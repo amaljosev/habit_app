@@ -31,143 +31,145 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("lib/assets/images/LogIn.png"),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Center(
-                      child: Padding(
-                    padding: const EdgeInsets.only(bottom: 30),
-                    child: Text('Get Started Free',
-                        style: GoogleFonts.unbounded(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                  )),
-                  TextFormField(
-                    style: const TextStyle(color: Colors.white),
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 62, 51, 51),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      hintText: 'yourname@gmail.com',
-                      labelText: 'Email Address',
-                      labelStyle: TextStyle(color: Colors.white54),
-                      prefixIcon: Icon(
-                        Icons.mail,
-                        color: Colors.white,
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Enail Address is empty!';
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                      style: const TextStyle(color: Colors.white),
-                      controller: _userNameController,
-                      keyboardType: TextInputType.name,
-                      decoration: const InputDecoration(
-                        
-                        filled: true,
-                        fillColor: Color.fromARGB(255, 62, 51, 51),
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        hintText: '@yourname',
-                        labelText: 'User Name',
-                        labelStyle: TextStyle(color: Colors.white54),
-                        prefixIcon: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'User Name is empty!';
-                        } else {
-                          return null;
-                        }
-                      }),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                      style: const TextStyle(color: Colors.white),
-                      controller: _passwordController,
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Color.fromARGB(255, 62, 51, 51),
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        hintText: '**********',
-                        labelText: 'Password',
-                        labelStyle: TextStyle(color: Colors.white54),
-                        prefixIcon: Icon(
-                          Icons.key,
-                          color: Colors.white,
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Password is empty!';
-                        } else {
-                          return null;
-                        }
-                      }),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        addDataToModel();
-                      } else {
-                        print("Empty");
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 146, 9, 55),
-                        fixedSize: const Size(220, 34),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            20,
-                          ),
-                        )),
-                    child: Text(
-                      "Sign up",
-                      style: GoogleFonts.unbounded(
-                          fontWeight: FontWeight.w500, color: Colors.white),
-                    ),
-                  ),
-                ],
+      body: SingleChildScrollView(
+        child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("lib/assets/images/LogIn.png"),
+                fit: BoxFit.cover,
               ),
             ),
-          )),
+            child: Padding(
+              padding: const EdgeInsets.all(40.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Center(
+                        child: Padding(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: Text('Get Started Free',
+                          style: GoogleFonts.unbounded(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    )),
+                    TextFormField(
+                      style: const TextStyle(color: Colors.white),
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 62, 51, 51),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                        hintText: 'yourname@gmail.com',
+                        labelText: 'Email Address',
+                        labelStyle: TextStyle(color: Colors.white54),
+                        prefixIcon: Icon(
+                          Icons.mail,
+                          color: Colors.white,
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Enail Address is empty!';
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                        controller: _userNameController,
+                        keyboardType: TextInputType.name,
+                        decoration: const InputDecoration(
+                          
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 62, 51, 51),
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          hintText: '@yourname',
+                          labelText: 'User Name',
+                          labelStyle: TextStyle(color: Colors.white54),
+                          prefixIcon: Icon(
+                            Icons.person,
+                            color: Colors.white,
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'User Name is empty!';
+                          } else {
+                            return null;
+                          }
+                        }),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                        controller: _passwordController,
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 62, 51, 51),
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          hintText: '**********',
+                          labelText: 'Password',
+                          labelStyle: TextStyle(color: Colors.white54),
+                          prefixIcon: Icon(
+                            Icons.key,
+                            color: Colors.white,
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Password is empty!';
+                          } else {
+                            return null;
+                          }
+                        }),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          addDataToModel();
+                        } else {
+                          print("Empty");
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 146, 9, 55),
+                          fixedSize: const Size(220, 34),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              20,
+                            ),
+                          )),
+                      child: Text(
+                        "Sign up",
+                        style: GoogleFonts.unbounded(
+                            fontWeight: FontWeight.w500, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )),
+      ),
     );
   }
 
