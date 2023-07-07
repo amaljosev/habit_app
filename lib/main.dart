@@ -4,6 +4,7 @@ import 'package:habit_project/screens/screen_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'models/sign_up/signup_model.dart';
 const save_key_name='userLoggedIn';
+
 Future<void> main() async{
   await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(SignUpModelAdapter().typeId)) {

@@ -1,10 +1,6 @@
 
-import 'package:flutter/material.dart';
 import 'package:habit_project/models/sign_up/signup_model.dart';
 import 'package:hive/hive.dart';
-
-import '../../models/categories/ctegories_model.dart';
-ValueNotifier<List<CategoryModel>> categoriesListNotifier = ValueNotifier([]);
 const SIGNUP_DB_NAME='signup_db';
 abstract class SignupDBfunctions {
   Future<List <SignUpModel>> getDatas();
@@ -23,5 +19,4 @@ class SignUpDB implements SignupDBfunctions {
     return _signupDB.values.toList();
   }
   
- 
 }

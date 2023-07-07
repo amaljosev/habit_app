@@ -11,7 +11,12 @@ class _StartWidgetState extends State<StartWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: const Center(child: Text('Start',style: TextStyle(color: Colors.white),)), 
+      
+      child: const Center(
+          child: Text(
+        'Start',
+        style: TextStyle(color: Colors.white),
+      )),
     );
   }
 }

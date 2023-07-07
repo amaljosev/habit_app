@@ -28,9 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
@@ -46,6 +43,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   hive_generator: ^2.0.0
+  path_provider: ^2.0.15
   shared_preferences: ^2.2.0
 flutter_native_splash: color:"#f9f9f9"
 # For information on the generic Dart part of this file, see the
@@ -67,6 +65,7 @@ flutter:
     - lib/assets/images/Home.png
     - lib/assets/images/FirstPage.png
     - lib/assets/videos/splash.mp4
+    - lib/assets/images/Start_Background.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

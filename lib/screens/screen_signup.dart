@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_project/main.dart';
-import 'package:habit_project/screens/screen_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:habit_project/screens/screen_home.dart';
 import '../functions/hive_functions/db_functions.dart';
+import '../main.dart';
 import '../models/sign_up/signup_model.dart';
 
 class SignUp extends StatefulWidget {
@@ -186,10 +186,10 @@ class _SignUpState extends State<SignUp> {
       _passwordController.text = '';
       final _sharedPrefs = await SharedPreferences.getInstance();
       await _sharedPrefs.setBool(save_key_name, true);
-
+      
       final signUpDB = SignUpDB();
       final signUpList = await signUpDB.getDatas();
-
+      
       var user;
       for (var signUp in signUpList) {
         if (signUp.username == _username && signUp.password == _password) {
@@ -211,6 +211,7 @@ class _SignUpState extends State<SignUp> {
             
         print('user already registred');
       } else {
+        
         _emailController.text = '';
         _userNameController.text = '';
         _passwordController.text = '';
@@ -219,6 +220,8 @@ class _SignUpState extends State<SignUp> {
         }));
       }
     }
+
+      
 
     final signUpObject = SignUpModel(
         mail: _mail,

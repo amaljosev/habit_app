@@ -163,6 +163,7 @@ class _LogInPageState extends State<LogInPage> {
 
      final _sharedPrefs = await SharedPreferences.getInstance();
       await _sharedPrefs.setBool(save_key_name, true);
+       print("$_username $_password ");
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (ctx) => const HomeScreen()),
       );

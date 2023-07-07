@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/screens/screen_home.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:habit_project/screens/screen_first.dart';
 import 'package:video_player/video_player.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
 
 class Splash extends StatefulWidget {
@@ -20,6 +19,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
+
     _controller = VideoPlayerController.asset('lib/assets/videos/splash.mp4')
       ..initialize().then((value) {
         setState(() {});
@@ -28,17 +28,13 @@ class _SplashState extends State<Splash> {
     _playVideo();
     
   }
-  
 
   void _playVideo() async {
-    
     await _controller.play();
-    
+
     await Future.delayed(const Duration(seconds: 3));
-    
     checkUserSignedUp();
   }
-  
 
   @override
   void dispose() {
@@ -59,14 +55,15 @@ class _SplashState extends State<Splash> {
                     child: VideoPlayer(_controller),
                   )
                 : Container(),
-                    Text('My Habits',
-                          style: GoogleFonts.acme(
-                              fontSize: 35,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black))
+            Text('My Habits',
+                style: GoogleFonts.acme(
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black))
           ],
         ));
   }
+
   Future <void>checkUserSignedUp()async{
   final _sharedPrefs=await SharedPreferences.getInstance();
   final _userSignedUp=_sharedPrefs.getBool(save_key_name);
@@ -82,4 +79,5 @@ class _SplashState extends State<Splash> {
     );
   }
   }
+  
 }

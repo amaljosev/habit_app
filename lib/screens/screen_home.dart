@@ -5,9 +5,6 @@ import 'package:habit_project/screens/bottom_navigation.dart/widget_today.dart';
 import 'bottom_navigation.dart/widget_me.dart';
 
 
-
-
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -19,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   
-  static const List _widgetOptions = [
+  static const List<Widget> _widgetOptions = [
     TodayWidget(),
     CategoryWidget(),
     StartWidget(), 
@@ -53,11 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'TODAY',
-             backgroundColor:  Color.fromARGB(255, 80, 37, 89),
+             backgroundColor:  Color.fromRGBO(80, 37, 89, 1),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
-            label: 'JOURNEY',
+            label: 'CATEGORIES',
              backgroundColor:  Color.fromARGB(255, 80, 37, 89),
           ),
           
