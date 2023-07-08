@@ -6,15 +6,24 @@ import 'models/sign_up/signup_model.dart';
 const save_key_name='userLoggedIn';
 
 Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  
   await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(SignUpModelAdapter().typeId)) {
     Hive.registerAdapter(SignUpModelAdapter());
   }
+  if (!Hive.isAdapterRegistered(StartModelAdapter().typeId)) {
+    Hive.registerAdapter(StartModelAdapter());
+  }
+  if (!Hive.isAdapterRegistered(AddModelAdapter().typeId)) {
+    Hive.registerAdapter(AddModelAdapter());
+  }
+  
   runApp(const MyApp());
 }
 final _formKey = GlobalKey<FormState>();
  
-
+ 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

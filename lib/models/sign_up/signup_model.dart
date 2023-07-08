@@ -38,3 +38,20 @@ class StartModel {
       required this.time,
       this.icon});
 }
+
+@HiveType(typeId: 3)
+class AddModel {
+  @HiveField(0)
+  final int id;
+  @HiveField(1)
+  final String name;
+   @HiveField(2)
+  final String days;
+
+  AddModel({required this.id, required this.name, required this.days}); 
+
+  
+}
+
+
+

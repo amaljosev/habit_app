@@ -4,6 +4,7 @@ import 'package:habit_project/screens/screen_home.dart';
 import 'package:habit_project/screens/screen_first.dart';
 import 'package:video_player/video_player.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../functions/hive_functions/db_start.dart';
 import '../main.dart';
 
 class Splash extends StatefulWidget {
@@ -19,14 +20,13 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-
+    getallstudents();
     _controller = VideoPlayerController.asset('lib/assets/videos/splash.mp4')
       ..initialize().then((value) {
         setState(() {});
       })
       ..setVolume(0);
     _playVideo();
-    
   }
 
   void _playVideo() async {
@@ -64,20 +64,19 @@ class _SplashState extends State<Splash> {
         ));
   }
 
-  Future <void>checkUserSignedUp()async{
-  final _sharedPrefs=await SharedPreferences.getInstance();
-  final _userSignedUp=_sharedPrefs.getBool(save_key_name);
-  if (_userSignedUp==null||_userSignedUp==false) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const FirstPage()),
-    );
-  } else {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
-    );
+  Future<void> checkUserSignedUp() async {
+    final _sharedPrefs = await SharedPreferences.getInstance();
+    final _userSignedUp = _sharedPrefs.getBool(save_key_name);
+    if (_userSignedUp == null || _userSignedUp == false) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const FirstPage()),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+    }
   }
-  }
-  
 }
