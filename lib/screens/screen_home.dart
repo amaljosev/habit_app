@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onDateChanged: (value) => print(value),
       firstDate: DateTime.now().subtract(Duration(days: 140)), 
       lastDate: DateTime.now(),
-      accent: Color.fromRGBO(80, 37, 89, 1), 
+      accent:Colors.indigo.shade400,   
       backButton: false,
       
     ),extendBodyBehindAppBar: mounted, 
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: MediaQuery.of(context).size.height,  
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("lib/assets/images/Home.png"),
+              image: AssetImage("lib/assets/images/background_new.png"),
               fit: BoxFit.fill,
             ),
           ),
@@ -55,27 +55,27 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
+      items:  <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'TODAY',
-           backgroundColor:  Color.fromRGBO(80, 37, 89, 1),
+           backgroundColor:Colors.indigo.shade400,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.map),
+          icon: Icon(Icons.map,color: Colors.white,), 
           label: 'CATEGORIES',
-           backgroundColor:  Color.fromARGB(255, 80, 37, 89),
+           backgroundColor:Colors.indigo.shade400, 
         ),
         
         BottomNavigationBarItem( 
           icon: Icon(Icons.add_box_sharp),
           label: 'NEW START',
-           backgroundColor:  Color.fromARGB(255, 80, 37, 89),
+           backgroundColor: Colors.indigo.shade400,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
           label: 'ME',
-           backgroundColor:  Color.fromARGB(255, 80, 37, 89),
+           backgroundColor: Colors.indigo.shade400,
         ),
       ],
       currentIndex: _selectedIndex,

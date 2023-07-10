@@ -5,6 +5,7 @@ import 'package:habit_project/screens/screen_home.dart';
 import '../functions/hive_functions/db_functions.dart';
 import '../main.dart';
 import '../models/sign_up/signup_model.dart';
+import 'package:email_validator/email_validator.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -37,7 +38,7 @@ class _SignUpState extends State<SignUp> {
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("lib/assets/images/LogIn.png"),
+                image: AssetImage("lib/assets/images/elephant.png"), 
                 fit: BoxFit.cover,
               ),
             ),
@@ -61,15 +62,15 @@ class _SignUpState extends State<SignUp> {
                       style: const TextStyle(color: Colors.white),
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
+                      decoration:  InputDecoration(
                         filled: true,
-                        fillColor: Color.fromARGB(255, 62, 51, 51),
-                        border: OutlineInputBorder(
+                        fillColor: Colors.indigo.shade300,
+                        border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10))),
                         hintText: 'yourname@gmail.com',
                         labelText: 'Email Address',
-                        labelStyle: TextStyle(color: Colors.white54),
-                        prefixIcon: Icon(
+                        labelStyle: const TextStyle(color: Colors.white), 
+                        prefixIcon: const Icon(
                           Icons.mail,
                           color: Colors.white,
                         ),
@@ -77,7 +78,10 @@ class _SignUpState extends State<SignUp> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Enail Address is empty!';
-                        } else {
+                        }  else if (!EmailValidator.validate(value)) {
+                        return 'Invalid email address!';
+                      }
+                        else {
                           return null;
                         }
                       },
@@ -89,20 +93,20 @@ class _SignUpState extends State<SignUp> {
                         style: const TextStyle(color: Colors.white),
                         controller: _userNameController,
                         keyboardType: TextInputType.name,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           
                           filled: true,
-                          fillColor: Color.fromARGB(255, 62, 51, 51),
-                          border: OutlineInputBorder(
+                          fillColor: Colors.indigo.shade300,
+                          border: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           hintText: '@yourname',
                           labelText: 'User Name',
-                          labelStyle: TextStyle(color: Colors.white54),
-                          prefixIcon: Icon(
+                          labelStyle: const TextStyle(color: Colors.white),
+                          prefixIcon: const Icon(
                             Icons.person,
                             color: Colors.white,
-                          ),
+                          ), 
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -119,16 +123,16 @@ class _SignUpState extends State<SignUp> {
                         controller: _passwordController,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: true,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           filled: true,
-                          fillColor: Color.fromARGB(255, 62, 51, 51),
-                          border: OutlineInputBorder(
+                          fillColor: Colors.indigo.shade300,
+                          border: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           hintText: '**********',
                           labelText: 'Password',
-                          labelStyle: TextStyle(color: Colors.white54),
-                          prefixIcon: Icon(
+                          labelStyle: const TextStyle(color: Colors.white),
+                          prefixIcon: const Icon(
                             Icons.key,
                             color: Colors.white,
                           ),
@@ -152,7 +156,7 @@ class _SignUpState extends State<SignUp> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 146, 9, 55),
+                          backgroundColor: Colors.deepPurple,
                           fixedSize: const Size(220, 34),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(

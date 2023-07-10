@@ -28,7 +28,7 @@ class _LogInPageState extends State<LogInPage> {
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("lib/assets/images/Login_page.png"),
+                image: AssetImage("lib/assets/images/logIn (2).png"), 
                 fit: BoxFit.cover, 
               ),
             ),
@@ -56,16 +56,16 @@ class _LogInPageState extends State<LogInPage> {
                     TextFormField(
                         style: const TextStyle(color: Colors.white),
                         controller: _usernameController,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           filled: true,
-                          fillColor: Color.fromARGB(255, 62, 51, 51),
-                          border: OutlineInputBorder(
+                          fillColor: Colors.indigo.shade300,
+                          border: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           hintText: '@yourname',
                           labelText: 'User Name',
-                          labelStyle: TextStyle(color: Colors.white54),
-                          prefixIcon: Icon(
+                          labelStyle: const TextStyle(color: Colors.white),
+                          prefixIcon: const Icon(
                             Icons.person,
                             color: Colors.white,
                           ),
@@ -84,16 +84,16 @@ class _LogInPageState extends State<LogInPage> {
                         style: const TextStyle(color: Colors.white),
                         controller: _passwordController,
                         keyboardType: TextInputType.visiblePassword,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           filled: true,
-                          fillColor: Color.fromARGB(255, 62, 51, 51),
-                          border: OutlineInputBorder(
+                          fillColor: Colors.indigo.shade300,
+                          border: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           hintText: '**********',
                           labelText: 'Password',
-                          labelStyle: TextStyle(color: Colors.white54),
-                          prefixIcon: Icon(
+                          labelStyle: const TextStyle(color: Colors.white),
+                          prefixIcon: const Icon(
                             Icons.key,
                             color: Colors.white,
                           ),
@@ -117,7 +117,7 @@ class _LogInPageState extends State<LogInPage> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 146, 9, 55),
+                          backgroundColor: Colors.deepPurple, 
                           fixedSize: const Size(220, 34),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(

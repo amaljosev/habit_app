@@ -25,7 +25,7 @@ class _TodayWidgetState extends State<TodayWidget> {
                   children: [
                     InkWell(
                       child: Card(
-                        color:  const Color.fromARGB(255, 80, 37, 89),
+                        color: Colors.indigo.shade400,
                         child: ListTile(
                           title: Text(startdata.habit,style: const TextStyle(color: Colors.white),),
                         ),

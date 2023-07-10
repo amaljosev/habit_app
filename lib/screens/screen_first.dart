@@ -16,24 +16,26 @@ class FirstPage extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         decoration:  const BoxDecoration(
           image:  DecorationImage(
-         image:  AssetImage("lib/assets/images/FirstPage.png"),
+         image:  AssetImage("lib/assets/images/bear.png"),
          fit: BoxFit.fill,
           ),
         ),
         child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.3,
-                  child: Center(
-                      child: Text('My Habits',
-                          style: GoogleFonts.acme(
-                              fontSize: 35,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white))),
+                  child: Padding(
+                    padding: const EdgeInsets.all(58.0),
+                    child: Text('My Habits',
+                        style: GoogleFonts.acme(
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepOrangeAccent)),
+                  ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.3,
                   child:
@@ -42,7 +44,7 @@ class FirstPage extends StatelessWidget {
                       "Make your life helthy",
                       style: GoogleFonts.unbounded(
                           fontWeight: FontWeight.w500,
-                          color: Colors.white,
+                          color: Colors.red.shade50, 
                           fontSize: 20),
                     ),
                     const SizedBox(
@@ -52,7 +54,7 @@ class FirstPage extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       child: OutlinedButton(
                         onPressed: () {
-                          Navigator.pushReplacement(
+                          Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const SignUp()),
                           );
@@ -64,12 +66,12 @@ class FirstPage extends StatelessWidget {
                                   20,
                                 ),
                                 side: const BorderSide(
-                                  color: Colors.white,
+                                  color: Colors.brown,  
                                 ))),
                         child: Text(
                           "Sign Up",
                           style: GoogleFonts.unbounded(
-                              fontWeight: FontWeight.w500, color: Colors.white),
+                              fontWeight: FontWeight.w500, color: Colors.brown),
                         ),
                       ),
                     ),

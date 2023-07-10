@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/models/sign_up/signup_model.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../screen_home.dart';
@@ -34,16 +35,16 @@ class _StartWidgetState extends State<StartWidget> {
                   style: const TextStyle(color: Colors.white),
                   controller: _habitController,
                   keyboardType: TextInputType.multiline,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     filled: true,
-                    fillColor: Color.fromARGB(255, 62, 51, 51),
-                    border: OutlineInputBorder(
+                    fillColor: Colors.indigo.shade300,   
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     hintText: 'Name',
-                    hintStyle: TextStyle(color: Colors.white60),
+                    hintStyle: const TextStyle(color: Colors.white60),
                     labelText: 'Habit Name',
-                    labelStyle: TextStyle(color: Colors.white54),
-                    prefixIcon: Icon(
+                    labelStyle: const TextStyle(color: Colors.white ), 
+                    prefixIcon: const Icon(
                       Icons.alarm_on_sharp,
                       color: Colors.white,
                     ),
@@ -63,16 +64,16 @@ class _StartWidgetState extends State<StartWidget> {
                   style: const TextStyle(color: Colors.white),
                   controller: _daysController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     filled: true,
-                    fillColor: Color.fromARGB(255, 62, 51, 51),
-                    border: OutlineInputBorder(
+                    fillColor:   Colors.indigo.shade300,  
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     hintText: 'Days',
-                    hintStyle: TextStyle(color: Colors.white60),
+                    hintStyle: const TextStyle(color: Colors.white),
                     labelText: 'Duration',
-                    labelStyle: TextStyle(color: Colors.white54),
-                    prefixIcon: Icon(
+                    labelStyle: const TextStyle(color: Colors.white),
+                    prefixIcon: const Icon(
                       Icons.edit,
                       color: Colors.white,
                     ),
@@ -87,13 +88,12 @@ class _StartWidgetState extends State<StartWidget> {
                 ),
                 Column(
                   children: [
-                    
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'REPETATION', 
+                          'REPETATION',
                           style: GoogleFonts.unbounded(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
@@ -133,107 +133,32 @@ class _StartWidgetState extends State<StartWidget> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromARGB(255, 80, 37, 89)),
-                        onPressed: () {
-                          data = 'Morning';
-                          print(data);
+                    Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ToggleSwitch(
+                        minWidth: 100.0,  
+                        initialLabelIndex: 0,
+                        totalSwitches: 3,
+                        inactiveBgColor: Colors.grey, 
+                        labels: const ['Morning', 'Noon', 'Evening'],
+                        icons: const [Icons.sunny,Icons.wb_sunny_outlined,Icons.bedtime_rounded], 
+                        onToggle: (index) {
+                          List<String> labelValues = [
+                            'Morning',
+                            'Noon',
+                            'Evening'
+                          ];
+                          if (index != null &&
+                              index >= 0 &&
+                              index < labelValues.length) {
+                            String selectedValue = labelValues[index];
+                            print('Switched to: $selectedValue');
+                          }
                         },
-                        child: const Row(
-                          children: [
-                            Icon(
-                              Icons.sunny,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'Morninig  ',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        )),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromARGB(255, 80, 37, 89)),
-                        onPressed: () {
-                          data = 'Afternoon';
-                          print(data);
-                        },
-                        child: const Row(
-                          children: [
-                            Icon(
-                              Icons.wb_sunny_outlined,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'Afternoon',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        )),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromARGB(255, 80, 37, 89)),
-                        onPressed: () {
-                          data = 'Evening';
-                          print(data);
-                        },
-                        child: const Row(
-                          children: [
-                            Icon(
-                              Icons.nightlight,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'Evening     ',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        )),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromARGB(255, 80, 37, 89)),
-                        onPressed: () {},
-                        child: const Row(
-                          children: [
-                            Icon(
-                              Icons.access_time_filled_sharp,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'Anytime    ',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        )),
+                      ),
+                    ],
+                  ),
                   ],
                 ),
                 const SizedBox(
@@ -243,6 +168,7 @@ class _StartWidgetState extends State<StartWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton(
+                      
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             addDataToModel();
@@ -252,7 +178,7 @@ class _StartWidgetState extends State<StartWidget> {
                         },
                         child: const Text(
                           'START',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.deepPurple),  
                         )),
                   ],
                 ),

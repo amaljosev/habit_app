@@ -33,35 +33,38 @@ class _MeWdgetState extends State<MeWdget> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Column(
-          children: [
-            Container( 
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.8,
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 80, 37, 89),
-                  borderRadius: BorderRadius.all(Radius.circular(60))),
-              child: Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.person_outline_outlined,
-                      color: Colors.white,
-                      size: 100,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Container( 
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.6,
+                decoration:  BoxDecoration(
+                    color: Colors.indigo.shade400,  
+                    borderRadius: const BorderRadius.all(Radius.circular(60))),
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.person_outline_outlined,
+                        color: Colors.white,
+                        size: 100,
+                      ),
                     ),
-                  ),
-                  Text(username,style: TextStyle(color: Colors.white),), 
-                  ElevatedButton(
-                onPressed: () {
-                  signOut(context); 
-                },
-                child: const Text('sign out')),
-                ],
+                    Text(username,style: const TextStyle(color: Colors.white),), 
+                    ElevatedButton(
+                  onPressed: () {
+                    signOut(context); 
+                  },
+                  child: const Text('sign out')),
+                  ],
+                ),
               ),
-            ),
-            
-          ],
+              
+            ],
+          ),
         ),
       ],
     );

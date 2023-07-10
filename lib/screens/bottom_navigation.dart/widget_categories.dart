@@ -23,7 +23,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           child: ListView.separated(
               itemBuilder: (context, index) {
                 return Card(
-                  color: const Color.fromARGB(255, 80, 37, 89),
+                  color: Colors.indigo.shade400,
                   child: ListTile(
                     title: Text(
                       categoryList[index].trailingTitle.toString(),

@@ -4,7 +4,7 @@ import 'package:habit_project/models/sign_up/signup_model.dart';
 import 'package:habit_project/screens/screen_home.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import '../functions/hive_functions/db_start.dart';
-
+import 'package:toggle_switch/toggle_switch.dart';
 class StartScreen extends StatefulWidget {
   final String name;
   const StartScreen({super.key, required this.name});
@@ -17,7 +17,6 @@ final TextEditingController _daysController = TextEditingController();
 
 final _formKey = GlobalKey<FormState>();
 
-var data;
 var countData;
 var hoursData;
 var namecount;
@@ -33,7 +32,7 @@ class _StartScreenState extends State<StartScreen> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
               image: DecorationImage(
-            image: AssetImage('lib/assets/images/Home.png'),
+            image: AssetImage('lib/assets/images/background_new.png'),
             fit: BoxFit.fill,
           )),
           child: Padding(
@@ -52,18 +51,18 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                   TextFormField(
                     style: const TextStyle(color: Colors.white),
-                    controller: _daysController,
+                    controller: _daysController, 
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
+                    decoration:   InputDecoration(
                       filled: true,
-                      fillColor: Color.fromARGB(255, 62, 51, 51),
-                      border: OutlineInputBorder(
+                      fillColor: Colors.indigo.shade300,   
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       hintText: 'Days',
-                      hintStyle: TextStyle(color: Colors.white60),
+                      hintStyle: const TextStyle(color: Colors.white),  
                       labelText: 'Duration',
-                      labelStyle: TextStyle(color: Colors.white54),
-                      prefixIcon: Icon(
+                      labelStyle: const TextStyle(color: Colors.white), 
+                      prefixIcon: const Icon(
                         Icons.edit,
                         color: Colors.white,
                       ),
@@ -114,10 +113,10 @@ class _StartScreenState extends State<StartScreen> {
                         ),
                       ),
                       Container(
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 87, 39, 114),
+                        decoration:   BoxDecoration( 
+                            color: Colors.indigo.shade300,   
                             borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
+                                BorderRadius.all(Radius.circular(30))), 
                         child: Row(
                           children: [
                             Expanded(
@@ -267,109 +266,30 @@ class _StartScreenState extends State<StartScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 80, 37, 89)),
-                          onPressed: () {
-                            data = 'Morning';
-                            print(data);
-                          },
-                          child: const Row(
-                            children: [
-                              Icon(
-                                Icons.sunny,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Morninig  ',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          )),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 80, 37, 89)),
-                          onPressed: () {
-                            data = 'Afternoon';
-                            print(data);
-                          },
-                          child: const Row(
-                            children: [
-                              Icon(
-                                Icons.wb_sunny_outlined,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Afternoon',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          )),
+                      ToggleSwitch(
+                        minWidth: 100.0, 
+                        initialLabelIndex: 0,
+                        totalSwitches: 3,
+                        inactiveBgColor: Colors.grey, 
+                        labels: ['Morning', 'Noon', 'Evening'],
+                        icons: [Icons.sunny,Icons.wb_sunny_outlined,Icons.bedtime_rounded], 
+                        onToggle: (index) {
+                          List<String> labelValues = [
+                            'Morning',
+                            'Noon',
+                            'Evening'
+                          ];
+                          if (index != null &&
+                              index >= 0 &&
+                              index < labelValues.length) {
+                            String selectedValue = labelValues[index];
+                            print('Switched to: $selectedValue');
+                          } 
+                        },
+                      ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 80, 37, 89)),
-                          onPressed: () {
-                            data = 'Evening';
-                            print(data);
-                          },
-                          child: const Row(
-                            children: [
-                              Icon(
-                                Icons.nightlight,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Evening     ',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          )),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 80, 37, 89)),
-                          onPressed: () {},
-                          child: const Row(
-                            children: [
-                              Icon(
-                                Icons.access_time_filled_sharp,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Anytime    ',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          )),
-                    ],
-                  ),
+                  
                   const SizedBox(
                     height: 20,
                   ),
