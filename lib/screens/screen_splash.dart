@@ -20,7 +20,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    getallstudents();
+    getallDatas(); 
     _controller = VideoPlayerController.asset('lib/assets/videos/splash.mp4')
       ..initialize().then((value) {
         setState(() {});

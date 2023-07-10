@@ -2,25 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/models/sign_up/signup_model.dart';
 import 'package:habit_project/screens/screen_home.dart';
+import 'package:weekday_selector/weekday_selector.dart';
 import '../functions/hive_functions/db_start.dart';
 
 class StartScreen extends StatefulWidget {
-  
-final String name;
-const StartScreen({super.key,required this.name});
+  final String name;
+  const StartScreen({super.key, required this.name});
 
   @override
   State<StartScreen> createState() => _StartScreenState();
 }
 
 final TextEditingController _daysController = TextEditingController();
-final TextEditingController _hoursController = TextEditingController();
+
 final _formKey = GlobalKey<FormState>();
 
 var data;
+var countData;
+var hoursData;
+var namecount;
 
 class _StartScreenState extends State<StartScreen> {
-
+  final List<bool> selectedWeekdays = List.filled(7, true);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +60,7 @@ class _StartScreenState extends State<StartScreen> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       hintText: 'Days',
+                      hintStyle: TextStyle(color: Colors.white60),
                       labelText: 'Duration',
                       labelStyle: TextStyle(color: Colors.white54),
                       prefixIcon: Icon(
@@ -75,30 +79,173 @@ class _StartScreenState extends State<StartScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  TextFormField(
-                    style: const TextStyle(color: Colors.white),
-                    controller: _hoursController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 62, 51, 51),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      hintText: 'Time',
-                      labelText: 'Goal',
-                      labelStyle: TextStyle(color: Colors.white54),
-                      prefixIcon: Icon(
-                        Icons.alarm_on_sharp,
-                        color: Colors.white,
+                  Column(
+                    children: [
+                      const Text(
+                        'SELECT WEEKDAYS',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Goal is empty!';
-                      } else {
-                        return null;
-                      }
-                    },
+                      WeekdaySelector(
+                        onChanged: (int day) {
+                          setState(() {
+                            final index = day % 7;
+                            selectedWeekdays[index] = !selectedWeekdays[index];
+                            printSelectedWeekdays();
+                          });
+                        },
+                        values: selectedWeekdays,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'COUNTER',
+                              style: GoogleFonts.unbounded(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 87, 39, 114),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                child: ListWheelScrollView(
+                                  itemExtent: 50,
+                                  onSelectedItemChanged: (index) {
+                                    countData = index + 1;
+                                    print('Days: $countData');
+                                  },
+                                  children: List<Widget>.generate(
+                                    10,
+                                    (index) => Center(
+                                      child: Text(
+                                        '${index + 1}',
+                                        style: const TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 20),
+                            Expanded(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                child: ListWheelScrollView(
+                                  itemExtent: 50,
+                                  onSelectedItemChanged: (index) {
+                                    hoursData = index;
+                                    setState(() {
+                                      if (index == 0) {
+                                        namecount = 'cup';
+                                      } else if (index == 1) {
+                                        namecount = 'liter';
+                                      } else if (index == 2) {
+                                        namecount = 'Hours';
+                                      } else if (index == 3) {
+                                        namecount = 'page';
+                                      } else if (index == 4) {
+                                        namecount = 'Kilometer';
+                                      } else if (index == 5) {
+                                        namecount = 'Meter';
+                                      } else if (index == 6) {
+                                        namecount = 'Rupee';
+                                      }
+                                    });
+                                    print('selected: $namecount');
+                                  },
+                                  children: const [
+                                    Center(
+                                      child: Text(
+                                        'Cup',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Liter',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Hours',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Page',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Kilometer',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Meter',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Rupee',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 20),
+                            const SizedBox(width: 20),
+                            Expanded(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                alignment: Alignment.center,
+                                child: const Text(
+                                  'per day',
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 20,
@@ -253,14 +400,14 @@ class _StartScreenState extends State<StartScreen> {
   }
 
   Future<void> addDataToModel() async {
+    var counter = namecount + countData.toString();
     final _days = _daysController.text.trim();
-    final _hours = _hoursController.text.trim();
 
-    if (_days.isEmpty || _hours.isEmpty) {
+    if (_days.isEmpty || namecount.isEmpty) {
       return;
     } else {
       _daysController.text = '';
-      _hoursController.text = '';
+
       setState(() {
         popDialogueBox();
       });
@@ -270,11 +417,11 @@ class _StartScreenState extends State<StartScreen> {
         id: DateTime.now().millisecond,
         habit: widget.name,
         days: _days,
-        time: _hours);
+        time: counter);
 
-    print("${widget.name} $_days $_hours ");
+    print("${widget.name} $_days $counter ");
 
-     addStudent(startObject);
+    addCategory(startObject);
   }
 
   popDialogueBox() {
@@ -304,5 +451,39 @@ class _StartScreenState extends State<StartScreen> {
             ),
           );
         });
+  }
+
+  void printSelectedWeekdays() {
+    final weekdays = <String>[];
+
+    for (int i = 0; i < selectedWeekdays.length; i++) {
+      if (selectedWeekdays[i]) {
+        switch (i) {
+          case 0:
+            weekdays.add('Sunday');
+            break;
+          case 1:
+            weekdays.add('Monday');
+            break;
+          case 2:
+            weekdays.add('Tuesday');
+            break;
+          case 3:
+            weekdays.add('Wednesday');
+            break;
+          case 4:
+            weekdays.add('Thursday');
+            break;
+          case 5:
+            weekdays.add('Friday');
+            break;
+          case 6:
+            weekdays.add('Saturday');
+            break;
+        }
+      }
+    }
+
+    print('Selected weekdays: $weekdays');
   }
 }

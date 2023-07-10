@@ -184,8 +184,7 @@ class _SignUpState extends State<SignUp> {
       _emailController.text = '';
       _userNameController.text = '';
       _passwordController.text = '';
-      final _sharedPrefs = await SharedPreferences.getInstance();
-      await _sharedPrefs.setBool(save_key_name, true);
+      
       
       final signUpDB = SignUpDB();
       final signUpList = await signUpDB.getDatas();
@@ -215,7 +214,9 @@ class _SignUpState extends State<SignUp> {
         _emailController.text = '';
         _userNameController.text = '';
         _passwordController.text = '';
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
+        final _sharedPrefs = await SharedPreferences.getInstance();
+      await _sharedPrefs.setBool(save_key_name, true);
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) { 
           return const HomeScreen();
         }));
       }

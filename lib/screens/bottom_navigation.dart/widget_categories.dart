@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../functions/hive_functions/db_addNew.dart';
-
+import '../../functions/hive_functions/db_start.dart';
 import '../../models/categories/categories_model.dart';
 import '../../models/sign_up/signup_model.dart';
 import '../screen_start.dart';
@@ -14,49 +13,53 @@ class CategoryWidget extends StatefulWidget {
 }
 
 class _CategoryWidgetState extends State<CategoryWidget> {
- 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: addListNotifier,
-        builder:
-            (BuildContext ctx, List<AddModel> startList, Widget? child) {
-      return Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: ListView.separated(
-            itemBuilder: (context, index) {
-              return Card(
-                color: const Color.fromARGB(255, 80, 37, 89),
-                child: ListTile(
-                  title: Text(
-                    categoryList[index].trailingTitle.toString(), 
-                    style: const TextStyle(color: Colors.white),
+      valueListenable: startListNotifier,
+      builder: (BuildContext ctx, List<StartModel> startList, Widget? child) {
+        return Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView.separated(
+              itemBuilder: (context, index) {
+                return Card(
+                  color: const Color.fromARGB(255, 80, 37, 89),
+                  child: ListTile(
+                    title: Text(
+                      categoryList[index].trailingTitle.toString(),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    leading: categoryList[index].leadingIcon,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => StartScreen(
+                                name: categoryList[index].trailingTitle)),
+                      );
+                      print(categoryList[index].trailingTitle);
+                    },
                   ),
-                  leading: categoryList[index].leadingIcon,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => StartScreen(
-                              name: categoryList[index].trailingTitle)),
-                    );
-                    print(categoryList[index].trailingTitle);
-                  },
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 20,
-              );
-            },
-            itemCount: categoryList.length),
-      );
-            },
+                );
+              },
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  height: 20,
+                );
+              },
+              itemCount: categoryList.length),
+        );
+      },
     );
-    
   }
+
   List<CategoryModel> categoryList = [
+    CategoryModel(
+        leadingIcon: const Icon(
+          Icons.yard,
+          color: Colors.white,
+        ),
+        trailingTitle: 'Meditation'),
     CategoryModel(
         leadingIcon: const Icon(
           Icons.menu_book_sharp,
@@ -71,16 +74,10 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         trailingTitle: 'Study'),
     CategoryModel(
         leadingIcon: const Icon(
-          Icons.yard,
+          Icons.accessibility_new,
           color: Colors.white,
         ),
-        trailingTitle: 'Meditation'),
-    CategoryModel(
-        leadingIcon: const Icon(
-          Icons.smoke_free,
-          color: Colors.white,
-        ),
-        trailingTitle: 'Quit a bad habit'),
+        trailingTitle: 'Workout'),
     CategoryModel(
         leadingIcon: const Icon(
           Icons.draw,
@@ -101,16 +98,15 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         trailingTitle: 'Social'),
     CategoryModel(
         leadingIcon: const Icon(
-          Icons.health_and_safety,
+          Icons.cleaning_services_outlined,
           color: Colors.white,
         ),
-        trailingTitle: 'Health'),
+        trailingTitle: 'Cleaning'),
     CategoryModel(
         leadingIcon: const Icon(
-          Icons.accessibility_new,
+          Icons.airline_seat_individual_suite,
           color: Colors.white,
         ),
-        trailingTitle: 'Workout'),
+        trailingTitle: 'Sleep'),
   ];
-
 }

@@ -1,6 +1,6 @@
 
 class CategoryModel {
-  final leadingIcon;
+  final  leadingIcon;
   final trailingTitle;
   CategoryModel({this.leadingIcon,this.trailingTitle}); 
 }

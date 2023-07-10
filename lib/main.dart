@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:habit_project/screens/screen_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'models/sign_up/signup_model.dart';
@@ -15,13 +14,9 @@ Future<void> main() async{
   if (!Hive.isAdapterRegistered(StartModelAdapter().typeId)) {
     Hive.registerAdapter(StartModelAdapter());
   }
-  if (!Hive.isAdapterRegistered(AddModelAdapter().typeId)) {
-    Hive.registerAdapter(AddModelAdapter());
-  }
-  
+
   runApp(const MyApp());
 }
-final _formKey = GlobalKey<FormState>();
  
  
 class MyApp extends StatelessWidget {
