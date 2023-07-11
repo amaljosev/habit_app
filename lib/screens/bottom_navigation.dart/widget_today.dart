@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:habit_project/functions/hive_functions/db_start.dart';
 import '../../models/sign_up/signup_model.dart';
+import '../screen_user_interface.dart';
 
 class TodayWidget extends StatefulWidget {
-  const  TodayWidget({super.key});
+  const TodayWidget({super.key});
 
   @override
   State<TodayWidget> createState() => _TodayWidgetState();
@@ -23,10 +24,21 @@ class _TodayWidgetState extends State<TodayWidget> {
                 child: Column(
                   children: [
                     InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserInterface()),
+                        );
+                        print(startList[indexVal]);
+                      },
                       child: Card(
                         color: Colors.indigo.shade400,
                         child: ListTile(
-                          title: Text(startdata.habit,style: const TextStyle(color: Colors.white),),
+                          title: Text(
+                            startdata.habit,
+                            style: const TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                     ),
