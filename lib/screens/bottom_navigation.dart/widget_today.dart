@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:habit_project/functions/hive_functions/db_start.dart';
-
 import '../../models/sign_up/signup_model.dart';
 
 class TodayWidget extends StatefulWidget {
-  const TodayWidget({super.key});
+  const  TodayWidget({super.key});
 
   @override
   State<TodayWidget> createState() => _TodayWidgetState();

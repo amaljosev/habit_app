@@ -116,11 +116,11 @@ class _StartScreenState extends State<StartScreen> {
                         decoration:   BoxDecoration( 
                             color: Colors.indigo.shade300,   
                             borderRadius:
-                                BorderRadius.all(Radius.circular(30))), 
+                                const BorderRadius.all(Radius.circular(30))), 
                         child: Row(
                           children: [
                             Expanded(
-                              child: Container(
+                              child: SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 height:
                                     MediaQuery.of(context).size.height * 0.2,
@@ -145,7 +145,7 @@ class _StartScreenState extends State<StartScreen> {
                             ),
                             const SizedBox(width: 20),
                             Expanded(
-                              child: Container(
+                              child: SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 height:
                                     MediaQuery.of(context).size.height * 0.2,

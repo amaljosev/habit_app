@@ -38,7 +38,7 @@ class _SignUpState extends State<SignUp> {
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("lib/assets/images/elephant.png"), 
+                image: AssetImage("lib/assets/images/newBackground.png"), 
                 fit: BoxFit.cover,
               ),
             ),
@@ -53,10 +53,10 @@ class _SignUpState extends State<SignUp> {
                         child: Padding(
                       padding: const EdgeInsets.only(bottom: 30),
                       child: Text('Get Started Free',
-                          style: GoogleFonts.unbounded(
+                          style: GoogleFonts.unbounded(  
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white)),
+                              color: Colors.indigo )), 
                     )),
                     TextFormField(
                       style: const TextStyle(color: Colors.white),

@@ -35,7 +35,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => StartScreen(
-                                name: categoryList[index].trailingTitle)),
+                                name: categoryList[index].trailingTitle)) ,
                       );
                       print(categoryList[index].trailingTitle);
                     },

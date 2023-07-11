@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: CalendarAppBar(  
       onDateChanged: (value) => print(value),
-      firstDate: DateTime.now().subtract(Duration(days: 140)), 
+      firstDate: DateTime.now().subtract(const Duration(days: 140)), 
       lastDate: DateTime.now(),
       accent:Colors.indigo.shade400,   
       backButton: false,
@@ -57,23 +57,23 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
       items:  <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: const Icon(Icons.home),
           label: 'TODAY',
            backgroundColor:Colors.indigo.shade400,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.map,color: Colors.white,), 
+          icon: const Icon(Icons.map,color: Colors.white,), 
           label: 'CATEGORIES',
            backgroundColor:Colors.indigo.shade400, 
         ),
         
         BottomNavigationBarItem( 
-          icon: Icon(Icons.add_box_sharp),
+          icon: const Icon(Icons.add_box_sharp),
           label: 'NEW START',
            backgroundColor: Colors.indigo.shade400,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: const Icon(Icons.person),
           label: 'ME',
            backgroundColor: Colors.indigo.shade400,
         ),
