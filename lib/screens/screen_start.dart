@@ -5,6 +5,7 @@ import 'package:habit_project/screens/screen_home.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import '../functions/hive_functions/db_start.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+
 class StartScreen extends StatefulWidget {
   final String name;
   const StartScreen({super.key, required this.name});
@@ -51,17 +52,17 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                   TextFormField(
                     style: const TextStyle(color: Colors.white),
-                    controller: _daysController, 
+                    controller: _daysController,
                     keyboardType: TextInputType.number,
-                    decoration:   InputDecoration(
+                    decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.indigo.shade300,   
+                      fillColor: Colors.indigo.shade300,
                       border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       hintText: 'Days',
-                      hintStyle: const TextStyle(color: Colors.white),  
+                      hintStyle: const TextStyle(color: Colors.white),
                       labelText: 'Duration',
-                      labelStyle: const TextStyle(color: Colors.white), 
+                      labelStyle: const TextStyle(color: Colors.white),
                       prefixIcon: const Icon(
                         Icons.edit,
                         color: Colors.white,
@@ -80,13 +81,17 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                   Column(
                     children: [
-                      const Text(
-                        'SELECT WEEKDAYS',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                      const Row(
+                        children: [
+                          Text(
+                            'SELECT WEEKDAYS',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                       WeekdaySelector(
                         onChanged: (int day) {
@@ -113,10 +118,10 @@ class _StartScreenState extends State<StartScreen> {
                         ),
                       ),
                       Container(
-                        decoration:   BoxDecoration( 
-                            color: Colors.indigo.shade300,   
+                        decoration: BoxDecoration(
+                            color: Colors.indigo.shade300,
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(30))), 
+                                const BorderRadius.all(Radius.circular(30))),
                         child: Row(
                           children: [
                             Expanded(
@@ -155,17 +160,17 @@ class _StartScreenState extends State<StartScreen> {
                                     hoursData = index;
                                     setState(() {
                                       if (index == 0) {
-                                        namecount = 'cup';
-                                      } else if (index == 1) {
-                                        namecount = 'liter';
-                                      } else if (index == 2) {
                                         namecount = 'Hours';
-                                      } else if (index == 3) {
+                                      } else if (index == 1) {
                                         namecount = 'page';
-                                      } else if (index == 4) {
+                                      } else if (index == 2) {
                                         namecount = 'Kilometer';
-                                      } else if (index == 5) {
+                                      } else if (index == 3) {
                                         namecount = 'Meter';
+                                      } else if (index == 4) {
+                                        namecount = 'liter';
+                                      } else if (index == 5) {
+                                        namecount = 'cup';
                                       } else if (index == 6) {
                                         namecount = 'Rupee';
                                       }
@@ -173,20 +178,6 @@ class _StartScreenState extends State<StartScreen> {
                                     print('selected: $namecount');
                                   },
                                   children: const [
-                                    Center(
-                                      child: Text(
-                                        'Cup',
-                                        style: TextStyle(
-                                            fontSize: 20, color: Colors.white),
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'Liter',
-                                        style: TextStyle(
-                                            fontSize: 20, color: Colors.white),
-                                      ),
-                                    ),
                                     Center(
                                       child: Text(
                                         'Hours',
@@ -211,6 +202,21 @@ class _StartScreenState extends State<StartScreen> {
                                     Center(
                                       child: Text(
                                         'Meter',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      ),
+                                    ),
+                                    
+                                    Center(
+                                      child: Text(
+                                        'Liter',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Cup',
                                         style: TextStyle(
                                             fontSize: 20, color: Colors.white),
                                       ),
@@ -267,12 +273,16 @@ class _StartScreenState extends State<StartScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ToggleSwitch(
-                        minWidth: 100.0, 
+                        minWidth: 100.0,
                         initialLabelIndex: 0,
                         totalSwitches: 3,
-                        inactiveBgColor: Colors.grey, 
-                        labels: ['Morning', 'Noon', 'Evening'],
-                        icons: [Icons.sunny,Icons.wb_sunny_outlined,Icons.bedtime_rounded], 
+                        inactiveBgColor: Colors.grey,
+                        labels: const ['Morning', 'Noon', 'Evening'],
+                        icons: const [
+                          Icons.sunny,
+                          Icons.wb_sunny_outlined,
+                          Icons.bedtime_rounded
+                        ],
                         onToggle: (index) {
                           List<String> labelValues = [
                             'Morning',
@@ -284,12 +294,11 @@ class _StartScreenState extends State<StartScreen> {
                               index < labelValues.length) {
                             String selectedValue = labelValues[index];
                             print('Switched to: $selectedValue');
-                          } 
+                          }
                         },
                       ),
                     ],
                   ),
-                  
                   const SizedBox(
                     height: 20,
                   ),

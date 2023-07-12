@@ -37,6 +37,8 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   shared_preferences: ^2.2.0
+  slider_button: ^2.0.0
+  table_calendar: ^3.0.8
   toggle_switch: ^2.1.0
   video_player: ^2.7.0
   weekday_selector: ^1.1.0

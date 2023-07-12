@@ -32,19 +32,21 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CalendarAppBar(  
-      onDateChanged: (value) => print(value),
-      firstDate: DateTime.now().subtract(const Duration(days: 140)), 
-      lastDate: DateTime.now(),
-      accent:Colors.indigo.shade400,   
-      backButton: false,
-      
-    ),extendBodyBehindAppBar: mounted, 
+      appBar: _selectedIndex == 0
+          ? CalendarAppBar(
+              onDateChanged: (value) => print(value),
+              firstDate: DateTime.now().subtract(const Duration(days: 140)),
+              lastDate: DateTime.now(),
+              accent: Colors.indigo.shade400,
+              backButton: false,
+            )
+          : null,
+      extendBodyBehindAppBar: mounted, 
     
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,  
+          height: MediaQuery.of(context).size.height*0.93,   
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("lib/assets/images/background_new.png"),
