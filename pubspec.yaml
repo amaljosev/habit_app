@@ -71,6 +71,7 @@ flutter:
     - lib/assets/images/elephant.png 
     - lib/assets/images/bear.png 
     - lib/assets/images/newBackground.png
+    - lib/assets/images/bg-user_interface.png
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

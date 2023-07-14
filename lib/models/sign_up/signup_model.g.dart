@@ -60,11 +60,11 @@ class StartModelAdapter extends TypeAdapter<StartModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return StartModel(
-      id: fields[0] as int,
+      id: fields[0] as String,
       habit: fields[1] as String,
       days: fields[2] as String,
-      time: fields[3] as String,
-      icon: fields[4] as dynamic,
+      wheelName: fields[3] as String,
+      wheelCount: fields[4] as String,
     );
   }
 
@@ -79,9 +79,9 @@ class StartModelAdapter extends TypeAdapter<StartModel> {
       ..writeByte(2)
       ..write(obj.days)
       ..writeByte(3)
-      ..write(obj.time)
+      ..write(obj.wheelName)
       ..writeByte(4)
-      ..write(obj.icon);
+      ..write(obj.wheelCount);
   }
 
   @override

@@ -22,24 +22,21 @@ class SignUpModel {
 @HiveType(typeId: 2)
 class StartModel {
   @HiveField(0)
-  final int id;
+  final String id;
   @HiveField(1)
   final String habit;
   @HiveField(2)
   final String days;
-  @HiveField(3)
-  final String time;
+  @HiveField(3) 
+  final String wheelName;
   @HiveField(4)
-  final dynamic icon;
-  StartModel(
-      {required this.id,
-      required this.habit,
-      required this.days,
-      required this.time,
-      this.icon});
+  final String wheelCount;
+
+  StartModel({
+    required this.id,
+    required this.habit,
+    required this.days,
+    required this.wheelName,
+    required this.wheelCount,
+  });
 }
-
-
-
-
-

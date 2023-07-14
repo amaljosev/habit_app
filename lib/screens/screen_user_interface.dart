@@ -4,7 +4,17 @@ import 'package:slider_button/slider_button.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class UserInterface extends StatefulWidget {
-  const UserInterface({Key? key}) : super(key: key);
+  final String habitName;
+  final String totalDays;
+  final String wheelCount;
+  final String wheelName;
+  const UserInterface(
+      {Key? key,
+      required this.habitName,
+      required this.totalDays,
+      required this.wheelCount,
+      required this.wheelName})
+      : super(key: key);
 
   @override
   State<UserInterface> createState() => _UserInterfaceState();
@@ -54,7 +64,7 @@ class _UserInterfaceState extends State<UserInterface> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Text(
-                            'HABIT',
+                            widget.habitName,
                             style: GoogleFonts.unbounded(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -64,53 +74,7 @@ class _UserInterfaceState extends State<UserInterface> {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                          width: MediaQuery.of(context).size.width * 0.25,
-                          height: MediaQuery.of(context).size.height * 0.03,
-                          child: const Center(
-                            child: Text(
-                              'morning',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                          width: MediaQuery.of(context).size.width * 0.25,
-                          height: MediaQuery.of(context).size.height * 0.03,
-                          child: const Center(
-                            child: Text(
-                              'Afternoon',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                          width: MediaQuery.of(context).size.width * 0.25,
-                          height: MediaQuery.of(context).size.height * 0.03,
-                          child: const Center(
-                            child: Text(
-                              '1 hour',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    
                     Padding(
                       padding: const EdgeInsets.only(top: 20, bottom: 1),
                       child: Row(
@@ -124,27 +88,27 @@ class _UserInterfaceState extends State<UserInterface> {
                             ),
                             width: MediaQuery.of(context).size.width * 0.3,
                             height: MediaQuery.of(context).size.height * 0.2,
-                            child: const Padding(
-                              padding: EdgeInsets.all(15.0),
+                            child:  Padding(
+                              padding: const EdgeInsets.all(15.0),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'HOURS \nFINISHED',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
-                                  Text(
+                                  const Text(
                                     '2',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w900,
                                         fontSize: 30),
-                                  ),
+                                  ), 
                                   Text(
-                                    'TOTAL HOURS : 10',
-                                    style: TextStyle(
+                                    'TOTAL ${widget.wheelName} : ${widget.wheelCount}',
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w900,
                                         fontSize: 9),
                                   ),
@@ -250,7 +214,7 @@ class _UserInterfaceState extends State<UserInterface> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 10),
+                            margin: const EdgeInsets.only(top: 10),
                             decoration: const BoxDecoration(
                                 color: Colors.white,
                                 borderRadius:

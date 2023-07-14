@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_project/functions/hive_functions/db_start.dart';
 import '../../models/sign_up/signup_model.dart';
-import '../screen_user_interface.dart';
+import '../screen_user.dart';
 
 class TodayWidget extends StatefulWidget {
   const TodayWidget({super.key});
@@ -26,10 +26,14 @@ class _TodayWidgetState extends State<TodayWidget> {
                     InkWell(
                       onTap: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => UserInterface()),
-                        );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ScreenUser(
+                                      habitName: startdata.habit,
+                                      totalDays: startdata.days,
+                                      wheelCount: startdata.wheelCount,
+                                      wheelName: startdata.wheelName, 
+                                    )));
                         print(startList[indexVal]);
                       },
                       child: Card(
