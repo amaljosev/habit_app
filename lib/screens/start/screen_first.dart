@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_project/screens/screen_login.dart';
-import 'package:habit_project/screens/screen_signup.dart';
+import 'package:habit_project/screens/start/screen_login.dart';
+import 'package:habit_project/screens/start/screen_signup.dart';
 
 class FirstPage extends StatelessWidget {
   const FirstPage({super.key});

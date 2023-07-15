@@ -5,7 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/main.dart';
 import 'package:habit_project/screens/screen_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../functions/hive_functions/db_functions.dart';
+import '../../functions/hive_functions/db_functions.dart';
+
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});

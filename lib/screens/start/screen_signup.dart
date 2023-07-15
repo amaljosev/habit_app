@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:habit_project/screens/screen_home.dart';
-import '../functions/hive_functions/db_functions.dart';
-import '../main.dart';
-import '../models/sign_up/signup_model.dart';
+import '../../functions/hive_functions/db_functions.dart';
+import '../../main.dart';
+import '../../models/sign_up/signup_model.dart';
 import 'package:email_validator/email_validator.dart';
 
 class SignUp extends StatefulWidget {

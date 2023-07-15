@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:habit_project/screens/screen_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../functions/hive_functions/db_functions.dart';
+import '../start/screen_login.dart';
 
 class MeWdget extends StatefulWidget {
   const MeWdget({super.key});
