@@ -29,6 +29,8 @@ class _TodayWidgetState extends State<TodayWidget> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ScreenUser(
+                                  id: DateTime.now().millisecond.toString(),
+                                  index: indexVal,
                                       habitName: startdata.habit,
                                       totalDays: startdata.days,
                                       wheelCount: startdata.wheelCount,

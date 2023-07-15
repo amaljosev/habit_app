@@ -169,7 +169,7 @@ class _StartScreenState extends State<StartScreen> {
                                     if (index == 0) {
                                       wheelName = 'HOURS';
                                     } else if (index == 1) {
-                                      wheelName = 'PAGE';
+                                      wheelName = 'PAGES'; 
                                     } else if (index == 2) {
                                       wheelName = 'KILOMETER';
                                     } else if (index == 3) {
@@ -197,7 +197,7 @@ class _StartScreenState extends State<StartScreen> {
                                   ),
                                   Center(
                                     child: Text(
-                                      'Page',
+                                      'Pages',
                                       style: TextStyle(
                                         fontSize: 20,
                                         color: Colors.white,

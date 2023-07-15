@@ -3,9 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class UserCalendar extends StatefulWidget {
-  const UserCalendar({
-    Key? key,
-  }) : super(key: key);
+  const UserCalendar({super.key});
 
   @override
   State<UserCalendar> createState() => _UserCalendarState();

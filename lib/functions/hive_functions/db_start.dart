@@ -22,3 +22,14 @@ Future<void> getallDatas() async {
 
 
 
+Future<void> deleteData(int id) async {
+  final categoryDB = await Hive.openBox<StartModel>('category_db');
+  await categoryDB.deleteAt(id);
+  getallDatas();
+}
+
+Future<void> updateList(int id, StartModel value) async {
+  final categoryDB = await Hive.openBox<StartModel>('category_db');
+  categoryDB.putAt(id, value);
+  getallDatas(); 
+}
