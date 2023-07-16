@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/categories/categories_model.dart';
@@ -19,15 +20,18 @@ class _CategoryWidgetState extends State<CategoryWidget> {
       valueListenable: startListNotifier,
       builder: (BuildContext ctx, List<StartModel> startList, Widget? child) {
         return Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding:  EdgeInsets.all(10.0),
           child: ListView.separated(
               itemBuilder: (context, index) {
                 return Card(
-                  color: Colors.indigo.shade400,
+                  color: Colors.white,
                   child: ListTile(
                     title: Text(
                       categoryList[index].trailingTitle.toString(),
-                      style: const TextStyle(color: Colors.white),
+                      style: GoogleFonts.andadaPro(  
+                              color: Colors.blue.shade900,
+                              fontWeight: FontWeight.bold, 
+                            ),
                     ),
                     leading: categoryList[index].leadingIcon,
                     onTap: () {
@@ -55,57 +59,57 @@ class _CategoryWidgetState extends State<CategoryWidget> {
 
   List<CategoryModel> categoryList = [
     CategoryModel(
-        leadingIcon: const Icon(
+        leadingIcon:  const Icon(
           Icons.yard,
-          color: Colors.white,
+          color:Colors.green, 
         ),
         trailingTitle: 'Meditation'),
     CategoryModel(
         leadingIcon: const Icon(
           Icons.menu_book_sharp,
-          color: Colors.white,
+          color: Colors.red,  
         ),
         trailingTitle: 'Reading'),
     CategoryModel(
         leadingIcon: const Icon(
           Icons.assignment,
-          color: Colors.white,
+          color: Colors.pink,
         ),
         trailingTitle: 'Study'),
     CategoryModel(
         leadingIcon: const Icon(
           Icons.accessibility_new,
-          color: Colors.white,
+          color: Colors.yellow,
         ),
         trailingTitle: 'Workout'),
     CategoryModel(
         leadingIcon: const Icon(
           Icons.draw,
-          color: Colors.white,
+          color: Colors.purple,
         ),
         trailingTitle: 'Art'),
     CategoryModel(
         leadingIcon: const Icon(
           Icons.sports_soccer,
-          color: Colors.white,
+          color: Colors.orangeAccent,
         ),
         trailingTitle: 'Sports'),
     CategoryModel(
         leadingIcon: const Icon(
           Icons.mobile_off_outlined,
-          color: Colors.white,
+          color: Colors.grey,
         ),
         trailingTitle: 'Social'),
     CategoryModel(
         leadingIcon: const Icon(
           Icons.cleaning_services_outlined,
-          color: Colors.white,
+          color: Colors.blue,
         ),
         trailingTitle: 'Cleaning'),
     CategoryModel(
         leadingIcon: const Icon(
           Icons.airline_seat_individual_suite,
-          color: Colors.white,
+          color: Colors.deepPurple,
         ),
         trailingTitle: 'Sleep'),
   ];

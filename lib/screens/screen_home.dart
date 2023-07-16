@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onDateChanged: (value) => print(value),
               firstDate: DateTime.now().subtract(const Duration(days: 140)),
               lastDate: DateTime.now(),
-              accent: Colors.indigo.shade400,
+              accent: Colors.blue.shade800,    
               backButton: false,
             )
           : null,
@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: MediaQuery.of(context).size.height*0.93,   
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("lib/assets/images/background_new.png"),
+              image: AssetImage("lib/assets/images/home_new.jpg"), 
               fit: BoxFit.fill,
             ),
           ),
@@ -57,27 +57,27 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-      items:  <BottomNavigationBarItem>[
+      items:  const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: const Icon(Icons.home),
+          icon: Icon(Icons.home),
           label: 'TODAY',
-           backgroundColor:Colors.indigo.shade400,
+           backgroundColor:Colors.indigo,  
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.assignment_outlined,color: Colors.white,), 
+          icon: Icon(Icons.assignment_outlined,color: Colors.white,), 
           label: 'CATEGORIES',
-           backgroundColor:Colors.indigo.shade400, 
+           backgroundColor:Colors.indigo, 
         ),
         
         BottomNavigationBarItem( 
-          icon: const Icon(Icons.add_circle_outline_outlined),
+          icon: Icon(Icons.add_circle_outline_outlined),
           label: 'CREATE',
-           backgroundColor: Colors.indigo.shade400,
+           backgroundColor: Colors.indigo,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.person_2_outlined),
+          icon: Icon(Icons.person_2_outlined),
           label: 'ME',
-           backgroundColor: Colors.indigo.shade400,
+           backgroundColor: Colors.indigo,
         ),
       ],
       currentIndex: _selectedIndex,

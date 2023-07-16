@@ -32,7 +32,7 @@ class _StartWidgetState extends State<StartWidget> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('lib/assets/images/background_new.png'),
+              image: AssetImage('lib/assets/images/create_bg.jpg'),
               fit: BoxFit.fill,
             ),
           ),
@@ -51,23 +51,37 @@ class _StartWidgetState extends State<StartWidget> {
                     ),
                   ),
                 ),
+                Padding( 
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row( 
+                    children: [
+                      Text(
+                        'ENTER HABIT NAME',
+                        style: GoogleFonts.unbounded(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 TextFormField(
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                   controller: habit_NameController,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Colors.indigo.shade300,
-                    border: const OutlineInputBorder(
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    hintText: 'NAME',
-                    hintStyle: const TextStyle(color: Colors.white),
-                    labelText: 'HABIT NAME',
-                    labelStyle: const TextStyle(color: Colors.white),
-                    prefixIcon: const Icon(
+                    hintText: 'HABIT NAME',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Colors.grey),
+                    prefixIcon: Icon(
                       Icons.edit,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                   validator: (value) {
@@ -78,26 +92,39 @@ class _StartWidgetState extends State<StartWidget> {
                     }
                   },
                 ),
-                const SizedBox(
-                  height: 20,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'ENTER TOTAL DAYS', 
+                        style: GoogleFonts.unbounded(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                
                 TextFormField(
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                   controller: total_DaysController,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Colors.indigo.shade300,
-                    border: const OutlineInputBorder(
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     hintText: 'Days',
-                    hintStyle: const TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.grey),
                     labelText: 'Duration',
-                    labelStyle: const TextStyle(color: Colors.white),
-                    prefixIcon: const Icon(
-                      Icons.edit,
-                      color: Colors.white,
+                    labelStyle: TextStyle(color: Colors.grey),
+                    prefixIcon: Icon(
+                      Icons.alarm,
+                      color: Colors.black,
                     ),
                   ),
                   validator: (value) {
@@ -151,9 +178,9 @@ class _StartWidgetState extends State<StartWidget> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        color: Colors.indigo.shade300,
-                        borderRadius: const BorderRadius.all(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
                           Radius.circular(30),
                         ),
                       ),
@@ -164,7 +191,7 @@ class _StartWidgetState extends State<StartWidget> {
                               width: MediaQuery.of(context).size.width * 0.4,
                               height: MediaQuery.of(context).size.height * 0.2,
                               child: ListWheelScrollView(
-                                itemExtent: 50,
+                                itemExtent: 70,
                                 onSelectedItemChanged: (index) {
                                   wheel_count = index + 1;
                                   print('Days: $wheel_count');
@@ -172,14 +199,22 @@ class _StartWidgetState extends State<StartWidget> {
                                 physics: const FixedExtentScrollPhysics(),
                                 children: List<Widget>.generate(
                                   10,
-                                  (index) => Center(
-                                    child: Text(
-                                      '${index + 1}',
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
+                                  (index) => Column(
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          '${index + 1}',
+                                          style: GoogleFonts.andadaPro(
+                                            color: Colors.blue.shade900,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      const Padding(
+                                        padding: EdgeInsets.all(10.0),
+                                        child: Divider(color: Colors.grey),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -191,7 +226,7 @@ class _StartWidgetState extends State<StartWidget> {
                               width: MediaQuery.of(context).size.width * 0.4,
                               height: MediaQuery.of(context).size.height * 0.2,
                               child: ListWheelScrollView(
-                                itemExtent: 50,
+                                itemExtent: 70,
                                 onSelectedItemChanged: (index) {
                                   wheel_name = index;
                                   setState(() {
@@ -214,87 +249,61 @@ class _StartWidgetState extends State<StartWidget> {
                                   print('Selected: $wheel_name');
                                 },
                                 physics: const FixedExtentScrollPhysics(),
-                                children: const [
-                                  Center(
-                                    child: Text(
-                                      'Hours',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
+                                children: List<Widget>.generate(
+                                  7,
+                                  (index) => Column(
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          [
+                                            'Hours',
+                                            'Pages',
+                                            'Kilometer',
+                                            'Meter',
+                                            'Liter',
+                                            'Cup',
+                                            'Rupee',
+                                          ][index],
+                                          style: GoogleFonts.andadaPro(
+                                            color: Colors.blue.shade900,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Pages',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
+                                      const Padding(
+                                        padding: EdgeInsets.all(10.0),
+                                        child: Divider(color: Colors.grey),
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                  Center(
-                                    child: Text(
-                                      'Kilometer',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Meter',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Liter',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Cup',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Rupee',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
-                          const SizedBox(width: 20),
                           const SizedBox(width: 20),
                           Expanded(
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.4,
                               height: MediaQuery.of(context).size.height * 0.2,
                               alignment: Alignment.center,
-                              child: const Text(
-                                'per day',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.arrow_back,
+                                    color: Colors.blue.shade900,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    'per day',
+                                    style: GoogleFonts.andadaPro(
+                                      color: Colors.blue.shade900,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -422,6 +431,7 @@ class _StartWidgetState extends State<StartWidget> {
       return;
     } else {
       total_DaysController.text = '';
+      habit_NameController.text = '';
 
       setState(() {
         popDialogueBox();

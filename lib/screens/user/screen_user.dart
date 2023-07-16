@@ -37,7 +37,7 @@ class _ScreenUserState extends State<ScreenUser> {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("lib/assets/images/bg-user_interface.png"),
+            image: AssetImage("lib/assets/images/user_bg.jpg"),
             fit: BoxFit.fill,
           ),
         ),
@@ -58,7 +58,7 @@ class _ScreenUserState extends State<ScreenUser> {
                               Navigator.of(context).pop();
                             },
                             child: const Icon(
-                              Icons.arrow_back,
+                              Icons.arrow_back,color: Colors.white, 
                             ),
                           ),
                         )
@@ -81,8 +81,9 @@ class _ScreenUserState extends State<ScreenUser> {
                                 }), 
                               );
                             },
-                            icon: Icon(Icons.edit_outlined)),
-                        PopupMenuButton<SampleItem>(
+                            icon: const Icon(Icons.edit_outlined,color: Colors.white,)),
+                        PopupMenuButton<SampleItem>( 
+                          color: Colors.white, 
                           initialValue: selectedMenu,
                           onSelected: (SampleItem item) {
                             setState(() {
@@ -114,7 +115,7 @@ class _ScreenUserState extends State<ScreenUser> {
                 child: Container(
                   height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
-                      color: Colors.pink.shade100,
+                      color: Colors.white30,
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(30))),
                   child: Padding(
@@ -130,7 +131,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                 style: GoogleFonts.unbounded(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.indigo,
+                                  color: Colors.white, 
                                 ),
                               ),
                             ),

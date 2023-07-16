@@ -33,7 +33,7 @@ class _StartScreenState extends State<StartScreen> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('lib/assets/images/background_new.png'),
+              image: AssetImage('lib/assets/images/start_bg.jpg'), 
               fit: BoxFit.fill,
             ),
           ),
