@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_project/screens/bottom_navigation.dart/widget_categories.dart';
-import 'package:habit_project/screens/bottom_navigation.dart/widget_newstart.dart';
+import 'package:habit_project/screens/bottom_navigation.dart/widget_newcategory.dart';
 import 'package:habit_project/screens/bottom_navigation.dart/widget_today.dart';
 import 'bottom_navigation.dart/widget_me.dart';
 import 'package:calendar_appbar/calendar_appbar.dart';
@@ -64,18 +64,18 @@ class _HomeScreenState extends State<HomeScreen> {
            backgroundColor:Colors.indigo.shade400,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.map,color: Colors.white,), 
+          icon: const Icon(Icons.assignment_outlined,color: Colors.white,), 
           label: 'CATEGORIES',
            backgroundColor:Colors.indigo.shade400, 
         ),
         
         BottomNavigationBarItem( 
-          icon: const Icon(Icons.add_box_sharp),
-          label: 'NEW START',
+          icon: const Icon(Icons.add_circle_outline_outlined),
+          label: 'CREATE',
            backgroundColor: Colors.indigo.shade400,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.person),
+          icon: const Icon(Icons.person_2_outlined),
           label: 'ME',
            backgroundColor: Colors.indigo.shade400,
         ),
