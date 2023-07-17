@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import '../../functions/hive_functions/db_start.dart';
-import '../../models/sign_up/signup_model.dart';
+import '../../models/sign_up/db_model.dart';
 import '../screen_home.dart';
 
 class EditUser extends StatefulWidget {
@@ -53,7 +53,7 @@ class _EditUserState extends State<EditUser> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('lib/assets/images/background_new.png'),
+              image: AssetImage('lib/assets/images/create_bg.jpg'),
               fit: BoxFit.fill,
             ),
           ),
@@ -89,22 +89,21 @@ class _EditUserState extends State<EditUser> {
                     ),
                   ),
                   TextFormField(
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.black),
                     controller: habitNameController,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       filled: true,
-                      fillColor: Colors.indigo.shade300,
-                      border: const OutlineInputBorder(
+                      fillColor: Colors.white70,
+                      border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       hintText: 'Name',
-                      hintStyle: const TextStyle(color: Colors.white),
-                      // labelText: 'HABIT NAME',
-                      labelStyle: const TextStyle(color: Colors.white),
-                      prefixIcon: const Icon(
+                      hintStyle: TextStyle(color: Colors.grey),
+                      labelStyle: TextStyle(color: Colors.grey),
+                      prefixIcon: Icon(
                         Icons.edit,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                     validator: (value) {
@@ -123,7 +122,7 @@ class _EditUserState extends State<EditUser> {
                     child: Row(
                       children: [
                         Text(
-                          'HABIT NAME',
+                          'HABIT DURATION',
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
@@ -134,22 +133,21 @@ class _EditUserState extends State<EditUser> {
                     ),
                   ),
                   TextFormField(
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.black),
                     controller: totalDaysController,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       filled: true,
-                      fillColor: Colors.indigo.shade300,
-                      border: const OutlineInputBorder(
+                      fillColor: Colors.white70,
+                      border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       hintText: 'Days',
-                      hintStyle: const TextStyle(color: Colors.white),
-                      // labelText: 'Duration',
-                      labelStyle: const TextStyle(color: Colors.white),
-                      prefixIcon: const Icon(
-                        Icons.edit,
-                        color: Colors.white,
+                      hintStyle: TextStyle(color: Colors.grey),
+                      labelStyle: TextStyle(color: Colors.grey),
+                      prefixIcon: Icon(
+                        Icons.calendar_month_outlined,
+                        color: Colors.black,
                       ),
                     ),
                     validator: (value) {
@@ -203,159 +201,127 @@ class _EditUserState extends State<EditUser> {
                         ),
                       ),
                       Container(
-                        decoration: BoxDecoration(
-                          color: Colors.indigo.shade300,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(30),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.4,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.2,
-                                child: ListWheelScrollView(
-                                  itemExtent: 50,
-                                  onSelectedItemChanged: (index) {
-                                    wheel_Count = index + 1;
-                                    print('Days: $wheel_Count');
-                                  },
-                                  physics: const FixedExtentScrollPhysics(),
-                                  children: List<Widget>.generate(
-                                    10,
-                                    (index) => Center(
-                                      child: Text(
-                                        '${index + 1}',
-                                        style: const TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.4,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.2,
-                                child: ListWheelScrollView(
-                                  itemExtent: 50,
-                                  onSelectedItemChanged: (index) {
-                                    wheel_Name = index;
-                                    setState(() {
-                                      if (index == 0) {
-                                        wheel_Name = 'HOURS';
-                                      } else if (index == 1) {
-                                        wheel_Name = 'PAGES';
-                                      } else if (index == 2) {
-                                        wheel_Name = 'KILOMETER';
-                                      } else if (index == 3) {
-                                        wheel_Name = 'METER';
-                                      } else if (index == 4) {
-                                        wheel_Name = 'LITER';
-                                      } else if (index == 5) {
-                                        wheel_Name = 'CUP';
-                                      } else if (index == 6) {
-                                        wheel_Name = 'RUPEE';
-                                      }
-                                    });
-                                    print('Selected: $wheel_Name');
-                                  },
-                                  physics: const FixedExtentScrollPhysics(),
-                                  children: const [
-                                    Center(
-                                      child: Text(
-                                        'Hours',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'Pages',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'Kilometer',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'Meter',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'Liter',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'Cup',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'Rupee',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.4,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.2,
-                                alignment: Alignment.center,
-                                child: const Text(
-                                  'per day',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30),
                         ),
                       ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              child: ListWheelScrollView(
+                                itemExtent: 50,
+                                onSelectedItemChanged: (index) {
+                                  wheel_Count = index + 1;
+                                  print('Days: $wheel_Count');
+                                },
+                                physics: const FixedExtentScrollPhysics(),
+                                children: List<Widget>.generate(
+                                  10,
+                                  (index) => Column(
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          '${index + 1}',
+                                          style: GoogleFonts.andadaPro(
+                                            color: Colors.blue.shade900,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 50,
+                                        child: Divider(color: Colors.grey),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          Expanded(
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              child: ListWheelScrollView(
+                                itemExtent: 50,
+                                onSelectedItemChanged: (index) {
+                                  wheel_Name = index;
+                                  setState(() {
+                                    if (index == 0) {
+                                      wheel_Name = 'HOURS';
+                                    } else if (index == 1) {
+                                      wheel_Name = 'PAGES';
+                                    } else if (index == 2) {
+                                      wheel_Name = 'KILOMETER';
+                                    } else if (index == 3) {
+                                      wheel_Name = 'METER';
+                                    } else if (index == 4) {
+                                      wheel_Name = 'LITER';
+                                    } else if (index == 5) {
+                                      wheel_Name = 'CUP';
+                                    } else if (index == 6) {
+                                      wheel_Name = 'RUPEE';
+                                    }
+                                  });
+                                  print('Selected: $wheel_Name'); 
+                                },
+                                physics: FixedExtentScrollPhysics(),
+                                children: [
+                                  for (var name in [
+                                    'Hours',
+                                    'Pages',
+                                    'Kilometer',
+                                    'Meter',
+                                    'Liter',
+                                    'Cup',
+                                    'Rupee'
+                                  ])
+                                    Column(
+                                      children: [
+                                        Center(
+                                          child: Text(
+                                            name,
+                                            style: GoogleFonts.andadaPro(
+                                              color: Colors.blue.shade900,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 50,
+                                          child: Divider(color: Colors.grey),
+                                        ),
+                                      ],
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          const SizedBox(width: 20),
+                          Expanded(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              alignment: Alignment.center,
+                              child: Text(
+                                'per day',
+                                style: GoogleFonts.andadaPro(
+                                  color: Colors.blue.shade900,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     ],
                   ),
                   const SizedBox(
@@ -436,7 +402,7 @@ class _EditUserState extends State<EditUser> {
                             }
                           } else {
                             ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar( 
+                                .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                     margin: EdgeInsets.all(10),
@@ -518,7 +484,7 @@ class _EditUserState extends State<EditUser> {
             break;
           case 3:
             weekdays.add('Wednesday');
-            break;
+            break; 
           case 4:
             weekdays.add('Thursday');
             break;
@@ -534,6 +500,7 @@ class _EditUserState extends State<EditUser> {
 
     print('Selected weekdays: $weekdays');
   }
+  
 
   Future<void> updateDetails(ctx) async {
     final dataModel = StartModel(

@@ -4,7 +4,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 
 import '../../functions/hive_functions/db_start.dart';
-import '../../models/sign_up/signup_model.dart';
+import '../../models/sign_up/db_model.dart';
 import '../screen_home.dart';
 
 class StartWidget extends StatefulWidget {

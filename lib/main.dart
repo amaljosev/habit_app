@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:habit_project/screens/start/screen_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'models/sign_up/signup_model.dart';
+import 'models/sign_up/db_model.dart';
 
 const save_key_name = 'userLoggedIn';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Hive.initFlutter();
+  await Hive.initFlutter(); 
   if (!Hive.isAdapterRegistered(SignUpModelAdapter().typeId)) {
     Hive.registerAdapter(SignUpModelAdapter());
   }
   if (!Hive.isAdapterRegistered(StartModelAdapter().typeId)) {
     Hive.registerAdapter(StartModelAdapter());
+  }
+  if (!Hive.isAdapterRegistered(SignUpModelAdapter().typeId)) {
+    Hive.registerAdapter(SignUpModelAdapter()); 
   }
 
   runApp(const MyApp());

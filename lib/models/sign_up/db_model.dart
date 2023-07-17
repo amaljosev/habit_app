@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-part 'signup_model.g.dart';
+part 'db_model.g.dart';
 
 @HiveType(typeId: 1)
 class SignUpModel {
@@ -27,7 +27,7 @@ class StartModel {
   final String habit;
   @HiveField(2)
   final String days;
-  @HiveField(3) 
+  @HiveField(3)
   final String wheelName;
   @HiveField(4)
   final String wheelCount;
@@ -39,4 +39,21 @@ class StartModel {
     required this.wheelName,
     required this.wheelCount,
   });
+}
+
+@HiveType(typeId: 3)
+class UserModel { 
+  @HiveField(0)
+  final int id; 
+  @HiveField(1)
+  late final int categoryCount;
+  @HiveField(2)
+  final int daysCount;
+  @HiveField(3)
+  final int percentage; 
+
+  UserModel( 
+      {required this.id,required this.categoryCount,
+      required this.daysCount,
+      required this.percentage});
 }

@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/categories/categories_model.dart';
-import '../../models/sign_up/signup_model.dart';
+import '../../models/sign_up/db_model.dart';
 import '../screen_start.dart';
 
 class CategoryWidget extends StatefulWidget {

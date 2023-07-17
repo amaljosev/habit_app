@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_project/models/sign_up/signup_model.dart';
+import 'package:habit_project/models/sign_up/db_model.dart';
 import 'package:habit_project/screens/screen_home.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import '../functions/hive_functions/db_start.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+
+import '../functions/hive_functions/db_user.dart';
 
 class StartScreen extends StatefulWidget {
   final String name;
@@ -33,7 +35,7 @@ class _StartScreenState extends State<StartScreen> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('lib/assets/images/start_bg.jpg'), 
+              image: AssetImage('lib/assets/images/start_bg.jpg'),
               fit: BoxFit.fill,
             ),
           ),
@@ -53,22 +55,22 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                 ),
                 TextFormField(
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                   controller: totalDaysController,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Colors.indigo.shade300,
-                    border: const OutlineInputBorder(
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     hintText: 'Days',
-                    hintStyle: const TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.grey),
                     labelText: 'Duration',
-                    labelStyle: const TextStyle(color: Colors.white),
-                    prefixIcon: const Icon(
+                    labelStyle: TextStyle(color: Colors.grey),
+                    prefixIcon: Icon(
                       Icons.edit,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                   validator: (value) {
@@ -122,9 +124,9 @@ class _StartScreenState extends State<StartScreen> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        color: Colors.indigo.shade300,
-                        borderRadius: const BorderRadius.all(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
                           Radius.circular(30),
                         ),
                       ),
@@ -143,14 +145,22 @@ class _StartScreenState extends State<StartScreen> {
                                 physics: const FixedExtentScrollPhysics(),
                                 children: List<Widget>.generate(
                                   10,
-                                  (index) => Center(
-                                    child: Text(
-                                      '${index + 1}',
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
+                                  (index) => Column(
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          '${index + 1}',
+                                          style: GoogleFonts.andadaPro(
+                                            color: Colors.blue.shade900,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      Container(
+                                        width: 50,
+                                        child: Divider(color: Colors.grey),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -169,7 +179,7 @@ class _StartScreenState extends State<StartScreen> {
                                     if (index == 0) {
                                       wheelName = 'HOURS';
                                     } else if (index == 1) {
-                                      wheelName = 'PAGES'; 
+                                      wheelName = 'PAGES';
                                     } else if (index == 2) {
                                       wheelName = 'KILOMETER';
                                     } else if (index == 3) {
@@ -179,76 +189,39 @@ class _StartScreenState extends State<StartScreen> {
                                     } else if (index == 5) {
                                       wheelName = 'CUP';
                                     } else if (index == 6) {
-                                      wheelName = 'RUPEE'; 
+                                      wheelName = 'RUPEE';
                                     }
                                   });
                                   print('Selected: $wheelName');
                                 },
-                                physics: const FixedExtentScrollPhysics(),
-                                children: const [
-                                  Center(
-                                    child: Text(
-                                      'Hours',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
+                                physics: FixedExtentScrollPhysics(),
+                                children: [
+                                  for (var name in [
+                                    'Hours',
+                                    'Pages',
+                                    'Kilometer',
+                                    'Meter',
+                                    'Liter',
+                                    'Cup',
+                                    'Rupee'
+                                  ])
+                                    Column(
+                                      children: [
+                                        Center(
+                                          child: Text(
+                                            name,
+                                            style: GoogleFonts.andadaPro(
+                                              color: Colors.blue.shade900,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 50,
+                                          child: Divider(color: Colors.grey),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Pages',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Kilometer',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Meter',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Liter',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Cup',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Rupee',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -260,11 +233,11 @@ class _StartScreenState extends State<StartScreen> {
                               width: MediaQuery.of(context).size.width * 0.4,
                               height: MediaQuery.of(context).size.height * 0.2,
                               alignment: Alignment.center,
-                              child: const Text(
+                              child: Text(
                                 'per day',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
+                                style: GoogleFonts.andadaPro(
+                                  color: Colors.blue.shade900,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
@@ -384,8 +357,17 @@ class _StartScreenState extends State<StartScreen> {
         id: DateTime.now().millisecond.toString(),
         habit: widget.name,
         days: _days,
-        wheelCount: wheelCount.toString(), 
+        wheelCount: wheelCount.toString(),
         wheelName: wheelName);
+    int categoryCount = 0;
+    int daysCount = 0;
+    int percentage = 0;
+    final userModelObjet = UserModel(
+      id: DateTime.now().millisecond,
+        categoryCount: categoryCount, 
+        daysCount: daysCount,
+        percentage: percentage);
+        addUserData(userModelObjet); 
 
     print("${widget.name} $_days  $wheelCount $wheelName");
     wheelCount = defaultCountData;

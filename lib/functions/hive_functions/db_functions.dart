@@ -1,5 +1,5 @@
 
-import 'package:habit_project/models/sign_up/signup_model.dart';
+import 'package:habit_project/models/sign_up/db_model.dart';
 import 'package:hive/hive.dart';
 const SIGNUP_DB_NAME='signup_db';
 abstract class SignupDBfunctions {

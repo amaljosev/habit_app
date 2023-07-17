@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:table_calendar/table_calendar.dart';
 import '../../functions/hive_functions/db_functions.dart';
 import '../start/screen_login.dart';
 
@@ -56,25 +56,84 @@ class _MeWdgetState extends State<MeWdget> {
                 username,
                 style: const TextStyle(color: Colors.white),
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    signOut(context);
-                  },
-                  child: const Text('sign out')),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                decoration: const BoxDecoration(
+              
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20), 
+                  child: Icon(Icons.star_outline),
+                ),
+               
+                Text(
+                  'TOTAL HABITS STARTED : 5',
+                  style: GoogleFonts.unbounded(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(30))),
-                child: TableCalendar(
-                  firstDay: DateTime.utc(2010, 10, 16),
-                  lastDay: DateTime.utc(2030, 3, 14),
-                  focusedDay: DateTime.now(),
+                  ),
+                ),
+              ],
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20), 
+                  child: Icon(Icons.celebration_outlined), 
+                ),
+                Text(
+                  'COMPLEATED : 2',
+                  style: GoogleFonts.unbounded(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+                ),
+              ), 
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20), 
+                  child: Icon(Icons.favorite_outline_outlined), 
+                ),
+                Text(
+                  'YOUR SCORE : 200',
+                  style: GoogleFonts.unbounded(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+                ),
+              ),
+              
+              Padding(
+                padding: const EdgeInsets.only(top: 50,right: 30), 
+                child: Row(
+                  
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                          onPressed: () {
+                    signOut(context);
+                          },
+                          child: const Text('sign out')),
+                  ],
+                ),
+              ), 
             ],
           ),
         ),
+        
       ],
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:slider_button/slider_button.dart';
 import '../../functions/hive_functions/db_start.dart';
+import '../../models/sign_up/db_model.dart';
 import '../screen_home.dart';
 import 'edit_user.dart';
 
@@ -12,6 +13,7 @@ class ScreenUser extends StatefulWidget {
   final String totalDays;
   final String wheelCount;
   final String wheelName;
+  
   const ScreenUser(
       {super.key,
       required this.habitName,
@@ -19,7 +21,8 @@ class ScreenUser extends StatefulWidget {
       required this.wheelCount,
       required this.wheelName,
       required this.index,
-      required this.id});
+      required this.id,
+      });
 
   @override
   State<ScreenUser> createState() => _ScreenUserState();
@@ -58,7 +61,8 @@ class _ScreenUserState extends State<ScreenUser> {
                               Navigator.of(context).pop();
                             },
                             child: const Icon(
-                              Icons.arrow_back,color: Colors.white, 
+                              Icons.arrow_back,
+                              color: Colors.white,
                             ),
                           ),
                         )
@@ -70,20 +74,23 @@ class _ScreenUserState extends State<ScreenUser> {
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(builder: (context) {
-                                  return  EditUser( 
+                                  return EditUser(
                                     index: widget.index,
-                                    id:  DateTime.now().millisecond.toString(),
+                                    id: DateTime.now().millisecond.toString(),
                                     habitName: widget.habitName,
                                     totalDays: widget.totalDays,
                                     wheelCount: widget.wheelCount,
                                     wheelName: widget.wheelName,
                                   );
-                                }), 
+                                }),
                               );
                             },
-                            icon: const Icon(Icons.edit_outlined,color: Colors.white,)),
-                        PopupMenuButton<SampleItem>( 
-                          color: Colors.white, 
+                            icon: const Icon(
+                              Icons.edit_outlined,
+                              color: Colors.white,
+                            )),
+                        PopupMenuButton<SampleItem>(
+                          color: Colors.white,
                           initialValue: selectedMenu,
                           onSelected: (SampleItem item) {
                             setState(() {
@@ -131,7 +138,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                 style: GoogleFonts.unbounded(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white, 
+                                  color: Colors.white,
                                 ),
                               ),
                             ),

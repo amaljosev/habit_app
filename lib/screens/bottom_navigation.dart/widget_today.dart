@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/functions/hive_functions/db_start.dart';
-import '../../models/sign_up/signup_model.dart';
+import '../../models/sign_up/db_model.dart';
 import '../user/screen_user.dart';
 
 class TodayWidget extends StatefulWidget {
@@ -36,6 +36,7 @@ class _TodayWidgetState extends State<TodayWidget> {
                                       totalDays: startdata.days,
                                       wheelCount: startdata.wheelCount,
                                       wheelName: startdata.wheelName,
+                                      
                                     )));
                         print(startList[indexVal]);
                       },
