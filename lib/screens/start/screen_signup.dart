@@ -38,7 +38,7 @@ class _SignUpState extends State<SignUp> {
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("lib/assets/images/newBackground.png"), 
+                image: AssetImage("lib/assets/images/sign_up.jpg"),  
                 fit: BoxFit.cover,
               ),
             ),
@@ -56,23 +56,23 @@ class _SignUpState extends State<SignUp> {
                           style: GoogleFonts.unbounded(  
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
-                              color: Colors.indigo )), 
+                              color: Colors.white )), 
                     )),
                     TextFormField(
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.black), 
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                       decoration:  InputDecoration(
                         filled: true,
-                        fillColor: Colors.indigo.shade300,
+                        fillColor: Colors.white70, 
                         border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10))),
                         hintText: 'yourname@gmail.com',
                         labelText: 'Email Address',
-                        labelStyle: const TextStyle(color: Colors.white), 
+                        labelStyle: const TextStyle(color: Colors.grey), 
                         prefixIcon: const Icon(
                           Icons.mail,
-                          color: Colors.white,
+                          color: Colors.grey, 
                         ),
                       ),
                       validator: (value) {
@@ -90,22 +90,22 @@ class _SignUpState extends State<SignUp> {
                       height: 20,
                     ),
                     TextFormField(
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.black),
                         controller: _userNameController,
                         keyboardType: TextInputType.name,
                         decoration:  InputDecoration(
                           
                           filled: true,
-                          fillColor: Colors.indigo.shade300,
+                          fillColor: Colors.white70,
                           border: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           hintText: '@yourname',
                           labelText: 'User Name',
-                          labelStyle: const TextStyle(color: Colors.white),
+                          labelStyle: const TextStyle(color: Colors.grey),
                           prefixIcon: const Icon(
                             Icons.person,
-                            color: Colors.white,
+                            color: Colors.grey, 
                           ), 
                         ),
                         validator: (value) {
@@ -119,22 +119,22 @@ class _SignUpState extends State<SignUp> {
                       height: 20,
                     ),
                     TextFormField(
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.black),
                         controller: _passwordController,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: true,
                         decoration:  InputDecoration(
                           filled: true,
-                          fillColor: Colors.indigo.shade300,
+                          fillColor: Colors.white70,
                           border: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           hintText: '**********',
                           labelText: 'Password',
-                          labelStyle: const TextStyle(color: Colors.white),
+                          labelStyle: const TextStyle(color: Colors.grey),
                           prefixIcon: const Icon(
                             Icons.key,
-                            color: Colors.white,
+                            color: Colors.grey, 
                           ),
                         ),
                         validator: (value) {
@@ -156,7 +156,7 @@ class _SignUpState extends State<SignUp> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.deepPurple,
+                          backgroundColor: Colors.white,
                           fixedSize: const Size(220, 34),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
@@ -166,7 +166,7 @@ class _SignUpState extends State<SignUp> {
                       child: Text(
                         "Sign up",
                         style: GoogleFonts.unbounded(
-                            fontWeight: FontWeight.w500, color: Colors.white),
+                            fontWeight: FontWeight.w500, color: Colors.green), 
                       ),
                     ),
                   ],

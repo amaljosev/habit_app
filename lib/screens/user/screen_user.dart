@@ -86,6 +86,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                     totalDays: widget.totalDays,
                                     wheelCount: widget.wheelCount,
                                     wheelName: widget.wheelName,
+                                    name: widget.name  
                                   );
                                 }),
                               );
@@ -384,7 +385,6 @@ class _ScreenUserState extends State<ScreenUser> {
     habitNameNotifier.value = (habitName ?? 0) + 1;
     
     if (habitNameNotifier.value.toString() == widget.wheelCount) {
-      // Reset action
       habitNameNotifier.value = 0;
       updateList(
         widget.index,
@@ -392,10 +392,10 @@ class _ScreenUserState extends State<ScreenUser> {
           days: widget.totalDays,
           habit: widget.habitName,
           id: DateTime.now().millisecond.toString(),
-          name: habitNameNotifier.value.toString(),
+          todayHours: habitNameNotifier.value.toString(),
           wheelCount: widget.wheelCount,
-          wheelName: widget.wheelName,
-        ),
+          wheelName: widget.wheelName, 
+        ), 
       );
     } else { 
       updateList(
@@ -404,7 +404,7 @@ class _ScreenUserState extends State<ScreenUser> {
           days: widget.totalDays,
           habit: widget.habitName,
           id: DateTime.now().millisecond.toString(),
-          name: habitNameNotifier.value.toString(),
+          todayHours: habitNameNotifier.value.toString(),
           wheelCount: widget.wheelCount,
           wheelName: widget.wheelName,
         ),

@@ -29,7 +29,7 @@ class _LogInPageState extends State<LogInPage> {
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("lib/assets/images/logIn (2).png"), 
+                image: AssetImage("lib/assets/images/log_in.jpg"),    
                 fit: BoxFit.cover, 
               ),
             ),
@@ -55,20 +55,20 @@ class _LogInPageState extends State<LogInPage> {
                               color: Colors.white70)),
                     )),
                     TextFormField(
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.black),
                         controller: _usernameController,
-                        decoration:  InputDecoration(
+                        decoration:  const InputDecoration(
                           filled: true,
-                          fillColor: Colors.indigo.shade300,
-                          border: const OutlineInputBorder(
+                          fillColor: Colors.white70,
+                          border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           hintText: '@yourname',
                           labelText: 'User Name',
-                          labelStyle: const TextStyle(color: Colors.white),
-                          prefixIcon: const Icon(
+                          labelStyle: TextStyle(color: Colors.grey),
+                          prefixIcon: Icon(
                             Icons.person,
-                            color: Colors.white,
+                            color: Colors.grey,
                           ),
                         ),
                         validator: (value) {
@@ -82,21 +82,21 @@ class _LogInPageState extends State<LogInPage> {
                       height: 30,
                     ),
                     TextFormField(
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.black),
                         controller: _passwordController,
                         keyboardType: TextInputType.visiblePassword,
-                        decoration:  InputDecoration(
+                        decoration:  const InputDecoration(
                           filled: true,
-                          fillColor: Colors.indigo.shade300,
-                          border: const OutlineInputBorder(
+                          fillColor: Colors.white70,
+                          border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           hintText: '**********',
                           labelText: 'Password',
-                          labelStyle: const TextStyle(color: Colors.white),
-                          prefixIcon: const Icon(
+                          labelStyle: TextStyle(color: Colors.grey),
+                          prefixIcon: Icon(
                             Icons.key,
-                            color: Colors.white,
+                            color: Colors.grey, 
                           ),
                         ),
                         validator: (value) {
@@ -118,7 +118,7 @@ class _LogInPageState extends State<LogInPage> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.deepPurple, 
+                          backgroundColor: Colors.white, 
                           fixedSize: const Size(220, 34),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
@@ -128,7 +128,7 @@ class _LogInPageState extends State<LogInPage> {
                       child: Text(
                         "Log In",
                         style: GoogleFonts.unbounded(
-                            fontWeight: FontWeight.w500, color: Colors.white),
+                            fontWeight: FontWeight.w500, color: Colors.deepPurple),   
                       ),
                     ),
                   ],

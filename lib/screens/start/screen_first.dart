@@ -16,7 +16,7 @@ class FirstPage extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         decoration:  const BoxDecoration(
           image:  DecorationImage(
-         image:  AssetImage("lib/assets/images/bear.png"),
+         image:  AssetImage("lib/assets/images/first_bg.jpg"), 
          fit: BoxFit.fill,
           ),
         ),
@@ -27,12 +27,16 @@ class FirstPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.3,
                   child: Padding(
-                    padding: const EdgeInsets.all(58.0),
-                    child: Text('My Habits',
-                        style: GoogleFonts.acme(
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepOrangeAccent)),
+                    padding: const EdgeInsets.only(top: 100),  
+                    child: Column(
+                      children: [
+                        Text('My Habits',
+                            style: GoogleFonts.acme(
+                                fontSize: 35,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)), 
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -66,12 +70,12 @@ class FirstPage extends StatelessWidget {
                                   20,
                                 ),
                                 side: const BorderSide(
-                                  color: Colors.brown,  
+                                  color: Colors.white,   
                                 ))),
                         child: Text(
                           "Sign Up",
                           style: GoogleFonts.unbounded(
-                              fontWeight: FontWeight.w500, color: Colors.brown),
+                              fontWeight: FontWeight.w500, color: Colors.white), 
                         ),
                       ),
                     ),
@@ -90,9 +94,9 @@ class FirstPage extends StatelessWidget {
                           ))),
                       child: Text(
                         "Log In",
-                        style: GoogleFonts.unbounded(fontWeight: FontWeight.w500),
+                        style: GoogleFonts.unbounded(fontWeight: FontWeight.w500,color: Colors.blue.shade900),
                       ),
-                    ),
+                    ), 
                   ]),
                 )
               ],

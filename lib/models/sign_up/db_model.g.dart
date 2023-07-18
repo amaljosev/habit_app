@@ -65,7 +65,7 @@ class StartModelAdapter extends TypeAdapter<StartModel> {
       days: fields[2] as String,
       wheelName: fields[3] as String,
       wheelCount: fields[4] as String,
-      name: fields[5] as String,
+      todayHours: fields[5] as String,
     );
   }
 
@@ -84,7 +84,7 @@ class StartModelAdapter extends TypeAdapter<StartModel> {
       ..writeByte(4)
       ..write(obj.wheelCount)
       ..writeByte(5)
-      ..write(obj.name);
+      ..write(obj.todayHours);
   }
 
   @override

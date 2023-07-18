@@ -437,14 +437,14 @@ class _StartWidgetState extends State<StartWidget> {
         popDialogueBox();
       });
     }
-
+int todayCount = 0;  
     final startObject = StartModel(
         id: DateTime.now().millisecond.toString(),
         habit: name,
         days: _days,
         wheelCount: wheel_count.toString(),
         wheelName: wheel_name,
-        name: wheel_name,  
+        todayHours: todayCount.toString(),    
         );
 
     print("$name $_days  $wheel_count $wheel_name");

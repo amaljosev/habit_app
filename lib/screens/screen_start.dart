@@ -33,7 +33,7 @@ class _StartScreenState extends State<StartScreen> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('lib/assets/images/start_bg.jpg'),
+              image: AssetImage('lib/assets/images/start_habit.jpg'),
               fit: BoxFit.fill,
             ),
           ),
@@ -58,7 +58,7 @@ class _StartScreenState extends State<StartScreen> {
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: Colors.white, 
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
@@ -123,122 +123,132 @@ class _StartScreenState extends State<StartScreen> {
                     ),
                     Container(
                       decoration: const BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.white70,
                         borderRadius: BorderRadius.all(
                           Radius.circular(30),
                         ),
                       ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.4,
-                              height: MediaQuery.of(context).size.height * 0.2,
-                              child: ListWheelScrollView(
-                                itemExtent: 50,
-                                onSelectedItemChanged: (index) {
-                                  wheelCount = index + 1;
-                                  print('Days: $wheelCount');
-                                },
-                                physics: const FixedExtentScrollPhysics(),
-                                children: List<Widget>.generate(
-                                  10,
-                                  (index) => Column(
-                                    children: [
-                                      Center(
-                                        child: Text(
-                                          '${index + 1}',
-                                          style: GoogleFonts.andadaPro(
-                                            color: Colors.blue.shade900,
-                                            fontWeight: FontWeight.bold,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start, 
+                        children: [ 
+                          // Padding(
+                          //   padding: const EdgeInsets.all(8.0),
+                          //   child: Text('SCROLL THE WHEEL'), 
+                          // ),
+                          Row(
+                            children: [
+                              
+                              Expanded(
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.4,
+                                  height: MediaQuery.of(context).size.height * 0.2,
+                                  child: ListWheelScrollView(
+                                    itemExtent: 50,
+                                    onSelectedItemChanged: (index) {
+                                      wheelCount = index + 1;
+                                      print('Days: $wheelCount');
+                                    },
+                                    physics: const FixedExtentScrollPhysics(),
+                                    children: List<Widget>.generate(
+                                      10,
+                                      (index) => Column(
+                                        children: [
+                                          Center(
+                                            child: Text(
+                                              '${index + 1}',
+                                              style: GoogleFonts.andadaPro(
+                                                color: Colors.blue.shade900,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ),
+                                          Container(
+                                            width: 50,
+                                            child: Divider(color: Colors.grey),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.4,
+                                  height: MediaQuery.of(context).size.height * 0.2,
+                                  child: ListWheelScrollView(
+                                    itemExtent: 50,
+                                    onSelectedItemChanged: (index) {
+                                      wheelName = index;
+                                      setState(() {
+                                        if (index == 0) {
+                                          wheelName = 'HOURS';
+                                        } else if (index == 1) {
+                                          wheelName = 'PAGES';
+                                        } else if (index == 2) {
+                                          wheelName = 'KILOMETER';
+                                        } else if (index == 3) {
+                                          wheelName = 'METER';
+                                        } else if (index == 4) {
+                                          wheelName = 'LITER';
+                                        } else if (index == 5) {
+                                          wheelName = 'CUP';
+                                        } else if (index == 6) {
+                                          wheelName = 'RUPEE';
+                                        }
+                                      });
+                                      print('Selected: $wheelName');
+                                    },
+                                    physics: FixedExtentScrollPhysics(),
+                                    children: [
+                                      for (var name in [
+                                        'Hours',
+                                        'Pages',
+                                        'Kilometer',
+                                        'Meter',
+                                        'Liter',
+                                        'Cup',
+                                        'Rupee'
+                                      ])
+                                        Column(
+                                          children: [
+                                            Center(
+                                              child: Text(
+                                                name,
+                                                style: GoogleFonts.andadaPro(
+                                                  color: Colors.blue.shade900,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 50,
+                                              child: Divider(color: Colors.grey),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      Container(
-                                        width: 50,
-                                        child: Divider(color: Colors.grey),
-                                      ),
                                     ],
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                          const SizedBox(width: 20),
-                          Expanded(
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.4,
-                              height: MediaQuery.of(context).size.height * 0.2,
-                              child: ListWheelScrollView(
-                                itemExtent: 50,
-                                onSelectedItemChanged: (index) {
-                                  wheelName = index;
-                                  setState(() {
-                                    if (index == 0) {
-                                      wheelName = 'HOURS';
-                                    } else if (index == 1) {
-                                      wheelName = 'PAGES';
-                                    } else if (index == 2) {
-                                      wheelName = 'KILOMETER';
-                                    } else if (index == 3) {
-                                      wheelName = 'METER';
-                                    } else if (index == 4) {
-                                      wheelName = 'LITER';
-                                    } else if (index == 5) {
-                                      wheelName = 'CUP';
-                                    } else if (index == 6) {
-                                      wheelName = 'RUPEE';
-                                    }
-                                  });
-                                  print('Selected: $wheelName');
-                                },
-                                physics: FixedExtentScrollPhysics(),
-                                children: [
-                                  for (var name in [
-                                    'Hours',
-                                    'Pages',
-                                    'Kilometer',
-                                    'Meter',
-                                    'Liter',
-                                    'Cup',
-                                    'Rupee'
-                                  ])
-                                    Column(
-                                      children: [
-                                        Center(
-                                          child: Text(
-                                            name,
-                                            style: GoogleFonts.andadaPro(
-                                              color: Colors.blue.shade900,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 50,
-                                          child: Divider(color: Colors.grey),
-                                        ),
-                                      ],
+                              const SizedBox(width: 20),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width * 0.4,
+                                  height: MediaQuery.of(context).size.height * 0.2,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'per day',
+                                    style: GoogleFonts.andadaPro(
+                                      color: Colors.blue.shade900,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 20),
-                          const SizedBox(width: 20),
-                          Expanded(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.4,
-                              height: MediaQuery.of(context).size.height * 0.2,
-                              alignment: Alignment.center,
-                              child: Text(
-                                'per day',
-                                style: GoogleFonts.andadaPro(
-                                  color: Colors.blue.shade900,
-                                  fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                         ],
                       ),
@@ -357,7 +367,7 @@ class _StartScreenState extends State<StartScreen> {
       days: _days,
       wheelCount: wheelCount.toString(),
       wheelName: wheelName,
-      name: todayCount.toString(), 
+      todayHours: todayCount.toString(), 
     );
 
     print("${widget.name} $_days  $wheelCount $wheelName");

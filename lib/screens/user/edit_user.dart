@@ -13,6 +13,7 @@ class EditUser extends StatefulWidget {
   final String wheelCount;
   final String wheelName;
   final String id;
+  final String name;
   const EditUser(
       {super.key,
       required this.habitName,
@@ -20,7 +21,8 @@ class EditUser extends StatefulWidget {
       required this.wheelCount,
       required this.wheelName,
       required this.id,
-      required this.index});
+      required this.index,
+      required this.name,});
 
   @override
   State<EditUser> createState() => _EditUserState();
@@ -31,7 +33,7 @@ class _EditUserState extends State<EditUser> {
   TextEditingController habitNameController = TextEditingController();
   var wheel_Name;
   var wheel_Count;
-  
+  var today_Count;  
   @override
   void initState() {
     super.initState();
@@ -39,6 +41,7 @@ class _EditUserState extends State<EditUser> {
     habitNameController = TextEditingController(text: widget.habitName);
     wheel_Name = widget.wheelName;
     wheel_Count = widget.wheelCount;
+    today_Count=widget.name;
     
   }
 
@@ -511,7 +514,7 @@ class _EditUserState extends State<EditUser> {
         days: totalDaysController.text,
         wheelCount: wheel_Count.toString(),
         wheelName: wheel_Name.toString(),
-        name: wheel_Name.toString() 
+        todayHours: today_Count.toString()   
         );
 
     await updateList(widget.index, dataModel);

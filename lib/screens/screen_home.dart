@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: MediaQuery.of(context).size.height*0.93,   
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("lib/assets/images/home_new.jpg"), 
+              image: AssetImage("lib/assets/images/home_bg.jpg"),  
               fit: BoxFit.fill,
             ),
           ),
