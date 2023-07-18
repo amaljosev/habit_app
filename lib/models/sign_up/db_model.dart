@@ -31,6 +31,8 @@ class StartModel {
   final String wheelName;
   @HiveField(4)
   final String wheelCount;
+  @HiveField(5)
+  final String name;
 
   StartModel({
     required this.id,
@@ -38,6 +40,7 @@ class StartModel {
     required this.days,
     required this.wheelName,
     required this.wheelCount,
+    required this.name,
   });
 }
 

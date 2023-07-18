@@ -31,6 +31,7 @@ class _EditUserState extends State<EditUser> {
   TextEditingController habitNameController = TextEditingController();
   var wheel_Name;
   var wheel_Count;
+  
   @override
   void initState() {
     super.initState();
@@ -38,6 +39,7 @@ class _EditUserState extends State<EditUser> {
     habitNameController = TextEditingController(text: widget.habitName);
     wheel_Name = widget.wheelName;
     wheel_Count = widget.wheelCount;
+    
   }
 
   final List<bool> selectedWeekdays = List.filled(7, true);
@@ -508,7 +510,10 @@ class _EditUserState extends State<EditUser> {
         habit: habitNameController.text,
         days: totalDaysController.text,
         wheelCount: wheel_Count.toString(),
-        wheelName: wheel_Name.toString());
+        wheelName: wheel_Name.toString(),
+        name: wheel_Name.toString() 
+        );
+
     await updateList(widget.index, dataModel);
 
     popDialogueBox();

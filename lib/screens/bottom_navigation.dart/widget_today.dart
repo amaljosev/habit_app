@@ -36,7 +36,7 @@ class _TodayWidgetState extends State<TodayWidget> {
                                       totalDays: startdata.days,
                                       wheelCount: startdata.wheelCount,
                                       wheelName: startdata.wheelName,
-                                      
+                                      name: startdata.name,    
                                     )));
                         print(startList[indexVal]);
                       },

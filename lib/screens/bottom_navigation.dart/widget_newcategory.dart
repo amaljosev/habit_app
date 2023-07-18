@@ -443,7 +443,9 @@ class _StartWidgetState extends State<StartWidget> {
         habit: name,
         days: _days,
         wheelCount: wheel_count.toString(),
-        wheelName: wheel_name);
+        wheelName: wheel_name,
+        name: wheel_name,  
+        );
 
     print("$name $_days  $wheel_count $wheel_name");
     wheel_count = defaultCountData;

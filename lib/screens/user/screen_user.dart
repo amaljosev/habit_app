@@ -6,6 +6,9 @@ import '../../models/sign_up/db_model.dart';
 import '../screen_home.dart';
 import 'edit_user.dart';
 
+ValueNotifier<int> habitNameNotifier = ValueNotifier<int>(habitName ?? 0);
+int? habitName;
+
 class ScreenUser extends StatefulWidget {
   final int index;
   final String id;
@@ -13,16 +16,18 @@ class ScreenUser extends StatefulWidget {
   final String totalDays;
   final String wheelCount;
   final String wheelName;
-  
-  const ScreenUser(
-      {super.key,
-      required this.habitName,
-      required this.totalDays,
-      required this.wheelCount,
-      required this.wheelName,
-      required this.index,
-      required this.id,
-      });
+  final String name;
+
+  const ScreenUser({
+    super.key,
+    required this.habitName,
+    required this.totalDays,
+    required this.wheelCount,
+    required this.wheelName,
+    required this.index,
+    required this.id,
+    required this.name,
+  });
 
   @override
   State<ScreenUser> createState() => _ScreenUserState();
@@ -30,10 +35,10 @@ class ScreenUser extends StatefulWidget {
 
 class _ScreenUserState extends State<ScreenUser> {
   SampleItem? selectedMenu;
-  int todayWheelCount = 0;
 
   @override
   Widget build(BuildContext context) {
+    habitName = int.parse(widget.name);
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -171,11 +176,18 @@ class _ScreenUserState extends State<ScreenUser> {
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      Text(
-                                        '$todayWheelCount',
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w900,
-                                            fontSize: 30),
+                                      ValueListenableBuilder<int>(
+                                        valueListenable: habitNameNotifier,
+                                        builder: (BuildContext context,
+                                            int value, Widget? child) {
+                                          return Text(
+                                           habitName.toString(),  
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w900,
+                                              fontSize: 30,
+                                            ),
+                                          );
+                                        },
                                       ),
                                       Text(
                                         'TOTAL ${widget.wheelName} : ${widget.wheelCount}',
@@ -351,6 +363,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                   },
                                   icon: const Icon(Icons.done_all),
                                   label: const Text('|   FINISH ALL')),
+                              
                             ],
                           ),
                         ),
@@ -367,10 +380,39 @@ class _ScreenUserState extends State<ScreenUser> {
   }
 
   void incrementTodayWheelCount() {
-    setState(() {
-      todayWheelCount++;
-    });
-  }
+  setState(() {
+    habitNameNotifier.value = (habitName ?? 0) + 1;
+    
+    if (habitNameNotifier.value.toString() == widget.wheelCount) {
+      // Reset action
+      habitNameNotifier.value = 0;
+      updateList(
+        widget.index,
+        StartModel(
+          days: widget.totalDays,
+          habit: widget.habitName,
+          id: DateTime.now().millisecond.toString(),
+          name: habitNameNotifier.value.toString(),
+          wheelCount: widget.wheelCount,
+          wheelName: widget.wheelName,
+        ),
+      );
+    } else { 
+      updateList(
+        widget.index,
+        StartModel(
+          days: widget.totalDays,
+          habit: widget.habitName,
+          id: DateTime.now().millisecond.toString(),
+          name: habitNameNotifier.value.toString(),
+          wheelCount: widget.wheelCount,
+          wheelName: widget.wheelName,
+        ),
+      );
+    }
+  });
+}
+
 
   popupDialogueBox(int indexValue) {
     showDialog(

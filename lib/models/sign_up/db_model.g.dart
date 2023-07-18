@@ -65,13 +65,14 @@ class StartModelAdapter extends TypeAdapter<StartModel> {
       days: fields[2] as String,
       wheelName: fields[3] as String,
       wheelCount: fields[4] as String,
+      name: fields[5] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, StartModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -81,7 +82,9 @@ class StartModelAdapter extends TypeAdapter<StartModel> {
       ..writeByte(3)
       ..write(obj.wheelName)
       ..writeByte(4)
-      ..write(obj.wheelCount);
+      ..write(obj.wheelCount)
+      ..writeByte(5)
+      ..write(obj.name);
   }
 
   @override

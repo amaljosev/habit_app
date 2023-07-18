@@ -6,8 +6,6 @@ import 'package:weekday_selector/weekday_selector.dart';
 import '../functions/hive_functions/db_start.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-import '../functions/hive_functions/db_user.dart';
-
 class StartScreen extends StatefulWidget {
   final String name;
   const StartScreen({Key? key, required this.name}) : super(key: key);
@@ -352,22 +350,15 @@ class _StartScreenState extends State<StartScreen> {
         popDialogueBox();
       });
     }
-
+    int todayCount = 0; 
     final startObject = StartModel(
-        id: DateTime.now().millisecond.toString(),
-        habit: widget.name,
-        days: _days,
-        wheelCount: wheelCount.toString(),
-        wheelName: wheelName);
-    int categoryCount = 0;
-    int daysCount = 0;
-    int percentage = 0;
-    final userModelObjet = UserModel(
-      id: DateTime.now().millisecond,
-        categoryCount: categoryCount, 
-        daysCount: daysCount,
-        percentage: percentage);
-        addUserData(userModelObjet); 
+      id: DateTime.now().millisecond.toString(),
+      habit: widget.name,
+      days: _days,
+      wheelCount: wheelCount.toString(),
+      wheelName: wheelName,
+      name: todayCount.toString(), 
+    );
 
     print("${widget.name} $_days  $wheelCount $wheelName");
     wheelCount = defaultCountData;
