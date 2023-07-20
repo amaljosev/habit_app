@@ -28,15 +28,17 @@ class _TodayWidgetState extends State<TodayWidget> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => ScreenUser(
+                            MaterialPageRoute( 
+                                builder: (context) => ScreenUser(  
                                       id: DateTime.now().millisecond.toString(),
                                       index: indexVal,
                                       habitName: startdata.habit,
                                       totalDays: startdata.days,
                                       wheelCount: startdata.wheelCount,
                                       wheelName: startdata.wheelName,
-                                      name: startdata.todayHours,    
+                                      todayCount: startdata.todayHours,  
+                                      today: startdata.today, 
+                                      streak: startdata.streak, 
                                     )));
                         print(startList[indexVal]);
                       },

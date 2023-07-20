@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:weekday_selector/weekday_selector.dart';
-
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
 import '../screen_home.dart';
@@ -51,9 +50,9 @@ class _StartWidgetState extends State<StartWidget> {
                     ),
                   ),
                 ),
-                Padding( 
+                Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Row( 
+                  child: Row(
                     children: [
                       Text(
                         'ENTER HABIT NAME',
@@ -97,7 +96,7 @@ class _StartWidgetState extends State<StartWidget> {
                   child: Row(
                     children: [
                       Text(
-                        'ENTER TOTAL DAYS', 
+                        'ENTER TOTAL DAYS',
                         style: GoogleFonts.unbounded(
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
@@ -107,7 +106,6 @@ class _StartWidgetState extends State<StartWidget> {
                     ],
                   ),
                 ),
-                
                 TextFormField(
                   style: const TextStyle(color: Colors.black),
                   controller: total_DaysController,
@@ -256,13 +254,13 @@ class _StartWidgetState extends State<StartWidget> {
                                       Center(
                                         child: Text(
                                           [
-                                            'Hours',
-                                            'Pages',
-                                            'Kilometer',
-                                            'Meter',
-                                            'Liter',
-                                            'Cup',
-                                            'Rupee',
+                                            'HOURS',
+                                            'PAGES',
+                                            'KILOMETE',
+                                            'METER',
+                                            'LITER',
+                                            'CUP',
+                                            'RUPEE',
                                           ][index],
                                           style: GoogleFonts.andadaPro(
                                             color: Colors.blue.shade900,
@@ -338,7 +336,7 @@ class _StartWidgetState extends State<StartWidget> {
                       initialLabelIndex: 0,
                       totalSwitches: 3,
                       inactiveBgColor: Colors.grey,
-                      labels: const ['Morning', 'Noon', 'Evening'],
+                      labels: const ['MORNING', 'NOON', 'EVENING'],
                       icons: const [
                         Icons.sunny,
                         Icons.wb_sunny_outlined,
@@ -346,9 +344,9 @@ class _StartWidgetState extends State<StartWidget> {
                       ],
                       onToggle: (index) {
                         List<String> labelValues = [
-                          'Morning',
-                          'Noon',
-                          'Evening'
+                          'MORNING',
+                          'NOON',
+                          'EVENING'
                         ];
                         if (index != null &&
                             index >= 0 &&
@@ -437,15 +435,19 @@ class _StartWidgetState extends State<StartWidget> {
         popDialogueBox();
       });
     }
-int todayCount = 0;  
+    int todayCount = 0;
+    int today = 0;
+    int streak = 0;
     final startObject = StartModel(
-        id: DateTime.now().millisecond.toString(),
-        habit: name,
-        days: _days,
-        wheelCount: wheel_count.toString(),
-        wheelName: wheel_name,
-        todayHours: todayCount.toString(),    
-        );
+      id: DateTime.now().millisecond.toString(),
+      habit: name,
+      days: _days,
+      wheelCount: wheel_count.toString(),
+      wheelName: wheel_name,
+      todayHours: todayCount.toString(),
+      today: today.toString(),
+      streak: streak.toString(),
+    );
 
     print("$name $_days  $wheel_count $wheel_name");
     wheel_count = defaultCountData;
@@ -493,25 +495,25 @@ int todayCount = 0;
       if (selectedWeekdays[i]) {
         switch (i) {
           case 0:
-            weekdays.add('Sunday');
+            weekdays.add('SUNDAY');
             break;
           case 1:
-            weekdays.add('Monday');
+            weekdays.add('MONDAY');
             break;
           case 2:
-            weekdays.add('Tuesday');
+            weekdays.add('TUESDAY');
             break;
           case 3:
-            weekdays.add('Wednesday');
+            weekdays.add('WEDNESDAY');
             break;
           case 4:
-            weekdays.add('Thursday');
+            weekdays.add('THURSDAY');
             break;
           case 5:
-            weekdays.add('Friday');
+            weekdays.add('FRIDAY');
             break;
           case 6:
-            weekdays.add('Saturday');
+            weekdays.add('SATURDAY');
             break;
         }
       }

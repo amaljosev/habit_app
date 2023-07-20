@@ -162,7 +162,7 @@ class _StartScreenState extends State<StartScreen> {
                                               ),
                                             ),
                                           ),
-                                          Container(
+                                          SizedBox(
                                             width: 50,
                                             child: Divider(color: Colors.grey),
                                           ),
@@ -203,13 +203,13 @@ class _StartScreenState extends State<StartScreen> {
                                     physics: FixedExtentScrollPhysics(),
                                     children: [
                                       for (var name in [
-                                        'Hours',
-                                        'Pages',
-                                        'Kilometer',
-                                        'Meter',
-                                        'Liter',
-                                        'Cup',
-                                        'Rupee'
+                                        'HOUR',
+                                        'PAGES',
+                                        'KILOMETER',
+                                        'METER',
+                                        'LITER',
+                                        'CUP',
+                                        'RUPEE'
                                       ])
                                         Column(
                                           children: [
@@ -222,7 +222,7 @@ class _StartScreenState extends State<StartScreen> {
                                                 ),
                                               ),
                                             ),
-                                            Container(
+                                            SizedBox(
                                               width: 50,
                                               child: Divider(color: Colors.grey),
                                             ),
@@ -281,7 +281,7 @@ class _StartScreenState extends State<StartScreen> {
                       initialLabelIndex: 0,
                       totalSwitches: 3,
                       inactiveBgColor: Colors.grey,
-                      labels: const ['Morning', 'Noon', 'Evening'],
+                      labels: const ['MORNING', 'NOON', 'EVENING'],
                       icons: const [
                         Icons.sunny,
                         Icons.wb_sunny_outlined,
@@ -289,9 +289,9 @@ class _StartScreenState extends State<StartScreen> {
                       ],
                       onToggle: (index) {
                         List<String> labelValues = [
-                          'Morning',
-                          'Noon',
-                          'Evening'
+                          'MORNING',
+                          'NOON',
+                          'EVENING'
                         ];
                         if (index != null &&
                             index >= 0 &&
@@ -361,13 +361,17 @@ class _StartScreenState extends State<StartScreen> {
       });
     }
     int todayCount = 0; 
+    int today =0;
+    int streak=0;
     final startObject = StartModel(
       id: DateTime.now().millisecond.toString(),
       habit: widget.name,
       days: _days,
       wheelCount: wheelCount.toString(),
       wheelName: wheelName,
-      todayHours: todayCount.toString(), 
+      todayHours: todayCount.toString(),
+      today:  today.toString(),
+      streak: streak.toString(),
     );
 
     print("${widget.name} $_days  $wheelCount $wheelName");

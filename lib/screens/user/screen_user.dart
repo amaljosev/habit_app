@@ -9,14 +9,16 @@ import 'edit_user.dart';
 ValueNotifier<int> habitNameNotifier = ValueNotifier<int>(habitName ?? 0);
 int? habitName;
 
-class ScreenUser extends StatefulWidget {
+class ScreenUser extends StatefulWidget { 
   final int index;
   final String id;
   final String habitName;
   final String totalDays;
   final String wheelCount;
   final String wheelName;
-  final String name;
+  final String todayCount;
+  final String today;
+  final String streak;
 
   const ScreenUser({
     super.key,
@@ -26,7 +28,9 @@ class ScreenUser extends StatefulWidget {
     required this.wheelName,
     required this.index,
     required this.id,
-    required this.name,
+    required this.todayCount,
+    required this.today,
+    required this.streak, 
   });
 
   @override
@@ -38,7 +42,7 @@ class _ScreenUserState extends State<ScreenUser> {
 
   @override
   Widget build(BuildContext context) {
-    habitName = int.parse(widget.name);
+    habitName = int.parse(widget.todayCount);
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -86,7 +90,9 @@ class _ScreenUserState extends State<ScreenUser> {
                                     totalDays: widget.totalDays,
                                     wheelCount: widget.wheelCount,
                                     wheelName: widget.wheelName,
-                                    name: widget.name  
+                                    name: widget.todayCount,
+                                    today: widget.today, 
+                                    percentage: widget.streak,
                                   );
                                 }),
                               );
@@ -127,9 +133,9 @@ class _ScreenUserState extends State<ScreenUser> {
                 padding: const EdgeInsets.only(left: 8),
                 child: Container(
                   height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white30,
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30))),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -209,28 +215,28 @@ class _ScreenUserState extends State<ScreenUser> {
                                 width: MediaQuery.of(context).size.width * 0.3,
                                 height:
                                     MediaQuery.of(context).size.height * 0.2,
-                                child: const Padding(
-                                  padding: EdgeInsets.all(15.0),
+                                child:  Padding(
+                                  padding: const EdgeInsets.all(15.0),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
+                                      const Text( 
                                         'DAYS \nFINISHED',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        '2',
-                                        style: TextStyle(
+                                        widget.today,  
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.w900,
                                             fontSize: 30),
                                       ),
                                       Text(
-                                        'TOTAL DAYS : 10',
-                                        style: TextStyle(
+                                        'TOTAL DAYS : ${widget.totalDays}', 
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.w900,
                                             fontSize: 9),
                                       ),
@@ -247,27 +253,27 @@ class _ScreenUserState extends State<ScreenUser> {
                                 width: MediaQuery.of(context).size.width * 0.3,
                                 height:
                                     MediaQuery.of(context).size.height * 0.2,
-                                child: const Padding(
-                                  padding: EdgeInsets.all(15.0),
+                                child:  Padding( 
+                                  padding: const EdgeInsets.all(15.0),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        'COMPLETION \nRATE',
+                                      const Text(
+                                        'CURRENT \nSTREAK',  
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 13),
                                       ),
                                       Text(
-                                        '20%',
-                                        style: TextStyle(
+                                       widget.streak, 
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.w900,
                                             fontSize: 30),
                                       ),
-                                      Text(
+                                      const Text(
                                         'TOTAL HABITS : 10',
                                         style: TextStyle(
                                             fontWeight: FontWeight.w900,
@@ -386,7 +392,7 @@ class _ScreenUserState extends State<ScreenUser> {
     
     if (habitNameNotifier.value.toString() == widget.wheelCount) {
       habitNameNotifier.value = 0;
-      updateList(
+      updateList( 
         widget.index,
         StartModel(
           days: widget.totalDays,
@@ -395,6 +401,8 @@ class _ScreenUserState extends State<ScreenUser> {
           todayHours: habitNameNotifier.value.toString(),
           wheelCount: widget.wheelCount,
           wheelName: widget.wheelName, 
+          today: widget.today,
+          streak: widget.streak,
         ), 
       );
     } else { 
@@ -407,6 +415,8 @@ class _ScreenUserState extends State<ScreenUser> {
           todayHours: habitNameNotifier.value.toString(),
           wheelCount: widget.wheelCount,
           wheelName: widget.wheelName,
+          today: widget.today,
+          streak: widget.streak
         ),
       );
     }

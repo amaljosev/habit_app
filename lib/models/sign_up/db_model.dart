@@ -33,6 +33,10 @@ class StartModel {
   final String wheelCount;
   @HiveField(5)
   final String todayHours;
+  @HiveField(6)
+  final String today;
+  @HiveField(7)
+  final String streak;
 
   StartModel({
     required this.id,
@@ -41,22 +45,8 @@ class StartModel {
     required this.wheelName,
     required this.wheelCount,
     required this.todayHours,
+    required this.today, 
+    required this.streak, 
   });
 }
 
-@HiveType(typeId: 3)
-class UserModel { 
-  @HiveField(0)
-  final int id; 
-  @HiveField(1)
-  late final int categoryCount;
-  @HiveField(2)
-  final int daysCount;
-  @HiveField(3)
-  final int percentage; 
-
-  UserModel( 
-      {required this.id,required this.categoryCount,
-      required this.daysCount,
-      required this.percentage});
-}
