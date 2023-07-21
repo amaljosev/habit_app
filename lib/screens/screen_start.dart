@@ -18,12 +18,24 @@ final TextEditingController totalDaysController = TextEditingController();
 
 var wheelName;
 var wheelCount;
+var doitAt;
+var week;
 
 class _StartScreenState extends State<StartScreen> {
   final List<bool> selectedWeekdays = List.filled(7, true);
 
   final int defaultCountData = 1;
   final String defaultNameCount = 'Hours';
+  final String defaultWeek = 'MORNING';
+  List defaultWeekDays=[
+'Sunday',
+'Monday',
+'Tuesday',
+'Wednesday',
+'Thursday',
+'Friday',
+'Saturday',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +70,7 @@ class _StartScreenState extends State<StartScreen> {
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     filled: true,
-                    fillColor: Colors.white, 
+                    fillColor: Colors.white,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
@@ -129,19 +141,20 @@ class _StartScreenState extends State<StartScreen> {
                         ),
                       ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start, 
-                        children: [ 
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                           // Padding(
                           //   padding: const EdgeInsets.all(8.0),
-                          //   child: Text('SCROLL THE WHEEL'), 
+                          //   child: Text('SCROLL THE WHEEL'),
                           // ),
                           Row(
                             children: [
-                              
                               Expanded(
                                 child: SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.4,
-                                  height: MediaQuery.of(context).size.height * 0.2,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.4,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.2,
                                   child: ListWheelScrollView(
                                     itemExtent: 50,
                                     onSelectedItemChanged: (index) {
@@ -162,7 +175,7 @@ class _StartScreenState extends State<StartScreen> {
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 50,
                                             child: Divider(color: Colors.grey),
                                           ),
@@ -175,8 +188,10 @@ class _StartScreenState extends State<StartScreen> {
                               const SizedBox(width: 20),
                               Expanded(
                                 child: SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.4,
-                                  height: MediaQuery.of(context).size.height * 0.2,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.4,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.2,
                                   child: ListWheelScrollView(
                                     itemExtent: 50,
                                     onSelectedItemChanged: (index) {
@@ -200,7 +215,7 @@ class _StartScreenState extends State<StartScreen> {
                                       });
                                       print('Selected: $wheelName');
                                     },
-                                    physics: FixedExtentScrollPhysics(),
+                                    physics: const FixedExtentScrollPhysics(),
                                     children: [
                                       for (var name in [
                                         'HOUR',
@@ -222,9 +237,10 @@ class _StartScreenState extends State<StartScreen> {
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 50,
-                                              child: Divider(color: Colors.grey),
+                                              child:
+                                                  Divider(color: Colors.grey),
                                             ),
                                           ],
                                         ),
@@ -236,8 +252,10 @@ class _StartScreenState extends State<StartScreen> {
                               const SizedBox(width: 20),
                               Expanded(
                                 child: Container(
-                                  width: MediaQuery.of(context).size.width * 0.4,
-                                  height: MediaQuery.of(context).size.height * 0.2,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.4,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.2,
                                   alignment: Alignment.center,
                                   child: Text(
                                     'per day',
@@ -297,6 +315,7 @@ class _StartScreenState extends State<StartScreen> {
                             index >= 0 &&
                             index < labelValues.length) {
                           String selectedValue = labelValues[index];
+                          doitAt = selectedValue;
                           print('Switched to: $selectedValue');
                         }
                       },
@@ -349,6 +368,8 @@ class _StartScreenState extends State<StartScreen> {
   Future<void> addDataToModel() async {
     wheelCount ??= defaultCountData;
     wheelName ??= defaultNameCount;
+    doitAt ??= defaultWeek;
+    week??=defaultWeekDays;  
     final _days = totalDaysController.text.trim();
 
     if (_days.isEmpty) {
@@ -360,19 +381,20 @@ class _StartScreenState extends State<StartScreen> {
         popDialogueBox();
       });
     }
-    int todayCount = 0; 
-    int today =0;
-    int streak=0;
+    int todayCount = 0;
+    int today = 0;
+    int streak = 0;
     final startObject = StartModel(
-      id: DateTime.now().millisecond.toString(),
-      habit: widget.name,
-      days: _days,
-      wheelCount: wheelCount.toString(),
-      wheelName: wheelName,
-      todayHours: todayCount.toString(),
-      today:  today.toString(),
-      streak: streak.toString(),
-    );
+        id: DateTime.now().millisecond.toString(),
+        habit: widget.name,
+        days: _days,
+        wheelCount: wheelCount.toString(),
+        wheelName: wheelName,
+        todayHours: todayCount.toString(),
+        today: today.toString(),
+        streak: streak.toString(),
+        week: week,
+        doitAt: doitAt);
 
     print("${widget.name} $_days  $wheelCount $wheelName");
     wheelCount = defaultCountData;
@@ -443,7 +465,8 @@ class _StartScreenState extends State<StartScreen> {
         }
       }
     }
-
+    week = weekdays;
     print('Selected weekdays: $weekdays');
   }
+ 
 }

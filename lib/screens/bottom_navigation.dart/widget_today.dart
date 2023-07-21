@@ -39,6 +39,8 @@ class _TodayWidgetState extends State<TodayWidget> {
                                       todayCount: startdata.todayHours,  
                                       today: startdata.today, 
                                       streak: startdata.streak, 
+                                      week: startdata.week,
+                                      doItAt: startdata.doitAt, 
                                     )));
                         print(startList[indexVal]);
                       },

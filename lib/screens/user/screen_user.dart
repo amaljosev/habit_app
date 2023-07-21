@@ -7,9 +7,13 @@ import '../screen_home.dart';
 import 'edit_user.dart';
 
 ValueNotifier<int> habitNameNotifier = ValueNotifier<int>(habitName ?? 0);
+ValueNotifier<int> daysNotifier = ValueNotifier<int>(days ?? 0);
+ValueNotifier<int> streakNotifier = ValueNotifier<int>(days ?? 0);
 int? habitName;
+int? days;
+int? streak;
 
-class ScreenUser extends StatefulWidget { 
+class ScreenUser extends StatefulWidget {
   final int index;
   final String id;
   final String habitName;
@@ -19,6 +23,8 @@ class ScreenUser extends StatefulWidget {
   final String todayCount;
   final String today;
   final String streak;
+  final List week;
+  final String doItAt;
 
   const ScreenUser({
     super.key,
@@ -30,7 +36,9 @@ class ScreenUser extends StatefulWidget {
     required this.id,
     required this.todayCount,
     required this.today,
-    required this.streak, 
+    required this.streak,
+    required this.week,
+    required this.doItAt,
   });
 
   @override
@@ -39,10 +47,14 @@ class ScreenUser extends StatefulWidget {
 
 class _ScreenUserState extends State<ScreenUser> {
   SampleItem? selectedMenu;
+  bool isButtonsEnabled = true;
 
   @override
   Widget build(BuildContext context) {
     habitName = int.parse(widget.todayCount);
+    days = int.parse(widget.today);
+    streak = int.parse(widget.streak);
+
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -84,16 +96,17 @@ class _ScreenUserState extends State<ScreenUser> {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(builder: (context) {
                                   return EditUser(
-                                    index: widget.index,
-                                    id: DateTime.now().millisecond.toString(),
-                                    habitName: widget.habitName,
-                                    totalDays: widget.totalDays,
-                                    wheelCount: widget.wheelCount,
-                                    wheelName: widget.wheelName,
-                                    name: widget.todayCount,
-                                    today: widget.today, 
-                                    percentage: widget.streak,
-                                  );
+                                      index: widget.index,
+                                      id: DateTime.now().millisecond.toString(),
+                                      habitName: widget.habitName,
+                                      totalDays: widget.totalDays,
+                                      wheelCount: widget.wheelCount,
+                                      wheelName: widget.wheelName,
+                                      name: widget.todayCount,
+                                      today: widget.today,
+                                      percentage: widget.streak,
+                                      week: widget.week,
+                                      doItAt: widget.doItAt);
                                 }),
                               );
                             },
@@ -135,8 +148,8 @@ class _ScreenUserState extends State<ScreenUser> {
                   height: MediaQuery.of(context).size.height,
                   decoration: const BoxDecoration(
                       color: Colors.white30,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30))),
+                      borderRadius:
+                          BorderRadius.only(topLeft: Radius.circular(30))),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -157,15 +170,50 @@ class _ScreenUserState extends State<ScreenUser> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 20, bottom: 1),
+                          padding: const EdgeInsets.only(left: 13, top: 8),
+                          child: Row(
+                            children: [
+                              Card(
+                               
+                                color: Colors.deepPurple,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    widget.doItAt,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                color: Colors.deepPurple,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                      widget.week.length == 7
+                                          ? "EVERYDAY"
+                                          : "${widget.week.length} DAYS",
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20, bottom: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
+                                decoration: BoxDecoration(
+                                  color: Colors.red.shade400,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(20)),
                                 ),
                                 width: MediaQuery.of(context).size.width * 0.3,
                                 height:
@@ -181,6 +229,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                       Text(
                                         '${widget.wheelName} \nFINISHED',
                                         style: const TextStyle(
+                                            color: Colors.white,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       ValueListenableBuilder<int>(
@@ -188,8 +237,9 @@ class _ScreenUserState extends State<ScreenUser> {
                                         builder: (BuildContext context,
                                             int value, Widget? child) {
                                           return Text(
-                                           habitName.toString(),  
+                                            habitName.toString(),
                                             style: const TextStyle(
+                                              color: Colors.white,
                                               fontWeight: FontWeight.w900,
                                               fontSize: 30,
                                             ),
@@ -199,6 +249,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                       Text(
                                         'TOTAL ${widget.wheelName} : ${widget.wheelCount}',
                                         style: const TextStyle(
+                                            color: Colors.white,
                                             fontWeight: FontWeight.w900,
                                             fontSize: 9),
                                       ),
@@ -207,53 +258,15 @@ class _ScreenUserState extends State<ScreenUser> {
                                 ),
                               ),
                               Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow.shade700,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(20)),
                                 ),
                                 width: MediaQuery.of(context).size.width * 0.3,
                                 height:
                                     MediaQuery.of(context).size.height * 0.2,
-                                child:  Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text( 
-                                        'DAYS \nFINISHED',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        widget.today,  
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w900,
-                                            fontSize: 30),
-                                      ),
-                                      Text(
-                                        'TOTAL DAYS : ${widget.totalDays}', 
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w900,
-                                            fontSize: 9),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                ),
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.2,
-                                child:  Padding( 
+                                child: Padding(
                                   padding: const EdgeInsets.all(15.0),
                                   child: Column(
                                     mainAxisAlignment:
@@ -262,20 +275,78 @@ class _ScreenUserState extends State<ScreenUser> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       const Text(
-                                        'CURRENT \nSTREAK',  
+                                        'DAYS \nFINISHED',
                                         style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      ValueListenableBuilder<int>(
+                                        valueListenable: daysNotifier,
+                                        builder: (BuildContext context,
+                                            int count, Widget? child) {
+                                          return Text(
+                                            days.toString(),
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w900,
+                                              fontSize: 30,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      Text(
+                                        'TOTAL DAYS : ${widget.totalDays}',
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w900,
+                                            fontSize: 9),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.greenAccent.shade400,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(20)),
+                                ),
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'CURRENT \nSTREAK',
+                                        style: TextStyle(
+                                            color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 13),
                                       ),
-                                      Text(
-                                       widget.streak, 
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w900,
-                                            fontSize: 30),
+                                      ValueListenableBuilder<int>(
+                                        valueListenable: streakNotifier,
+                                        builder: (BuildContext context,
+                                            int count, Widget? child) {
+                                          return Text(
+                                            streak.toString(),
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w900,
+                                              fontSize: 30,
+                                            ),
+                                          );
+                                        },
                                       ),
                                       const Text(
-                                        'TOTAL HABITS : 10',
+                                        'BEST STREAK : 10',
                                         style: TextStyle(
+                                            color: Colors.white,
                                             fontWeight: FontWeight.w900,
                                             fontSize: 9),
                                       ),
@@ -287,12 +358,15 @@ class _ScreenUserState extends State<ScreenUser> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(18.0),
                           child: Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(18.0),
                                 child: SliderButton(
+                                  backgroundColor: Colors.greenAccent,
+                                  buttonColor: Colors.greenAccent.shade700,
+                                  buttonSize: 50,
                                   action: () {
                                     incrementTodayWheelCount();
                                     showModalBottomSheet<void>(
@@ -328,52 +402,157 @@ class _ScreenUserState extends State<ScreenUser> {
                                   label: const Text(
                                     "Swipe to complete",
                                     style: TextStyle(
-                                      color: Color(0xff4a4a4a),
+                                      color: Colors.grey,
                                       fontWeight: FontWeight.w500,
                                       fontSize: 17,
                                     ),
                                   ),
-                                  icon: const Icon(Icons.task_alt_outlined),
+                                  boxShadow: BoxShadow(
+                                    color: Colors.black.withOpacity(0.5),
+                                    blurRadius: 10.0,
+                                    offset: Offset(8, 5),
+                                  ),
+                                  icon: Icon(
+                                    Icons.check_rounded,
+                                    color: Colors.green.shade50,
+                                  ),
                                 ),
                               ),
                               ElevatedButton.icon(
-                                  onPressed: () {
-                                    showModalBottomSheet<void>(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return Center(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              Image.asset(
-                                                  'lib/assets/videos/trophy.gif'),
-                                              const Text(
-                                                  'YOU HAVE COMPLETED \n             THIS DAY'),
-                                              ElevatedButton(
-                                                child: const Text('GO TO HOME'),
-                                                onPressed: () =>
-                                                    Navigator.of(context)
-                                                        .pushReplacement(
-                                                  MaterialPageRoute(
-                                                      builder: (context) {
-                                                    return const HomeScreen();
-                                                  }),
-                                                ),
+                                onPressed: () {
+                                  showModalBottomSheet<void>(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Center(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            Image.asset(
+                                                'lib/assets/videos/trophy.gif'),
+                                            const Text(
+                                                'YOU HAVE COMPLETED \n             THIS DAY'),
+                                            ElevatedButton(
+                                              child: const Text('GO TO HOME'),
+                                              onPressed: () =>
+                                                  Navigator.of(context)
+                                                      .pushReplacement(
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                                  return const HomeScreen();
+                                                }),
                                               ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                  icon: const Icon(Icons.done_all),
-                                  label: const Text('|   FINISH ALL')),
-                              
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                icon: const Icon(
+                                  Icons.done_all,
+                                  color: Colors.white,
+                                ),
+                                label: const Text(
+                                  '|   FINISH ALL',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.blueGrey,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              children: [
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.blueGrey,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                  ),
+                                  onPressed: () {},
+                                  child: const Icon(
+                                    Icons.map_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'JOURNEY',
+                                  style: GoogleFonts.unbounded(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.blueGrey,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                  ),
+                                  onPressed: () {},
+                                  child: const Icon(
+                                    Icons.timer_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'TIMER',
+                                  style: GoogleFonts.unbounded(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.blueGrey,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                  ),
+                                  onPressed: () {},
+                                  child: const Icon(
+                                    Icons.alarm,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'STOP WATCH',
+                                  style: GoogleFonts.unbounded(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
@@ -387,42 +566,66 @@ class _ScreenUserState extends State<ScreenUser> {
   }
 
   void incrementTodayWheelCount() {
-  setState(() {
-    habitNameNotifier.value = (habitName ?? 0) + 1;
-    
-    if (habitNameNotifier.value.toString() == widget.wheelCount) {
-      habitNameNotifier.value = 0;
-      updateList( 
-        widget.index,
-        StartModel(
-          days: widget.totalDays,
-          habit: widget.habitName,
-          id: DateTime.now().millisecond.toString(),
-          todayHours: habitNameNotifier.value.toString(),
-          wheelCount: widget.wheelCount,
-          wheelName: widget.wheelName, 
-          today: widget.today,
-          streak: widget.streak,
-        ), 
-      );
-    } else { 
-      updateList(
-        widget.index,
-        StartModel(
-          days: widget.totalDays,
-          habit: widget.habitName,
-          id: DateTime.now().millisecond.toString(),
-          todayHours: habitNameNotifier.value.toString(),
-          wheelCount: widget.wheelCount,
-          wheelName: widget.wheelName,
-          today: widget.today,
-          streak: widget.streak
-        ),
-      );
-    }
-  });
-}
+    setState(() {
+      habitNameNotifier.value = (habitName ?? 0) + 1;
 
+      if (habitNameNotifier.value.toString() == widget.wheelCount) {
+        habitNameNotifier.value = 0;
+
+        daysNotifier.value = (days ?? 0) + 1;
+        isButtonsEnabled = false;
+
+        if (daysNotifier.value.toString() == widget.totalDays) {
+          daysNotifier.value = 0;
+          streakNotifier.value = (streak ?? 0) + 1;
+          updateList(
+            widget.index,
+            StartModel(
+                id: DateTime.now().millisecond.toString(),
+                days: widget.totalDays,
+                habit: widget.habitName,
+                wheelCount: widget.wheelCount,
+                wheelName: widget.wheelName,
+                todayHours: habitNameNotifier.value.toString(),
+                today: daysNotifier.value.toString(),
+                streak: streakNotifier.value.toString(),
+                doitAt: widget.doItAt,
+                week: widget.week),
+          );
+        } else {
+          updateList(
+            widget.index,
+            StartModel(
+                id: DateTime.now().millisecond.toString(),
+                days: widget.totalDays,
+                habit: widget.habitName,
+                wheelCount: widget.wheelCount,
+                wheelName: widget.wheelName,
+                todayHours: habitNameNotifier.value.toString(),
+                today: daysNotifier.value.toString(),
+                streak: streakNotifier.value.toString(),
+                doitAt: widget.doItAt,
+                week: widget.week),
+          );
+        }
+      } else {
+        updateList(
+          widget.index,
+          StartModel(
+              id: DateTime.now().millisecond.toString(),
+              days: widget.totalDays,
+              habit: widget.habitName,
+              wheelCount: widget.wheelCount,
+              wheelName: widget.wheelName,
+              todayHours: habitNameNotifier.value.toString(),
+              today: daysNotifier.value.toString(),
+              streak: streakNotifier.value.toString(),
+              doitAt: widget.doItAt,
+              week: widget.week),
+        );
+      }
+    });
+  }
 
   popupDialogueBox(int indexValue) {
     showDialog(
@@ -457,5 +660,12 @@ class _ScreenUserState extends State<ScreenUser> {
     );
   }
 }
+
+List colors = [
+  Colors.red.shade400,
+  Colors.yellowAccent,
+  Colors.greenAccent,
+  Colors.blueAccent,
+];
 
 enum SampleItem { itemOne, itemTwo }

@@ -37,6 +37,10 @@ class StartModel {
   final String today;
   @HiveField(7)
   final String streak;
+  @HiveField(8)
+  final List week; 
+  @HiveField(9)
+  final String doitAt;
 
   StartModel({
     required this.id,
@@ -46,7 +50,9 @@ class StartModel {
     required this.wheelCount,
     required this.todayHours,
     required this.today, 
-    required this.streak, 
+    required this.streak,
+    required this.week,
+    required this.doitAt, 
   });
 }
 
