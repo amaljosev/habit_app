@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   calendar_appbar: ^0.0.6
+  circular_countdown_timer: ^0.2.3
   cupertino_icons: ^1.0.2
   email_validator: ^2.1.17
   flutter:
@@ -43,6 +44,7 @@ dependencies:
   video_player: ^2.7.0
   weekday_selector: ^1.1.0
   wheel_chooser: ^1.1.2
+
 
 dev_dependencies:
   build_runner: ^2.4.6

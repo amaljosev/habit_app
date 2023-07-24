@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habit_project/screens/user/sub_pages/screen_timer.dart';
 import 'package:slider_button/slider_button.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
@@ -174,7 +175,6 @@ class _ScreenUserState extends State<ScreenUser> {
                           child: Row(
                             children: [
                               Card(
-                               
                                 color: Colors.deepPurple,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -485,7 +485,13 @@ class _ScreenUserState extends State<ScreenUser> {
                                       borderRadius: BorderRadius.circular(30.0),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(builder: (context) {
+                                        return const HomeScreen();
+                                      }),
+                                    );
+                                  },
                                   child: const Icon(
                                     Icons.map_outlined,
                                     color: Colors.white,
@@ -510,7 +516,13 @@ class _ScreenUserState extends State<ScreenUser> {
                                       borderRadius: BorderRadius.circular(30.0),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(builder: (context) {
+                                        return const TimerSreen();  
+                                      }),
+                                    );
+                                  },
                                   child: const Icon(
                                     Icons.timer_outlined,
                                     color: Colors.white,
@@ -535,7 +547,13 @@ class _ScreenUserState extends State<ScreenUser> {
                                       borderRadius: BorderRadius.circular(30.0),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(builder: (context) {
+                                        return const HomeScreen();
+                                      }),
+                                    );
+                                  },
                                   child: const Icon(
                                     Icons.alarm,
                                     color: Colors.white,
@@ -660,12 +678,5 @@ class _ScreenUserState extends State<ScreenUser> {
     );
   }
 }
-
-List colors = [
-  Colors.red.shade400,
-  Colors.yellowAccent,
-  Colors.greenAccent,
-  Colors.blueAccent,
-];
 
 enum SampleItem { itemOne, itemTwo }

@@ -17,6 +17,7 @@ class _MeWdgetState extends State<MeWdget> {
   @override
   void initState() {
     super.initState();
+    
     fetchUsername();
   }
 
