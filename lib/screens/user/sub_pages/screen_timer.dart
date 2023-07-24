@@ -8,87 +8,207 @@ class TimerSreen extends StatefulWidget {
   State<TimerSreen> createState() => _TimerSreenState();
 }
 
-final CountDownController _controller = CountDownController();
-
 class _TimerSreenState extends State<TimerSreen> {
+  final CountDownController _controller = CountDownController();
+  final TextEditingController textEditingController = TextEditingController();
+  int timerDuration = 600; // 10 minutes in seconds
+  int defaultValue = 1; // 1 minute in minutes
+  int maxValue = 60; // Maximum value in minutes
+
+  @override
+  void initState() {
+    super.initState();
+    textEditingController.addListener(onTimerDurationChanged);
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+
+    super.dispose();
+  }
+
+  void onTimerDurationChanged() {
+    setState(() {
+      int timerDurationInMinutes = int.tryParse(textEditingController.text) ?? 0;
+      timerDuration = timerDurationInMinutes * 60;
+    });
+  }
+
+  void startTimer() {
+  int enteredDuration = int.tryParse(textEditingController.text) ?? 0;
+  if (enteredDuration > maxValue) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Entered value exceeds the maximum limit of $maxValue minutes.'),
+        duration: Duration(seconds: 3),
+      ),
+    );
+    return; // Do not start the timer if the value is too big
+  }
+
+  int durationToStart = enteredDuration > 0 ? enteredDuration * 60 : defaultValue * 60;
+  _controller.restart(duration: durationToStart);
+  textEditingController.text = ''; 
+}
+
+
+
+  void checkEnteredValue() {
+    int enteredValue = int.tryParse(textEditingController.text) ?? 0;
+    if (enteredValue > maxValue) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Entered value exceeds the maximum limit of $maxValue minutes.'),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("data"),
-      ),
-      body: Column(
-        children: [
-          CircularCountDownTimer(
-            duration: 10,
-            initialDuration: 0,
-            controller: _controller,
-            width: MediaQuery.of(context).size.width / 2,
-            height: MediaQuery.of(context).size.height / 2,
-            ringColor: Colors.grey[300]!,
-            ringGradient: null,
-            fillColor: Colors.purpleAccent[100]!,
-            fillGradient: null,
-            backgroundColor: Colors.purple[500],
-            backgroundGradient: null,
-            strokeWidth: 20.0,
-            strokeCap: StrokeCap.round,
-            textStyle: TextStyle(
+      backgroundColor: Colors.purple,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            CircularCountDownTimer(
+              duration: timerDuration,
+              initialDuration: 0,
+              controller: _controller,
+              width: MediaQuery.of(context).size.width / 2,
+              height: MediaQuery.of(context).size.height / 2,
+              ringColor: Colors.yellow.shade200,
+              ringGradient: null,
+              fillColor: Colors.purpleAccent[100]!,
+              fillGradient: null,
+              backgroundColor: Colors.purple[500],
+              backgroundGradient: null,
+              strokeWidth: 20.0,
+              strokeCap: StrokeCap.round,
+              textStyle: const TextStyle(
                 fontSize: 33.0,
                 color: Colors.white,
-                fontWeight: FontWeight.bold),
-            textFormat: CountdownTextFormat.S,
-            isReverse: false,
-            isReverseAnimation: false,
-            isTimerTextShown: true,
-            autoStart: false,
-            onStart: () {
-              debugPrint('Countdown Started');
-            },
-            onComplete: () {
-              debugPrint('Countdown Ended');
-            },
-            onChange: (String timeStamp) {
-              debugPrint('Countdown Changed $timeStamp');
-            },
-            timeFormatterFunction: (defaultFormatterFunction, duration) {
-              if (duration.inSeconds == 0) {
-                return "Start";
-              } else {
-                return Function.apply(defaultFormatterFunction, [duration]);
-              }
-            },
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  _controller.start();
-                },
-                child: Text("Start"),
+                fontWeight: FontWeight.bold,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  _controller.pause();
-                },
-                child: Text("Pause"),
+              textFormat:
+                  CountdownTextFormat.MM_SS, // Format the timer in minutes and seconds
+              isReverse: true, // Set to true to make the timer count down
+              isReverseAnimation: false,
+              isTimerTextShown: true,
+              autoStart: false,
+              onStart: () {
+                debugPrint('Countdown Started');
+              },
+              onComplete: () {
+                debugPrint('Countdown Ended');
+              },
+              onChange: (String timeStamp) {
+                debugPrint('Countdown Changed $timeStamp');
+              },
+              timeFormatterFunction: (defaultFormatterFunction, duration) {
+                if (duration.inSeconds == 0) {
+                  return "1 min"; // Display as 10:00 when the timer ends (10 minutes) 
+                } else {
+                  // Format the duration to minutes and seconds
+                  String minutes =
+                      (duration.inMinutes % 60).toString().padLeft(2, '0');
+                  String seconds =
+                      (duration.inSeconds % 60).toString().padLeft(2, '0');
+                  return "$minutes:$seconds";
+                }
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(28.0),
+                      child: TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                        controller: textEditingController,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: Colors.purple,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                          labelText: 'Enter Time in Minutes',
+                          labelStyle: TextStyle(color: Colors.white70),
+                          prefixIcon: Icon(
+                            Icons.alarm,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                              const CircleBorder(),
+                            ),
+                            minimumSize: MaterialStateProperty.all(const Size(80, 80)),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.yellow.shade200),
+                          ),
+                          onPressed: () {
+                            startTimer();
+                          },
+                          child: const Text("Start"),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.yellow.shade200),
+                            ),
+                            onPressed: () {
+                              _controller.pause();
+                            },
+                            child: const Text("Pause"),
+                          ),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.yellow.shade200),
+                            ),
+                            onPressed: () {
+                              _controller.resume();
+                            },
+                            child: const Text("Resume"),
+                          ),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.yellow.shade200),
+                            ),
+                            onPressed: () {
+                              _controller.restart();
+                            },
+                            child: const Text("Restart"),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  _controller.resume();
-                },
-                child: Text("Resume"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _controller.restart();
-                },
-                child: Text("Restart"), 
-              ),
-            ],
-          ),
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
