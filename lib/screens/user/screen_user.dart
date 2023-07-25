@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/screens/user/sub_pages/journey_screen.dart';
 import 'package:habit_project/screens/user/sub_pages/screen_timer.dart';
+import 'package:habit_project/screens/user/sub_pages/stopwatch_screen.dart';
 import 'package:slider_button/slider_button.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
@@ -412,7 +413,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                   boxShadow: BoxShadow(
                                     color: Colors.black.withOpacity(0.5),
                                     blurRadius: 10.0,
-                                    offset: Offset(8, 5),
+                                    offset: const Offset(8, 5),
                                   ),
                                   icon: Icon(
                                     Icons.check_rounded,
@@ -490,7 +491,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                   onPressed: () {
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(builder: (context) {
-                                        return  JourneyPage();  
+                                        return const JourneyPage();
                                       }),
                                     );
                                   },
@@ -521,7 +522,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                   onPressed: () {
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(builder: (context) {
-                                        return const TimerSreen();  
+                                        return const TimerSreen();
                                       }),
                                     );
                                   },
@@ -552,7 +553,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                   onPressed: () {
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(builder: (context) {
-                                        return const HomeScreen();
+                                        return const StopWatchScreen(); 
                                       }),
                                     );
                                   },

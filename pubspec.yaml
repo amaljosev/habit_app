@@ -40,6 +40,7 @@ dependencies:
   hive_flutter: ^1.1.0
   shared_preferences: ^2.2.0
   slider_button: ^2.0.0
+  stop_watch_timer: ^3.0.1
   table_calendar: ^3.0.8
   toggle_switch: ^2.1.0
   video_player: ^2.7.0
@@ -83,6 +84,7 @@ flutter:
     - lib/assets/images/start_habit.jpg
     - lib/assets/images/timer_bg.jpg
     - lib/assets/images/analysis_bg.jpg
+    - lib/assets/images/stopwatch_bg.jpg
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
