@@ -32,6 +32,7 @@ dependencies:
   circular_countdown_timer: ^0.2.3
   cupertino_icons: ^1.0.2
   email_validator: ^2.1.17
+  fl_chart: ^0.63.0
   flutter:
     sdk: flutter
   google_fonts: ^5.1.0
@@ -80,6 +81,7 @@ flutter:
     - lib/assets/images/log_in.jpg
     - lib/assets/images/home_bg.jpg 
     - lib/assets/images/start_habit.jpg
+    - lib/assets/images/timer_bg.jpg
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

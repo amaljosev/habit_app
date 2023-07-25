@@ -70,7 +70,7 @@ class _StartWidgetState extends State<StartWidget> {
                 TextFormField(
                   style: const TextStyle(color: Colors.black),
                   controller: habit_NameController,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.name, 
                   decoration: const InputDecoration(
                     filled: true,
                     fillColor: Colors.white,

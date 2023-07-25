@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habit_project/screens/user/sub_pages/journey_screen.dart';
 import 'package:habit_project/screens/user/sub_pages/screen_timer.dart';
 import 'package:slider_button/slider_button.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
+
 import '../screen_home.dart';
 import 'edit_user.dart';
 
@@ -488,7 +490,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                   onPressed: () {
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(builder: (context) {
-                                        return const HomeScreen();
+                                        return  JourneyPage();  
                                       }),
                                     );
                                   },
