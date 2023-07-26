@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height*0.93,   
+          height: MediaQuery.of(context).size.height*0.96,    
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("lib/assets/images/home_bg.jpg"),  

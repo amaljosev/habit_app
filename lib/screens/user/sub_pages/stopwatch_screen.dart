@@ -81,100 +81,97 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("lib/assets/images/stopwatch_bg.jpg"),
+            image: AssetImage("lib/assets/images/stop_watch_bg.jpg"),
             fit: BoxFit.fill,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Card(
-                color: Colors.blue.shade700,
-                child: Text(
-                  '$digiHours:$digiMinuts:$digiSeconds',
-                  style:
-                      TextStyle(fontSize: 80, color: Colors.blueAccent.shade100),
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround, 
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 55), 
+              child: Text(
+                '$digiHours:$digiMinuts:$digiSeconds',
+                style:
+                    TextStyle(fontSize: 80, color: Colors.blueAccent.shade100),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: 300,
-                  child: ListView.builder(
-                    itemCount: laps.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 8, right: 8),
-                        child: Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Lap no:${index + 1}',
-                                  style: TextStyle(
-                                      color: Colors.blue.shade800, fontSize: 16),
-                                ),
-                                Text(
-                                  '${laps[index]}',
-                                  style: TextStyle(
-                                      color: Colors.blue.shade800, fontSize: 16),
-                                ),
-                              ],
-                            ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 300,
+                child: ListView.builder(
+                  itemCount: laps.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Lap no:${index + 1}',
+                                style: TextStyle(
+                                    color: Colors.blue.shade800, fontSize: 16),
+                              ),
+                              Text(
+                                '${laps[index]}',
+                                style: TextStyle(
+                                    color: Colors.blue.shade800, fontSize: 16),
+                              ),
+                            ],
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: RawMaterialButton(
-                      onPressed: () {
-                        (!started ? start() : stop());
-                      },
-                      shape: const StadiumBorder(
-                        side: BorderSide(color: Colors.blue),
-                      ),
-                      child: Text(
-                        (!started ? 'START' : 'PAUSE'),
-                        style: const TextStyle(color: Colors.white),
-                      ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: RawMaterialButton(
+                    onPressed: () {
+                      (!started ? start() : stop());
+                    },
+                    shape: const StadiumBorder(
+                      side: BorderSide(color: Colors.blue),
+                    ),
+                    child: Text(
+                      (!started ? 'START' : 'PAUSE'),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
-                  IconButton(
-                      onPressed: () {
-                        addLaps();
-                      },
-                      icon: const Icon(
-                        Icons.flag,
-                        color: Colors.white,
-                      )),
-                  Expanded(
-                    child: RawMaterialButton(
-                      onPressed: () {
-                        reset();
-                      },
-                      shape: const StadiumBorder(
-                        side: BorderSide(color: Colors.blue),
-                      ),
-                      child: const Text(
-                        'STOP',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                ),
+                IconButton(
+                    onPressed: () {
+                      addLaps();
+                    },
+                    icon: const Icon(
+                      Icons.flag,
+                      color: Colors.white,
+                    )),
+                Expanded(
+                  child: RawMaterialButton(
+                    onPressed: () {
+                      reset();
+                    },
+                    shape: const StadiumBorder(
+                      side: BorderSide(color: Colors.blue),
+                    ),
+                    child: const Text(
+                      'STOP',
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
-                ],
-              )
-            ],
-          ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );

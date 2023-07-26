@@ -75,7 +75,7 @@ class _EditUserState extends State<EditUser> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('lib/assets/images/create_bg.jpg'),
+              image: AssetImage('lib/assets/images/edit_user_bg.jpg'), 
               fit: BoxFit.fill,
             ),
           ),
@@ -299,13 +299,13 @@ class _EditUserState extends State<EditUser> {
                                   physics: const FixedExtentScrollPhysics(),
                                   children: [
                                     for (var name in [
-                                      'Hours',
-                                      'Pages',
-                                      'Kilometer',
-                                      'Meter',
-                                      'Liter',
-                                      'Cup',
-                                      'Rupee'
+                                      'HOURS',
+                                      'PAGES',
+                                      'KILOMETER',
+                                      'METER',
+                                      'LITER',
+                                      'CUP',
+                                      'RUPEE'
                                     ])
                                       Column(
                                         children: [
@@ -501,25 +501,25 @@ class _EditUserState extends State<EditUser> {
       if (selectedWeekdays[i]) {
         switch (i) {
           case 0:
-            weekdays.add('Sunday');
+            weekdays.add('SUNDAY');
             break;
           case 1:
-            weekdays.add('Monday');
+            weekdays.add('MONDAY');
             break;
           case 2:
-            weekdays.add('Tuesday');
+            weekdays.add('TUESDAY');
             break;
           case 3:
-            weekdays.add('Wednesday');
+            weekdays.add('WEDNESDAY');
             break;
           case 4:
-            weekdays.add('Thursday');
+            weekdays.add('THURSDAY');
             break;
           case 5:
-            weekdays.add('Friday');
+            weekdays.add('FRIDAY');
             break;
           case 6:
-            weekdays.add('Saturday');
+            weekdays.add('SATURDAY');
             break;
         }
       }

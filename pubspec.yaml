@@ -70,21 +70,18 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/assets/videos/splash.mp4   
-    - lib/assets/images/first_bg.jpg      
-    - lib/assets/images/bg-user_interface.png  
+    - lib/assets/images/first_bg.jpg        
     - lib/assets/videos/tick.gif
-    - lib/assets/videos/trophy.gif 
-    - lib/assets/images/home_new.jpg
-    - lib/assets/images/start_bg.jpg
-    - lib/assets/images/create_bg.jpg
+    - lib/assets/videos/trophy.gif    
     - lib/assets/images/user_bg.jpg 
     - lib/assets/images/sign_up.jpg
     - lib/assets/images/log_in.jpg
     - lib/assets/images/home_bg.jpg 
-    - lib/assets/images/start_habit.jpg
-    - lib/assets/images/timer_bg.jpg
-    - lib/assets/images/analysis_bg.jpg
-    - lib/assets/images/stopwatch_bg.jpg
+    - lib/assets/images/start_habit.jpg 
+    - lib/assets/images/timer_bg.jpg  
+    - lib/assets/images/stop_watch_bg.jpg 
+    - lib/assets/images/analysisBg.jpg 
+    - lib/assets/images/edit_user_bg.jpg 
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

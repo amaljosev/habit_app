@@ -20,7 +20,7 @@ class _JourneyPageState extends State<JourneyPage> {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/assets/images/analysis_bg.jpg'),
+            image: AssetImage('lib/assets/images/analysisBg.jpg'), 
             fit: BoxFit.fill,
           ),
         ),
