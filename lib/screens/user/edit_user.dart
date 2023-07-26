@@ -45,6 +45,9 @@ class _EditUserState extends State<EditUser> {
   var today_hours_Count;
   var today_days_count;
   var today_streak;
+  var week_days;
+
+  var do_it_at;
   @override
   void initState() {
     super.initState();
@@ -55,6 +58,8 @@ class _EditUserState extends State<EditUser> {
     today_hours_Count = widget.name;
     today_days_count = widget.today;
     today_streak = widget.percentage;
+    week_days = widget.week;
+    do_it_at = widget.doItAt;
   }
 
   final List<bool> selectedWeekdays = List.filled(7, true);
@@ -253,7 +258,8 @@ class _EditUserState extends State<EditUser> {
                                         ),
                                         Container(
                                           width: 50,
-                                          child: Divider(color: Colors.grey),
+                                          child:
+                                              const Divider(color: Colors.grey),
                                         ),
                                       ],
                                     ),
@@ -290,7 +296,7 @@ class _EditUserState extends State<EditUser> {
                                     });
                                     print('Selected: $wheel_Name');
                                   },
-                                  physics: FixedExtentScrollPhysics(),
+                                  physics: const FixedExtentScrollPhysics(),
                                   children: [
                                     for (var name in [
                                       'Hours',
@@ -312,7 +318,7 @@ class _EditUserState extends State<EditUser> {
                                               ),
                                             ),
                                           ),
-                                          Container(
+                                          const SizedBox(
                                             width: 50,
                                             child: Divider(color: Colors.grey),
                                           ),
@@ -387,6 +393,7 @@ class _EditUserState extends State<EditUser> {
                               index < labelValues.length) {
                             String selectedValue = labelValues[index];
                             print('Switched to: $selectedValue');
+                            do_it_at = selectedValue;
                           }
                         },
                       ),
@@ -517,22 +524,22 @@ class _EditUserState extends State<EditUser> {
         }
       }
     }
-
+    week_days = weekdays;
     print('Selected weekdays: $weekdays');
   }
 
   Future<void> updateDetails(ctx) async {
     final dataModel = StartModel(
-      id: DateTime.now().millisecond.toString(),
-      habit: habitNameController.text,
-      days: totalDaysController.text,
-      wheelCount: wheel_Count.toString(),
-      wheelName: wheel_Name.toString(),
-      todayHours: today_hours_Count.toString(),
-      today: today_days_count.toString(),
-      streak: today_streak.toString(),
-      week: widget.week,doitAt: widget.doItAt
-    );
+        id: DateTime.now().millisecond.toString(),
+        habit: habitNameController.text,
+        days: totalDaysController.text,
+        wheelCount: wheel_Count.toString(),
+        wheelName: wheel_Name.toString(),
+        todayHours: today_hours_Count.toString(),
+        today: today_days_count.toString(),
+        streak: today_streak.toString(),
+        week: week_days,
+        doitAt: do_it_at);
 
     await updateList(widget.index, dataModel);
 

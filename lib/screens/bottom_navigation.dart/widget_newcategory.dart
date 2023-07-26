@@ -19,11 +19,21 @@ var wheel_name;
 var wheel_count;
 var do_itAt;
 var week;
+
 class _StartWidgetState extends State<StartWidget> {
   final List<bool> selectedWeekdays = List.filled(7, true);
   final int defaultCountData = 1;
   final String defaultNameCount = 'Hours';
-  final String default_Week='MORNING';
+  final String default_Week = 'MORNING';
+  List defaultWeekDays = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +80,7 @@ class _StartWidgetState extends State<StartWidget> {
                 TextFormField(
                   style: const TextStyle(color: Colors.black),
                   controller: habit_NameController,
-                  keyboardType: TextInputType.name, 
+                  keyboardType: TextInputType.name,
                   decoration: const InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -354,7 +364,7 @@ class _StartWidgetState extends State<StartWidget> {
                             index >= 0 &&
                             index < labelValues.length) {
                           String selectedValue = labelValues[index];
-                          do_itAt=selectedValue;
+                          do_itAt = selectedValue;
                           print('Switched to: $selectedValue');
                         }
                       },
@@ -425,7 +435,8 @@ class _StartWidgetState extends State<StartWidget> {
   Future<void> addDataToModel() async {
     wheel_count ??= defaultCountData;
     wheel_name ??= defaultNameCount;
-    do_itAt??=default_Week;
+    do_itAt ??= default_Week;
+    week??=defaultWeekDays;
     final _days = total_DaysController.text.trim();
     final name = habit_NameController.text.trim();
 
@@ -443,16 +454,16 @@ class _StartWidgetState extends State<StartWidget> {
     int today = 0;
     int streak = 0;
     final startObject = StartModel(
-      id: DateTime.now().millisecond.toString(),
-      habit: name,
-      days: _days,
-      wheelCount: wheel_count.toString(),
-      wheelName: wheel_name,
-      todayHours: todayCount.toString(),
-      today: today.toString(),
-      streak: streak.toString(),
-      doitAt: do_itAt,week: week
-    );
+        id: DateTime.now().millisecond.toString(),
+        habit: name,
+        days: _days,
+        wheelCount: wheel_count.toString(),
+        wheelName: wheel_name,
+        todayHours: todayCount.toString(),
+        today: today.toString(),
+        streak: streak.toString(),
+        doitAt: do_itAt,
+        week: week);
 
     print("$name $_days  $wheel_count $wheel_name");
     wheel_count = defaultCountData;
@@ -523,7 +534,7 @@ class _StartWidgetState extends State<StartWidget> {
         }
       }
     }
-week=weekdays;
+    week = weekdays;
     print('Selected weekdays: $weekdays');
   }
 }

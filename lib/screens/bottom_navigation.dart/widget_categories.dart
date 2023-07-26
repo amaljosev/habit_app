@@ -20,29 +20,31 @@ class _CategoryWidgetState extends State<CategoryWidget> {
       valueListenable: startListNotifier,
       builder: (BuildContext ctx, List<StartModel> startList, Widget? child) {
         return Padding(
-          padding:  EdgeInsets.all(10.0),
+          padding:  const EdgeInsets.all(10.0),
           child: ListView.separated(
               itemBuilder: (context, index) {
-                return Card(
-                  color: Colors.white,
-                  child: ListTile(
-                    title: Text(
-                      categoryList[index].trailingTitle.toString(),
-                      style: GoogleFonts.andadaPro(  
-                              color: Colors.blue.shade900,
-                              fontWeight: FontWeight.bold, 
-                            ),
+                return InkWell( 
+                  child: Card(
+                    color: Colors.white,
+                    child: ListTile(
+                      title: Text(
+                        categoryList[index].trailingTitle.toString(),
+                        style: GoogleFonts.andadaPro(  
+                                color: Colors.blue.shade900,
+                                fontWeight: FontWeight.bold, 
+                              ),
+                      ),
+                      leading: categoryList[index].leadingIcon,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StartScreen(
+                                  name: categoryList[index].trailingTitle)) ,
+                        );
+                        print(categoryList[index].trailingTitle);
+                      },
                     ),
-                    leading: categoryList[index].leadingIcon,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => StartScreen(
-                                name: categoryList[index].trailingTitle)) ,
-                      );
-                      print(categoryList[index].trailingTitle);
-                    },
                   ),
                 );
               },

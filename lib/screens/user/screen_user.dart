@@ -346,9 +346,9 @@ class _ScreenUserState extends State<ScreenUser> {
                                           );
                                         },
                                       ),
-                                      const Text(
-                                        'BEST STREAK : 10',
-                                        style: TextStyle(
+                                       Text(
+                                        'BEST STREAK : ${widget.streak}',
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w900,
                                             fontSize: 9),
@@ -423,6 +423,7 @@ class _ScreenUserState extends State<ScreenUser> {
                               ),
                               ElevatedButton.icon(
                                 onPressed: () {
+                                  incrementTodayCount();
                                   showModalBottomSheet<void>(
                                     context: context,
                                     builder: (BuildContext context) {
@@ -647,6 +648,48 @@ class _ScreenUserState extends State<ScreenUser> {
       }
     });
   }
+  void incrementTodayCount() {
+  setState(() {
+    habitNameNotifier.value = 0;
+    daysNotifier.value = (days ?? 0) + 1;
+
+    if (daysNotifier.value.toString() == widget.totalDays) {
+        daysNotifier.value = 0;
+        streakNotifier.value = (streak ?? 0) + 1;
+        updateList(
+          widget.index,
+          StartModel(
+              id: DateTime.now().millisecond.toString(),
+              days: widget.totalDays,
+              habit: widget.habitName,
+              wheelCount: widget.wheelCount,
+              wheelName: widget.wheelName,
+              todayHours: habitNameNotifier.value.toString(), 
+              today: daysNotifier.value.toString(),
+              streak: streakNotifier.value.toString(),
+              doitAt: widget.doItAt,
+              week: widget.week),
+        );
+      } else {
+        updateList(
+          widget.index,
+          StartModel(
+              id: DateTime.now().millisecond.toString(),
+              days: widget.totalDays,
+              habit: widget.habitName,
+              wheelCount: widget.wheelCount,
+              wheelName: widget.wheelName,
+              todayHours: habitNameNotifier.value.toString(),
+              today: daysNotifier.value.toString(),
+              streak: streakNotifier.value.toString(),
+              doitAt: widget.doItAt,
+              week: widget.week),
+        );
+      }
+  });
+}
+
+
 
   popupDialogueBox(int indexValue) {
     showDialog(

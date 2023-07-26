@@ -27,14 +27,14 @@ class _StartScreenState extends State<StartScreen> {
   final int defaultCountData = 1;
   final String defaultNameCount = 'Hours';
   final String defaultWeek = 'MORNING';
-  List defaultWeekDays=[
-'Sunday',
-'Monday',
-'Tuesday',
-'Wednesday',
-'Thursday',
-'Friday',
-'Saturday',
+  List defaultWeekDays = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
   ];
   @override
   Widget build(BuildContext context) {
@@ -369,7 +369,7 @@ class _StartScreenState extends State<StartScreen> {
     wheelCount ??= defaultCountData;
     wheelName ??= defaultNameCount;
     doitAt ??= defaultWeek;
-    week??=defaultWeekDays;  
+    week ??= defaultWeekDays;
     final _days = totalDaysController.text.trim();
 
     if (_days.isEmpty) {
@@ -468,5 +468,4 @@ class _StartScreenState extends State<StartScreen> {
     week = weekdays;
     print('Selected weekdays: $weekdays');
   }
- 
 }
