@@ -595,11 +595,12 @@ class _ScreenUserState extends State<ScreenUser> {
         habitNameNotifier.value = 0;
 
         daysNotifier.value = (days ?? 0) + 1;
+        streakNotifier.value = (streak ?? 0) + 1;
         isButtonsEnabled = false;
 
         if (daysNotifier.value.toString() == widget.totalDays) {
           daysNotifier.value = 0;
-          streakNotifier.value = (streak ?? 0) + 1;
+          
           updateList(
             widget.index,
             StartModel(
@@ -652,10 +653,11 @@ class _ScreenUserState extends State<ScreenUser> {
   setState(() {
     habitNameNotifier.value = 0;
     daysNotifier.value = (days ?? 0) + 1;
+    streakNotifier.value = (streak ?? 0) + 1;
 
     if (daysNotifier.value.toString() == widget.totalDays) {
         daysNotifier.value = 0;
-        streakNotifier.value = (streak ?? 0) + 1;
+        
         updateList(
           widget.index,
           StartModel(
