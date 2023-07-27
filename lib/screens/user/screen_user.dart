@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_project/screens/user/sub_pages/journey_screen.dart';
 import 'package:habit_project/screens/user/sub_pages/screen_timer.dart';
 import 'package:habit_project/screens/user/sub_pages/stopwatch_screen.dart';
 import 'package:slider_button/slider_button.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
-
 import '../screen_home.dart';
 import 'edit_user.dart';
 
@@ -372,35 +370,97 @@ class _ScreenUserState extends State<ScreenUser> {
                                   buttonSize: 50,
                                   action: () {
                                     incrementTodayWheelCount();
-                                    showModalBottomSheet<void>(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return Center(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              Image.asset(
-                                                  'lib/assets/videos/tick.gif'),
-                                              const Text(
-                                                  'YOU HAVE COMPLETED \n    SCHEDULED TASKS'),
-                                              ElevatedButton(
-                                                child: const Text('GO TO HOME'),
-                                                onPressed: () =>
-                                                    Navigator.of(context)
-                                                        .pushReplacement(
-                                                  MaterialPageRoute(
-                                                      builder: (context) {
-                                                    return const HomeScreen();
-                                                  }),
+                                    if (daysNotifier.value.toString() ==
+                                        widget.totalDays) {
+                                      showModalBottomSheet<void>(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Center(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                Image.asset(
+                                                    'lib/assets/videos/habit_completed.gif'),
+                                                Text(
+                                                  'YOU HAVE COMPLETED \n             YOUR HABIT',
+                                                  style: GoogleFonts.andadaPro(
+                                                    color: Colors.blue.shade900,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    );
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceAround, 
+                                                  children: [
+                                                    ElevatedButton(
+                                                      child: const Text(
+                                                          'GO TO HOME'),
+                                                      onPressed: () =>
+                                                          Navigator.of(context)
+                                                              .pushReplacement(
+                                                        MaterialPageRoute(
+                                                            builder: (context) {
+                                                          return const HomeScreen();
+                                                        }),
+                                                      ),
+                                                    ),
+                                                    ElevatedButton(
+                                                      child:
+                                                          const Text('RESTART'),
+                                                      onPressed: () =>
+                                                          Navigator.of(context)
+                                                              .pushReplacement(
+                                                        MaterialPageRoute(
+                                                            builder: (context) {
+                                                          return const HomeScreen();
+                                                        }),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      showModalBottomSheet<void>(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Center(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                Image.asset(
+                                                    'lib/assets/videos/category_completed.gif'),
+                                                Text(
+                                                  'YOU HAVE COMPLETED \n    SCHEDULED TASKS',
+                                                  style: GoogleFonts.andadaPro(
+                                                    color: Colors.blue.shade900,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                ElevatedButton(
+                                                  child:
+                                                      const Text('GO TO HOME'),
+                                                  onPressed: () =>
+                                                      Navigator.of(context)
+                                                          .pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (context) {
+                                                      return const HomeScreen();
+                                                    }),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    }
                                   },
                                   label: const Text(
                                     "Swipe to complete",
@@ -435,8 +495,13 @@ class _ScreenUserState extends State<ScreenUser> {
                                           children: <Widget>[
                                             Image.asset(
                                                 'lib/assets/videos/trophy.gif'),
-                                            const Text(
-                                                'YOU HAVE COMPLETED \n             THIS DAY'),
+                                            Text(
+                                              'YOU HAVE COMPLETED \n             THIS DAY',
+                                              style: GoogleFonts.andadaPro(
+                                                color: Colors.blue.shade900,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                             ElevatedButton(
                                               child: const Text('GO TO HOME'),
                                               onPressed: () =>
@@ -480,37 +545,6 @@ class _ScreenUserState extends State<ScreenUser> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Column(
-                              children: [
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.blueGrey,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(builder: (context) {
-                                        return const JourneyPage();
-                                      }),
-                                    );
-                                  },
-                                  child: const Icon(
-                                    Icons.map_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  'JOURNEY',
-                                  style: GoogleFonts.unbounded(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 10,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
                             Column(
                               children: [
                                 ElevatedButton(
@@ -599,9 +633,7 @@ class _ScreenUserState extends State<ScreenUser> {
         isButtonsEnabled = false;
 
         if (daysNotifier.value.toString() == widget.totalDays) {
-          deleteData(widget.index); 
-
-          
+          deleteData(widget.index);
         } else {
           updateList(
             widget.index,

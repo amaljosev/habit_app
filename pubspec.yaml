@@ -82,6 +82,9 @@ flutter:
     - lib/assets/images/stop_watch_bg.jpg 
     - lib/assets/images/analysisBg.jpg 
     - lib/assets/images/edit_user_bg.jpg 
+    - lib/assets/videos/category_completed.gif
+    - lib/assets/videos/habit_completed.gif 
+    - lib/assets/images/profile_bg.jpg 
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

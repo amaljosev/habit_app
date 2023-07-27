@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/screens/user/sub_pages/analysis_screen/bar_graph.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import 'widget_me.dart';
+
 class JourneyPage extends StatefulWidget {
   const JourneyPage({super.key});
 
@@ -14,30 +16,39 @@ class _JourneyPageState extends State<JourneyPage> {
   List<double> weeklySummary = [10.0, 20.0, 30.0, 50.0, 80.0, 25.0, 35.0, 25.0];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('lib/assets/images/analysisBg.jpg'), 
-            fit: BoxFit.fill,
-          ),
-        ),
+    return SafeArea(
+      child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const SizedBox(width: 25,),
-                Text( 
+                const SizedBox(
+                  width: 25,
+                ),
+                Text(
                   "STATISTICS",
                   style: GoogleFonts.unbounded(
-                    fontSize: 20, 
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
+                ),
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) {
+                            return const MeWdget();
+                          }),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.person,
+                        color: Colors.blue.shade800,
+                      )),
                 ),
               ],
             ),

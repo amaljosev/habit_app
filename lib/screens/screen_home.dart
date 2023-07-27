@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habit_project/screens/bottom_navigation.dart/widget_categories.dart';
 import 'package:habit_project/screens/bottom_navigation.dart/widget_newcategory.dart';
 import 'package:habit_project/screens/bottom_navigation.dart/widget_today.dart';
-import 'bottom_navigation.dart/widget_me.dart';
+import 'package:habit_project/screens/bottom_navigation.dart/journey_screen.dart';
 import 'package:calendar_appbar/calendar_appbar.dart';
 
 
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     TodayWidget(),
     CategoryWidget(),
     StartWidget(), 
-    MeWdget(),
+    JourneyPage(), 
   ];
 
   void _onItemTapped(int index) {
