@@ -62,15 +62,15 @@ class _SignUpState extends State<SignUp> {
                       style: const TextStyle(color: Colors.black), 
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
-                      decoration:  InputDecoration(
+                      decoration:  const InputDecoration(
                         filled: true,
                         fillColor: Colors.white70, 
-                        border: const OutlineInputBorder(
+                        border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10))),
                         hintText: 'yourname@gmail.com',
                         labelText: 'Email Address',
-                        labelStyle: const TextStyle(color: Colors.grey), 
-                        prefixIcon: const Icon(
+                        labelStyle: TextStyle(color: Colors.grey), 
+                        prefixIcon: Icon(
                           Icons.mail,
                           color: Colors.grey, 
                         ),
@@ -93,17 +93,17 @@ class _SignUpState extends State<SignUp> {
                         style: const TextStyle(color: Colors.black),
                         controller: _userNameController,
                         keyboardType: TextInputType.name,
-                        decoration:  InputDecoration(
+                        decoration:  const InputDecoration(
                           
                           filled: true,
                           fillColor: Colors.white70,
-                          border: const OutlineInputBorder(
+                          border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           hintText: '@yourname',
                           labelText: 'User Name',
-                          labelStyle: const TextStyle(color: Colors.grey),
-                          prefixIcon: const Icon(
+                          labelStyle: TextStyle(color: Colors.grey),
+                          prefixIcon: Icon(
                             Icons.person,
                             color: Colors.grey, 
                           ), 
@@ -123,16 +123,16 @@ class _SignUpState extends State<SignUp> {
                         controller: _passwordController,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: true,
-                        decoration:  InputDecoration(
+                        decoration:  const InputDecoration(
                           filled: true,
                           fillColor: Colors.white70,
-                          border: const OutlineInputBorder(
+                          border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           hintText: '**********',
                           labelText: 'Password',
-                          labelStyle: const TextStyle(color: Colors.grey),
-                          prefixIcon: const Icon(
+                          labelStyle: TextStyle(color: Colors.grey),
+                          prefixIcon: Icon(
                             Icons.key,
                             color: Colors.grey, 
                           ),

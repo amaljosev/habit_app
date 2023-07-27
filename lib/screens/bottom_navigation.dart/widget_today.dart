@@ -24,7 +24,7 @@ class _TodayWidgetState extends State<TodayWidget> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    InkWell(
+                    InkWell( 
                       onTap: () {
                         Navigator.push(
                             context,

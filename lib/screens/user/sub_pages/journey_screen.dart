@@ -30,8 +30,8 @@ class _JourneyPageState extends State<JourneyPage> {
             
             Row(
               children: [
-                SizedBox(width: 25,),
-                Text(
+                const SizedBox(width: 25,),
+                Text( 
                   "STATISTICS",
                   style: GoogleFonts.unbounded(
                     fontSize: 20, 

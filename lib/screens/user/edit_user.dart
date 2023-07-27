@@ -256,10 +256,10 @@ class _EditUserState extends State<EditUser> {
                                             ),
                                           ),
                                         ),
-                                        Container(
+                                        const SizedBox(
                                           width: 50,
                                           child:
-                                              const Divider(color: Colors.grey),
+                                              Divider(color: Colors.grey),
                                         ),
                                       ],
                                     ),

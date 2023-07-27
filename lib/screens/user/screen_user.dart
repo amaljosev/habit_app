@@ -346,7 +346,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                           );
                                         },
                                       ),
-                                       Text(
+                                      Text(
                                         'BEST STREAK : ${widget.streak}',
                                         style: const TextStyle(
                                             color: Colors.white,
@@ -554,7 +554,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                   onPressed: () {
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(builder: (context) {
-                                        return const StopWatchScreen(); 
+                                        return const StopWatchScreen();
                                       }),
                                     );
                                   },
@@ -599,22 +599,9 @@ class _ScreenUserState extends State<ScreenUser> {
         isButtonsEnabled = false;
 
         if (daysNotifier.value.toString() == widget.totalDays) {
-          daysNotifier.value = 0;
+          deleteData(widget.index); 
+
           
-          updateList(
-            widget.index,
-            StartModel(
-                id: DateTime.now().millisecond.toString(),
-                days: widget.totalDays,
-                habit: widget.habitName,
-                wheelCount: widget.wheelCount,
-                wheelName: widget.wheelName,
-                todayHours: habitNameNotifier.value.toString(),
-                today: daysNotifier.value.toString(),
-                streak: streakNotifier.value.toString(),
-                doitAt: widget.doItAt,
-                week: widget.week),
-          );
         } else {
           updateList(
             widget.index,
@@ -649,15 +636,16 @@ class _ScreenUserState extends State<ScreenUser> {
       }
     });
   }
-  void incrementTodayCount() {
-  setState(() {
-    habitNameNotifier.value = 0;
-    daysNotifier.value = (days ?? 0) + 1;
-    streakNotifier.value = (streak ?? 0) + 1;
 
-    if (daysNotifier.value.toString() == widget.totalDays) {
+  void incrementTodayCount() {
+    setState(() {
+      habitNameNotifier.value = 0;
+      daysNotifier.value = (days ?? 0) + 1;
+      streakNotifier.value = (streak ?? 0) + 1;
+
+      if (daysNotifier.value.toString() == widget.totalDays) {
         daysNotifier.value = 0;
-        
+
         updateList(
           widget.index,
           StartModel(
@@ -666,7 +654,7 @@ class _ScreenUserState extends State<ScreenUser> {
               habit: widget.habitName,
               wheelCount: widget.wheelCount,
               wheelName: widget.wheelName,
-              todayHours: habitNameNotifier.value.toString(), 
+              todayHours: habitNameNotifier.value.toString(),
               today: daysNotifier.value.toString(),
               streak: streakNotifier.value.toString(),
               doitAt: widget.doItAt,
@@ -688,10 +676,8 @@ class _ScreenUserState extends State<ScreenUser> {
               week: widget.week),
         );
       }
-  });
-}
-
-
+    });
+  }
 
   popupDialogueBox(int indexValue) {
     showDialog(
