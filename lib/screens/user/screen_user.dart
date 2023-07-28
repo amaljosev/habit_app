@@ -391,7 +391,9 @@ class _ScreenUserState extends State<ScreenUser> {
                                                   ),
                                                 ),
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceAround, 
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
                                                   children: [
                                                     ElevatedButton(
                                                       child: const Text(
@@ -409,13 +411,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                                       child:
                                                           const Text('RESTART'),
                                                       onPressed: () =>
-                                                          Navigator.of(context)
-                                                              .pushReplacement(
-                                                        MaterialPageRoute(
-                                                            builder: (context) {
-                                                          return const HomeScreen();
-                                                        }),
-                                                      ),
+                                                          restart(),
                                                     ),
                                                   ],
                                                 ),
@@ -484,40 +480,91 @@ class _ScreenUserState extends State<ScreenUser> {
                               ElevatedButton.icon(
                                 onPressed: () {
                                   incrementTodayCount();
-                                  showModalBottomSheet<void>(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return Center(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            Image.asset(
-                                                'lib/assets/videos/trophy.gif'),
-                                            Text(
-                                              'YOU HAVE COMPLETED \n             THIS DAY',
-                                              style: GoogleFonts.andadaPro(
-                                                color: Colors.blue.shade900,
-                                                fontWeight: FontWeight.bold,
+                                  if (daysNotifier.value.toString() ==
+                                      widget.totalDays) {
+                                    showModalBottomSheet<void>(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: <Widget>[
+                                              Image.asset(
+                                                  'lib/assets/videos/habit_completed.gif'),
+                                              Text(
+                                                'YOU HAVE COMPLETED \n             YOUR HABIT',
+                                                style: GoogleFonts.andadaPro(
+                                                  color: Colors.blue.shade900,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
-                                            ),
-                                            ElevatedButton(
-                                              child: const Text('GO TO HOME'),
-                                              onPressed: () =>
-                                                  Navigator.of(context)
-                                                      .pushReplacement(
-                                                MaterialPageRoute(
-                                                    builder: (context) {
-                                                  return const HomeScreen();
-                                                }),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  ElevatedButton(
+                                                    child: const Text(
+                                                        'GO TO HOME'),
+                                                    onPressed: () =>
+                                                        Navigator.of(context)
+                                                            .pushReplacement(
+                                                      MaterialPageRoute(
+                                                          builder: (context) {
+                                                        return const HomeScreen();
+                                                      }),
+                                                    ),
+                                                  ),
+                                                  ElevatedButton(
+                                                      child:
+                                                          const Text('RESTART'),
+                                                      onPressed: () =>
+                                                          restart()),
+                                                ],
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  } else {
+                                    showModalBottomSheet<void>(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: <Widget>[
+                                              Image.asset(
+                                                  'lib/assets/videos/category_completed.gif'),
+                                              Text(
+                                                'YOU HAVE COMPLETED \n    SCHEDULED TASKS',
+                                                style: GoogleFonts.andadaPro(
+                                                  color: Colors.blue.shade900,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              ElevatedButton(
+                                                child: const Text('GO TO HOME'),
+                                                onPressed: () =>
+                                                    Navigator.of(context)
+                                                        .pushReplacement(
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                    return const HomeScreen();
+                                                  }),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  }
                                 },
                                 icon: const Icon(
                                   Icons.done_all,
@@ -676,22 +723,7 @@ class _ScreenUserState extends State<ScreenUser> {
       streakNotifier.value = (streak ?? 0) + 1;
 
       if (daysNotifier.value.toString() == widget.totalDays) {
-        daysNotifier.value = 0;
-
-        updateList(
-          widget.index,
-          StartModel(
-              id: DateTime.now().millisecond.toString(),
-              days: widget.totalDays,
-              habit: widget.habitName,
-              wheelCount: widget.wheelCount,
-              wheelName: widget.wheelName,
-              todayHours: habitNameNotifier.value.toString(),
-              today: daysNotifier.value.toString(),
-              streak: streakNotifier.value.toString(),
-              doitAt: widget.doItAt,
-              week: widget.week),
-        );
+        deleteData(widget.index);
       } else {
         updateList(
           widget.index,
@@ -741,6 +773,33 @@ class _ScreenUserState extends State<ScreenUser> {
           ],
         );
       },
+    );
+  }
+
+  Future<void> restart() async {
+    int todayCount = 0;
+    int today = 0;
+    int streak = 0;
+    final startObject = StartModel(
+        id: DateTime.now().millisecond.toString(),
+        habit: widget.habitName,
+        days: widget.totalDays,
+        wheelCount: widget.wheelCount.toString(),
+        wheelName: widget.wheelName,
+        todayHours: todayCount.toString(),
+        today: today.toString(),
+        streak: streak.toString(),
+        week: widget.week,
+        doitAt: widget.doItAt);
+
+    print(
+        "${widget.habitName} ${widget.totalDays}  ${widget.wheelCount} ${widget.wheelName}");
+
+    addCategory(startObject);
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) {
+        return const HomeScreen();
+      }),
     );
   }
 }

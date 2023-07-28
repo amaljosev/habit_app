@@ -399,6 +399,7 @@ class _StartScreenState extends State<StartScreen> {
     print("${widget.name} $_days  $wheelCount $wheelName");
     wheelCount = defaultCountData;
     wheelName = defaultNameCount;
+    int countDatabase;
     addCategory(startObject);
   }
 

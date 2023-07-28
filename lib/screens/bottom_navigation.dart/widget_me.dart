@@ -63,14 +63,14 @@ class _MeWdgetState extends State<MeWdget> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.8,
+                height: MediaQuery.of(context).size.height * 0.8, 
                 decoration: BoxDecoration(
                   color: Colors.white30,
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30)),
                   border: Border.all(
-                    color: Colors.black,
+                    color: Colors.white, 
                     width: 2.0,
                   ),
                 ),
