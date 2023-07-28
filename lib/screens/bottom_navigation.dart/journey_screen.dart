@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/screens/user/sub_pages/analysis_screen/bar_graph.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../functions/hive_functions/db_functions.dart';
+import '../../functions/hive_functions/db_start.dart';
 
 class JourneyPage extends StatefulWidget {
   const JourneyPage({super.key});
@@ -14,6 +15,7 @@ class JourneyPage extends StatefulWidget {
 class _JourneyPageState extends State<JourneyPage> {
   String username = '';
   String email = '';
+  int totalHabitsStarted = 0;
 
   @override
   void initState() {
@@ -29,6 +31,11 @@ class _JourneyPageState extends State<JourneyPage> {
       setState(() {
         username = dataList.last.username;
         email = dataList.last.mail;
+        calculateTotalHabitsStarted().then((totalHabits) {
+          setState(() {
+            totalHabitsStarted = totalHabits;
+          });
+        });
       });
     }
   }
@@ -61,87 +68,102 @@ class _JourneyPageState extends State<JourneyPage> {
                       onPressed: () {
                         showDialog<String>(
                           context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            content: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    IconButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        icon: Icon(Icons.close)),
-                                  ],
-                                ),
-                                Card(
-                                  color: Colors.blue.shade50,
-                                  child: Column(
+                          builder: (BuildContext context) =>
+                              FractionallySizedBox(
+                            heightFactor: 0.6,
+                            child: AlertDialog(
+                              content: Column(
+                                children: [
+                                  Row(
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          children: [
-                                            const CircleAvatar(
-                                              backgroundColor: Colors.blue,
-                                              child:
-                                                  Icon(Icons.person_2_outlined),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    username,
-                                                    style:
-                                                        GoogleFonts.unbounded(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.blue,
-                                                    ),
-                                                  ),
-                                                  Text(email),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
+                                      IconButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          icon: const Icon(Icons.close)),
+                                      const SizedBox(
+                                        width: 45,
+                                      ),
+                                      Text(
+                                        'profile', 
+                                        style: GoogleFonts.unbounded(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black, 
                                         ),
                                       ),
-                                    ], 
+                                    ],
                                   ),
-                                ),
-                                Column(
-                                  children: [
-                                    Row(
+                                  Card(
+                                    color: Colors.blue.shade50,
+                                    child: Column(
                                       children: [
-                                        Text(
-                                          'TOTAL HABITS STARTED : 5',
-                                          style: GoogleFonts.unbounded(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.red,
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              const CircleAvatar(
+                                                backgroundColor: Colors.blue,
+                                                child: Icon(
+                                                    Icons.person_2_outlined),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      username,
+                                                      style:
+                                                          GoogleFonts.unbounded(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.blue,
+                                                      ),
+                                                    ),
+                                                    Text(email),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
                                     ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'TOTAL HABITS STARTED : 5',
-                                          style: GoogleFonts.unbounded(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.red,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            '$totalHabitsStarted',
+                                            style: GoogleFonts.unbounded(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.red,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'TOTAL HABITS completed : 5',
+                                            style: GoogleFonts.unbounded(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );

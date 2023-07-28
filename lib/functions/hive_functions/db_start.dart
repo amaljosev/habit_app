@@ -33,3 +33,8 @@ Future<void> updateList(int id, StartModel value) async {
   categoryDB.putAt(id, value);
   getallDatas(); 
 }
+
+Future<int> calculateTotalHabitsStarted() async {
+  final categoryDB = await Hive.openBox<StartModel>('category_db');
+  return categoryDB.length;
+}

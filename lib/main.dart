@@ -15,9 +15,7 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(StartModelAdapter().typeId)) {
     Hive.registerAdapter(StartModelAdapter());
   }
-  if (!Hive.isAdapterRegistered(SignUpModelAdapter().typeId)) {
-    Hive.registerAdapter(SignUpModelAdapter()); 
-  }
+  
 
   runApp(const MyApp());
 }
