@@ -139,11 +139,11 @@ class _JourneyPageState extends State<JourneyPage> {
                                       Row(
                                         children: [
                                           Text(
-                                            '$totalHabitsStarted',
+                                            'TOTAL HABITS STARTED : $totalHabitsStarted', 
                                             style: GoogleFonts.unbounded(
                                               fontSize: 10,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.red,
+                                              color: Colors.grey,
                                             ),
                                           ),
                                         ],
@@ -155,7 +155,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                             style: GoogleFonts.unbounded(
                                               fontSize: 10,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.red,
+                                              color: Colors.grey, 
                                             ),
                                           ),
                                         ],

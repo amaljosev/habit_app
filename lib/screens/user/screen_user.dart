@@ -122,6 +122,9 @@ class _ScreenUserState extends State<ScreenUser> {
                           onSelected: (SampleItem item) {
                             setState(() {
                               selectedMenu = item;
+                              if (item == SampleItem.itemOne) {
+                                reset();
+                              }
                               if (item == SampleItem.itemTwo) {
                                 popupDialogueBox(widget.index);
                               }
@@ -666,7 +669,32 @@ class _ScreenUserState extends State<ScreenUser> {
         ),
       ),
     );
+    
   }
+  Future<void> reset() async {
+      int todayCount = 0;
+      int today = 0;
+      int streak = 0;
+      updateList(
+        widget.index,
+        StartModel(
+            id: DateTime.now().millisecond.toString(),
+            days: widget.totalDays,
+            habit: widget.habitName,
+            wheelCount: widget.wheelCount,
+            wheelName: widget.wheelName,
+            todayHours: todayCount.toString(),
+            today: today.toString(),
+            streak: streak.toString(),
+            doitAt: widget.doItAt,
+            week: widget.week),
+      );
+      Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) {
+        return const HomeScreen();
+      }),
+    );
+    }
 
   void incrementTodayWheelCount() {
     setState(() {
@@ -741,6 +769,7 @@ class _ScreenUserState extends State<ScreenUser> {
         );
       }
     });
+    
   }
 
   popupDialogueBox(int indexValue) {
