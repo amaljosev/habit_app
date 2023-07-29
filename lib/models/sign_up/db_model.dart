@@ -38,7 +38,7 @@ class StartModel {
   @HiveField(7)
   final String streak;
   @HiveField(8)
-  final List week; 
+  final List week;
   @HiveField(9)
   final String doitAt;
 
@@ -49,10 +49,34 @@ class StartModel {
     required this.wheelName,
     required this.wheelCount,
     required this.todayHours,
-    required this.today, 
+    required this.today,
     required this.streak,
     required this.week,
-    required this.doitAt, 
+    required this.doitAt,
   });
 }
 
+@HiveType(typeId: 3)
+class HabitsCountModel {
+  @HiveField(0)
+  final String id;
+
+  @HiveField(1)
+  final int totalHabitCompleted;
+
+  HabitsCountModel({required this.id, required this.totalHabitCompleted});
+}
+
+@HiveType(typeId: 4)
+class DateModel {
+  @HiveField(0)
+  final String id;
+
+  @HiveField(1)
+  final int date;
+
+  DateModel({
+    required this.id,
+    required this.date,
+  });
+}

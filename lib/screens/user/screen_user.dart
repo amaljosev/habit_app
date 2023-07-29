@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/screens/user/sub_pages/screen_timer.dart';
 import 'package:habit_project/screens/user/sub_pages/stopwatch_screen.dart';
 import 'package:slider_button/slider_button.dart';
+import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
 import '../screen_home.dart';
@@ -48,6 +49,27 @@ class ScreenUser extends StatefulWidget {
 }
 
 class _ScreenUserState extends State<ScreenUser> {
+  int completed = 0;
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    fetchUsername();
+  }
+
+  void fetchUsername() async {
+    final db = HabitCountsDB();
+    final dataList = await db.getAllCounts();
+    if (dataList.isNotEmpty) {
+      setState(() {
+        completed = dataList.last.totalHabitCompleted;
+        
+      });
+    }
+  }
+
   SampleItem? selectedMenu;
   bool isButtonsEnabled = true;
 
@@ -55,7 +77,7 @@ class _ScreenUserState extends State<ScreenUser> {
   Widget build(BuildContext context) {
     habitName = int.parse(widget.todayCount);
     days = int.parse(widget.today);
-    streak = int.parse(widget.streak);
+    streak = int.parse(widget.streak); 
 
     return Scaffold(
       body: Container(
@@ -375,6 +397,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                     incrementTodayWheelCount();
                                     if (daysNotifier.value.toString() ==
                                         widget.totalDays) {
+                                      addCountToModel();
                                       showModalBottomSheet<void>(
                                         context: context,
                                         builder: (BuildContext context) {
@@ -657,6 +680,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                 ),
                               ],
                             ),
+                            
                           ],
                         )
                       ],
@@ -669,32 +693,32 @@ class _ScreenUserState extends State<ScreenUser> {
         ),
       ),
     );
-    
   }
+
   Future<void> reset() async {
-      int todayCount = 0;
-      int today = 0;
-      int streak = 0;
-      updateList(
-        widget.index,
-        StartModel(
-            id: DateTime.now().millisecond.toString(),
-            days: widget.totalDays,
-            habit: widget.habitName,
-            wheelCount: widget.wheelCount,
-            wheelName: widget.wheelName,
-            todayHours: todayCount.toString(),
-            today: today.toString(),
-            streak: streak.toString(),
-            doitAt: widget.doItAt,
-            week: widget.week),
-      );
-      Navigator.of(context).pushReplacement(
+    int todayCount = 0;
+    int today = 0;
+    int streak = 0;
+    updateList(
+      widget.index,
+      StartModel(
+          id: DateTime.now().millisecond.toString(),
+          days: widget.totalDays,
+          habit: widget.habitName,
+          wheelCount: widget.wheelCount,
+          wheelName: widget.wheelName,
+          todayHours: todayCount.toString(),
+          today: today.toString(),
+          streak: streak.toString(),
+          doitAt: widget.doItAt,
+          week: widget.week),
+    );
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) {
         return const HomeScreen();
       }),
     );
-    }
+  }
 
   void incrementTodayWheelCount() {
     setState(() {
@@ -769,7 +793,6 @@ class _ScreenUserState extends State<ScreenUser> {
         );
       }
     });
-    
   }
 
   popupDialogueBox(int indexValue) {
@@ -831,6 +854,19 @@ class _ScreenUserState extends State<ScreenUser> {
       }),
     );
   }
+
+  void addCountToModel() {
+    print(completed);
+    int countHabit = completed + 1; 
+
+   final habtCounts= HabitsCountModel(
+        id: DateTime.now().millisecond.toString(),
+        totalHabitCompleted: countHabit);
+        HabitCountsDB().addCounts(habtCounts); 
+         
+         
+  }
+  
 }
 
 enum SampleItem { itemOne, itemTwo }

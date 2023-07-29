@@ -18,5 +18,6 @@ class SignUpDB implements SignupDBfunctions {
     final _signupDB=await Hive.openBox<SignUpModel>(SIGNUP_DB_NAME);
     return _signupDB.values.toList();
   }
+
   
 }

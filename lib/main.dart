@@ -15,6 +15,13 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(StartModelAdapter().typeId)) {
     Hive.registerAdapter(StartModelAdapter());
   }
+  if (!Hive.isAdapterRegistered(HabitsCountModelAdapter().typeId)) {
+    Hive.registerAdapter(HabitsCountModelAdapter()); 
+  }
+  if (!Hive.isAdapterRegistered(DateModelAdapter().typeId)) {
+    Hive.registerAdapter(DateModelAdapter()); 
+  }
+  
   
 
   runApp(const MyApp());

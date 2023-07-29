@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habit_project/functions/hive_functions/db_start.dart';
 import 'package:habit_project/models/sign_up/db_model.dart';
 import 'package:habit_project/screens/screen_home.dart';
 import 'package:weekday_selector/weekday_selector.dart';
-import '../functions/hive_functions/db_start.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class StartScreen extends StatefulWidget {
@@ -20,6 +20,7 @@ var wheelName;
 var wheelCount;
 var doitAt;
 var week;
+
 
 class _StartScreenState extends State<StartScreen> {
   final List<bool> selectedWeekdays = List.filled(7, true);
@@ -381,6 +382,7 @@ class _StartScreenState extends State<StartScreen> {
         popDialogueBox();
       });
     }
+
     int todayCount = 0;
     int today = 0;
     int streak = 0;

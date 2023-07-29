@@ -38,3 +38,8 @@ Future<int> calculateTotalHabitsStarted() async {
   final categoryDB = await Hive.openBox<StartModel>('category_db');
   return categoryDB.length;
 }
+Future<void> clearDatabase() async {
+  final categoryDB = await Hive.openBox<StartModel>('category_db');
+  await categoryDB.clear();
+  getallDatas(); 
+}
