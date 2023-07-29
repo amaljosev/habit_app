@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/screens/user/sub_pages/screen_timer.dart';
 import 'package:habit_project/screens/user/sub_pages/stopwatch_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slider_button/slider_button.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
@@ -51,22 +52,58 @@ class ScreenUser extends StatefulWidget {
 class _ScreenUserState extends State<ScreenUser> {
   int completed = 0;
 
-
   @override
   void initState() {
     super.initState();
 
-    fetchUsername();
+    fetchCount();
+    checkAndResetHabit();
   }
 
-  void fetchUsername() async {
+  void fetchCount() async {
     final db = HabitCountsDB();
     final dataList = await db.getAllCounts();
     if (dataList.isNotEmpty) {
       setState(() {
         completed = dataList.last.totalHabitCompleted;
-        
       });
+    }
+  }
+
+  // Add this method to check if it's a new day and reset the habitNameNotifier
+  Future<void> checkAndResetHabit() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String lastUsedDate = prefs.getString('lastUsedDate') ?? '';
+
+    // Get the current date
+    DateTime currentDate = DateTime.now();
+    String formattedCurrentDate =
+        "${currentDate.year}-${currentDate.month}-${currentDate.day}";
+
+    // Check if it's a new day 
+    if (lastUsedDate != formattedCurrentDate) { 
+     
+      // Reset habitNameNotifier to 0
+      setState(() {
+        habitNameNotifier.value = 0;
+        updateList(
+          widget.index,
+          StartModel(
+              id: DateTime.now().millisecond.toString(),
+              days: widget.totalDays,
+              habit: widget.habitName,
+              wheelCount: widget.wheelCount,
+              wheelName: widget.wheelName,
+              todayHours: habitNameNotifier.value.toString(),
+              today: widget.today.toString(),
+              streak: widget.streak.toString(), 
+              doitAt: widget.doItAt,
+              week: widget.week),
+        );
+      });
+
+      // Save the current date as the last used date in shared preferences
+      await prefs.setString('lastUsedDate', formattedCurrentDate);
     }
   }
 
@@ -77,7 +114,7 @@ class _ScreenUserState extends State<ScreenUser> {
   Widget build(BuildContext context) {
     habitName = int.parse(widget.todayCount);
     days = int.parse(widget.today);
-    streak = int.parse(widget.streak); 
+    streak = int.parse(widget.streak);
 
     return Scaffold(
       body: Container(
@@ -680,7 +717,6 @@ class _ScreenUserState extends State<ScreenUser> {
                                 ),
                               ],
                             ),
-                            
                           ],
                         )
                       ],
@@ -829,18 +865,21 @@ class _ScreenUserState extends State<ScreenUser> {
   }
 
   Future<void> restart() async {
-    int todayCount = 0;
-    int today = 0;
-    int streak = 0;
+    
+    
+    habitNameNotifier.value = 0;
+    daysNotifier.value =0;
+      streakNotifier.value = 0;
+
     final startObject = StartModel(
         id: DateTime.now().millisecond.toString(),
         habit: widget.habitName,
         days: widget.totalDays,
         wheelCount: widget.wheelCount.toString(),
         wheelName: widget.wheelName,
-        todayHours: todayCount.toString(),
-        today: today.toString(),
-        streak: streak.toString(),
+        todayHours: habitNameNotifier.value.toString(), 
+        today: daysNotifier.value.toString(),
+        streak:  streakNotifier.value.toString(), 
         week: widget.week,
         doitAt: widget.doItAt);
 
@@ -857,16 +896,13 @@ class _ScreenUserState extends State<ScreenUser> {
 
   void addCountToModel() {
     print(completed);
-    int countHabit = completed + 1; 
+    int countHabit = completed + 1;
 
-   final habtCounts= HabitsCountModel(
+    final habtCounts = HabitsCountModel(
         id: DateTime.now().millisecond.toString(),
         totalHabitCompleted: countHabit);
-        HabitCountsDB().addCounts(habtCounts); 
-         
-         
+    HabitCountsDB().addCounts(habtCounts);
   }
-  
 }
 
 enum SampleItem { itemOne, itemTwo }

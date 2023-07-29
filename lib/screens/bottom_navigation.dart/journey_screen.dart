@@ -239,6 +239,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                         TextButton(
                                             onPressed: () {
                                               clearDatabase();
+                                              Navigator.pop(context); 
                                             },
                                             child: const Text(
                                               'DELETE ALL HABITS',

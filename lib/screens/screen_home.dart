@@ -75,8 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
            backgroundColor: Colors.indigo,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person_2_outlined),
-          label: 'ME',
+          icon: Icon(Icons.bar_chart_rounded),
+          label: 'JOURNEY',  
            backgroundColor: Colors.indigo,
         ),
       ],
