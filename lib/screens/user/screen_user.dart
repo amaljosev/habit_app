@@ -7,6 +7,7 @@ import 'package:slider_button/slider_button.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
+import '../new/card.dart';
 import '../screen_home.dart';
 import 'edit_user.dart';
 
@@ -709,6 +710,37 @@ class _ScreenUserState extends State<ScreenUser> {
                                 ),
                                 Text(
                                   'STOP WATCH',
+                                  style: GoogleFonts.unbounded(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.blueGrey,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(builder: (context) {
+                                        return  Calender(); 
+                                      }),
+                                    );
+                                  },
+                                  child: const Icon(
+                                    Icons.alarm,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'WATCH',
                                   style: GoogleFonts.unbounded(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 10,

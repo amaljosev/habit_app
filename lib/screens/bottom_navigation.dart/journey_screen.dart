@@ -14,6 +14,7 @@ class JourneyPage extends StatefulWidget {
 }
 
 class _JourneyPageState extends State<JourneyPage> {
+  
   String username = '';
   String email = '';
   int countComplete = 0;
@@ -239,7 +240,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                         TextButton(
                                             onPressed: () {
                                               clearDatabase();
-                                              Navigator.pop(context); 
+                                              Navigator.pop(context);
                                             },
                                             child: const Text(
                                               'DELETE ALL HABITS',
