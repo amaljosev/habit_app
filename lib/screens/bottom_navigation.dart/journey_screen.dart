@@ -111,15 +111,14 @@ class _JourneyPageState extends State<JourneyPage> {
                                   child: Column(
                                     children: [
                                       Row(
+                                          
                                         children: [
                                           IconButton(
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
                                               icon: const Icon(Icons.close)),
-                                          const SizedBox(
-                                            width: 45,
-                                          ),
+                                           SizedBox(width: 55,), 
                                           Text(
                                             'profile',
                                             style: GoogleFonts.unbounded(
@@ -141,7 +140,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                                   const CircleAvatar(
                                                     backgroundColor: Colors.blue,
                                                     child: Icon(
-                                                        Icons.person_2_outlined),
+                                                        Icons.person_2_outlined,color: Colors.white ,),
                                                   ),
                                                   Padding(
                                                     padding:
@@ -176,7 +175,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                       Container(
                                         height: 30,
                                         decoration: BoxDecoration(
-                                            color: Colors.green.shade200,
+                                            color: Colors.green.shade100, 
                                             borderRadius: const BorderRadius.only(
                                                 topLeft: Radius.circular(20),
                                                 topRight: Radius.circular(20))),
@@ -227,7 +226,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                       Container(
                                         height: 30,
                                         decoration: BoxDecoration(
-                                            color: Colors.green.shade200,
+                                            color: Colors.green.shade100,
                                             borderRadius: const BorderRadius.only(
                                                 bottomLeft: Radius.circular(20),
                                                 bottomRight: Radius.circular(20))),
@@ -281,6 +280,7 @@ class _JourneyPageState extends State<JourneyPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
+                  color: Colors.green.shade100, 
                   elevation: 5,
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -360,10 +360,16 @@ class _JourneyPageState extends State<JourneyPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(18.0),
-                child: SizedBox(
-                  height: 200,
-                  child: MybarGraph(
-                    weeklySummary: weeklySummary,
+                child: Card( 
+                  color: Colors.blue.shade100, 
+                  child: Padding( 
+                    padding: const EdgeInsets.all(18.0),
+                    child: SizedBox(
+                      height: 200,
+                      child: MybarGraph(
+                        weeklySummary: weeklySummary,
+                      ),
+                    ),
                   ),
                 ),
               ),
