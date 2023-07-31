@@ -408,8 +408,7 @@ class _StartScreenState extends State<StartScreen> {
     final date = DateModel(
         id: DateTime.now().millisecond.toString(),
         date: DateTime.now().toString());
-        DateDB().addDate(date); 
-        print('************${DateTime.now().toString()}*************');  
+        DateDB().addDate(date);  
   }
 
   popDialogueBox() {

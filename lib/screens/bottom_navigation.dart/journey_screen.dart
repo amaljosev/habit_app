@@ -20,13 +20,14 @@ class _JourneyPageState extends State<JourneyPage> {
   int countComplete = 0;
   int totalHabitsStarted = 0;
   int score = 0;
-
+  DateTime? parsedDate;
   @override
   void initState() {
     super.initState();
 
     fetchUsername();
     fetchCount();
+    fetchDate();
   }
 
   void fetchUsername() async {
@@ -61,8 +62,7 @@ class _JourneyPageState extends State<JourneyPage> {
     final dateList = await db.getAlldates();
     if (dateList.isNotEmpty) {
       setState(() {
-        DateTime parsedDate = DateTime.parse(dateList.first.date);
-        
+        parsedDate = DateTime.parse(dateList.first.date);
       });
     }
   }
@@ -275,75 +275,81 @@ class _JourneyPageState extends State<JourneyPage> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: const EdgeInsets.all(8.0),
               child: Card(
                 elevation: 5,
-                child: TableCalendar(
-                  firstDay: DateTime.utc(2010, 10, 16),
-                  lastDay: DateTime.utc(2030, 3, 14),
-                  focusedDay: DateTime.now(),
-                  calendarFormat: CalendarFormat.month,
-                  rangeStartDay: DateTime.utc(2023, 07, 10),
-                  rangeEndDay: DateTime.utc(2023, 07, 30),
-                  calendarStyle: const CalendarStyle(
-                    rangeHighlightColor: Colors.red,
-                    rangeEndDecoration: BoxDecoration(
-                      color: Colors.red,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5,
-                          offset: Offset(5, 5),
-                        ),
-                      ],
-                      shape: BoxShape.circle,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: TableCalendar(
+                    pageJumpingEnabled: true,
+                    firstDay: DateTime.utc(2010, 10, 16),
+                    lastDay: DateTime.utc(2035, 10, 16),
+                    focusedDay: DateTime.now(),
+                    calendarFormat: CalendarFormat.month,
+                    rangeStartDay: parsedDate,
+                    rangeEndDay: DateTime.now(),
+                    calendarStyle: const CalendarStyle(
+                      rangeHighlightColor: Colors.red,
+                      rangeEndDecoration: BoxDecoration(
+                        color: Colors.red,
+                        boxShadow: [
+                          BoxShadow( 
+                            color: Colors.grey,
+                            blurRadius: 5,
+                            offset: Offset(5, 5),
+                          ),
+                        ],
+                        shape: BoxShape.circle,
+                      ),
+                      rangeStartDecoration: BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 5,
+                            offset: Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      withinRangeTextStyle: TextStyle(color: Colors.white),
+                      rangeHighlightScale: 0.2,
+                      withinRangeDecoration: BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 5,
+                            offset: Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      todayDecoration: BoxDecoration(
+                        color: Colors.green,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 5,
+                            offset: Offset(5, 5),
+                          ),
+                        ],
+                      ),
                     ),
-                    rangeStartDecoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5,
-                          offset: Offset(0, 5),
-                        ),
-                      ],
+                    daysOfWeekStyle: const DaysOfWeekStyle(
+                      weekdayStyle: TextStyle(color: Colors.blue),
+                      weekendStyle: TextStyle(color: Colors.blue),
                     ),
-                    withinRangeTextStyle: TextStyle(color: Colors.white),
-                    rangeHighlightScale: 0.2,
-                    withinRangeDecoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5,
-                          offset: Offset(0, 5),
-                        ),
-                      ],
+                    headerStyle: const HeaderStyle(
+                      titleCentered: true,
+                      headerPadding: EdgeInsets.all(15),
+                      formatButtonVisible: false,
+                      titleTextStyle: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ),
-                    todayDecoration: BoxDecoration(
-                      color: Colors.green,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5,
-                          offset: Offset(5, 5),
-                        ),
-                      ],
-                    ),
-                  ),
-                  daysOfWeekStyle: const DaysOfWeekStyle(
-                    weekdayStyle: TextStyle(color: Colors.blue),
-                    weekendStyle: TextStyle(color: Colors.blue),
-                  ),
-                  headerStyle: const HeaderStyle(
-                    formatButtonVisible: false,
-                    titleTextStyle: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
