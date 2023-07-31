@@ -78,295 +78,300 @@ class _JourneyPageState extends State<JourneyPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const SizedBox(
-                  width: 25,
-                ),
-                Text(
-                  "STATISTICS",
-                  style: GoogleFonts.unbounded(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 15), 
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const SizedBox(
+                    width: 25,
                   ),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: IconButton(
-                      onPressed: () {
-                        showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) =>
-                              FractionallySizedBox(
-                            heightFactor: 0.6,
-                            child: AlertDialog(
-                              content: Column(
-                                children: [
-                                  Row(
+                  Text(
+                    "STATISTICS",
+                    style: GoogleFonts.unbounded(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: IconButton(
+                        onPressed: () {
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                FractionallySizedBox(
+                              heightFactor: 0.6,
+                              child: AlertDialog(
+                                content: SingleChildScrollView( 
+                                  child: Column(
                                     children: [
-                                      IconButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          icon: const Icon(Icons.close)),
-                                      const SizedBox(
-                                        width: 45,
-                                      ),
-                                      Text(
-                                        'profile',
-                                        style: GoogleFonts.unbounded(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Card(
-                                    color: Colors.blue.shade50,
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            children: [
-                                              const CircleAvatar(
-                                                backgroundColor: Colors.blue,
-                                                child: Icon(
-                                                    Icons.person_2_outlined),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      username,
-                                                      style:
-                                                          GoogleFonts.unbounded(
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.blue,
-                                                      ),
-                                                    ),
-                                                    Text(email),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
+                                      Row(
+                                        children: [
+                                          IconButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              icon: const Icon(Icons.close)),
+                                          const SizedBox(
+                                            width: 45,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 7,
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                        color: Colors.green.shade200,
-                                        borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20))),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            'RUNNING HABITS : $totalHabitsStarted',
+                                          Text(
+                                            'profile',
                                             style: GoogleFonts.unbounded(
-                                              fontSize: 10,
+                                              fontSize: 12,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black,
                                             ),
                                           ),
+                                        ],
+                                      ),
+                                      Card(
+                                        color: Colors.blue.shade50,
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                children: [
+                                                  const CircleAvatar(
+                                                    backgroundColor: Colors.blue,
+                                                    child: Icon(
+                                                        Icons.person_2_outlined),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          username,
+                                                          style:
+                                                              GoogleFonts.unbounded(
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.blue,
+                                                          ),
+                                                        ),
+                                                        Text(email),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Container(
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      color: Colors.green.shade200,
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'TOTAL HABITS COMPLETED : $countComplete',
-                                          style: GoogleFonts.unbounded(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                          ),
+                                      ),
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                      Container(
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                            color: Colors.green.shade200,
+                                            borderRadius: const BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                topRight: Radius.circular(20))),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                'RUNNING HABITS : $totalHabitsStarted',
+                                                style: GoogleFonts.unbounded(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                        color: Colors.green.shade200,
-                                        borderRadius: const BorderRadius.only(
-                                            bottomLeft: Radius.circular(20),
-                                            bottomRight: Radius.circular(20))),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'YOUR SCORE : $score',
-                                          style: GoogleFonts.unbounded(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                          ),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Container(
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          color: Colors.green.shade200,
                                         ),
-                                      ],
-                                    ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'TOTAL HABITS COMPLETED : $countComplete',
+                                              style: GoogleFonts.unbounded(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Container(
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                            color: Colors.green.shade200,
+                                            borderRadius: const BorderRadius.only(
+                                                bottomLeft: Radius.circular(20),
+                                                bottomRight: Radius.circular(20))),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'YOUR SCORE : $score',
+                                              style: GoogleFonts.unbounded(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 20),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            TextButton(
+                                                onPressed: () {
+                                                  clearDatabase();
+                                                  Navigator.pop(context);
+                                                },
+                                                child: const Text(
+                                                  'DELETE ALL HABITS',
+                                                  style:
+                                                      TextStyle(color: Colors.red),
+                                                )),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        TextButton(
-                                            onPressed: () {
-                                              clearDatabase();
-                                              Navigator.pop(context);
-                                            },
-                                            child: const Text(
-                                              'DELETE ALL HABITS',
-                                              style:
-                                                  TextStyle(color: Colors.red),
-                                            )),
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
-                      icon: Icon(
-                        Icons.person,
-                        color: Colors.blue.shade800,
-                      )),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                elevation: 5,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: TableCalendar(
-                    pageJumpingEnabled: true,
-                    firstDay: DateTime.utc(2010, 10, 16),
-                    lastDay: DateTime.utc(2035, 10, 16),
-                    focusedDay: DateTime.now(),
-                    calendarFormat: CalendarFormat.month,
-                    rangeStartDay: parsedDate,
-                    rangeEndDay: DateTime.now(),
-                    calendarStyle: const CalendarStyle(
-                      rangeHighlightColor: Colors.red,
-                      rangeEndDecoration: BoxDecoration(
-                        color: Colors.red,
-                        boxShadow: [
-                          BoxShadow( 
-                            color: Colors.grey,
-                            blurRadius: 5,
-                            offset: Offset(5, 5),
-                          ),
-                        ],
-                        shape: BoxShape.circle,
+                          );
+                        },
+                        icon: Icon(
+                          Icons.person,
+                          color: Colors.blue.shade800,
+                        )),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  elevation: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: TableCalendar(
+                      pageJumpingEnabled: true,
+                      firstDay: DateTime.utc(2010, 10, 16),
+                      lastDay: DateTime.utc(2035, 10, 16),
+                      focusedDay: DateTime.now(),
+                      calendarFormat: CalendarFormat.month,
+                      rangeStartDay: parsedDate,
+                      rangeEndDay: DateTime.now(),
+                      calendarStyle: const CalendarStyle(
+                        rangeHighlightColor: Colors.red,
+                        rangeEndDecoration: BoxDecoration(
+                          color: Colors.red,
+                          boxShadow: [
+                            BoxShadow( 
+                              color: Colors.grey,
+                              blurRadius: 5,
+                              offset: Offset(5, 5),
+                            ),
+                          ],
+                          shape: BoxShape.circle,
+                        ),
+                        rangeStartDecoration: BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 5,
+                              offset: Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        withinRangeTextStyle: TextStyle(color: Colors.white),
+                        rangeHighlightScale: 0.2,
+                        withinRangeDecoration: BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 5,
+                              offset: Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        todayDecoration: BoxDecoration(
+                          color: Colors.green,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 5,
+                              offset: Offset(5, 5),
+                            ),
+                          ],
+                        ),
                       ),
-                      rangeStartDecoration: BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 5,
-                            offset: Offset(0, 5),
-                          ),
-                        ],
+                      daysOfWeekStyle: const DaysOfWeekStyle(
+                        weekdayStyle: TextStyle(color: Colors.blue),
+                        weekendStyle: TextStyle(color: Colors.blue),
                       ),
-                      withinRangeTextStyle: TextStyle(color: Colors.white),
-                      rangeHighlightScale: 0.2,
-                      withinRangeDecoration: BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 5,
-                            offset: Offset(0, 5),
-                          ),
-                        ],
+                      headerStyle: const HeaderStyle(
+                        titleCentered: true,
+                        headerPadding: EdgeInsets.all(15),
+                        formatButtonVisible: false,
+                        titleTextStyle: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                       ),
-                      todayDecoration: BoxDecoration(
-                        color: Colors.green,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 5,
-                            offset: Offset(5, 5),
-                          ),
-                        ],
-                      ),
-                    ),
-                    daysOfWeekStyle: const DaysOfWeekStyle(
-                      weekdayStyle: TextStyle(color: Colors.blue),
-                      weekendStyle: TextStyle(color: Colors.blue),
-                    ),
-                    headerStyle: const HeaderStyle(
-                      titleCentered: true,
-                      headerPadding: EdgeInsets.all(15),
-                      formatButtonVisible: false,
-                      titleTextStyle: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: SizedBox(
-                height: 200,
-                child: MybarGraph(
-                  weeklySummary: weeklySummary,
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: SizedBox(
+                  height: 200,
+                  child: MybarGraph(
+                    weeklySummary: weeklySummary,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-          ],
+              const SizedBox(
+                height: 30,
+              ),
+            ],
+          ),
         ),
       ),
     );
