@@ -73,7 +73,7 @@ class DateModel {
   final String id;
 
   @HiveField(1)
-  final int date;
+  final String date; 
 
   DateModel({
     required this.id,

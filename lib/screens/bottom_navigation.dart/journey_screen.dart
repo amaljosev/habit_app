@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/screens/user/sub_pages/analysis_screen/bar_graph.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../functions/hive_functions/db_count.dart';
+import '../../functions/hive_functions/db_date.dart';
 import '../../functions/hive_functions/db_functions.dart';
 import '../../functions/hive_functions/db_start.dart';
 
@@ -14,7 +15,6 @@ class JourneyPage extends StatefulWidget {
 }
 
 class _JourneyPageState extends State<JourneyPage> {
-  
   String username = '';
   String email = '';
   int countComplete = 0;
@@ -52,6 +52,17 @@ class _JourneyPageState extends State<JourneyPage> {
       setState(() {
         countComplete = countList.last.totalHabitCompleted;
         calculateScore();
+      });
+    }
+  }
+
+  void fetchDate() async {
+    final db = DateDB();
+    final dateList = await db.getAlldates();
+    if (dateList.isNotEmpty) {
+      setState(() {
+        DateTime parsedDate = DateTime.parse(dateList.first.date);
+        
       });
     }
   }
@@ -271,6 +282,69 @@ class _JourneyPageState extends State<JourneyPage> {
                   firstDay: DateTime.utc(2010, 10, 16),
                   lastDay: DateTime.utc(2030, 3, 14),
                   focusedDay: DateTime.now(),
+                  calendarFormat: CalendarFormat.month,
+                  rangeStartDay: DateTime.utc(2023, 07, 10),
+                  rangeEndDay: DateTime.utc(2023, 07, 30),
+                  calendarStyle: const CalendarStyle(
+                    rangeHighlightColor: Colors.red,
+                    rangeEndDecoration: BoxDecoration(
+                      color: Colors.red,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5,
+                          offset: Offset(5, 5),
+                        ),
+                      ],
+                      shape: BoxShape.circle,
+                    ),
+                    rangeStartDecoration: BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5,
+                          offset: Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    withinRangeTextStyle: TextStyle(color: Colors.white),
+                    rangeHighlightScale: 0.2,
+                    withinRangeDecoration: BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5,
+                          offset: Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    todayDecoration: BoxDecoration(
+                      color: Colors.green,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5,
+                          offset: Offset(5, 5),
+                        ),
+                      ],
+                    ),
+                  ),
+                  daysOfWeekStyle: const DaysOfWeekStyle(
+                    weekdayStyle: TextStyle(color: Colors.blue),
+                    weekendStyle: TextStyle(color: Colors.blue),
+                  ),
+                  headerStyle: const HeaderStyle(
+                    formatButtonVisible: false,
+                    titleTextStyle: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ),

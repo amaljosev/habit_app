@@ -7,7 +7,6 @@ import 'package:slider_button/slider_button.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
-import '../new/card.dart';
 import '../screen_home.dart';
 import 'edit_user.dart';
 
@@ -65,9 +64,11 @@ class _ScreenUserState extends State<ScreenUser> {
     final db = HabitCountsDB();
     final dataList = await db.getAllCounts();
     if (dataList.isNotEmpty) {
-      setState(() {
-        completed = dataList.last.totalHabitCompleted;
-      });
+      setState(
+        () {
+          completed = dataList.last.totalHabitCompleted;
+        },
+      );
     }
   }
 
@@ -81,9 +82,8 @@ class _ScreenUserState extends State<ScreenUser> {
     String formattedCurrentDate =
         "${currentDate.year}-${currentDate.month}-${currentDate.day}";
 
-    // Check if it's a new day 
-    if (lastUsedDate != formattedCurrentDate) { 
-     
+    // Check if it's a new day
+    if (lastUsedDate != formattedCurrentDate) {
       // Reset habitNameNotifier to 0
       setState(() {
         habitNameNotifier.value = 0;
@@ -97,7 +97,7 @@ class _ScreenUserState extends State<ScreenUser> {
               wheelName: widget.wheelName,
               todayHours: habitNameNotifier.value.toString(),
               today: widget.today.toString(),
-              streak: widget.streak.toString(), 
+              streak: widget.streak.toString(),
               doitAt: widget.doItAt,
               week: widget.week),
         );
@@ -546,6 +546,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                   incrementTodayCount();
                                   if (daysNotifier.value.toString() ==
                                       widget.totalDays) {
+                                        addCountToModel();
                                     showModalBottomSheet<void>(
                                       context: context,
                                       builder: (BuildContext context) {
@@ -718,37 +719,37 @@ class _ScreenUserState extends State<ScreenUser> {
                                 ),
                               ],
                             ),
-                            Column(
-                              children: [
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.blueGrey,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(builder: (context) {
-                                        return  Calender(); 
-                                      }),
-                                    );
-                                  },
-                                  child: const Icon(
-                                    Icons.alarm,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  'WATCH',
-                                  style: GoogleFonts.unbounded(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 10,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            // Column(
+                            //   children: [
+                            //     ElevatedButton(
+                            //       style: ElevatedButton.styleFrom(
+                            //         backgroundColor: Colors.blueGrey,
+                            //         shape: RoundedRectangleBorder(
+                            //           borderRadius: BorderRadius.circular(30.0),
+                            //         ),
+                            //       ),
+                            //       onPressed: () {
+                            //         Navigator.of(context).pushReplacement(
+                            //           MaterialPageRoute(builder: (context) {
+                            //             return Calender();
+                            //           }),
+                            //         );
+                            //       },
+                            //       child: const Icon(
+                            //         Icons.alarm,
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //     Text(
+                            //       'WATCH',
+                            //       style: GoogleFonts.unbounded(
+                            //         fontWeight: FontWeight.bold,
+                            //         fontSize: 10,
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
                           ],
                         )
                       ],
@@ -897,11 +898,9 @@ class _ScreenUserState extends State<ScreenUser> {
   }
 
   Future<void> restart() async {
-    
-    
     habitNameNotifier.value = 0;
-    daysNotifier.value =0;
-      streakNotifier.value = 0;
+    daysNotifier.value = 0;
+    streakNotifier.value = 0;
 
     final startObject = StartModel(
         id: DateTime.now().millisecond.toString(),
@@ -909,9 +908,9 @@ class _ScreenUserState extends State<ScreenUser> {
         days: widget.totalDays,
         wheelCount: widget.wheelCount.toString(),
         wheelName: widget.wheelName,
-        todayHours: habitNameNotifier.value.toString(), 
+        todayHours: habitNameNotifier.value.toString(),
         today: daysNotifier.value.toString(),
-        streak:  streakNotifier.value.toString(), 
+        streak: streakNotifier.value.toString(),
         week: widget.week,
         doitAt: widget.doItAt);
 

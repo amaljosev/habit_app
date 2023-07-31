@@ -159,7 +159,7 @@ class DateModelAdapter extends TypeAdapter<DateModel> {
     };
     return DateModel(
       id: fields[0] as String,
-      date: fields[1] as int,
+      date: fields[1] as String,
     );
   }
 

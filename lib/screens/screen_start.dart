@@ -6,6 +6,8 @@ import 'package:habit_project/screens/screen_home.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
+import '../functions/hive_functions/db_date.dart';
+
 class StartScreen extends StatefulWidget {
   final String name;
   const StartScreen({Key? key, required this.name}) : super(key: key);
@@ -20,7 +22,6 @@ var wheelName;
 var wheelCount;
 var doitAt;
 var week;
-
 
 class _StartScreenState extends State<StartScreen> {
   final List<bool> selectedWeekdays = List.filled(7, true);
@@ -403,6 +404,12 @@ class _StartScreenState extends State<StartScreen> {
     wheelName = defaultNameCount;
 
     addCategory(startObject);
+
+    final date = DateModel(
+        id: DateTime.now().millisecond.toString(),
+        date: DateTime.now().toString());
+        DateDB().addDate(date); 
+        print('************${DateTime.now().toString()}*************');  
   }
 
   popDialogueBox() {
