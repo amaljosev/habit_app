@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_project/screens/user/sub_pages/screen_calendar.dart';
+import 'package:habit_project/screens/user/sub_pages/analysis_screen.dart';
 import 'package:habit_project/screens/user/sub_pages/screen_timer.dart';
 import 'package:habit_project/screens/user/sub_pages/stopwatch_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
