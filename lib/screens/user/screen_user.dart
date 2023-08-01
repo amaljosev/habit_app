@@ -31,7 +31,6 @@ class ScreenUser extends StatefulWidget {
   final List week;
   final String doItAt;
   final DateTime date;
-  
 
   const ScreenUser({
     super.key,
@@ -163,17 +162,19 @@ class _ScreenUserState extends State<ScreenUser> {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(builder: (context) {
                                   return EditUser(
-                                      index: widget.index,
-                                      id: DateTime.now().millisecond.toString(),
-                                      habitName: widget.habitName,
-                                      totalDays: widget.totalDays,
-                                      wheelCount: widget.wheelCount,
-                                      wheelName: widget.wheelName,
-                                      name: widget.todayCount,
-                                      today: widget.today,
-                                      percentage: widget.streak,
-                                      week: widget.week,
-                                      doItAt: widget.doItAt,date: widget.date,);
+                                    index: widget.index,
+                                    id: DateTime.now().millisecond.toString(),
+                                    habitName: widget.habitName,
+                                    totalDays: widget.totalDays,
+                                    wheelCount: widget.wheelCount,
+                                    wheelName: widget.wheelName,
+                                    name: widget.todayCount,
+                                    today: widget.today,
+                                    percentage: widget.streak,
+                                    week: widget.week,
+                                    doItAt: widget.doItAt,
+                                    date: widget.date,
+                                  );
                                 }),
                               );
                             },
@@ -551,7 +552,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                   incrementTodayCount();
                                   if (daysNotifier.value.toString() ==
                                       widget.totalDays) {
-                                        addCountToModel();
+                                    addCountToModel();
                                     showModalBottomSheet<void>(
                                       context: context,
                                       builder: (BuildContext context) {
@@ -736,17 +737,26 @@ class _ScreenUserState extends State<ScreenUser> {
                                   onPressed: () {
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(builder: (context) {
-                                        return  AnalysisScreen(date: widget.date,);   
+                                        return AnalysisScreen(
+                                          date: widget.date,
+                                          completedDays:
+                                              daysNotifier.value.toString(),
+                                          completedHours: habitNameNotifier
+                                              .value
+                                              .toString(),
+                                          totalCount: widget.wheelCount, 
+                                          totalDays: widget.totalDays,
+                                        );
                                       }),
-                                    ); 
+                                    );
                                   },
                                   child: const Icon(
-                                    Icons.bar_chart ,
+                                    Icons.bar_chart,
                                     color: Colors.white,
                                   ),
                                 ),
                                 Text(
-                                  'HISTORY', 
+                                  'HISTORY',
                                   style: GoogleFonts.unbounded(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 10,
@@ -785,7 +795,8 @@ class _ScreenUserState extends State<ScreenUser> {
           today: today.toString(),
           streak: streak.toString(),
           doitAt: widget.doItAt,
-          week: widget.week,date: widget.date),
+          week: widget.week,
+          date: widget.date),
     );
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) {
@@ -820,7 +831,8 @@ class _ScreenUserState extends State<ScreenUser> {
                 today: daysNotifier.value.toString(),
                 streak: streakNotifier.value.toString(),
                 doitAt: widget.doItAt,
-                week: widget.week,date: widget.date),
+                week: widget.week,
+                date: widget.date),
           );
         }
       } else {
@@ -836,7 +848,8 @@ class _ScreenUserState extends State<ScreenUser> {
               today: daysNotifier.value.toString(),
               streak: streakNotifier.value.toString(),
               doitAt: widget.doItAt,
-              week: widget.week,date: widget.date),
+              week: widget.week,
+              date: widget.date),
         );
       }
     });
@@ -863,7 +876,8 @@ class _ScreenUserState extends State<ScreenUser> {
               today: daysNotifier.value.toString(),
               streak: streakNotifier.value.toString(),
               doitAt: widget.doItAt,
-              week: widget.week,date: widget.date),
+              week: widget.week,
+              date: widget.date),
         );
       }
     });
@@ -917,7 +931,8 @@ class _ScreenUserState extends State<ScreenUser> {
         today: daysNotifier.value.toString(),
         streak: streakNotifier.value.toString(),
         week: widget.week,
-        doitAt: widget.doItAt,date: widget.date); 
+        doitAt: widget.doItAt,
+        date: widget.date);
 
     print(
         "${widget.habitName} ${widget.totalDays}  ${widget.wheelCount} ${widget.wheelName}");
