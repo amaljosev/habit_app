@@ -23,7 +23,15 @@ class AnalysisScreen extends StatefulWidget {
 class _AnalysisScreenState extends State<AnalysisScreen> {
   @override
   Widget build(BuildContext context) {
+
+  
+    int completedDays = int.parse(widget.completedDays);
+    int totalDays = int.parse(widget.totalDays);
+
+    // Calculate the percent based on completedDays and totalDays
+    double percent = completedDays / totalDays;
     return Scaffold(
+      appBar: AppBar(), 
       body: Column(
         children: [
           Padding(
@@ -108,19 +116,19 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
             ),
           ),
           CircularPercentIndicator(
-            radius: 60.0,
-            lineWidth: 9.0,
-            percent: 1.0,
-            center: Text("100%"),
-            progressColor: Colors.green,
-          ),
+  radius: 60.0,
+  lineWidth: 9.0,
+  percent:percent, 
+  center: Text("${(percent * 100).toStringAsFixed(0)}%"), 
+  progressColor: Colors.green,
+),
           Column(
             children: [
               Text(widget.completedDays),
                Text(widget.completedHours),
                 Text(widget.totalCount),
                  Text(widget.totalDays),
-                  Text(widget.date.toString()), 
+                  Text(widget.date.toString()),
             ],
           )
         ],
