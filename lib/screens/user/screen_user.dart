@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habit_project/screens/user/sub_pages/screen_calendar.dart';
 import 'package:habit_project/screens/user/sub_pages/screen_timer.dart';
 import 'package:habit_project/screens/user/sub_pages/stopwatch_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,6 +30,8 @@ class ScreenUser extends StatefulWidget {
   final String streak;
   final List week;
   final String doItAt;
+  final DateTime date;
+  
 
   const ScreenUser({
     super.key,
@@ -43,6 +46,7 @@ class ScreenUser extends StatefulWidget {
     required this.streak,
     required this.week,
     required this.doItAt,
+    required this.date,
   });
 
   @override
@@ -99,7 +103,8 @@ class _ScreenUserState extends State<ScreenUser> {
               today: widget.today.toString(),
               streak: widget.streak.toString(),
               doitAt: widget.doItAt,
-              week: widget.week),
+              week: widget.week,
+              date: widget.date),
         );
       });
 
@@ -168,7 +173,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                       today: widget.today,
                                       percentage: widget.streak,
                                       week: widget.week,
-                                      doItAt: widget.doItAt);
+                                      doItAt: widget.doItAt,date: widget.date,);
                                 }),
                               );
                             },
@@ -719,37 +724,37 @@ class _ScreenUserState extends State<ScreenUser> {
                                 ),
                               ],
                             ),
-                            // Column(
-                            //   children: [
-                            //     ElevatedButton(
-                            //       style: ElevatedButton.styleFrom(
-                            //         backgroundColor: Colors.blueGrey,
-                            //         shape: RoundedRectangleBorder(
-                            //           borderRadius: BorderRadius.circular(30.0),
-                            //         ),
-                            //       ),
-                            //       onPressed: () {
-                            //         Navigator.of(context).pushReplacement(
-                            //           MaterialPageRoute(builder: (context) {
-                            //             return Calender();
-                            //           }),
-                            //         );
-                            //       },
-                            //       child: const Icon(
-                            //         Icons.alarm,
-                            //         color: Colors.white,
-                            //       ),
-                            //     ),
-                            //     Text(
-                            //       'WATCH',
-                            //       style: GoogleFonts.unbounded(
-                            //         fontWeight: FontWeight.bold,
-                            //         fontSize: 10,
-                            //         color: Colors.white,
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
+                            Column(
+                              children: [
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.blueGrey,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(builder: (context) {
+                                        return  AnalysisScreen(date: widget.date,);   
+                                      }),
+                                    ); 
+                                  },
+                                  child: const Icon(
+                                    Icons.bar_chart ,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'HISTORY', 
+                                  style: GoogleFonts.unbounded(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         )
                       ],
@@ -780,7 +785,7 @@ class _ScreenUserState extends State<ScreenUser> {
           today: today.toString(),
           streak: streak.toString(),
           doitAt: widget.doItAt,
-          week: widget.week),
+          week: widget.week,date: widget.date),
     );
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) {
@@ -815,7 +820,7 @@ class _ScreenUserState extends State<ScreenUser> {
                 today: daysNotifier.value.toString(),
                 streak: streakNotifier.value.toString(),
                 doitAt: widget.doItAt,
-                week: widget.week),
+                week: widget.week,date: widget.date),
           );
         }
       } else {
@@ -831,7 +836,7 @@ class _ScreenUserState extends State<ScreenUser> {
               today: daysNotifier.value.toString(),
               streak: streakNotifier.value.toString(),
               doitAt: widget.doItAt,
-              week: widget.week),
+              week: widget.week,date: widget.date),
         );
       }
     });
@@ -858,7 +863,7 @@ class _ScreenUserState extends State<ScreenUser> {
               today: daysNotifier.value.toString(),
               streak: streakNotifier.value.toString(),
               doitAt: widget.doItAt,
-              week: widget.week),
+              week: widget.week,date: widget.date),
         );
       }
     });
@@ -912,7 +917,7 @@ class _ScreenUserState extends State<ScreenUser> {
         today: daysNotifier.value.toString(),
         streak: streakNotifier.value.toString(),
         week: widget.week,
-        doitAt: widget.doItAt);
+        doitAt: widget.doItAt,date: widget.date); 
 
     print(
         "${widget.habitName} ${widget.totalDays}  ${widget.wheelCount} ${widget.wheelName}");

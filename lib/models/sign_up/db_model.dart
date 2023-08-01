@@ -41,6 +41,8 @@ class StartModel {
   final List week;
   @HiveField(9)
   final String doitAt;
+    @HiveField(10)
+  final DateTime date; 
 
   StartModel({
     required this.id,
@@ -53,6 +55,7 @@ class StartModel {
     required this.streak,
     required this.week,
     required this.doitAt,
+    required this.date, 
   });
 }
 

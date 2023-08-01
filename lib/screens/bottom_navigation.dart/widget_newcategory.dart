@@ -454,7 +454,9 @@ class _StartWidgetState extends State<StartWidget> {
         today: today.toString(),
         streak: streak.toString(),
         doitAt: do_itAt,
-        week: week);
+        week: week,
+        date: DateTime.now(),
+        );
 
     print("$name $_days  $wheel_count $wheel_name");
     wheel_count = defaultCountData;

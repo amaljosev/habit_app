@@ -18,6 +18,8 @@ class EditUser extends StatefulWidget {
   final String percentage;
   final List week;
   final String doItAt;
+   final DateTime date;
+
   const EditUser({
     super.key,
     required this.habitName,
@@ -31,6 +33,7 @@ class EditUser extends StatefulWidget {
     required this.percentage,
     required this.week,
     required this.doItAt,
+    required this.date,
   });
 
   @override
@@ -539,7 +542,9 @@ class _EditUserState extends State<EditUser> {
         today: today_days_count.toString(),
         streak: today_streak.toString(),
         week: week_days,
-        doitAt: do_it_at);
+        doitAt: do_it_at,
+        date: widget.date,
+        );
 
     await updateList(widget.index, dataModel);
 

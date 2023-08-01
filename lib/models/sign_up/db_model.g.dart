@@ -70,13 +70,14 @@ class StartModelAdapter extends TypeAdapter<StartModel> {
       streak: fields[7] as String,
       week: (fields[8] as List).cast<dynamic>(),
       doitAt: fields[9] as String,
+      date: fields[10] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, StartModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -96,7 +97,9 @@ class StartModelAdapter extends TypeAdapter<StartModel> {
       ..writeByte(8)
       ..write(obj.week)
       ..writeByte(9)
-      ..write(obj.doitAt);
+      ..write(obj.doitAt)
+      ..writeByte(10)
+      ..write(obj.date);
   }
 
   @override
