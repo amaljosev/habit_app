@@ -6,6 +6,7 @@ import 'package:habit_project/screens/user/sub_pages/stopwatch_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slider_button/slider_button.dart';
+import '../../functions/hive_functions/db_analysis.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
@@ -54,8 +55,17 @@ class ScreenUser extends StatefulWidget {
 }
 
 class _ScreenUserState extends State<ScreenUser> {
+  double monday = 0.0;
+  double tuesday = 0.0;
+  double wednesday = 0.0;
+  double thursday = 0.0;
+  double friday = 0.0;
+  double saturday = 0.0;
+  double sunday = 0.0;
+
   int completed = 0;
 
+  bool isDisableDay = false;
   @override
   void initState() {
     super.initState();
@@ -459,6 +469,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                       buttonColor: Colors.greenAccent.shade700,
                                       buttonSize: 50,
                                       action: () {
+                                        incrementCounterBasedOnDay();
                                         incrementTodayWheelCount();
                                         if (daysNotifier.value.toString() ==
                                             widget.totalDays) {
@@ -580,6 +591,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                   ),
                                   ElevatedButton.icon(
                                     onPressed: () {
+                                      incrementCounterBasedOnDay();
                                       incrementTodayCount();
                                       if (daysNotifier.value.toString() ==
                                           widget.totalDays) {
@@ -913,7 +925,7 @@ class _ScreenUserState extends State<ScreenUser> {
       habitNameNotifier.value = 0;
       daysNotifier.value = (days ?? 0) + 1;
       streakNotifier.value = (streak ?? 0) + 1;
-
+      isDisableDay = false;
       if (daysNotifier.value.toString() == widget.totalDays) {
         deleteData(widget.index);
       } else {
@@ -1006,6 +1018,111 @@ class _ScreenUserState extends State<ScreenUser> {
         id: DateTime.now().millisecond.toString(),
         totalHabitCompleted: countHabit);
     HabitCountsDB().addCounts(habtCounts);
+  }
+
+  void incrementCounterBasedOnDay() {
+    String currentDayOfWeek = DateFormat('EEEE').format(DateTime.now());
+
+    setState(() {
+      switch (currentDayOfWeek) {
+        case 'Monday':
+          monday += 1;
+          final analysisObject = AnalysisModel(
+              id: DateTime.now().millisecond,
+              monday: monday,
+              tuesday: tuesday,
+              wednesday: wednesday,
+              thursday: thursday,
+              friday: friday,
+              saturday: saturday,
+              sunday: sunday);
+          AnalysisDB().addanalysData(analysisObject);
+          break;
+        case 'Tuesday':
+          tuesday += 1;
+          final analysisObject = AnalysisModel(
+              id: DateTime.now().millisecond,
+              monday: monday,
+              tuesday: tuesday,
+              wednesday: wednesday,
+              thursday: thursday,
+              friday: friday,
+              saturday: saturday,
+              sunday: sunday);
+          AnalysisDB().addanalysData(analysisObject);
+          break;
+        case 'Wednesday':
+          wednesday += 1;
+
+          final analysisObject = AnalysisModel(
+              id: DateTime.now().millisecond,
+              monday: monday,
+              tuesday: tuesday,
+              wednesday: wednesday,
+              thursday: thursday,
+              friday: friday,
+              saturday: saturday,
+              sunday: sunday);
+
+          AnalysisDB().addanalysData(analysisObject);
+
+          break;
+        case 'Thursday':
+          thursday+=1;
+          final analysisObject = AnalysisModel(
+              id: DateTime.now().millisecond,
+              monday: monday,
+              tuesday: tuesday,
+              wednesday: wednesday,
+              thursday: thursday,
+              friday: friday,
+              saturday: saturday,
+              sunday: sunday);
+          AnalysisDB().addanalysData(analysisObject);
+          break;
+        case 'Friday':
+          friday+=1;
+          final analysisObject = AnalysisModel(
+              id: DateTime.now().millisecond,
+              monday: monday,
+              tuesday: tuesday,
+              wednesday: wednesday,
+              thursday: thursday,
+              friday: friday,
+              saturday: saturday,
+              sunday: sunday);
+          AnalysisDB().addanalysData(analysisObject);
+          break;
+        case 'Saturday':
+          saturday+=1;
+          final analysisObject = AnalysisModel(
+              id: DateTime.now().millisecond,
+              monday: monday,
+              tuesday: tuesday,
+              wednesday: wednesday,
+              thursday: thursday,
+              friday: friday,
+              saturday: saturday,
+              sunday: sunday);
+          AnalysisDB().addanalysData(analysisObject);
+          break;
+        case 'Sunday':
+          sunday+=1;
+          final analysisObject = AnalysisModel(
+              id: DateTime.now().millisecond,
+              monday: monday,
+              tuesday: tuesday,
+              wednesday: wednesday,
+              thursday: thursday,
+              friday: friday,
+              saturday: saturday,
+              sunday: sunday);
+          AnalysisDB().addanalysData(analysisObject);
+          break;
+        default:
+          break;
+      }
+    });
   }
 }
 

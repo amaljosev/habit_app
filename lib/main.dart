@@ -21,7 +21,9 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(DateModelAdapter().typeId)) {
     Hive.registerAdapter(DateModelAdapter()); 
   }
-  
+  if (!Hive.isAdapterRegistered(AnalysisModelAdapter().typeId)) {
+    Hive.registerAdapter(AnalysisModelAdapter());  
+  }
   
 
   runApp(const MyApp());

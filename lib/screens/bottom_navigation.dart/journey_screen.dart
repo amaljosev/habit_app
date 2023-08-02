@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/screens/user/sub_pages/analysis_screen/bar_graph.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
+import '../../functions/hive_functions/db_analysis.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_date.dart';
 import '../../functions/hive_functions/db_functions.dart';
@@ -17,12 +18,17 @@ class JourneyPage extends StatefulWidget {
 }
 
 class _JourneyPageState extends State<JourneyPage> {
+  List<double> weeklySummary = [1.0,1.0,1.0,1.0,1.0,1.0,1.0];     
+
+
+
   String username = '';
   String email = '';
   int countComplete = 0;
   int totalHabitsStarted = 0;
   int score = 0;
   DateTime? parsedDate;
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +36,7 @@ class _JourneyPageState extends State<JourneyPage> {
     fetchUsername();
     fetchCount();
     fetchDate();
+     fetchAnalysisData();
   }
 
   void fetchUsername() async {
@@ -45,6 +52,27 @@ class _JourneyPageState extends State<JourneyPage> {
           });
         });
       });
+    }
+  }
+
+  void fetchAnalysisData() async {
+    final db = AnalysisDB();
+    final analysList = await db.getAllanalysData();
+    if (analysList.isNotEmpty) {
+      setState(
+        () {
+           weeklySummary = [
+            analysList.last.monday,
+            analysList.last.tuesday,
+            analysList.last.wednesday,
+            analysList.last.thursday,
+            analysList.last.friday,
+            analysList.last.saturday,
+            analysList.last.sunday
+          ];
+          
+        },
+      );
     }
   }
 
@@ -75,7 +103,6 @@ class _JourneyPageState extends State<JourneyPage> {
     });
   }
 
-  List<double> weeklySummary = [10.0, 20.0, 30.0, 50.0, 80.0, 25.0, 35.0, 25.0];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -264,23 +291,28 @@ class _JourneyPageState extends State<JourneyPage> {
                                       Padding(
                                         padding: const EdgeInsets.only(top: 20),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceAround, 
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
                                           children: [
                                             TextButton(
                                               onPressed: () {
                                                 clearDatabase();
+                                                AnalysisDB().clearAllData(); 
                                                 Navigator.pop(context);
                                               },
-                                              child:  const Text(
+                                              child: const Text(
                                                 'DELETE ALL HABITS',
                                                 style: TextStyle(
                                                     color: Colors.red),
                                               ),
                                             ),
-                                            IconButton(onPressed: (){
-                                              signOut(context); 
-
-                                            }, icon: const Icon(Icons.power_settings_new_rounded),),
+                                            IconButton(
+                                              onPressed: () {
+                                                signOut(context);
+                                              },
+                                              icon: const Icon(Icons
+                                                  .power_settings_new_rounded),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -403,6 +435,7 @@ class _JourneyPageState extends State<JourneyPage> {
       ),
     );
   }
+
   signOut(BuildContext ctx) async {
     final _sharedPrefs = await SharedPreferences.getInstance();
     _sharedPrefs.clear();
