@@ -271,7 +271,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                                 clearDatabase();
                                                 Navigator.pop(context);
                                               },
-                                              child:  Text(
+                                              child:  const Text(
                                                 'DELETE ALL HABITS',
                                                 style: TextStyle(
                                                     color: Colors.red),
@@ -280,7 +280,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                             IconButton(onPressed: (){
                                               signOut(context); 
 
-                                            }, icon: Icon(Icons.power_settings_new_rounded),),
+                                            }, icon: const Icon(Icons.power_settings_new_rounded),),
                                           ],
                                         ),
                                       ),
