@@ -62,10 +62,7 @@ class _ScreenUserState extends State<ScreenUser> {
   double friday = 0.0;
   double saturday = 0.0;
   double sunday = 0.0;
-
   int completed = 0;
-
-  bool isDisableDay = false;
   @override
   void initState() {
     super.initState();
@@ -925,7 +922,7 @@ class _ScreenUserState extends State<ScreenUser> {
       habitNameNotifier.value = 0;
       daysNotifier.value = (days ?? 0) + 1;
       streakNotifier.value = (streak ?? 0) + 1;
-      isDisableDay = false;
+
       if (daysNotifier.value.toString() == widget.totalDays) {
         deleteData(widget.index);
       } else {
@@ -1068,7 +1065,7 @@ class _ScreenUserState extends State<ScreenUser> {
 
           break;
         case 'Thursday':
-          thursday+=1;
+          thursday += 1;
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,
@@ -1081,7 +1078,7 @@ class _ScreenUserState extends State<ScreenUser> {
           AnalysisDB().addanalysData(analysisObject);
           break;
         case 'Friday':
-          friday+=1;
+          friday += 1;
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,
@@ -1094,7 +1091,7 @@ class _ScreenUserState extends State<ScreenUser> {
           AnalysisDB().addanalysData(analysisObject);
           break;
         case 'Saturday':
-          saturday+=1;
+          saturday += 1;
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,
@@ -1107,7 +1104,7 @@ class _ScreenUserState extends State<ScreenUser> {
           AnalysisDB().addanalysData(analysisObject);
           break;
         case 'Sunday':
-          sunday+=1;
+          sunday += 1;
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,

@@ -504,25 +504,25 @@ class _StartWidgetState extends State<StartWidget> {
       if (selectedWeekdays[i]) {
         switch (i) {
           case 0:
-            weekdays.add('SUNDAY');
+            weekdays.add('Sunday');
             break;
           case 1:
-            weekdays.add('MONDAY');
+            weekdays.add('Monday');
             break;
           case 2:
-            weekdays.add('TUESDAY');
+            weekdays.add('Tuesday');
             break;
           case 3:
-            weekdays.add('WEDNESDAY');
+            weekdays.add('Wednesday');
             break;
           case 4:
-            weekdays.add('THURSDAY');
+            weekdays.add('Thursday');
             break;
           case 5:
-            weekdays.add('FRIDAY');
+            weekdays.add('Friday');
             break;
           case 6:
-            weekdays.add('SATURDAY');
+            weekdays.add('Saturday');
             break;
         }
       }
