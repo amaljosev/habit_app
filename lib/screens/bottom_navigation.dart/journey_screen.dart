@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/screens/user/sub_pages/analysis_screen/bar_graph.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_date.dart';
 import '../../functions/hive_functions/db_functions.dart';
 import '../../functions/hive_functions/db_start.dart';
+import '../start/screen_login.dart';
 
 class JourneyPage extends StatefulWidget {
   const JourneyPage({super.key});
@@ -79,7 +81,7 @@ class _JourneyPageState extends State<JourneyPage> {
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 15), 
+          padding: const EdgeInsets.only(top: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -107,18 +109,19 @@ class _JourneyPageState extends State<JourneyPage> {
                                 FractionallySizedBox(
                               heightFactor: 0.6,
                               child: AlertDialog(
-                                content: SingleChildScrollView( 
+                                content: SingleChildScrollView(
                                   child: Column(
                                     children: [
                                       Row(
-                                          
                                         children: [
                                           IconButton(
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
                                               icon: const Icon(Icons.close)),
-                                           SizedBox(width: 55,), 
+                                          const SizedBox(
+                                            width: 55,
+                                          ),
                                           Text(
                                             'profile',
                                             style: GoogleFonts.unbounded(
@@ -134,25 +137,31 @@ class _JourneyPageState extends State<JourneyPage> {
                                         child: Column(
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: Row(
                                                 children: [
                                                   const CircleAvatar(
-                                                    backgroundColor: Colors.blue,
+                                                    backgroundColor:
+                                                        Colors.blue,
                                                     child: Icon(
-                                                        Icons.person_2_outlined,color: Colors.white ,),
+                                                      Icons.person_2_outlined,
+                                                      color: Colors.white,
+                                                    ),
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsets.all(8.0),
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Column(
                                                       crossAxisAlignment:
-                                                          CrossAxisAlignment.start,
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
                                                         Text(
                                                           username,
-                                                          style:
-                                                              GoogleFonts.unbounded(
+                                                          style: GoogleFonts
+                                                              .unbounded(
                                                             fontSize: 12,
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -175,16 +184,20 @@ class _JourneyPageState extends State<JourneyPage> {
                                       Container(
                                         height: 30,
                                         decoration: BoxDecoration(
-                                            color: Colors.green.shade100, 
-                                            borderRadius: const BorderRadius.only(
-                                                topLeft: Radius.circular(20),
-                                                topRight: Radius.circular(20))),
+                                            color: Colors.green.shade100,
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(20),
+                                                    topRight:
+                                                        Radius.circular(20))),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: Text(
                                                 'RUNNING HABITS : $totalHabitsStarted',
                                                 style: GoogleFonts.unbounded(
@@ -227,9 +240,12 @@ class _JourneyPageState extends State<JourneyPage> {
                                         height: 30,
                                         decoration: BoxDecoration(
                                             color: Colors.green.shade100,
-                                            borderRadius: const BorderRadius.only(
-                                                bottomLeft: Radius.circular(20),
-                                                bottomRight: Radius.circular(20))),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(20),
+                                                    bottomRight:
+                                                        Radius.circular(20))),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -248,18 +264,23 @@ class _JourneyPageState extends State<JourneyPage> {
                                       Padding(
                                         padding: const EdgeInsets.only(top: 20),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround, 
                                           children: [
                                             TextButton(
-                                                onPressed: () {
-                                                  clearDatabase();
-                                                  Navigator.pop(context);
-                                                },
-                                                child: const Text(
-                                                  'DELETE ALL HABITS',
-                                                  style:
-                                                      TextStyle(color: Colors.red),
-                                                )),
+                                              onPressed: () {
+                                                clearDatabase();
+                                                Navigator.pop(context);
+                                              },
+                                              child:  Text(
+                                                'DELETE ALL HABITS',
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              ),
+                                            ),
+                                            IconButton(onPressed: (){
+                                              signOut(context); 
+
+                                            }, icon: Icon(Icons.power_settings_new_rounded),),
                                           ],
                                         ),
                                       ),
@@ -280,7 +301,7 @@ class _JourneyPageState extends State<JourneyPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
-                  color: Colors.green.shade100, 
+                  color: Colors.green.shade100,
                   elevation: 5,
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -297,7 +318,7 @@ class _JourneyPageState extends State<JourneyPage> {
                         rangeEndDecoration: BoxDecoration(
                           color: Colors.red,
                           boxShadow: [
-                            BoxShadow( 
+                            BoxShadow(
                               color: Colors.grey,
                               blurRadius: 5,
                               offset: Offset(5, 5),
@@ -360,9 +381,9 @@ class _JourneyPageState extends State<JourneyPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(18.0),
-                child: Card( 
-                  color: Colors.blue.shade100, 
-                  child: Padding( 
+                child: Card(
+                  color: Colors.blue.shade100,
+                  child: Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: SizedBox(
                       height: 200,
@@ -381,5 +402,12 @@ class _JourneyPageState extends State<JourneyPage> {
         ),
       ),
     );
+  }
+  signOut(BuildContext ctx) async {
+    final _sharedPrefs = await SharedPreferences.getInstance();
+    _sharedPrefs.clear();
+    Navigator.of(ctx).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (ctx) => const LogInPage()),
+        (route) => false);
   }
 }

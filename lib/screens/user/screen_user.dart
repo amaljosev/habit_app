@@ -501,7 +501,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                               mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
                                                 Image.asset(
-                                                    'lib/assets/videos/category_completed.gif'),
+                                                    'lib/assets/videos/done.gif'), 
                                                 Text(
                                                   'YOU HAVE COMPLETED \n    SCHEDULED TASKS',
                                                   style: GoogleFonts.andadaPro(
@@ -607,17 +607,30 @@ class _ScreenUserState extends State<ScreenUser> {
                                         return Center(
                                           child: Column(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                MainAxisAlignment.center, 
                                             mainAxisSize: MainAxisSize.min,
                                             children: <Widget>[
                                               Image.asset(
-                                                  'lib/assets/videos/category_completed.gif'),
-                                              Text(
-                                                'YOU HAVE COMPLETED \n    SCHEDULED TASKS',
-                                                style: GoogleFonts.andadaPro(
-                                                  color: Colors.blue.shade900,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                                  'lib/assets/videos/trophy.gif'), 
+                                              Column(
+                                                children: [
+                                                  Text(
+                                                    'YOU HAVE COMPLETED',   
+                                                    style: GoogleFonts.andadaPro(
+                                                      color: Colors.blue.shade900,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                    
+                                                  ),
+                                                  Text(
+                                                    'A DAY',  
+                                                    style: GoogleFonts.andadaPro(
+                                                      color: Colors.blue.shade900,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                    
+                                                  ),
+                                                ],
                                               ),
                                               ElevatedButton(
                                                 child: const Text('GO TO HOME'),
@@ -746,6 +759,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                               .toString(),
                                           totalCount: widget.wheelCount, 
                                           totalDays: widget.totalDays,
+                                          categoryname: widget.wheelName, 
                                         );
                                       }),
                                     );
