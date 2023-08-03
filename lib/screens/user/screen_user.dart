@@ -1055,6 +1055,7 @@ class _ScreenUserState extends State<ScreenUser> {
           AnalysisDB().addanalysData(analysisObject);
           break;
         case 'Tuesday':
+        print('object');
           tuesday += 1;
 
           final analysisObject = AnalysisModel(
