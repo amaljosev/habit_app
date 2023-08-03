@@ -122,8 +122,8 @@ class _ScreenUserState extends State<ScreenUser> {
               wheelCount: widget.wheelCount,
               wheelName: widget.wheelName,
               todayHours: habitNameNotifier.value.toString(),
-              today: widget.today.toString(),
-              streak: widget.streak.toString(),
+              today: daysNotifier.value.toString(),
+              streak: streakNotifier.value.toString(),
               doitAt: widget.doItAt,
               week: widget.week,
               date: widget.date),
@@ -1126,7 +1126,7 @@ class _ScreenUserState extends State<ScreenUser> {
           break;
         case 'Sunday':
           sunday += 1;
-          print('$sunday');q
+          print('$sunday');
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,
