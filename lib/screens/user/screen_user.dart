@@ -1126,6 +1126,7 @@ class _ScreenUserState extends State<ScreenUser> {
           break;
         case 'Sunday':
           sunday += 1;
+          print('$sunday');q
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,
@@ -1145,3 +1146,5 @@ class _ScreenUserState extends State<ScreenUser> {
 }
 
 enum SampleItem { itemOne, itemTwo }
+
+
