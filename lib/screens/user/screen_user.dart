@@ -19,6 +19,13 @@ ValueNotifier<int> streakNotifier = ValueNotifier<int>(days ?? 0);
 int? habitName;
 int? days;
 int? streak;
+double monday = 0.0;
+double tuesday = 0.0;
+double wednesday = 0.0;
+double thursday = 0.0;
+double friday = 0.0;
+double saturday = 0.0;
+double sunday = 0.0;
 
 class ScreenUser extends StatefulWidget {
   final int index;
@@ -55,13 +62,6 @@ class ScreenUser extends StatefulWidget {
 }
 
 class _ScreenUserState extends State<ScreenUser> {
-  double monday = 0.0;
-  double tuesday = 0.0;
-  double wednesday = 0.0;
-  double thursday = 0.0;
-  double friday = 0.0;
-  double saturday = 0.0;
-  double sunday = 0.0;
   int completed = 0;
   @override
   void initState() {
@@ -69,6 +69,7 @@ class _ScreenUserState extends State<ScreenUser> {
 
     fetchCount();
     checkAndResetHabit();
+    fetchAnalysisData();
   }
 
   void fetchCount() async {
@@ -78,6 +79,24 @@ class _ScreenUserState extends State<ScreenUser> {
       setState(
         () {
           completed = dataList.last.totalHabitCompleted;
+        },
+      );
+    }
+  }
+
+  void fetchAnalysisData() async {
+    final db = AnalysisDB();
+    final dataList = await db.getAllanalysData();
+    if (dataList.isNotEmpty) {
+      setState(
+        () {
+          monday = dataList.last.monday;
+          tuesday = dataList.last.tuesday;
+          wednesday = dataList.last.wednesday;
+          thursday = dataList.last.thursday;
+          friday = dataList.last.friday;
+          saturday = dataList.last.saturday;
+          sunday = dataList.last.sunday;
         },
       );
     }
@@ -1037,6 +1056,7 @@ class _ScreenUserState extends State<ScreenUser> {
           break;
         case 'Tuesday':
           tuesday += 1;
+
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,
@@ -1066,6 +1086,7 @@ class _ScreenUserState extends State<ScreenUser> {
           break;
         case 'Thursday':
           thursday += 1;
+
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,
