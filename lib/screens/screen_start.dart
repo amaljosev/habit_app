@@ -416,7 +416,7 @@ class _StartScreenState extends State<StartScreen> {
         streak: streak.toString(),
         week: week,
         doitAt: doitAt,
-        date:DateTime.now() ); 
+        date:DateTime.now(),dateLastDone:DateTime.now()  ); 
 
     print("${widget.name} $_days  $wheelCount $wheelName $today "); 
     wheelCount = defaultCountData;

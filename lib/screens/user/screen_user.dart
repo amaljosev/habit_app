@@ -4,7 +4,6 @@ import 'package:habit_project/screens/user/sub_pages/analysis_screen.dart';
 import 'package:habit_project/screens/user/sub_pages/screen_timer.dart';
 import 'package:habit_project/screens/user/sub_pages/stopwatch_screen.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slider_button/slider_button.dart';
 import '../../functions/hive_functions/db_analysis.dart';
 import '../../functions/hive_functions/db_count.dart';
@@ -33,6 +32,7 @@ class ScreenUser extends StatefulWidget {
   final List week;
   final String doItAt;
   final DateTime date;
+  final DateTime lastDoneDate;
 
   const ScreenUser({
     super.key,
@@ -48,6 +48,7 @@ class ScreenUser extends StatefulWidget {
     required this.week,
     required this.doItAt,
     required this.date,
+    required this.lastDoneDate,
   });
 
   @override
@@ -56,6 +57,8 @@ class ScreenUser extends StatefulWidget {
 
 class _ScreenUserState extends State<ScreenUser> {
   int completed = 0;
+
+  DateTime lastDate = DateTime.now();
 
   double monday = 0.0;
   double tuesday = 0.0;
@@ -70,8 +73,60 @@ class _ScreenUserState extends State<ScreenUser> {
     initializeData();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+
+    lastDate = DateTime.now();
+    updateList(
+      widget.index,
+      StartModel(
+          id: DateTime.now().millisecond.toString(),
+          days: widget.totalDays,
+          habit: widget.habitName,
+          wheelCount: widget.wheelCount,
+          wheelName: widget.wheelName,
+          todayHours: widget.todayCount.toString(),
+          today: widget.today.toString(),
+          streak: widget.streak.toString(),
+          doitAt: widget.doItAt,
+          week: widget.week,
+          date: widget.date,
+          dateLastDone: lastDate),
+    );
+  }
+
+  // Future<void> checkAndResetHabit() async {
+  //   lastDate = widget.lastDoneDate;
+
+  //    DateTime currentDate = DateTime.now();
+    
+  //   if (lastDate != currentDate) {    
+  //     setState(() {
+  //       habitNameNotifier.value = 0;
+  //       updateList(
+  //         widget.index,
+  //         StartModel(
+  //             id: DateTime.now().millisecond.toString(),
+  //             days: widget.totalDays,
+  //             habit: widget.habitName,
+  //             wheelCount: widget.wheelCount,
+  //             wheelName: widget.wheelName,
+  //             todayHours: habitNameNotifier.value.toString(),
+  //             today: widget.today.toString(),
+  //             streak: widget.streak.toString(),
+  //             doitAt: widget.doItAt,
+  //             week: widget.week,
+  //             date: widget.date,
+  //             dateLastDone: widget.lastDoneDate),
+  //       );
+  //       getallDatas();
+  //     });
+  //   }
+  // }
+
   Future<void> initializeData() async {
-    await checkAndResetHabit();
+    
     await resetNotifiers();
     await fetchAnalysisData();
     await fetchCount();
@@ -107,40 +162,6 @@ class _ScreenUserState extends State<ScreenUser> {
     }
   }
 
-  Future<void> checkAndResetHabit() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String lastUsedDate = prefs.getString('lastUsedDate') ?? '';
-
-    DateTime currentDate = DateTime.now();
-    String formattedCurrentDate =
-        "${currentDate.year}-${currentDate.month}-${currentDate.day}";
-
-    if (lastUsedDate != formattedCurrentDate) {
-      setState(() {
-        habitName=habitNameNotifier.value = 0; 
-        updateList(
-          widget.index,
-          StartModel(
-              id: DateTime.now().millisecond.toString(),
-              days: widget.totalDays,
-              habit: widget.habitName,
-              wheelCount: widget.wheelCount,
-              wheelName: widget.wheelName,
-              todayHours: habitNameNotifier.value.toString(),
-              today: widget.today.toString(),
-              streak: widget.streak.toString(),
-              doitAt: widget.doItAt,
-              week: widget.week,
-              date: widget.date),
-        );
-        getallDatas();
-      });
-
-      // Save the current date as the last used date in shared preferences
-      await prefs.setString('lastUsedDate', formattedCurrentDate);
-    }
-  }
-
   SampleItem? selectedMenu;
 
   bool shouldShowButtons(List week) {
@@ -168,13 +189,14 @@ class _ScreenUserState extends State<ScreenUser> {
 
   Future<void> resetNotifiers() async {
     await getallDatas();
-    habitName = int.parse(widget.todayCount); 
+    habitName = int.parse(widget.todayCount);
     days = int.parse(widget.today);
     streak = int.parse(widget.streak);
   }
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -228,6 +250,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                     week: widget.week,
                                     doItAt: widget.doItAt,
                                     date: widget.date,
+                                    lastDoneDate: widget.lastDoneDate,
                                   );
                                 }),
                               );
@@ -889,7 +912,8 @@ class _ScreenUserState extends State<ScreenUser> {
           streak: streak.toString(),
           doitAt: widget.doItAt,
           week: widget.week,
-          date: widget.date),
+          date: widget.date,
+          dateLastDone: widget.lastDoneDate),
     );
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) {
@@ -921,7 +945,8 @@ class _ScreenUserState extends State<ScreenUser> {
               streak: streakNotifier.value.toString(),
               doitAt: widget.doItAt,
               week: widget.week,
-              date: widget.date),
+              date: widget.date,
+              dateLastDone: widget.lastDoneDate),
         );
         if (daysNotifier.value.toString() == widget.totalDays) {
           deleteData(widget.index);
@@ -939,7 +964,8 @@ class _ScreenUserState extends State<ScreenUser> {
                 streak: streakNotifier.value.toString(),
                 doitAt: widget.doItAt,
                 week: widget.week,
-                date: widget.date),
+                date: widget.date,
+                dateLastDone: widget.lastDoneDate),
           );
         }
       } else {
@@ -956,7 +982,8 @@ class _ScreenUserState extends State<ScreenUser> {
               streak: streakNotifier.value.toString(),
               doitAt: widget.doItAt,
               week: widget.week,
-              date: widget.date),
+              date: widget.date,
+              dateLastDone: widget.lastDoneDate),
         );
       }
     });
@@ -964,7 +991,7 @@ class _ScreenUserState extends State<ScreenUser> {
 
   void incrementTodayCount() {
     setState(() {
-      habitNameNotifier.value = 0;
+      habitNameNotifier.value = int.parse(widget.wheelCount);
       daysNotifier.value = (days ?? 0) + 1;
       streakNotifier.value = (streak ?? 0) + 1;
 
@@ -984,7 +1011,8 @@ class _ScreenUserState extends State<ScreenUser> {
               streak: streakNotifier.value.toString(),
               doitAt: widget.doItAt,
               week: widget.week,
-              date: widget.date),
+              date: widget.date,
+              dateLastDone: widget.lastDoneDate),
         );
       }
     });
@@ -1039,7 +1067,8 @@ class _ScreenUserState extends State<ScreenUser> {
         streak: streakNotifier.value.toString(),
         week: widget.week,
         doitAt: widget.doItAt,
-        date: widget.date);
+        date: widget.date,
+        dateLastDone: widget.lastDoneDate);
 
     print(
         "${widget.habitName} ${widget.totalDays}  ${widget.wheelCount} ${widget.wheelName}");

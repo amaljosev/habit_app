@@ -43,6 +43,8 @@ class StartModel {
   final String doitAt;
   @HiveField(10)
   final DateTime date;
+    @HiveField(11)
+  final DateTime dateLastDone;
 
   StartModel({
     required this.id,
@@ -56,6 +58,7 @@ class StartModel {
     required this.week,
     required this.doitAt,
     required this.date,
+    required this.dateLastDone, 
   });
 }
 

@@ -19,6 +19,7 @@ class EditUser extends StatefulWidget {
   final List week;
   final String doItAt;
    final DateTime date;
+   final DateTime lastDoneDate;
 
   const EditUser({
     super.key,
@@ -34,6 +35,7 @@ class EditUser extends StatefulWidget {
     required this.week,
     required this.doItAt,
     required this.date,
+    required this.lastDoneDate,
   });
 
   @override
@@ -544,6 +546,7 @@ class _EditUserState extends State<EditUser> {
         week: week_days,
         doitAt: do_it_at,
         date: widget.date,
+        dateLastDone: widget.lastDoneDate
         );
 
     await updateList(widget.index, dataModel);

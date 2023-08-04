@@ -456,6 +456,7 @@ class _StartWidgetState extends State<StartWidget> {
         doitAt: do_itAt,
         week: week,
         date: DateTime.now(),
+        dateLastDone: DateTime.now(),
         );
 
     print("$name $_days  $wheel_count $wheel_name");

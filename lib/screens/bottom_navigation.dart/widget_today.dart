@@ -42,6 +42,7 @@ class _TodayWidgetState extends State<TodayWidget> {
                                       week: startdata.week,
                                       doItAt: startdata.doitAt, 
                                       date: startdata.date,
+                                      lastDoneDate: startdata.dateLastDone, 
                                     )));
                         print(startList[indexVal]);
                       },
