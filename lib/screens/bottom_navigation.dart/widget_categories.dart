@@ -16,62 +16,73 @@ class CategoryWidget extends StatefulWidget {
 class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: startListNotifier,
-      builder: (BuildContext ctx, List<StartModel> startList, Widget? child) {
-        return Padding(
-          padding:  const EdgeInsets.all(10.0),
-          child: ListView.separated(
-              itemBuilder: (context, index) {
-                return InkWell( 
-                  child: Card(
-                    color: Colors.white,
-                    child: ListTile(
-                      title: Text(
-                        categoryList[index].trailingTitle.toString(),
-                        style: GoogleFonts.andadaPro(  
-                                color: Colors.blue.shade900,
-                                fontWeight: FontWeight.bold, 
-                              ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ValueListenableBuilder(
+        valueListenable: startListNotifier,
+        builder: (BuildContext ctx, List<StartModel> startList, Widget? child) {
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    child: Card(
+                      color: Colors.white,
+                      child: ListTile(
+                        title: Text(
+                          categoryList[index].trailingTitle.toString(),
+                          style: GoogleFonts.saira(
+                            fontSize: 15,
+                            letterSpacing: 2,
+                            color: Colors.indigo,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        leading: categoryList[index].leadingIcon,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StartScreen(
+                                    name: categoryList[index].trailingTitle)),
+                          );
+                          print(categoryList[index].trailingTitle);
+                        },
                       ),
-                      leading: categoryList[index].leadingIcon,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => StartScreen(
-                                  name: categoryList[index].trailingTitle)) ,
-                        );
-                        print(categoryList[index].trailingTitle);
-                      },
                     ),
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  height: 20,
-                );
-              },
-              itemCount: categoryList.length),
-        );
-      },
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: 20,
+                  );
+                },
+                itemCount: categoryList.length),
+          );
+        },
+      ),
     );
   }
 
   List<CategoryModel> categoryList = [
     CategoryModel(
-        leadingIcon:  const Icon(
+        leadingIcon: const Icon(
           Icons.yard,
-          color:Colors.green, 
+          color: Colors.green,
         ),
         trailingTitle: 'Meditation'),
     CategoryModel(
         leadingIcon: const Icon(
           Icons.menu_book_sharp,
-          color: Colors.red,  
+          color: Colors.red,
         ),
         trailingTitle: 'Reading'),
+    CategoryModel(
+        leadingIcon: Icon(
+          Icons.directions_walk,
+          color: Colors.purple.shade300,
+        ),
+        trailingTitle: 'Walking'),
     CategoryModel(
         leadingIcon: const Icon(
           Icons.assignment,
@@ -80,8 +91,8 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         trailingTitle: 'Study'),
     CategoryModel(
         leadingIcon: const Icon(
-          Icons.accessibility_new,
-          color: Colors.yellow,
+          Icons.fitness_center,
+          color: Colors.black,
         ),
         trailingTitle: 'Workout'),
     CategoryModel(
@@ -92,8 +103,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         trailingTitle: 'Art'),
     CategoryModel(
         leadingIcon: const Icon(
-          Icons.sports_soccer,
-          color: Colors.orangeAccent,
+          Icons.water_drop_outlined,
+          color: Colors.deepPurple,
+        ),
+        trailingTitle: 'Drink Water'),
+    CategoryModel(
+        leadingIcon: Icon(
+          Icons.sports_soccer_outlined,
+          color: Colors.yellow.shade800,
         ),
         trailingTitle: 'Sports'),
     CategoryModel(
@@ -114,5 +131,60 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           color: Colors.deepPurple,
         ),
         trailingTitle: 'Sleep'),
+    CategoryModel(
+        leadingIcon: const Icon(
+          Icons.currency_rupee,
+          color: Colors.deepPurple,
+        ),
+        trailingTitle: 'Limit spending'),
+    CategoryModel(
+        leadingIcon: const Icon(
+          Icons.directions_run,
+          color: Colors.greenAccent,
+        ),
+        trailingTitle: 'Running'),
+    CategoryModel(
+        leadingIcon: const Icon(
+          Icons.pool,
+          color: Colors.blueGrey,
+        ),
+        
+        trailingTitle: 'Swimming'),
+        CategoryModel(
+        leadingIcon: const Icon(
+          Icons.local_florist_outlined, 
+          color: Colors.orangeAccent,  
+        ),
+        trailingTitle: 'Gardening'),
+    CategoryModel(
+        leadingIcon: const Icon(
+          Icons.accessibility_new,
+          color: Colors.orangeAccent,
+        ),
+        trailingTitle: 'Yoga'),
+    CategoryModel(
+        leadingIcon: const Icon(
+          Icons.directions_bike,
+          color: Colors.brown,
+        ),
+        trailingTitle: 'cycling'),
+    CategoryModel(
+        leadingIcon: const Icon(
+          Icons.sports_gymnastics_sharp,
+          color: Colors.blueAccent,
+        ),
+        trailingTitle: 'Warm up'),
+    CategoryModel(
+        leadingIcon: Icon(
+          Icons.air,
+          color: Colors.red.shade400,
+        ),
+        trailingTitle: 'Practice breathing'),
+    CategoryModel(
+        leadingIcon: Icon(
+          Icons.border_color_rounded,
+          color: Colors.green.shade700,
+        ),
+        trailingTitle: 'Keep a journal'),
   ];
 }

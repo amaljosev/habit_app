@@ -15,17 +15,10 @@ import 'edit_user.dart';
 
 ValueNotifier<int> habitNameNotifier = ValueNotifier<int>(habitName ?? 0);
 ValueNotifier<int> daysNotifier = ValueNotifier<int>(days ?? 0);
-ValueNotifier<int> streakNotifier = ValueNotifier<int>(days ?? 0);
-int? habitName;
-int? days;
-int? streak;
-double monday = 0.0;
-double tuesday = 0.0;
-double wednesday = 0.0;
-double thursday = 0.0;
-double friday = 0.0;
-double saturday = 0.0;
-double sunday = 0.0;
+ValueNotifier<int> streakNotifier = ValueNotifier<int>(streak ?? 0);
+int? habitName = 0;
+int? days = 0;
+int? streak = 0;
 
 class ScreenUser extends StatefulWidget {
   final int index;
@@ -63,16 +56,28 @@ class ScreenUser extends StatefulWidget {
 
 class _ScreenUserState extends State<ScreenUser> {
   int completed = 0;
+
+  double monday = 0.0;
+  double tuesday = 0.0;
+  double wednesday = 0.0;
+  double thursday = 0.0;
+  double friday = 0.0;
+  double saturday = 0.0;
+  double sunday = 0.0;
   @override
   void initState() {
     super.initState();
-
-    fetchCount();
-    checkAndResetHabit();
-    fetchAnalysisData();
+    initializeData();
   }
 
-  void fetchCount() async {
+  Future<void> initializeData() async {
+    await checkAndResetHabit();
+    await resetNotifiers();
+    await fetchAnalysisData();
+    await fetchCount();
+  }
+
+  Future<void> fetchCount() async {
     final db = HabitCountsDB();
     final dataList = await db.getAllCounts();
     if (dataList.isNotEmpty) {
@@ -84,7 +89,7 @@ class _ScreenUserState extends State<ScreenUser> {
     }
   }
 
-  void fetchAnalysisData() async {
+  Future<void> fetchAnalysisData() async {
     final db = AnalysisDB();
     final dataList = await db.getAllanalysData();
     if (dataList.isNotEmpty) {
@@ -112,7 +117,7 @@ class _ScreenUserState extends State<ScreenUser> {
 
     if (lastUsedDate != formattedCurrentDate) {
       setState(() {
-        habitNameNotifier.value = 0;
+        habitName=habitNameNotifier.value = 0; 
         updateList(
           widget.index,
           StartModel(
@@ -122,12 +127,13 @@ class _ScreenUserState extends State<ScreenUser> {
               wheelCount: widget.wheelCount,
               wheelName: widget.wheelName,
               todayHours: habitNameNotifier.value.toString(),
-              today: daysNotifier.value.toString(),
-              streak: streakNotifier.value.toString(),
+              today: widget.today.toString(),
+              streak: widget.streak.toString(),
               doitAt: widget.doItAt,
               week: widget.week,
               date: widget.date),
         );
+        getallDatas();
       });
 
       // Save the current date as the last used date in shared preferences
@@ -160,12 +166,15 @@ class _ScreenUserState extends State<ScreenUser> {
     return isDisable;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    habitName = int.parse(widget.todayCount);
+  Future<void> resetNotifiers() async {
+    await getallDatas();
+    habitName = int.parse(widget.todayCount); 
     days = int.parse(widget.today);
     streak = int.parse(widget.streak);
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -891,12 +900,29 @@ class _ScreenUserState extends State<ScreenUser> {
 
   void incrementTodayWheelCount() {
     setState(() {
+      habitNameNotifier.value = int.parse(widget.todayCount);
+      daysNotifier.value = int.parse(widget.today);
+      streakNotifier.value = int.parse(widget.streak);
       habitNameNotifier.value = (habitName ?? 0) + 1;
 
       if (habitNameNotifier.value.toString() == widget.wheelCount) {
         daysNotifier.value = (days ?? 0) + 1;
         streakNotifier.value = (streak ?? 0) + 1;
-
+        updateList(
+          widget.index,
+          StartModel(
+              id: DateTime.now().millisecond.toString(),
+              days: widget.totalDays,
+              habit: widget.habitName,
+              wheelCount: widget.wheelCount,
+              wheelName: widget.wheelName,
+              todayHours: habitNameNotifier.value.toString(),
+              today: daysNotifier.value.toString(),
+              streak: streakNotifier.value.toString(),
+              doitAt: widget.doItAt,
+              week: widget.week,
+              date: widget.date),
+        );
         if (daysNotifier.value.toString() == widget.totalDays) {
           deleteData(widget.index);
         } else {
@@ -1027,7 +1053,6 @@ class _ScreenUserState extends State<ScreenUser> {
   }
 
   void addCountToModel() {
-    print(completed);
     int countHabit = completed + 1;
 
     final habtCounts = HabitsCountModel(
@@ -1055,7 +1080,6 @@ class _ScreenUserState extends State<ScreenUser> {
           AnalysisDB().addanalysData(analysisObject);
           break;
         case 'Tuesday':
-        print('object');
           tuesday += 1;
 
           final analysisObject = AnalysisModel(
@@ -1147,5 +1171,3 @@ class _ScreenUserState extends State<ScreenUser> {
 }
 
 enum SampleItem { itemOne, itemTwo }
-
-

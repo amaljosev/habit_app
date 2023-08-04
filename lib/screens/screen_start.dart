@@ -65,7 +65,22 @@ class _StartScreenState extends State<StartScreen> {
                       color: Colors.white,
                     ),
                   ),
-                ),
+                ), 
+                Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text(
+                    'ENTER DURATION',
+                    style: GoogleFonts.unbounded(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
                 TextFormField(
                   style: const TextStyle(color: Colors.black),
                   controller: totalDaysController,
@@ -76,9 +91,9 @@ class _StartScreenState extends State<StartScreen> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    hintText: 'Days',
+                    hintText: 'Days ',  
                     hintStyle: TextStyle(color: Colors.grey),
-                    labelText: 'Duration',
+                    
                     labelStyle: TextStyle(color: Colors.grey),
                     prefixIcon: Icon(
                       Icons.edit,
@@ -98,17 +113,20 @@ class _StartScreenState extends State<StartScreen> {
                 ),
                 Column(
                   children: [
-                    const Row(
-                      children: [
-                        Text(
-                          'SELECT WEEKDAYS',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                     Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text( 
+                            'SELECT WEEKDAYS',
+                            style: GoogleFonts.unbounded(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     WeekdaySelector(
                       onChanged: (int day) {
@@ -121,7 +139,7 @@ class _StartScreenState extends State<StartScreen> {
                       values: selectedWeekdays,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(10.0),  
                       child: Row(
                         children: [
                           Text(
@@ -279,7 +297,7 @@ class _StartScreenState extends State<StartScreen> {
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),  
                   child: Row(
                     children: [
                       Text(
@@ -400,7 +418,7 @@ class _StartScreenState extends State<StartScreen> {
         doitAt: doitAt,
         date:DateTime.now() ); 
 
-    print("${widget.name} $_days  $wheelCount $wheelName");
+    print("${widget.name} $_days  $wheelCount $wheelName $today "); 
     wheelCount = defaultCountData;
     wheelName = defaultNameCount;
 
@@ -417,7 +435,7 @@ class _StartScreenState extends State<StartScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("Completed"),
+          title: const Text("HABIT STARTED"),  
           titleTextStyle: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.blue[400],

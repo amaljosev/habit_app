@@ -34,7 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: _selectedIndex == 0
           ? CalendarAppBar(
-              onDateChanged: (value) => print(value),
+            
+              onDateChanged: (value) => print(value), 
               firstDate: DateTime.now().subtract(const Duration(days: 140)),
               lastDate: DateTime.now(),
               accent: Colors.blue.shade800,    

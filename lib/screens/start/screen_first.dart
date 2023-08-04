@@ -58,7 +58,7 @@ class FirstPage extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       child: OutlinedButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => const SignUp()),
                           );
@@ -81,7 +81,7 @@ class FirstPage extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement( 
                             context,
                             MaterialPageRoute(builder: (context) => const LogInPage()),
                           );
