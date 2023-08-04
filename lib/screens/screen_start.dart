@@ -405,6 +405,8 @@ class _StartScreenState extends State<StartScreen> {
     int todayCount = 0;
     int today = 0;
     int streak = 0;
+     DateTime currentDate = DateTime.now();
+DateTime currentDateWithoutTime = DateTime(currentDate.year, currentDate.month, currentDate.day);
     final startObject = StartModel(
         id: DateTime.now().millisecond.toString(),
         habit: widget.name,
@@ -416,7 +418,7 @@ class _StartScreenState extends State<StartScreen> {
         streak: streak.toString(),
         week: week,
         doitAt: doitAt,
-        date:DateTime.now(),dateLastDone:DateTime.now()  ); 
+        date:DateTime.now(),dateLastDone:currentDateWithoutTime ); 
 
     print("${widget.name} $_days  $wheelCount $wheelName $today "); 
     wheelCount = defaultCountData;

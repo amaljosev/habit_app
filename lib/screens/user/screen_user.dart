@@ -73,63 +73,73 @@ class _ScreenUserState extends State<ScreenUser> {
     initializeData();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-
-    lastDate = DateTime.now();
-    updateList(
-      widget.index,
-      StartModel(
-          id: DateTime.now().millisecond.toString(),
-          days: widget.totalDays,
-          habit: widget.habitName,
-          wheelCount: widget.wheelCount,
-          wheelName: widget.wheelName,
-          todayHours: widget.todayCount.toString(),
-          today: widget.today.toString(),
-          streak: widget.streak.toString(),
-          doitAt: widget.doItAt,
-          week: widget.week,
-          date: widget.date,
-          dateLastDone: lastDate),
-    );
-  }
-
-  // Future<void> checkAndResetHabit() async {
-  //   lastDate = widget.lastDoneDate;
-
-  //    DateTime currentDate = DateTime.now();
-    
-  //   if (lastDate != currentDate) {    
-  //     setState(() {
-  //       habitNameNotifier.value = 0;
-  //       updateList(
-  //         widget.index,
-  //         StartModel(
-  //             id: DateTime.now().millisecond.toString(),
-  //             days: widget.totalDays,
-  //             habit: widget.habitName,
-  //             wheelCount: widget.wheelCount,
-  //             wheelName: widget.wheelName,
-  //             todayHours: habitNameNotifier.value.toString(),
-  //             today: widget.today.toString(),
-  //             streak: widget.streak.toString(),
-  //             doitAt: widget.doItAt,
-  //             week: widget.week,
-  //             date: widget.date,
-  //             dateLastDone: widget.lastDoneDate),
-  //       );
-  //       getallDatas();
-  //     });
-  //   }
-  // }
-
   Future<void> initializeData() async {
-    
-    await resetNotifiers();
+    await checkAndResetHabit();
     await fetchAnalysisData();
     await fetchCount();
+  }
+
+  // @override
+  // void dispose() {
+  //   super.dispose();
+
+  //   lastDate = DateTime.now();
+  //   updateList(
+  //     widget.index,
+  //     StartModel(
+  //         id: DateTime.now().millisecond.toString(),
+  //         days: widget.totalDays,
+  //         habit: widget.habitName,
+  //         wheelCount: widget.wheelCount,
+  //         wheelName: widget.wheelName,
+  //         todayHours: habitNameNotifier.value.toString(),
+  //         today: daysNotifier.value.toString(),
+  //         streak: streakNotifier.value.toString(),
+  //         doitAt: widget.doItAt,
+  //         week: widget.week,
+  //         date: widget.date,
+  //         dateLastDone: lastDate),
+  //   );
+  // }
+
+  Future<void> checkAndResetHabit() async {
+    await resetNotifiers();
+    lastDate = widget.lastDoneDate;
+
+    DateTime currentDate = DateTime.now();
+
+    if (lastDate.day != currentDate.day) {
+      habitNameNotifier.value = 0;
+
+      setState(
+        () {
+          updateList(
+            widget.index,
+            StartModel(
+                id: DateTime.now().millisecond.toString(),
+                days: widget.totalDays,
+                habit: widget.habitName,
+                wheelCount: widget.wheelCount,
+                wheelName: widget.wheelName,
+                todayHours: habitNameNotifier.value.toString(),
+                today: daysNotifier.value.toString(),
+                streak: streakNotifier.value.toString(),
+                doitAt: widget.doItAt,
+                week: widget.week,
+                date: widget.date,
+                dateLastDone: currentDate),
+          );
+          getallDatas();
+          
+          habitName = 0; 
+            days = int.parse(widget.today);
+            streak = int.parse(widget.streak);
+            habitNameNotifier.value = 0;
+            daysNotifier.value = int.parse(widget.today);
+            streakNotifier.value = int.parse(widget.streak);
+        },
+      );
+    }
   }
 
   Future<void> fetchCount() async {
@@ -192,11 +202,13 @@ class _ScreenUserState extends State<ScreenUser> {
     habitName = int.parse(widget.todayCount);
     days = int.parse(widget.today);
     streak = int.parse(widget.streak);
+    habitNameNotifier.value = int.parse(widget.todayCount);
+    daysNotifier.value = int.parse(widget.today);
+    streakNotifier.value = int.parse(widget.streak);
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -896,9 +908,9 @@ class _ScreenUserState extends State<ScreenUser> {
   }
 
   Future<void> reset() async {
-    int todayCount = 0;
-    int today = 0;
-    int streak = 0;
+    habitNameNotifier.value = 0;
+    daysNotifier.value = 0;
+    streakNotifier.value = 0;
     updateList(
       widget.index,
       StartModel(
@@ -907,9 +919,9 @@ class _ScreenUserState extends State<ScreenUser> {
           habit: widget.habitName,
           wheelCount: widget.wheelCount,
           wheelName: widget.wheelName,
-          todayHours: todayCount.toString(),
-          today: today.toString(),
-          streak: streak.toString(),
+          todayHours: habitNameNotifier.value.toString(),
+          today: daysNotifier.value.toString(),
+          streak: streakNotifier.value.toString(),
           doitAt: widget.doItAt,
           week: widget.week,
           date: widget.date,
@@ -924,9 +936,6 @@ class _ScreenUserState extends State<ScreenUser> {
 
   void incrementTodayWheelCount() {
     setState(() {
-      habitNameNotifier.value = int.parse(widget.todayCount);
-      daysNotifier.value = int.parse(widget.today);
-      streakNotifier.value = int.parse(widget.streak);
       habitNameNotifier.value = (habitName ?? 0) + 1;
 
       if (habitNameNotifier.value.toString() == widget.wheelCount) {
