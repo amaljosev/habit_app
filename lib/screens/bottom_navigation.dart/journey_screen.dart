@@ -18,9 +18,7 @@ class JourneyPage extends StatefulWidget {
 }
 
 class _JourneyPageState extends State<JourneyPage> {
-  List<double> weeklySummary = [1.0,1.0,1.0,1.0,1.0,1.0,1.0];     
-
-
+  List<double> weeklySummary = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
 
   String username = '';
   String email = '';
@@ -36,7 +34,7 @@ class _JourneyPageState extends State<JourneyPage> {
     fetchUsername();
     fetchCount();
     fetchDate();
-     fetchAnalysisData();
+    fetchAnalysisData();
   }
 
   void fetchUsername() async {
@@ -61,7 +59,7 @@ class _JourneyPageState extends State<JourneyPage> {
     if (analysList.isNotEmpty) {
       setState(
         () {
-           weeklySummary = [
+          weeklySummary = [
             analysList.last.monday,
             analysList.last.tuesday,
             analysList.last.wednesday,
@@ -70,7 +68,6 @@ class _JourneyPageState extends State<JourneyPage> {
             analysList.last.saturday,
             analysList.last.sunday
           ];
-          
         },
       );
     }
@@ -297,7 +294,7 @@ class _JourneyPageState extends State<JourneyPage> {
                                             TextButton(
                                               onPressed: () {
                                                 clearDatabase();
-                                                AnalysisDB().clearAllData(); 
+                                                AnalysisDB().clearAllData();
                                                 Navigator.pop(context);
                                               },
                                               child: const Text(
@@ -411,18 +408,32 @@ class _JourneyPageState extends State<JourneyPage> {
                   ),
                 ),
               ),
+              
               Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: Card(
                   color: Colors.blue.shade100,
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: SizedBox(
-                      height: 200,
-                      child: MybarGraph(
-                        weeklySummary: weeklySummary,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('Most active days',   
+                          style: GoogleFonts.unbounded(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white, 
+                          ),),
+                      ), 
+                      Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: SizedBox(
+                          height: 200,
+                          child: MybarGraph(
+                            weeklySummary: weeklySummary,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),

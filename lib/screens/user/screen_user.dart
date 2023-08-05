@@ -20,6 +20,14 @@ int? days = 0;
 int? streak = 0;
 bool isDisable = true;
 
+double monday = 0.0;
+double tuesday = 0.0;
+double wednesday = 0.0;
+double thursday = 0.0;
+double friday = 0.0;
+double saturday = 0.0;
+double sunday = 0.0;
+
 class ScreenUser extends StatefulWidget {
   final int index;
   final String id;
@@ -58,16 +66,10 @@ class ScreenUser extends StatefulWidget {
 
 class _ScreenUserState extends State<ScreenUser> {
   int completed = 0;
+  List analysisList = [];
 
   DateTime lastDate = DateTime.now();
 
-  double monday = 0.0;
-  double tuesday = 0.0;
-  double wednesday = 0.0;
-  double thursday = 0.0;
-  double friday = 0.0;
-  double saturday = 0.0;
-  double sunday = 0.0;
   @override
   void initState() {
     super.initState();
@@ -196,6 +198,7 @@ class _ScreenUserState extends State<ScreenUser> {
   Future<void> fetchAnalysisData() async {
     final db = AnalysisDB();
     final dataList = await db.getAllanalysData();
+    analysisList = dataList;
     if (dataList.isNotEmpty) {
       setState(
         () {
@@ -225,7 +228,7 @@ class _ScreenUserState extends State<ScreenUser> {
   }
 
   bool disableButtons() {
-    String todayCount = habitName.toString(); 
+    String todayCount = habitName.toString();
     String today = widget.wheelCount;
     isDisable = true;
 
@@ -568,10 +571,10 @@ class _ScreenUserState extends State<ScreenUser> {
                                       buttonColor: Colors.greenAccent.shade700,
                                       buttonSize: 50,
                                       action: () {
-                                        incrementCounterBasedOnDay();
                                         incrementTodayWheelCount();
                                         if (daysNotifier.value.toString() ==
                                             widget.totalDays) {
+                                         
                                           addCountToModel();
                                           showModalBottomSheet<void>(
                                             context: context,
@@ -978,6 +981,7 @@ class _ScreenUserState extends State<ScreenUser> {
       habitNameNotifier.value = (habitName ?? 0) + 1;
 
       if (habitNameNotifier.value.toString() == widget.wheelCount) {
+         incrementCounterBasedOnDay(); 
         daysNotifier.value = (days ?? 0) + 1;
         streakNotifier.value = (streak ?? 0) + 1;
         updateList(
@@ -1158,7 +1162,7 @@ class _ScreenUserState extends State<ScreenUser> {
           break;
         case 'Tuesday':
           tuesday += 1;
-
+           
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,
@@ -1172,7 +1176,6 @@ class _ScreenUserState extends State<ScreenUser> {
           break;
         case 'Wednesday':
           wednesday += 1;
-
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,
@@ -1202,6 +1205,7 @@ class _ScreenUserState extends State<ScreenUser> {
           break;
         case 'Friday':
           friday += 1;
+          
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,
