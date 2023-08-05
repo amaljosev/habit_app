@@ -18,6 +18,7 @@ ValueNotifier<int> streakNotifier = ValueNotifier<int>(streak ?? 0);
 int? habitName = 0;
 int? days = 0;
 int? streak = 0;
+bool isDisable = true;
 
 class ScreenUser extends StatefulWidget {
   final int index;
@@ -106,6 +107,7 @@ class _ScreenUserState extends State<ScreenUser> {
                 date: widget.date,
                 dateLastDone: currentDate),
           );
+
           getallDatas();
 
           habitName = 0;
@@ -138,11 +140,12 @@ class _ScreenUserState extends State<ScreenUser> {
             );
             getallDatas();
             habitName = 0;
+            streak = 0;
             days = int.parse(widget.today);
-            habitNameNotifier.value = 0; 
+            habitNameNotifier.value = 0;
             streakNotifier.value = 0;
             daysNotifier.value = int.parse(widget.today);
-          }, 
+          },
         );
       }
     }
@@ -162,7 +165,7 @@ class _ScreenUserState extends State<ScreenUser> {
     // Check if the year and month are the same
     if (lastYear == currentYear && lastMonth == currentMonth) {
       // Check if the difference between the days is 1 or more
-      return (currentDay - lastDay) >= 1;
+      return (currentDay - lastDay) > 1;
     }
 
     // Check if the dates are 1 month apart or more
@@ -222,9 +225,9 @@ class _ScreenUserState extends State<ScreenUser> {
   }
 
   bool disableButtons() {
-    String todayCount = widget.todayCount;
+    String todayCount = habitName.toString(); 
     String today = widget.wheelCount;
-    bool isDisable = true;
+    isDisable = true;
 
     if (todayCount == today) {
       isDisable = false;
