@@ -10,6 +10,7 @@ import '../../functions/hive_functions/db_functions.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../start/screen_login.dart';
 
+
 class JourneyPage extends StatefulWidget {
   const JourneyPage({super.key});
 

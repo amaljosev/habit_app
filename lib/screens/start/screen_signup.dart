@@ -54,9 +54,9 @@ class _SignUpState extends State<SignUp> {
                     Center(
                         child: Padding(
                       padding: const EdgeInsets.only(bottom: 30),
-                      child: Text('Get Started Free',
-                          style: GoogleFonts.unbounded(  
-                              fontSize: 28,
+                      child: Text('Begin your journey',
+                          style: GoogleFonts.ubuntu(        
+                              fontSize: 25,  
                               fontWeight: FontWeight.bold,
                               color: Colors.white )), 
                     )),

@@ -38,12 +38,13 @@ dependencies:
     sdk: flutter 
   google_fonts: ^5.1.0
   hive: ^2.2.3
-  hive_flutter: ^1.1.0
+  hive_flutter: ^1.1.0 
   intl: ^0.17.0
   percent_indicator: ^4.2.3
   scrollable_clean_calendar: ^1.4.0
   shared_preferences: ^2.2.0 
   slider_button: ^2.0.0
+  smooth_page_indicator: ^1.1.0
   stop_watch_timer: ^3.0.1
   table_calendar: ^3.0.8
   toggle_switch: ^2.1.0
@@ -89,8 +90,12 @@ flutter:
     - lib/assets/videos/category_completed.gif
     - lib/assets/videos/habit_completed.gif  
     - lib/assets/images/profile_bg.jpg 
-    - lib/assets/videos/done.gif 
+    - lib/assets/videos/completed.gif 
     - lib/assets/images/home.jpg
+    - lib/assets/videos/info scroll .gif 
+    - lib/assets/images/screen_1.webp
+    - lib/assets/images/screen_2.webp
+    - lib/assets/images/screen_3.webp
 
     
   # An image asset can refer to one or more resolution-specific "variants", see

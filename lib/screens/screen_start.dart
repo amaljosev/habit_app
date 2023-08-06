@@ -48,7 +48,7 @@ class _StartScreenState extends State<StartScreen> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('lib/assets/images/start_habit.jpg'),
+              image: AssetImage('lib/assets/images/edit_user_bg.jpg'),
               fit: BoxFit.fill,
             ),
           ),
@@ -66,22 +66,22 @@ class _StartScreenState extends State<StartScreen> {
                       color: Colors.white,
                     ),
                   ),
-                ), 
+                ),
                 Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Text(
-                    'ENTER DURATION',
-                    style: GoogleFonts.unbounded(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'ENTER DURATION',
+                        style: GoogleFonts.unbounded(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
+                ),
                 TextFormField(
                   style: const TextStyle(color: Colors.black),
                   controller: totalDaysController,
@@ -92,9 +92,8 @@ class _StartScreenState extends State<StartScreen> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    hintText: 'Days ',  
+                    hintText: 'Days ',
                     hintStyle: TextStyle(color: Colors.grey),
-                    
                     labelStyle: TextStyle(color: Colors.grey),
                     prefixIcon: Icon(
                       Icons.edit,
@@ -114,17 +113,17 @@ class _StartScreenState extends State<StartScreen> {
                 ),
                 Column(
                   children: [
-                     Padding(
+                    Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Text( 
+                          Text(
                             'SELECT WEEKDAYS',
                             style: GoogleFonts.unbounded(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ],
                       ),
@@ -140,8 +139,9 @@ class _StartScreenState extends State<StartScreen> {
                       values: selectedWeekdays,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10.0),  
+                      padding: const EdgeInsets.all(10.0),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'COUNTER',
@@ -151,6 +151,14 @@ class _StartScreenState extends State<StartScreen> {
                               color: Colors.white,
                             ),
                           ),
+                          IconButton(
+                              onPressed: () {
+                                popDialogueBox();
+                              },
+                              icon: const Icon(
+                                Icons.info_outline,
+                                color: Colors.white,
+                              )),
                         ],
                       ),
                     ),
@@ -298,7 +306,7 @@ class _StartScreenState extends State<StartScreen> {
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),  
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                     children: [
                       Text(
@@ -399,15 +407,20 @@ class _StartScreenState extends State<StartScreen> {
       totalDaysController.text = '';
 
       setState(() {
-        popDialogueBox();
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) {
+            return const Home();
+          }),
+        );
       });
     }
 
     int todayCount = 0;
     int today = 0;
     int streak = 0;
-     DateTime currentDate = DateTime.now();
-DateTime currentDateWithoutTime = DateTime(currentDate.year, currentDate.month, currentDate.day);
+    DateTime currentDate = DateTime.now();
+    DateTime currentDateWithoutTime =
+        DateTime(currentDate.year, currentDate.month, currentDate.day);
     final startObject = StartModel(
         id: DateTime.now().millisecond.toString(),
         habit: widget.name,
@@ -419,9 +432,10 @@ DateTime currentDateWithoutTime = DateTime(currentDate.year, currentDate.month, 
         streak: streak.toString(),
         week: week,
         doitAt: doitAt,
-        date:DateTime.now(),dateLastDone:currentDateWithoutTime ); 
+        date: DateTime.now(),
+        dateLastDone: currentDateWithoutTime);
 
-    print("${widget.name} $_days  $wheelCount $wheelName $today "); 
+    print("${widget.name} $_days  $wheelCount $wheelName $today ");
     wheelCount = defaultCountData;
     wheelName = defaultNameCount;
 
@@ -430,7 +444,7 @@ DateTime currentDateWithoutTime = DateTime(currentDate.year, currentDate.month, 
     final date = DateModel(
         id: DateTime.now().millisecond.toString(),
         date: DateTime.now().toString());
-        DateDB().addDate(date);  
+    DateDB().addDate(date);
   }
 
   popDialogueBox() {
@@ -438,29 +452,9 @@ DateTime currentDateWithoutTime = DateTime(currentDate.year, currentDate.month, 
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("HABIT STARTED"),  
-          titleTextStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.blue[400],
-            fontSize: 20,
-          ),
-          actionsOverflowButtonSpacing: 20,
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushReplacement(  
-                  MaterialPageRoute(builder: (context) {
-                    return const Home(); 
-                  }),
-                );
-              },
-              child: const Text("Home"),
-            ),
-          ],
-          content: Text(
-            "Saved successfully",
-            style: TextStyle(color: Colors.green[400]),
-          ),
+          title: const Text('Scroll and select items based on your habit'),   
+          titleTextStyle: const TextStyle(color: Colors.indigo),  
+          content: Image.asset('lib/assets/videos/info scroll .gif'),
         );
       },
     );

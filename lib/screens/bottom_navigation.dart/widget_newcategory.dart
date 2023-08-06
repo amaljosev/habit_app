@@ -6,7 +6,6 @@ import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
 import '../home.dart';
 
-
 class StartWidget extends StatefulWidget {
   const StartWidget({Key? key}) : super(key: key);
 
@@ -157,10 +156,10 @@ class _StartWidgetState extends State<StartWidget> {
                   ),
                 ),
                 WeekdaySelector(
-                   selectedColor:Colors.white, 
-                  fillColor: Colors.white,     
-                  selectedFillColor: Colors.blue.shade200,         
-                  onChanged: (int day) { 
+                  selectedColor: Colors.white,
+                  fillColor: Colors.white,
+                  selectedFillColor: Colors.blue.shade200,
+                  onChanged: (int day) {
                     setState(() {
                       final index = day % 7;
                       selectedWeekdays[index] = !selectedWeekdays[index];
@@ -172,6 +171,7 @@ class _StartWidgetState extends State<StartWidget> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween, 
                     children: [
                       Text(
                         'COUNTER',
@@ -181,6 +181,14 @@ class _StartWidgetState extends State<StartWidget> {
                           color: Colors.white,
                         ),
                       ),
+                      IconButton(
+                              onPressed: () {
+                                popDialogueBox();
+                              },
+                              icon: const Icon(
+                                Icons.info_outline,
+                                color: Colors.white,
+                              )),
                     ],
                   ),
                 ),
@@ -293,24 +301,12 @@ class _StartWidgetState extends State<StartWidget> {
                           width: MediaQuery.of(context).size.width * 0.4,
                           height: MediaQuery.of(context).size.height * 0.2,
                           alignment: Alignment.center,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.arrow_back,
-                                color: Colors.blue.shade900,
-                                size: 20,
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                'per day',
-                                style: GoogleFonts.andadaPro(
-                                  color: Colors.blue.shade900,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+                          child: Text(
+                            'per day',
+                            style: GoogleFonts.andadaPro(
+                              color: Colors.blue.shade900,
+                              fontWeight: FontWeight.bold,
+                            ),  
                           ),
                         ),
                       ),
@@ -322,16 +318,16 @@ class _StartWidgetState extends State<StartWidget> {
             const SizedBox(
               height: 20,
             ),
-            Row( 
+            Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 28,bottom: 8),  
+                  padding: const EdgeInsets.only(left: 28, bottom: 8),
                   child: Text(
                     'DO IT AT',
                     style: GoogleFonts.unbounded(
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black, 
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -341,12 +337,11 @@ class _StartWidgetState extends State<StartWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ToggleSwitch(
-                  activeBgColor: [Colors.blue.shade200 ],    
+                  activeBgColor: [Colors.blue.shade200],
                   minWidth: 100.0,
                   initialLabelIndex: 0,
                   totalSwitches: 3,
-                  inactiveBgColor: Colors.blue.shade50,  
-
+                  inactiveBgColor: Colors.blue.shade50,
                   labels: const ['MORNING', 'NOON', 'EVENING'],
                   icons: const [
                     Icons.sunny,
@@ -360,7 +355,6 @@ class _StartWidgetState extends State<StartWidget> {
                         index < labelValues.length) {
                       String selectedValue = labelValues[index];
                       do_itAt = selectedValue;
-                     
                     }
                   },
                 ),
@@ -439,26 +433,30 @@ class _StartWidgetState extends State<StartWidget> {
       habit_NameController.text = '';
 
       setState(() {
-        popDialogueBox();
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) {
+            return const Home();
+          }),
+        );
       });
     }
     int todayCount = 0;
     int today = 0;
     int streak = 0;
     final startObject = StartModel(
-        id: DateTime.now().millisecond.toString(),
-        habit: name,
-        days: _days,
-        wheelCount: wheel_count.toString(),
-        wheelName: wheel_name,
-        todayHours: todayCount.toString(),
-        today: today.toString(),
-        streak: streak.toString(),
-        doitAt: do_itAt,
-        week: week,
-        date: DateTime.now(),
-        dateLastDone: DateTime.now(),
-        );
+      id: DateTime.now().millisecond.toString(),
+      habit: name,
+      days: _days,
+      wheelCount: wheel_count.toString(),
+      wheelName: wheel_name,
+      todayHours: todayCount.toString(),
+      today: today.toString(),
+      streak: streak.toString(),
+      doitAt: do_itAt,
+      week: week,
+      date: DateTime.now(),
+      dateLastDone: DateTime.now(),
+    );
 
     print("$name $_days  $wheel_count $wheel_name");
     wheel_count = defaultCountData;
@@ -471,29 +469,9 @@ class _StartWidgetState extends State<StartWidget> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("Completed"),
-          titleTextStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.blue[400],
-            fontSize: 20,
-          ),
-          actionsOverflowButtonSpacing: 20,
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) {
-                    return const Home();
-                  }),
-                );
-              },
-              child: const Text("Home"),
-            ),
-          ],
-          content: Text(
-            "Saved successfully",
-            style: TextStyle(color: Colors.green[400]),
-          ),
+          title: const Text('Scroll and select items based on your habit'),
+          titleTextStyle: const TextStyle(color: Colors.indigo),
+          content: Image.asset('lib/assets/videos/info scroll .gif'),
         );
       },
     );

@@ -578,6 +578,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                          
                                           addCountToModel();
                                           showModalBottomSheet<void>(
+                                            
                                             context: context,
                                             builder: (BuildContext context) {
                                               return Center(
@@ -630,9 +631,11 @@ class _ScreenUserState extends State<ScreenUser> {
                                                 ),
                                               );
                                             },
+                                            backgroundColor: Colors.white,   
                                           );
                                         } else {
                                           showModalBottomSheet<void>(
+                                            backgroundColor: Colors.white,    
                                             context: context,
                                             builder: (BuildContext context) {
                                               return Center(
@@ -642,16 +645,22 @@ class _ScreenUserState extends State<ScreenUser> {
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   children: <Widget>[
-                                                    Image.asset(
-                                                        'lib/assets/videos/done.gif'),
-                                                    Text(
-                                                      'YOU HAVE COMPLETED \n    SCHEDULED TASKS',
-                                                      style:
-                                                          GoogleFonts.andadaPro(
-                                                        color: Colors
-                                                            .blue.shade900,
-                                                        fontWeight:
-                                                            FontWeight.bold,
+                                                    Padding(
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Image.asset(
+                                                          'lib/assets/videos/completed.gif'),
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Text(
+                                                        'YOU HAVE COMPLETED \n    SCHEDULED TASKS',
+                                                        style:
+                                                            GoogleFonts.andadaPro(
+                                                          color: Colors
+                                                              .blue.shade900,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
                                                       ),
                                                     ),
                                                     ElevatedButton(
@@ -1076,7 +1085,7 @@ class _ScreenUserState extends State<ScreenUser> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("Do you want to delete this entry?"),
+          title: const Text("Do you want to delete this habit?"),
           titleTextStyle: const TextStyle(
               fontWeight: FontWeight.bold, color: Colors.red, fontSize: 16),
           actionsOverflowButtonSpacing: 20,

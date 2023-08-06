@@ -44,6 +44,7 @@ class _TimerSreenState extends State<TimerSreen> {
           child: Column(
             children: [
               CircularCountDownTimer(
+              
                 duration: timerDuration,
                 initialDuration: 0,
                 controller: _controller,
@@ -66,7 +67,7 @@ class _TimerSreenState extends State<TimerSreen> {
                     .MM_SS, // Format the timer in minutes and seconds
                 isReverse: true, // Set to true to make the timer count down
                 isReverseAnimation: false,
-                isTimerTextShown: true,
+                
                 autoStart: false,
                 onStart: () {
                   debugPrint('Countdown Started');
@@ -79,7 +80,7 @@ class _TimerSreenState extends State<TimerSreen> {
                 },
                 timeFormatterFunction: (defaultFormatterFunction, duration) {
                   if (duration.inSeconds == 0) {
-                    return "1 min";
+                    return "1 min"; 
                   } else {
                     // Format the duration to minutes and seconds
                     String minutes =
@@ -89,6 +90,7 @@ class _TimerSreenState extends State<TimerSreen> {
                     return "$minutes:$seconds";
                   }
                 },
+                isTimerTextShown: true,  
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
