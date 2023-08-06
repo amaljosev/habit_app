@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/functions/hive_functions/db_start.dart';
 import 'package:habit_project/models/sign_up/db_model.dart';
-import 'package:habit_project/screens/screen_home.dart';
+
 import 'package:weekday_selector/weekday_selector.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../functions/hive_functions/db_date.dart';
+import 'home.dart';
 
 class StartScreen extends StatefulWidget {
   final String name;
@@ -114,7 +115,7 @@ class _StartScreenState extends State<StartScreen> {
                 Column(
                   children: [
                      Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
                           Text( 
@@ -447,9 +448,9 @@ DateTime currentDateWithoutTime = DateTime(currentDate.year, currentDate.month, 
           actions: [
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(
+                Navigator.of(context).pushReplacement(  
                   MaterialPageRoute(builder: (context) {
-                    return const HomeScreen();
+                    return const Home(); 
                   }),
                 );
               },

@@ -26,7 +26,7 @@ class _TodayWidgetState extends State<TodayWidget> {
                   children: [
                     InkWell( 
                       onTap: () {
-                        Navigator.push(
+                        Navigator.push( 
                             context,
                             MaterialPageRoute( 
                                 builder: (context) => ScreenUser(  

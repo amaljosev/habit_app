@@ -4,7 +4,8 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
-import '../screen_home.dart';
+import '../home.dart';
+
 
 class EditUser extends StatefulWidget {
   final int index;
@@ -481,9 +482,9 @@ class _EditUserState extends State<EditUser> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(
+                Navigator.of(context).push( 
                   MaterialPageRoute(builder: (context) {
-                    return const HomeScreen();
+                    return const Home();
                   }),
                 );
               },

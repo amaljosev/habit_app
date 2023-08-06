@@ -9,7 +9,8 @@ import '../../functions/hive_functions/db_analysis.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
-import '../screen_home.dart';
+
+import '../home.dart';
 import 'edit_user.dart';
 
 ValueNotifier<int> habitNameNotifier = ValueNotifier<int>(habitName ?? 0);
@@ -289,7 +290,7 @@ class _ScreenUserState extends State<ScreenUser> {
                       children: [
                         IconButton(
                             onPressed: () {
-                              Navigator.of(context).pushReplacement(
+                              Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context) {
                                   return EditUser(
                                     index: widget.index,
@@ -376,7 +377,7 @@ class _ScreenUserState extends State<ScreenUser> {
                           child: Row(
                             children: [
                               Card(
-                                color: Colors.deepPurple,
+                                color: const Color.fromARGB(202, 18, 63, 114), 
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
@@ -389,7 +390,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                 ),
                               ),
                               Card(
-                                color: Colors.deepPurple,
+                                color: const Color.fromARGB(202, 18, 63, 114), 
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
@@ -613,7 +614,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                                             MaterialPageRoute(
                                                                 builder:
                                                                     (context) {
-                                                              return const HomeScreen();
+                                                              return const Home();
                                                             }),
                                                           ),
                                                         ),
@@ -661,7 +662,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                                               .pushReplacement(
                                                         MaterialPageRoute(
                                                             builder: (context) {
-                                                          return const HomeScreen();
+                                                          return const Home();
                                                         }),
                                                       ),
                                                     ),
@@ -734,7 +735,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                                           MaterialPageRoute(
                                                               builder:
                                                                   (context) {
-                                                            return const HomeScreen();
+                                                            return const Home();
                                                           }),
                                                         ),
                                                       ),
@@ -794,7 +795,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                                             .pushReplacement(
                                                       MaterialPageRoute(
                                                           builder: (context) {
-                                                        return const HomeScreen();
+                                                        return const Home();
                                                       }),
                                                     ),
                                                   ),
@@ -842,7 +843,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    Navigator.of(context).pushReplacement(
+                                    Navigator.of(context).push(
                                       MaterialPageRoute(builder: (context) {
                                         return const TimerSreen();
                                       }),
@@ -873,7 +874,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    Navigator.of(context).pushReplacement(
+                                    Navigator.of(context).push(  
                                       MaterialPageRoute(builder: (context) {
                                         return const StopWatchScreen();
                                       }),
@@ -904,7 +905,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    Navigator.of(context).pushReplacement(
+                                    Navigator.of(context).push(
                                       MaterialPageRoute(builder: (context) {
                                         return AnalysisScreen(
                                           date: widget.date,
@@ -971,7 +972,7 @@ class _ScreenUserState extends State<ScreenUser> {
     );
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) {
-        return const HomeScreen();
+        return const Home();
       }),
     );
   }
@@ -1085,7 +1086,7 @@ class _ScreenUserState extends State<ScreenUser> {
                 deleteData(indexValue);
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) {
-                    return const HomeScreen();
+                    return const Home();
                   }),
                 );
               },
@@ -1128,7 +1129,7 @@ class _ScreenUserState extends State<ScreenUser> {
     addCategory(startObject);
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) {
-        return const HomeScreen();
+        return const Home();
       }),
     );
   }

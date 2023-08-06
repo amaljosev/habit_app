@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_project/screens/screen_home.dart';
 import 'package:habit_project/screens/start/screen_first.dart';
 import 'package:video_player/video_player.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../main.dart';
+import '../home.dart';
 
 
 class Splash extends StatefulWidget {
@@ -76,7 +76,7 @@ class _SplashState extends State<Splash> {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => const Home()),
       );
     }
   }

@@ -116,7 +116,7 @@ class _JourneyPageState extends State<JourneyPage> {
                     width: 25,
                   ),
                   Text(
-                    "STATISTICS",
+                    "JOURNEY",
                     style: GoogleFonts.unbounded(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -303,12 +303,17 @@ class _JourneyPageState extends State<JourneyPage> {
                                                     color: Colors.red),
                                               ),
                                             ),
-                                            IconButton(
-                                              onPressed: () {
-                                                signOut(context);
-                                              },
-                                              icon: const Icon(Icons
-                                                  .power_settings_new_rounded),
+                                            Column(
+                                              children: [
+                                                const Text('log out'), 
+                                                IconButton(
+                                                  onPressed: () {
+                                                    signOut(context);
+                                                  },
+                                                  icon: const Icon(Icons
+                                                      .power_settings_new_rounded),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -330,7 +335,7 @@ class _JourneyPageState extends State<JourneyPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
-                  color: Colors.green.shade100,
+                  color: Colors.blue.shade100,  
                   elevation: 5,
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -343,9 +348,9 @@ class _JourneyPageState extends State<JourneyPage> {
                       rangeStartDay: parsedDate,
                       rangeEndDay: DateTime.now(),
                       calendarStyle: const CalendarStyle(
-                        rangeHighlightColor: Colors.red,
-                        rangeEndDecoration: BoxDecoration(
-                          color: Colors.red,
+                        rangeHighlightColor: Colors.blue,
+                        rangeEndDecoration: BoxDecoration( 
+                          color: Colors.blue, 
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey,
@@ -356,7 +361,7 @@ class _JourneyPageState extends State<JourneyPage> {
                           shape: BoxShape.circle,
                         ),
                         rangeStartDecoration: BoxDecoration(
-                          color: Colors.red,
+                          color: Colors.blue, 
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
@@ -369,7 +374,7 @@ class _JourneyPageState extends State<JourneyPage> {
                         withinRangeTextStyle: TextStyle(color: Colors.white),
                         rangeHighlightScale: 0.2,
                         withinRangeDecoration: BoxDecoration(
-                          color: Colors.red,
+                          color: Colors.green,
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
@@ -380,7 +385,7 @@ class _JourneyPageState extends State<JourneyPage> {
                           ],
                         ),
                         todayDecoration: BoxDecoration(
-                          color: Colors.green,
+                          color: Colors.blue, 
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
@@ -437,9 +442,11 @@ class _JourneyPageState extends State<JourneyPage> {
                   ),
                 ),
               ),
-              const SizedBox(
+              
+              const SizedBox( 
                 height: 30,
               ),
+
             ],
           ),
         ),

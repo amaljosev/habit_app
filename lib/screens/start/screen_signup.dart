@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:habit_project/screens/screen_home.dart';
+
 import '../../functions/hive_functions/db_functions.dart';
 import '../../main.dart';
 import '../../models/sign_up/db_model.dart';
 import 'package:email_validator/email_validator.dart';
+
+import '../home.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -222,7 +224,7 @@ class _SignUpState extends State<SignUp> {
         final _sharedPrefs = await SharedPreferences.getInstance();
       await _sharedPrefs.setBool(save_key_name, true);
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) { 
-          return const HomeScreen();
+          return const Home();
         }));
       }
     }

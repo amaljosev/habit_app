@@ -3,9 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/main.dart';
-import 'package:habit_project/screens/screen_home.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../functions/hive_functions/db_functions.dart';
+import '../home.dart';
 
 
 class LogInPage extends StatefulWidget {
@@ -166,7 +167,7 @@ class _LogInPageState extends State<LogInPage> {
       await _sharedPrefs.setBool(save_key_name, true);
        print("$_username $_password ");
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (ctx) => const HomeScreen()),
+        MaterialPageRoute(builder: (ctx) => const Home()),
       );
     } else {
       _usernameController.text='';

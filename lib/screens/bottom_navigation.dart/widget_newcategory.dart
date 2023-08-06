@@ -4,7 +4,8 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
-import '../screen_home.dart';
+import '../home.dart';
+
 
 class StartWidget extends StatefulWidget {
   const StartWidget({Key? key}) : super(key: key);
@@ -157,8 +158,8 @@ class _StartWidgetState extends State<StartWidget> {
                 ),
                 WeekdaySelector(
                    selectedColor:Colors.white, 
-                  fillColor: Colors.blue.shade100,   
-                  selectedFillColor: Colors.cyanAccent.shade400,      
+                  fillColor: Colors.white,     
+                  selectedFillColor: Colors.blue.shade200,         
                   onChanged: (int day) { 
                     setState(() {
                       final index = day % 7;
@@ -340,11 +341,11 @@ class _StartWidgetState extends State<StartWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ToggleSwitch(
-                  activeBgColor: [Colors.cyan], 
+                  activeBgColor: [Colors.blue.shade200 ],    
                   minWidth: 100.0,
                   initialLabelIndex: 0,
                   totalSwitches: 3,
-                  inactiveBgColor: Colors.blue.shade100,  
+                  inactiveBgColor: Colors.blue.shade50,  
 
                   labels: const ['MORNING', 'NOON', 'EVENING'],
                   icons: const [
@@ -482,7 +483,7 @@ class _StartWidgetState extends State<StartWidget> {
               onPressed: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) {
-                    return const HomeScreen();
+                    return const Home();
                   }),
                 );
               },
