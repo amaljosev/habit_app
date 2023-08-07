@@ -17,7 +17,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(bottom: 60),   
       child: ValueListenableBuilder(
         valueListenable: startListNotifier,
         builder: (BuildContext ctx, List<StartModel> startList, Widget? child) {
@@ -46,7 +46,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 builder: (context) => StartScreen(
                                     name: categoryList[index].trailingTitle)),
                           );
-                          print(categoryList[index].trailingTitle);
+                          print(categoryList[index].trailingTitle); 
                         },
                       ),
                     ),

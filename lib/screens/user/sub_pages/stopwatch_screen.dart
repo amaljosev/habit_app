@@ -109,7 +109,7 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, 
                             children: [
                               Text(
                                 'Lap no:${index + 1}',

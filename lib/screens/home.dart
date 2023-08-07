@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Color.fromARGB(255, 11, 53, 107), 
+      backgroundColor:const Color.fromARGB(255, 11, 53, 107),  
       appBar: page == 0
           ? CalendarAppBar(
               onDateChanged: (value) => print(value),
@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.96,
+          height: MediaQuery.of(context).size.height,   
           decoration: const BoxDecoration(
             image: DecorationImage( 
               image: AssetImage("lib/assets/images/home_bg.jpg"), 
@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
           Icon(Icons.bar_chart, color: Color.fromARGB(202, 18, 63, 114), size: 35),    
         ],
         color:Colors.white   ,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black12,  
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 900),
         buttonBackgroundColor:  Colors.white,    

@@ -348,21 +348,21 @@ class _JourneyPageState extends State<JourneyPage> {
                       calendarFormat: CalendarFormat.month,
                       rangeStartDay: parsedDate,
                       rangeEndDay: DateTime.now(),
-                      calendarStyle: const CalendarStyle(
-                        rangeHighlightColor: Colors.blue,
-                        rangeEndDecoration: BoxDecoration( 
+                      calendarStyle:  CalendarStyle(
+                        rangeHighlightColor: Colors.blue.shade400,  
+                        rangeEndDecoration: const BoxDecoration( 
                           color: Colors.blue, 
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey,
                               blurRadius: 5,
-                              offset: Offset(5, 5),
+                              offset: Offset(5, 5), 
                             ),
                           ],
                           shape: BoxShape.circle,
                         ),
-                        rangeStartDecoration: BoxDecoration(
-                          color: Colors.blue, 
+                        rangeStartDecoration: const BoxDecoration(
+                          color: Colors.blue,  
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
@@ -372,9 +372,9 @@ class _JourneyPageState extends State<JourneyPage> {
                             ),
                           ],
                         ),
-                        withinRangeTextStyle: TextStyle(color: Colors.white),
+                        withinRangeTextStyle: const TextStyle(color: Colors.white),
                         rangeHighlightScale: 0.2,
-                        withinRangeDecoration: BoxDecoration(
+                        withinRangeDecoration: const BoxDecoration(
                           color: Colors.green,
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -385,7 +385,7 @@ class _JourneyPageState extends State<JourneyPage> {
                             ),
                           ],
                         ),
-                        todayDecoration: BoxDecoration(
+                        todayDecoration: const BoxDecoration(
                           color: Colors.blue, 
                           shape: BoxShape.circle,
                           boxShadow: [

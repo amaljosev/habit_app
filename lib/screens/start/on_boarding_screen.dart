@@ -39,9 +39,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 children: [
                   TextButton(
                       onPressed: () {
-                        pageController.jumpToPage(1);
-                      },
-                      child: const Text('skip')),
+                        Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) {
+                                return const FirstPage();
+                              }),
+                            ); 
+                      }, 
+                      child: const Text('skip',style: TextStyle(color: Colors.white),)),
                   SmoothPageIndicator(controller: pageController, count: 2),
                   onLastPage
                       ? TextButton(
@@ -52,14 +56,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               }),
                             );
                           },
-                          child: const Text('Done'))
+                          child: const Text('Done',style: TextStyle(color: Colors.white),))
                       : TextButton(
                           onPressed: () {
                             pageController.nextPage(
                                 duration: const Duration(milliseconds: 500),
                                 curve: Curves.easeIn);
                           },
-                          child: const Text('next')),
+                          child: const Text('next',style: TextStyle(color: Colors.white),)),
                 ],
               ))
         ],

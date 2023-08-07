@@ -36,16 +36,17 @@ class IntroPageOne extends StatelessWidget {
           ),
           const SizedBox(height: 30,), 
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
               Row(
+                
                 children: [
                   const SizedBox(
-                    width: 20,
+                    width: 30, 
                   ),
                   const Icon(
                     Icons.file_download_done_sharp,
-                    color: Colors.purple,
+                    color: Colors.white,
                   ),
                   const SizedBox(
                     width: 20,
@@ -60,11 +61,11 @@ class IntroPageOne extends StatelessWidget {
               Row(
                 children: [
                   const SizedBox(
-                    width: 20,
+                    width: 30,
                   ),
                   const Icon(
                     Icons.radar_outlined,
-                    color: Colors.purple,
+                    color: Colors.white,
                   ),
                   const SizedBox(
                     width: 20,
@@ -79,11 +80,11 @@ class IntroPageOne extends StatelessWidget {
               Row(
                 children: [
                   const SizedBox(
-                    width: 20,
+                    width: 30,
                   ),
                   const Icon(
                     Icons.map,
-                    color: Colors.purple,
+                    color: Colors.white,
                   ),
                   const SizedBox(
                     width: 20,
@@ -98,11 +99,11 @@ class IntroPageOne extends StatelessWidget {
               Row(
                 children: [
                   const SizedBox(
-                    width: 20,
+                   width: 30,
                   ),
                   const Icon(
                     Icons.celebration,
-                    color: Colors.purple,
+                    color: Colors.white,
                   ),
                   const SizedBox(
                     width: 20,
@@ -117,11 +118,11 @@ class IntroPageOne extends StatelessWidget {
               Row(
                 children: [
                   const SizedBox(
-                    width: 20,
+                    width: 30, 
                   ),
                   const Icon(
                     Icons.health_and_safety,
-                    color: Colors.purple,
+                    color: Colors.white,
                   ),
                   const SizedBox(
                     width: 20,
