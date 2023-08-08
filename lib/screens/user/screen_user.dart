@@ -87,7 +87,7 @@ class _ScreenUserState extends State<ScreenUser> {
     lastDate = widget.lastDoneDate;
 
     DateTime currentDate = DateTime.now();
-    print('$lastDate         $currentDate'); 
+    print('$lastDate         $currentDate');
 
     if (lastDate.day != currentDate.day) {
       habitNameNotifier.value = 0;
@@ -112,7 +112,6 @@ class _ScreenUserState extends State<ScreenUser> {
           );
 
           getallDatas();
-          
         },
       );
       if (isOneDayOrMoreDifference(lastDate, currentDate)) {
@@ -136,12 +135,10 @@ class _ScreenUserState extends State<ScreenUser> {
                   dateLastDone: currentDate),
             );
             getallDatas();
-           
-             
           },
         );
       }
-    } 
+    }
   }
 
   bool isOneDayOrMoreDifference(DateTime lastDate, DateTime currentDate) {
@@ -242,360 +239,410 @@ class _ScreenUserState extends State<ScreenUser> {
 
   @override
   Widget build(BuildContext context) {
-    resetNotifiers(); 
-    return Scaffold( 
+    resetNotifiers();
+    return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('lib/assets/images/new_bg.jpg'),  
-              fit: BoxFit.fill, 
-            ),
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('lib/assets/images/new_home.png'),
+            fit: BoxFit.fill,
           ),
-        child: SingleChildScrollView(
+        ),
+        child: SafeArea(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 50),
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: GestureDetector(
-                            onTap: () {
+                    Card(
+                        child: IconButton(
+                            onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: const Icon(
-                              Icons.arrow_back,
-                              color: Colors.black, 
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                            icon: const Icon(
+                              Icons.arrow_back_ios_rounded,
+                              size: 20,
+                            ))),
                     Row(
                       children: [
-                        IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(builder: (context) {
-                                  return EditUser(
-                                    index: widget.index,
-                                    id: DateTime.now().millisecond.toString(),
-                                    habitName: widget.habitName,
-                                    totalDays: widget.totalDays,
-                                    wheelCount: widget.wheelCount,
-                                    wheelName: widget.wheelName,
-                                    name: widget.todayCount,
-                                    today: widget.today,
-                                    percentage: widget.streak,
-                                    week: widget.week,
-                                    doItAt: widget.doItAt,
-                                    date: widget.date,
-                                    lastDoneDate: widget.lastDoneDate,
-                                  );
-                                }),
-                              );
+                        Card(
+                          child: IconButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context) {
+                                    return EditUser(
+                                      index: widget.index,
+                                      id: DateTime.now().millisecond.toString(),
+                                      habitName: widget.habitName,
+                                      totalDays: widget.totalDays,
+                                      wheelCount: widget.wheelCount,
+                                      wheelName: widget.wheelName,
+                                      name: widget.todayCount,
+                                      today: widget.today,
+                                      percentage: widget.streak,
+                                      week: widget.week,
+                                      doItAt: widget.doItAt,
+                                      date: widget.date,
+                                      lastDoneDate: widget.lastDoneDate,
+                                    );
+                                  }),
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.edit_outlined,
+                              )),
+                        ),
+                        Card(
+                          child: PopupMenuButton<SampleItem>(
+                            initialValue: selectedMenu,
+                            onSelected: (SampleItem item) {
+                              setState(() {
+                                selectedMenu = item;
+                                if (item == SampleItem.itemOne) {
+                                  reset();
+                                }
+                                if (item == SampleItem.itemTwo) {
+                                  popupDialogueBox(widget.index);
+                                }
+                              });
                             },
-                            icon: const Icon(
-                              Icons.edit_outlined,
-                              color: Colors.black,
-                            )),
-                        PopupMenuButton<SampleItem>(  
-                          color: Colors.indigo,      
-                          initialValue: selectedMenu,
-                          onSelected: (SampleItem item) { 
-                            setState(() {
-                              selectedMenu = item;
-                              if (item == SampleItem.itemOne) {
-                                reset();
-                              }
-                              if (item == SampleItem.itemTwo) {
-                                popupDialogueBox(widget.index);
-                              }
-                            });
-                          },
-                          itemBuilder: (BuildContext context) =>
-                              <PopupMenuEntry<SampleItem>>[
-                            const PopupMenuItem<SampleItem>( 
-                              value: SampleItem.itemOne,
-                              child: Text('Reset',style: TextStyle(color: Colors.white)),
-                            ),
-                            const PopupMenuItem<SampleItem>(
-                              value: SampleItem.itemTwo,
-                              child: Text('Delete',style: TextStyle(color: Colors.white)), 
-                            ),
-                          ],
+                            itemBuilder: (BuildContext context) =>
+                                <PopupMenuEntry<SampleItem>>[
+                              const PopupMenuItem<SampleItem>(
+                                value: SampleItem.itemOne,
+                                child: Text('Reset',
+                                    style: TextStyle(color: Colors.black)),
+                              ),
+                              const PopupMenuItem<SampleItem>(
+                                value: SampleItem.itemTwo,
+                                child: Text('Delete',
+                                    style: TextStyle(color: Colors.black)),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Container( 
-                  // height: MediaQuery.of(context).size.height,
-                  // decoration:   BoxDecoration(
-                  //     color: Colors.indigo.shade100, 
-                  //     borderRadius:
-                  //         BorderRadius.only(topLeft: Radius.circular(30))),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Row(
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, right: 8),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20, left: 20),
-                              child: Text(
-                                widget.habitName,
-                                style: GoogleFonts.unbounded(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black, 
+                            Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 20, left: 20),
+                                  child: Text(
+                                    widget.habitName,
+                                    style: GoogleFonts.unbounded(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 13, top: 8),
+                              child: Row(
+                                children: [
+                                  Card(
+                                    color: Colors.indigo.shade50,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        widget.doItAt,
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: Colors.indigo.shade50,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                          widget.week.length == 7
+                                              ? "EVERYDAY"
+                                              : "${widget.week.length} DAYS",
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold)),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 13, top: 8),
-                          child: Row(
-                            children: [
-                              Card(
-                                color: const Color.fromARGB(202, 18, 63, 114), 
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    widget.doItAt,
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                color: const Color.fromARGB(202, 18, 63, 114), 
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                      widget.week.length == 7
-                                          ? "EVERYDAY"
-                                          : "${widget.week.length} DAYS",
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20, bottom: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.indigo, 
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(20)),
-                                ),
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.2,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '${widget.wheelName} \nFINISHED',
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      ValueListenableBuilder<int>(
-                                        valueListenable: habitNameNotifier,
-                                        builder: (BuildContext context,
-                                            int value, Widget? child) {
-                                          return Text(
-                                            habitName.toString(),
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 30,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      Text(
-                                        'TOTAL ${widget.wheelName} : ${widget.wheelCount}',
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w900,
-                                            fontSize: 9),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.indigo.shade400,   
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(20)),
-                                ),
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.2,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text(
-                                        'DAYS \nFINISHED',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      ValueListenableBuilder<int>(
-                                        valueListenable: daysNotifier,
-                                        builder: (BuildContext context,
-                                            int count, Widget? child) {
-                                          return Text(
-                                            days.toString(),
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 30,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      Text(
-                                        'TOTAL DAYS : ${widget.totalDays}',
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w900,
-                                            fontSize: 9),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.indigo.shade300,  
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(20)),
-                                ),
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.2,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text(
-                                        'CURRENT \nSTREAK',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 13),
-                                      ),
-                                      ValueListenableBuilder<int>(
-                                        valueListenable: streakNotifier,
-                                        builder: (BuildContext context,
-                                            int count, Widget? child) {
-                                          return Text(
-                                            streak.toString(),
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 30,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      Text(
-                                        'BEST STREAK : ${widget.streak}',
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w900,
-                                            fontSize: 9),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        if (disableButtons())
-                          if (shouldShowButtons(widget.week))
                             Padding(
-                              padding: const EdgeInsets.all(18.0),
-                              child: Column(
+                              padding:
+                                  const EdgeInsets.only(top: 20, bottom: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(18.0),
-                                    child: SliderButton(
-                                      backgroundColor: Colors.indigo.shade300,  
-                                      buttonColor: Colors.indigo , 
-                                      buttonSize: 50,
-                                      action: () {
-                                        incrementTodayWheelCount();
-                                        if (daysNotifier.value.toString() ==
-                                            widget.totalDays) {
-                                         
-                                          addCountToModel();
-                                          showModalBottomSheet<void>(
-                                            
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return Center(
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: <Widget>[
-                                                    Image.asset(
-                                                        'lib/assets/videos/habit_completed.gif'),
-                                                    Text(
-                                                      'YOU HAVE COMPLETED \n             YOUR HABIT',
-                                                      style:
-                                                          GoogleFonts.andadaPro(
-                                                        color: Colors
-                                                            .blue.shade900,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                    Row(
+                                  Card(
+                                    color: Colors.indigo.shade50,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '${widget.wheelName} \nFINISHED',
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          ValueListenableBuilder<int>(
+                                            valueListenable: habitNameNotifier,
+                                            builder: (BuildContext context,
+                                                int value, Widget? child) {
+                                              return Text(
+                                                habitName.toString(),
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w900,
+                                                  fontSize: 30,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                          Text(
+                                            'TOTAL ${widget.wheelName} : ${widget.wheelCount}',
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w900,
+                                                fontSize: 9),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: Colors.indigo.shade50,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'DAYS \nFINISHED',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          ValueListenableBuilder<int>(
+                                            valueListenable: daysNotifier,
+                                            builder: (BuildContext context,
+                                                int count, Widget? child) {
+                                              return Text(
+                                                days.toString(),
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w900,
+                                                  fontSize: 30,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                          Text(
+                                            'TOTAL DAYS : ${widget.totalDays}',
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w900,
+                                                fontSize: 9),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: Colors.indigo.shade50,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'CURRENT \nSTREAK',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 13),
+                                          ),
+                                          ValueListenableBuilder<int>(
+                                            valueListenable: streakNotifier,
+                                            builder: (BuildContext context,
+                                                int count, Widget? child) {
+                                              return Text(
+                                                streak.toString(),
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w900,
+                                                  fontSize: 30,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                          Text(
+                                            'BEST STREAK : ${widget.streak}',
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w900,
+                                                fontSize: 9),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            if (disableButtons())
+                              if (shouldShowButtons(widget.week))
+                                Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(18.0),
+                                        child: SliderButton(
+                                          backgroundColor:
+                                              Colors.indigo.shade100,
+                                          buttonColor: Colors.indigo,
+                                          buttonSize: 50,
+                                          action: () {
+                                            incrementTodayWheelCount();
+                                            if (daysNotifier.value.toString() ==
+                                                widget.totalDays) {
+                                              addCountToModel();
+                                              showModalBottomSheet<void>(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return Center(
+                                                    child: Column(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
-                                                              .spaceAround,
-                                                      children: [
+                                                              .center,
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: <Widget>[
+                                                        Image.asset(
+                                                            'lib/assets/videos/habit_completed.gif'),
+                                                        Text(
+                                                          'YOU HAVE COMPLETED \n             YOUR HABIT',
+                                                          style: GoogleFonts
+                                                              .andadaPro(
+                                                            color:
+                                                                Colors.indigo,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            ElevatedButton(
+                                                              child: const Text(
+                                                                  'GO TO HOME'),
+                                                              onPressed: () =>
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pushReplacement(
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) {
+                                                                  return const Home();
+                                                                }),
+                                                              ),
+                                                            ),
+                                                            ElevatedButton(
+                                                              child: const Text(
+                                                                  'RESTART'),
+                                                              onPressed: () =>
+                                                                  restart(),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                                backgroundColor: Colors.white,
+                                              );
+                                            } else {
+                                              showModalBottomSheet<void>(
+                                                backgroundColor: Colors.white,
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return Center(
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: <Widget>[
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Image.asset(
+                                                              'lib/assets/videos/completed.gif'),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Text(
+                                                            'YOU HAVE COMPLETED \n    SCHEDULED TASKS',
+                                                            style: GoogleFonts
+                                                                .andadaPro(
+                                                              color: Colors.blue
+                                                                  .shade900,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                        ),
                                                         ElevatedButton(
                                                           child: const Text(
                                                               'GO TO HOME'),
@@ -610,121 +657,137 @@ class _ScreenUserState extends State<ScreenUser> {
                                                             }),
                                                           ),
                                                         ),
-                                                        ElevatedButton(
-                                                          child: const Text(
-                                                              'RESTART'),
-                                                          onPressed: () =>
-                                                              restart(),
-                                                        ),
                                                       ],
                                                     ),
-                                                  ],
-                                                ),
+                                                  );
+                                                },
                                               );
-                                            },
-                                            backgroundColor: Colors.white,   
-                                          );
-                                        } else {
-                                          showModalBottomSheet<void>(
-                                            backgroundColor: Colors.white,    
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return Center(
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: <Widget>[
-                                                    Padding(
-                                                      padding: const EdgeInsets.all(8.0),
-                                                      child: Image.asset(
-                                                          'lib/assets/videos/completed.gif'),
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets.all(8.0),
-                                                      child: Text(
-                                                        'YOU HAVE COMPLETED \n    SCHEDULED TASKS',
-                                                        style:
-                                                            GoogleFonts.andadaPro(
+                                            }
+                                          },
+                                          label: const Text(
+                                            "Swipe to complete",
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                          boxShadow: BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                            blurRadius: 10.0,
+                                            offset: const Offset(8, 5),
+                                          ),
+                                          icon: Icon(
+                                            Icons.check_rounded,
+                                            color: Colors.green.shade50,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      ElevatedButton.icon(
+                                        onPressed: () {
+                                          incrementCounterBasedOnDay();
+                                          incrementTodayCount();
+                                          if (daysNotifier.value.toString() ==
+                                              widget.totalDays) {
+                                            addCountToModel();
+                                            showModalBottomSheet<void>(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return Center(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: <Widget>[
+                                                      Image.asset(
+                                                          'lib/assets/videos/habit_completed.gif'),
+                                                      Text(
+                                                        'YOU HAVE COMPLETED \n             YOUR HABIT',
+                                                        style: GoogleFonts
+                                                            .andadaPro(
                                                           color: Colors
                                                               .blue.shade900,
                                                           fontWeight:
                                                               FontWeight.bold,
                                                         ),
                                                       ),
-                                                    ),
-                                                    ElevatedButton(
-                                                      child: const Text(
-                                                          'GO TO HOME'),
-                                                      onPressed: () =>
-                                                          Navigator.of(context)
-                                                              .pushReplacement(
-                                                        MaterialPageRoute(
-                                                            builder: (context) {
-                                                          return const Home();
-                                                        }),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceAround,
+                                                        children: [
+                                                          ElevatedButton(
+                                                            child: const Text(
+                                                                'GO TO HOME'),
+                                                            onPressed: () =>
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pushReplacement(
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) {
+                                                                return const Home();
+                                                              }),
+                                                            ),
+                                                          ),
+                                                          ElevatedButton(
+                                                              child: const Text(
+                                                                  'RESTART'),
+                                                              onPressed: () =>
+                                                                  restart()),
+                                                        ],
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        }
-                                      },
-                                      label: const Text(
-                                        "Swipe to complete",
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 17,
-                                        ),
-                                      ),
-                                      boxShadow: BoxShadow(
-                                        color: Colors.black.withOpacity(0.5),
-                                        blurRadius: 10.0,
-                                        offset: const Offset(8, 5),
-                                      ),
-                                      icon: Icon(
-                                        Icons.check_rounded,
-                                        color: Colors.green.shade50,
-                                      ),
-                                    ),
-                                  ),
-                                  ElevatedButton.icon(
-                                    onPressed: () {
-                                      incrementCounterBasedOnDay();
-                                      incrementTodayCount();
-                                      if (daysNotifier.value.toString() ==
-                                          widget.totalDays) {
-                                        addCountToModel();
-                                        showModalBottomSheet<void>(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return Center(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: <Widget>[
-                                                  Image.asset(
-                                                      'lib/assets/videos/habit_completed.gif'),
-                                                  Text(
-                                                    'YOU HAVE COMPLETED \n             YOUR HABIT',
-                                                    style:
-                                                        GoogleFonts.andadaPro(
-                                                      color:
-                                                          Colors.blue.shade900,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
+                                                    ],
                                                   ),
-                                                  Row(
+                                                );
+                                              },
+                                            );
+                                          } else {
+                                            showModalBottomSheet<void>(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return Center(
+                                                  child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
-                                                            .spaceAround,
-                                                    children: [
+                                                            .center,
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: <Widget>[
+                                                      Image.asset(
+                                                          'lib/assets/videos/trophy.gif'),
+                                                      Column(
+                                                        children: [
+                                                          Text(
+                                                            'YOU HAVE COMPLETED',
+                                                            style: GoogleFonts
+                                                                .andadaPro(
+                                                              color: Colors.blue
+                                                                  .shade900,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            'A DAY',
+                                                            style: GoogleFonts
+                                                                .andadaPro(
+                                                              color: Colors.blue
+                                                                  .shade900,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                       ElevatedButton(
                                                         child: const Text(
                                                             'GO TO HOME'),
@@ -739,209 +802,164 @@ class _ScreenUserState extends State<ScreenUser> {
                                                           }),
                                                         ),
                                                       ),
-                                                      ElevatedButton(
-                                                          child: const Text(
-                                                              'RESTART'),
-                                                          onPressed: () =>
-                                                              restart()),
                                                     ],
                                                   ),
-                                                ],
-                                              ),
+                                                );
+                                              },
                                             );
-                                          },
+                                          }
+                                        },
+                                        icon: const Icon(
+                                          Icons.done_all,
+                                          color: Colors.black,
+                                        ),
+                                        label: const Text(
+                                          '|   FINISH ALL',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              Colors.indigo.shade50,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Column(
+                                  children: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.indigo.shade50,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30.0),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(builder: (context) {
+                                            return const TimerSreen();
+                                          }),
                                         );
-                                      } else {
-                                        showModalBottomSheet<void>(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return Center(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: <Widget>[
-                                                  Image.asset(
-                                                      'lib/assets/videos/trophy.gif'),
-                                                  Column(
-                                                    children: [
-                                                      Text(
-                                                        'YOU HAVE COMPLETED',
-                                                        style: GoogleFonts
-                                                            .andadaPro(
-                                                          color: Colors
-                                                              .blue.shade900,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        'A DAY',
-                                                        style: GoogleFonts
-                                                            .andadaPro(
-                                                          color: Colors
-                                                              .blue.shade900,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  ElevatedButton(
-                                                    child: const Text(
-                                                        'GO TO HOME'),
-                                                    onPressed: () =>
-                                                        Navigator.of(context)
-                                                            .pushReplacement(
-                                                      MaterialPageRoute(
-                                                          builder: (context) {
-                                                        return const Home();
-                                                      }),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      }
-                                    },
-                                    icon: const Icon(
-                                      Icons.done_all,
-                                      color: Colors.white,
-                                    ),
-                                    label: const Text(
-                                      '|   FINISH ALL',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.indigo, 
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
+                                      },
+                                      child: const Icon(
+                                        Icons.timer_outlined,
+                                        color: Colors.black,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              children: [
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.indigo,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
+                                    const SizedBox(
+                                      height: 3,
                                     ),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context) {
-                                        return const TimerSreen();
-                                      }),
-                                    );
-                                  },
-                                  child: const Icon(
-                                    Icons.timer_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  'TIMER',
-                                  style: GoogleFonts.unbounded(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 10,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.indigo,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
+                                    Text(
+                                      'TIMER',
+                                      style: GoogleFonts.unbounded(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10,
+                                        color: Colors.black,
+                                      ),
                                     ),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).push(  
-                                      MaterialPageRoute(builder: (context) {
-                                        return const StopWatchScreen();
-                                      }),
-                                    );
-                                  },
-                                  child: const Icon(
-                                    Icons.alarm,
-                                    color: Colors.white,
-                                  ),
+                                  ],
                                 ),
-                                Text(
-                                  'STOP WATCH',
-                                  style: GoogleFonts.unbounded(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 10,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.indigo,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context) {
-                                        return AnalysisScreen(
-                                          date: widget.date,
-                                          completedDays:
-                                              daysNotifier.value.toString(),
-                                          completedHours: habitNameNotifier
-                                              .value
-                                              .toString(),
-                                          totalCount: widget.wheelCount,
-                                          totalDays: widget.totalDays,
-                                          categoryname: widget.wheelName,
+                                Column(
+                                  children: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.indigo.shade50,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30.0),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(builder: (context) {
+                                            return const StopWatchScreen();
+                                          }),
                                         );
-                                      }),
-                                    );
-                                  },
-                                  child: const Icon(
-                                    Icons.bar_chart,
-                                    color: Colors.white,
-                                  ),
+                                      },
+                                      child: const Icon(
+                                        Icons.alarm,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 3,
+                                    ),
+                                    Text(
+                                      'STOP WATCH',
+                                      style: GoogleFonts.unbounded(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  'HISTORY',
-                                  style: GoogleFonts.unbounded(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 10,
-                                    color: Colors.white,
-                                  ),
+                                Column(
+                                  children: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.indigo.shade50,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30.0),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(builder: (context) {
+                                            return AnalysisScreen(
+                                              date: widget.date,
+                                              completedDays:
+                                                  daysNotifier.value.toString(),
+                                              completedHours: habitNameNotifier
+                                                  .value
+                                                  .toString(),
+                                              totalCount: widget.wheelCount,
+                                              totalDays: widget.totalDays,
+                                              categoryname: widget.wheelName,
+                                            );
+                                          }),
+                                        );
+                                      },
+                                      child: const Icon(
+                                        Icons.bar_chart,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 3,
+                                    ),
+                                    Text(
+                                      'HISTORY',
+                                      style: GoogleFonts.unbounded(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
-                            ),
+                            )
                           ],
-                        )
-                      ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               )
             ],
           ),
@@ -982,7 +1000,7 @@ class _ScreenUserState extends State<ScreenUser> {
       habitNameNotifier.value = (habitName ?? 0) + 1;
 
       if (habitNameNotifier.value.toString() == widget.wheelCount) {
-         incrementCounterBasedOnDay(); 
+        incrementCounterBasedOnDay();
         daysNotifier.value = (days ?? 0) + 1;
         streakNotifier.value = (streak ?? 0) + 1;
         updateList(
@@ -1076,12 +1094,25 @@ class _ScreenUserState extends State<ScreenUser> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("Do you want to delete this habit?"),
+          content: const Text("Do you want to delete this habit?"),
+          title: Card(
+              color: Colors.indigo.shade50, child: const Center(child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("DELETE HABIT"),
+              ))),
           titleTextStyle: const TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.red, fontSize: 16),
+              fontWeight: FontWeight.w900, color: Colors.black, fontSize: 20),  
           actionsOverflowButtonSpacing: 20,
-          actions: [
+          actions: [ 
             ElevatedButton(
+              style: ElevatedButton.styleFrom( 
+                            backgroundColor: Colors.red, 
+                            
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                20,
+                              ),
+                            )),
               onPressed: () {
                 deleteData(indexValue);
                 Navigator.of(context).pushReplacement(
@@ -1090,13 +1121,13 @@ class _ScreenUserState extends State<ScreenUser> {
                   }),
                 );
               },
-              child: const Text("YES"),
+              child: const Text("DELETE",style: TextStyle(color: Colors.white)), 
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text("NO"),
+              child: const Text("GO BACK"), 
             ),
           ],
         );
@@ -1163,7 +1194,7 @@ class _ScreenUserState extends State<ScreenUser> {
           break;
         case 'Tuesday':
           tuesday += 1;
-           
+
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,
@@ -1206,7 +1237,7 @@ class _ScreenUserState extends State<ScreenUser> {
           break;
         case 'Friday':
           friday += 1;
-          
+
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,

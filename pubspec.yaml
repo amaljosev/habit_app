@@ -93,7 +93,8 @@ flutter:
     - lib/assets/svg/category.svg
     - lib/assets/svg/statistics-graph.svg 
     - lib/assets/svg/add.svg 
-    - lib/assets/images/bg_painted.png  
+    - lib/assets/images/bg_painted.png
+    - lib/assets/images/new_home.png  
 
 
     

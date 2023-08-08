@@ -9,6 +9,7 @@ import '../../functions/hive_functions/db_date.dart';
 import '../../functions/hive_functions/db_functions.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../start/screen_login.dart';
+import '../user/screen_userpage.dart';
 
 
 class JourneyPage extends StatefulWidget {
@@ -446,7 +447,15 @@ class _JourneyPageState extends State<JourneyPage> {
                     ),
                   ),
                 ),
-                
+                // IconButton(onPressed: (){
+                //   Navigator.of(context).push(
+                //                 MaterialPageRoute(builder: (context) {
+                //                   return const UserProfile( 
+                                    
+                //                   );
+                //                 }),
+                //               );
+                // }, icon: const Icon(Icons.accessible)),  
                 const SizedBox( 
                   height: 30,
                 ),

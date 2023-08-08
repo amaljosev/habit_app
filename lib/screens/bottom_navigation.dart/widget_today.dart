@@ -36,7 +36,7 @@ class _TodayWidgetState extends State<TodayWidget> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ScreenUser(
+                                    builder: (context) => ScreenUser( 
                                           id: DateTime.now()
                                               .millisecond
                                               .toString(),
