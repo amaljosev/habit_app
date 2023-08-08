@@ -36,6 +36,7 @@ dependencies:
   fl_chart: ^0.63.0
   flutter:
     sdk: flutter 
+  flutter_svg: ^2.0.7
   google_fonts: ^5.1.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0 
@@ -96,6 +97,12 @@ flutter:
     - lib/assets/images/screen_1.webp
     - lib/assets/images/screen_2.webp
     - lib/assets/images/screen_3.webp
+    - lib/assets/images/new_bg.jpg 
+    - lib/assets/svg/house.svg 
+    - lib/assets/svg/category.svg
+    - lib/assets/svg/statistics-graph.svg
+    - lib/assets/svg/add.svg 
+
 
     
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -41,17 +41,17 @@ class _StartScreenState extends State<StartScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
+    return Scaffold( 
+      body: Container(
+        width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('lib/assets/images/edit_user_bg.jpg'),
+              image: AssetImage('lib/assets/images/new_bg.jpg'),  
               fit: BoxFit.fill,
             ),
           ),
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(28.0),
             child: Column(
@@ -63,7 +63,7 @@ class _StartScreenState extends State<StartScreen> {
                     style: GoogleFonts.unbounded(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,  
                     ),
                   ),
                 ),
@@ -76,7 +76,7 @@ class _StartScreenState extends State<StartScreen> {
                         style: GoogleFonts.unbounded(
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black, 
                         ),
                       ),
                     ],
@@ -86,16 +86,16 @@ class _StartScreenState extends State<StartScreen> {
                   style: const TextStyle(color: Colors.black),
                   controller: totalDaysController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
+                    fillColor: Colors.indigo.shade50,
+                    border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     hintText: 'Days ',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    labelStyle: TextStyle(color: Colors.grey),
-                    prefixIcon: Icon(
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    labelStyle: const TextStyle(color: Colors.grey),
+                    prefixIcon: const Icon(
                       Icons.edit,
                       color: Colors.black,
                     ),
@@ -122,13 +122,14 @@ class _StartScreenState extends State<StartScreen> {
                             style: GoogleFonts.unbounded(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Colors.black,  
                             ),
                           ),
                         ],
                       ),
                     ),
                     WeekdaySelector(
+                      selectedFillColor: Colors.indigo,  
                       onChanged: (int day) {
                         setState(() {
                           final index = day % 7;
@@ -148,7 +149,7 @@ class _StartScreenState extends State<StartScreen> {
                             style: GoogleFonts.unbounded(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Colors.black, 
                             ),
                           ),
                           IconButton(
@@ -157,25 +158,22 @@ class _StartScreenState extends State<StartScreen> {
                               },
                               icon: const Icon(
                                 Icons.info_outline,
-                                color: Colors.white,
+                                color: Colors.black, 
                               )),
                         ],
                       ),
                     ),
                     Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white70,
-                        borderRadius: BorderRadius.all(
+                      decoration:  BoxDecoration(
+                        color: Colors.indigo.shade50,
+                        borderRadius: const BorderRadius.all( 
                           Radius.circular(30),
                         ),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Padding(
-                          //   padding: const EdgeInsets.all(8.0),
-                          //   child: Text('SCROLL THE WHEEL'),
-                          // ),
+                        children: [ 
+                          
                           Row(
                             children: [
                               Expanded(
@@ -206,7 +204,7 @@ class _StartScreenState extends State<StartScreen> {
                                           ),
                                           const SizedBox(
                                             width: 50,
-                                            child: Divider(color: Colors.grey),
+                                            child: Divider(color: Colors.indigo), 
                                           ),
                                         ],
                                       ),
@@ -269,7 +267,7 @@ class _StartScreenState extends State<StartScreen> {
                                             const SizedBox(
                                               width: 50,
                                               child:
-                                                  Divider(color: Colors.grey),
+                                                  Divider(color: Colors.indigo), 
                                             ),
                                           ],
                                         ),
@@ -289,7 +287,7 @@ class _StartScreenState extends State<StartScreen> {
                                   child: Text(
                                     'per day',
                                     style: GoogleFonts.andadaPro(
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo,  
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -314,7 +312,7 @@ class _StartScreenState extends State<StartScreen> {
                         style: GoogleFonts.unbounded(
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black, 
                         ),
                       ),
                     ],
@@ -324,10 +322,11 @@ class _StartScreenState extends State<StartScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ToggleSwitch(
+                      activeBgColor: [Colors.indigo],   
                       minWidth: 100.0,
                       initialLabelIndex: 0,
                       totalSwitches: 3,
-                      inactiveBgColor: Colors.grey,
+                      inactiveBgColor: Colors.indigo.shade50,    
                       labels: const ['MORNING', 'NOON', 'EVENING'],
                       icons: const [
                         Icons.sunny,
@@ -357,7 +356,15 @@ class _StartScreenState extends State<StartScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    OutlinedButton(
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom( 
+                            backgroundColor: Colors.indigo, 
+                            fixedSize: const Size(220, 34),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                20,
+                              ),
+                            )), 
                       onPressed: () {
                         if (totalDaysController.text.isNotEmpty) {
                           addDataToModel();
@@ -375,13 +382,13 @@ class _StartScreenState extends State<StartScreen> {
                                       ),
                                     ),
                                   )));
-
+      
                           print("Empty");
                         }
                       },
                       child: const Text(
                         'START',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white ), 
                       ),
                     ),
                   ],

@@ -9,7 +9,6 @@ import '../../functions/hive_functions/db_analysis.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/sign_up/db_model.dart';
-
 import '../home.dart';
 import 'edit_user.dart';
 
@@ -88,6 +87,7 @@ class _ScreenUserState extends State<ScreenUser> {
     lastDate = widget.lastDoneDate;
 
     DateTime currentDate = DateTime.now();
+    print('$lastDate         $currentDate'); 
 
     if (lastDate.day != currentDate.day) {
       habitNameNotifier.value = 0;
@@ -112,13 +112,7 @@ class _ScreenUserState extends State<ScreenUser> {
           );
 
           getallDatas();
-
-          habitName = 0;
-          days = int.parse(widget.today);
-          streak = int.parse(widget.streak);
-          habitNameNotifier.value = 0;
-          daysNotifier.value = int.parse(widget.today);
-          streakNotifier.value = int.parse(widget.streak);
+          
         },
       );
       if (isOneDayOrMoreDifference(lastDate, currentDate)) {
@@ -142,16 +136,12 @@ class _ScreenUserState extends State<ScreenUser> {
                   dateLastDone: currentDate),
             );
             getallDatas();
-            habitName = 0;
-            streak = 0;
-            days = int.parse(widget.today);
-            habitNameNotifier.value = 0;
-            streakNotifier.value = 0;
-            daysNotifier.value = int.parse(widget.today);
+           
+             
           },
         );
       }
-    }
+    } 
   }
 
   bool isOneDayOrMoreDifference(DateTime lastDate, DateTime currentDate) {
@@ -252,16 +242,17 @@ class _ScreenUserState extends State<ScreenUser> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    resetNotifiers(); 
+    return Scaffold( 
       body: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("lib/assets/images/user_bg.jpg"),
-            fit: BoxFit.fill,
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('lib/assets/images/new_bg.jpg'),  
+              fit: BoxFit.fill,
+            ),
           ),
-        ),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -280,7 +271,7 @@ class _ScreenUserState extends State<ScreenUser> {
                             },
                             child: const Icon(
                               Icons.arrow_back,
-                              color: Colors.white,
+                              color: Colors.black, 
                             ),
                           ),
                         )
@@ -312,12 +303,12 @@ class _ScreenUserState extends State<ScreenUser> {
                             },
                             icon: const Icon(
                               Icons.edit_outlined,
-                              color: Colors.white,
+                              color: Colors.black,
                             )),
-                        PopupMenuButton<SampleItem>(
-                          color: Colors.white,
+                        PopupMenuButton<SampleItem>(  
+                          color: Colors.indigo,      
                           initialValue: selectedMenu,
-                          onSelected: (SampleItem item) {
+                          onSelected: (SampleItem item) { 
                             setState(() {
                               selectedMenu = item;
                               if (item == SampleItem.itemOne) {
@@ -330,13 +321,13 @@ class _ScreenUserState extends State<ScreenUser> {
                           },
                           itemBuilder: (BuildContext context) =>
                               <PopupMenuEntry<SampleItem>>[
-                            const PopupMenuItem<SampleItem>(
+                            const PopupMenuItem<SampleItem>( 
                               value: SampleItem.itemOne,
-                              child: Text('Reset'),
+                              child: Text('Reset',style: TextStyle(color: Colors.white)),
                             ),
                             const PopupMenuItem<SampleItem>(
                               value: SampleItem.itemTwo,
-                              child: Text('Delete'),
+                              child: Text('Delete',style: TextStyle(color: Colors.white)), 
                             ),
                           ],
                         ),
@@ -347,12 +338,12 @@ class _ScreenUserState extends State<ScreenUser> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 8),
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  decoration: const BoxDecoration(
-                      color: Colors.white30,
-                      borderRadius:
-                          BorderRadius.only(topLeft: Radius.circular(30))),
+                child: Container( 
+                  // height: MediaQuery.of(context).size.height,
+                  // decoration:   BoxDecoration(
+                  //     color: Colors.indigo.shade100, 
+                  //     borderRadius:
+                  //         BorderRadius.only(topLeft: Radius.circular(30))),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -366,7 +357,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                 style: GoogleFonts.unbounded(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: Colors.black, 
                                 ),
                               ),
                             ),
@@ -413,7 +404,7 @@ class _ScreenUserState extends State<ScreenUser> {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.red.shade400,
+                                  color: Colors.indigo, 
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(20)),
                                 ),
@@ -461,7 +452,7 @@ class _ScreenUserState extends State<ScreenUser> {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.yellow.shade700,
+                                  color: Colors.indigo.shade400,   
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(20)),
                                 ),
@@ -509,7 +500,7 @@ class _ScreenUserState extends State<ScreenUser> {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.greenAccent.shade400,
+                                  color: Colors.indigo.shade300,  
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(20)),
                                 ),
@@ -568,8 +559,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                   Padding(
                                     padding: const EdgeInsets.all(18.0),
                                     child: SliderButton(
-                                      backgroundColor: Colors.greenAccent,
-                                      buttonColor: Colors.greenAccent.shade700,
+                                      backgroundColor: Colors.indigo.shade300,  
+                                      buttonColor: Colors.indigo , 
                                       buttonSize: 50,
                                       action: () {
                                         incrementTodayWheelCount();
@@ -826,7 +817,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                           color: Colors.white),
                                     ),
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.blueGrey,
+                                      backgroundColor: Colors.indigo, 
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(30.0),
@@ -846,7 +837,7 @@ class _ScreenUserState extends State<ScreenUser> {
                               children: [
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.blueGrey,
+                                    backgroundColor: Colors.indigo,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                     ),
@@ -877,7 +868,7 @@ class _ScreenUserState extends State<ScreenUser> {
                               children: [
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.blueGrey,
+                                    backgroundColor: Colors.indigo,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                     ),
@@ -908,7 +899,7 @@ class _ScreenUserState extends State<ScreenUser> {
                               children: [
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.blueGrey,
+                                    backgroundColor: Colors.indigo,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                     ),

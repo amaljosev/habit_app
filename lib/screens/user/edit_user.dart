@@ -81,7 +81,7 @@ class _EditUserState extends State<EditUser> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('lib/assets/images/edit_user_bg.jpg'), 
+              image: AssetImage('lib/assets/images/new_bg.jpg'), 
               fit: BoxFit.fill,
             ),
           ),
@@ -204,6 +204,7 @@ class _EditUserState extends State<EditUser> {
                         ],
                       ),
                       WeekdaySelector(
+                        selectedFillColor: Colors.blue, 
                         onChanged: (int day) {
                           setState(() {
                             final index = day % 7;
@@ -378,10 +379,11 @@ class _EditUserState extends State<EditUser> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ToggleSwitch(
+                        activeBgColor: [Colors.blue], 
                         minWidth: 100.0,
                         initialLabelIndex: 0,
                         totalSwitches: 3,
-                        inactiveBgColor: Colors.grey,
+                        inactiveBgColor: Colors.grey.shade200, 
                         labels: const ['Morning', 'Noon', 'Evening'],
                         icons: const [
                           Icons.sunny,
@@ -411,7 +413,7 @@ class _EditUserState extends State<EditUser> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      OutlinedButton(
+                      ElevatedButton( 
                         onPressed: () {
                           if (habitNameController.text.isNotEmpty) {
                             if (totalDaysController.text.isNotEmpty) {
@@ -453,7 +455,7 @@ class _EditUserState extends State<EditUser> {
                         },
                         child: const Text(
                           'START',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.blue),
                         ),
                       ),
                     ],

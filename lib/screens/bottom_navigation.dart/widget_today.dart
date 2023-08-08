@@ -14,60 +14,71 @@ class TodayWidget extends StatefulWidget {
 class _TodayWidgetState extends State<TodayWidget> {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: startListNotifier,
-      builder: (BuildContext ctx, List<StartModel> startList, Widget? child) {
-        return ListView.separated(
-            itemBuilder: (ctx, indexVal) {
-              final startdata = startList[indexVal];
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    InkWell( 
-                      onTap: () {
-                        Navigator.push( 
-                            context,
-                            MaterialPageRoute( 
-                                builder: (context) => ScreenUser(  
-                                      id: DateTime.now().millisecond.toString(),
-                                      index: indexVal,
-                                      habitName: startdata.habit,
-                                      totalDays: startdata.days,
-                                      wheelCount: startdata.wheelCount,
-                                      wheelName: startdata.wheelName,
-                                      todayCount: startdata.todayHours,  
-                                      today: startdata.today, 
-                                      streak: startdata.streak, 
-                                      week: startdata.week,
-                                      doItAt: startdata.doitAt, 
-                                      date: startdata.date,
-                                      lastDoneDate: startdata.dateLastDone, 
-                                    )));
-                        print(startList[indexVal]);
-                      },
-                      child: Card(
-                        color: Colors.white,
-                        child: ListTile(
-                          title: Text(
-                            startdata.habit,
-                            style: GoogleFonts.andadaPro( 
-                              color: Colors.blue.shade900,
-                              fontWeight: FontWeight.bold, 
+    return Container( 
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),   
+        child: ValueListenableBuilder(
+          valueListenable: startListNotifier,
+          builder: (BuildContext ctx, List<StartModel> startList, Widget? child) {
+            return ListView.separated(
+                itemBuilder: (ctx, indexVal) {
+                  final startdata = startList[indexVal];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5), 
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ScreenUser(
+                                          id: DateTime.now()
+                                              .millisecond
+                                              .toString(),
+                                          index: indexVal,
+                                          habitName: startdata.habit,
+                                          totalDays: startdata.days,
+                                          wheelCount: startdata.wheelCount,
+                                          wheelName: startdata.wheelName,
+                                          todayCount: startdata.todayHours,
+                                          today: startdata.today,
+                                          streak: startdata.streak,
+                                          week: startdata.week,
+                                          doItAt: startdata.doitAt,
+                                          date: startdata.date,
+                                          lastDoneDate: startdata.dateLastDone,
+                                        )));
+                            print(startList[indexVal]);
+                          },
+                          child: Card(
+                            color: Colors.indigo.shade50,
+                            child: ListTile(
+                              title: Text(
+                                startdata.habit,
+                                style: GoogleFonts.andadaPro(
+                                  color: Colors.blue.shade900,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(height: 0);
-            },
-            itemCount: startList.length);
-      },
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 0);
+                },
+                itemCount: startList.length);
+          },
+        ),
+      ),
     );
   }
 }

@@ -27,7 +27,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     child: Card(
-                      color: Colors.white,
+                      color: Colors.indigo.shade50, 
                       child: ListTile(
                         title: Text(
                           categoryList[index].trailingTitle.toString(),

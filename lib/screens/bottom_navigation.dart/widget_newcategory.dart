@@ -36,383 +36,393 @@ class _StartWidgetState extends State<StartWidget> {
   ];
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(28.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(28.0),
-              child: Text(
-                'START A HABIT',
-                style: GoogleFonts.unbounded(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+    return SafeArea( 
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20,right: 20,bottom: 60),    
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(28.0),
+                child: Text(
+                  'START A HABIT',
+                  style: GoogleFonts.unbounded(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black, 
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Text(
-                    'ENTER HABIT NAME',
-                    style: GoogleFonts.unbounded(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'ENTER HABIT NAME',
+                      style: GoogleFonts.unbounded(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            TextFormField(
-              style: const TextStyle(color: Colors.black),
-              controller: habit_NameController,
-              keyboardType: TextInputType.name,
-              decoration: const InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                hintText: 'HABIT NAME',
-                hintStyle: TextStyle(color: Colors.grey),
-                labelStyle: TextStyle(color: Colors.grey),
-                prefixIcon: Icon(
-                  Icons.edit,
-                  color: Colors.black,
-                ),
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Duration empty!';
-                } else {
-                  return null;
-                }
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Text(
-                    'ENTER TOTAL DAYS',
-                    style: GoogleFonts.unbounded(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            TextFormField(
-              style: const TextStyle(color: Colors.black),
-              controller: total_DaysController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                hintText: 'Days',
-                hintStyle: TextStyle(color: Colors.grey),
-                labelText: 'Duration',
-                labelStyle: TextStyle(color: Colors.grey),
-                prefixIcon: Icon(
-                  Icons.alarm,
-                  color: Colors.black,
-                ),
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Duration empty!';
-                } else {
-                  return null;
-                }
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        'SELECT WEEKDAYS',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                WeekdaySelector(
-                  selectedColor: Colors.white,
-                  fillColor: Colors.white,
-                  selectedFillColor: Colors.blue.shade200,
-                  onChanged: (int day) {
-                    setState(() {
-                      final index = day % 7;
-                      selectedWeekdays[index] = !selectedWeekdays[index];
-                      printSelectedWeekdays();
-                    });
-                  },
-                  values: selectedWeekdays,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-                    children: [
-                      Text(
-                        'COUNTER',
-                        style: GoogleFonts.unbounded(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      IconButton(
-                              onPressed: () {
-                                popDialogueBox();
-                              },
-                              icon: const Icon(
-                                Icons.info_outline,
-                                color: Colors.white,
-                              )),
-                    ],
-                  ),
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(30),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          child: ListWheelScrollView(
-                            itemExtent: 70,
-                            onSelectedItemChanged: (index) {
-                              wheel_count = index + 1;
-                              print('Days: $wheel_count');
-                            },
-                            physics: const FixedExtentScrollPhysics(),
-                            children: List<Widget>.generate(
-                              10,
-                              (index) => Column(
-                                children: [
-                                  Center(
-                                    child: Text(
-                                      '${index + 1}',
-                                      style: GoogleFonts.andadaPro(
-                                        color: Colors.blue.shade900,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(10.0),
-                                    child: Divider(color: Colors.grey),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Expanded(
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          child: ListWheelScrollView(
-                            itemExtent: 70,
-                            onSelectedItemChanged: (index) {
-                              wheel_name = index;
-                              setState(() {
-                                if (index == 0) {
-                                  wheel_name = 'HOURS';
-                                } else if (index == 1) {
-                                  wheel_name = 'PAGES';
-                                } else if (index == 2) {
-                                  wheel_name = 'KILOMETER';
-                                } else if (index == 3) {
-                                  wheel_name = 'METER';
-                                } else if (index == 4) {
-                                  wheel_name = 'LITER';
-                                } else if (index == 5) {
-                                  wheel_name = 'CUP';
-                                } else if (index == 6) {
-                                  wheel_name = 'RUPEE';
-                                }
-                              });
-                              print('Selected: $wheel_name');
-                            },
-                            physics: const FixedExtentScrollPhysics(),
-                            children: List<Widget>.generate(
-                              7,
-                              (index) => Column(
-                                children: [
-                                  Center(
-                                    child: Text(
-                                      [
-                                        'HOURS',
-                                        'PAGES',
-                                        'KILOMETE',
-                                        'METER',
-                                        'LITER',
-                                        'CUP',
-                                        'RUPEE',
-                                      ][index],
-                                      style: GoogleFonts.andadaPro(
-                                        color: Colors.blue.shade900,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(10.0),
-                                    child: Divider(color: Colors.grey),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Expanded(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          alignment: Alignment.center,
-                          child: Text(
-                            'per day',
-                            style: GoogleFonts.andadaPro(
-                              color: Colors.blue.shade900,
-                              fontWeight: FontWeight.bold,
-                            ),  
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 28, bottom: 8),
-                  child: Text(
-                    'DO IT AT',
-                    style: GoogleFonts.unbounded(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ToggleSwitch(
-                  activeBgColor: [Colors.blue.shade200],
-                  minWidth: 100.0,
-                  initialLabelIndex: 0,
-                  totalSwitches: 3,
-                  inactiveBgColor: Colors.blue.shade50,
-                  labels: const ['MORNING', 'NOON', 'EVENING'],
-                  icons: const [
-                    Icons.sunny,
-                    Icons.wb_sunny_outlined,
-                    Icons.bedtime_rounded
                   ],
-                  onToggle: (index) {
-                    List<String> labelValues = ['MORNING', 'NOON', 'EVENING'];
-                    if (index != null &&
-                        index >= 0 &&
-                        index < labelValues.length) {
-                      String selectedValue = labelValues[index];
-                      do_itAt = selectedValue;
-                    }
-                  },
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                OutlinedButton(
-                  onPressed: () {
-                    if (habit_NameController.text.isNotEmpty) {
-                      if (total_DaysController.text.isNotEmpty) {
-                        addDataToModel();
-                      } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                                backgroundColor: Colors.red,
-                                behavior: SnackBarBehavior.floating,
-                                margin: EdgeInsets.all(10),
-                                content: Center(
-                                  child: Text(
-                                    'Enter Duration of Habit',
-                                    style: TextStyle(
-                                      color: Colors.white,
+              ),
+              TextFormField(
+                style: const TextStyle(color: Colors.black),
+                controller: habit_NameController,
+                keyboardType: TextInputType.name,
+                decoration:  InputDecoration(
+                  filled: true,
+                  fillColor: Colors.indigo.shade50,
+                  border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)), 
+                  ),
+                  hintText: 'HABIT NAME',
+                  hintStyle: const TextStyle(color: Colors.grey),
+                  labelStyle: const TextStyle(color: Colors.grey),
+                  prefixIcon: const Icon(
+                    Icons.edit,
+                    color: Colors.black,
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Duration empty!';
+                  } else {
+                    return null;
+                  }
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'ENTER TOTAL DAYS',
+                      style: GoogleFonts.unbounded(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black ,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              TextFormField(
+                style: const TextStyle(color: Colors.black),
+                controller: total_DaysController,
+                keyboardType: TextInputType.number,
+                decoration:   InputDecoration(
+                  filled: true, 
+                  fillColor: Colors.indigo.shade50, 
+                  border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  hintText: 'Days',
+                  hintStyle: const TextStyle(color: Colors.grey),
+                  
+                  labelStyle: const TextStyle(color: Colors.grey),
+                  prefixIcon: const Icon(
+                    Icons.alarm,
+                    color: Colors.black,
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Duration empty!';
+                  } else {
+                    return null;
+                  }
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'SELECT WEEKDAYS',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black, 
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  WeekdaySelector(
+                    selectedColor: Colors.white,
+                    fillColor: Colors.white,
+                    selectedFillColor: Colors.indigo, 
+                    onChanged: (int day) {
+                      setState(() {
+                        final index = day % 7;
+                        selectedWeekdays[index] = !selectedWeekdays[index];
+                        printSelectedWeekdays();
+                      });
+                    },
+                    values: selectedWeekdays,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+                      children: [
+                        Text(
+                          'COUNTER',
+                          style: GoogleFonts.unbounded(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black, 
+                          ),
+                        ),
+                        IconButton(
+                                onPressed: () {
+                                  popDialogueBox();
+                                },
+                                icon: const Icon(
+                                  Icons.info_outline,
+                                  color: Colors.black, 
+                                )),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration:   BoxDecoration(
+                      color: Colors.indigo.shade100,  
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20), 
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.2,
+                            child: ListWheelScrollView(
+                              itemExtent: 70,
+                              onSelectedItemChanged: (index) {
+                                wheel_count = index + 1;
+                                print('Days: $wheel_count');
+                              },
+                              physics: const FixedExtentScrollPhysics(),
+                              children: List<Widget>.generate(
+                                10,
+                                (index) => Column(
+                                  children: [
+                                    Center(
+                                      child: Text(
+                                        '${index + 1}',
+                                        style: GoogleFonts.andadaPro(
+                                          color: Colors.blue.shade900,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                )));
-
+                                    const Padding(
+                                      padding: EdgeInsets.all(10.0),
+                                      child: Divider(color: Colors.blue), 
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.2,
+                            child: ListWheelScrollView(
+                              itemExtent: 70,
+                              onSelectedItemChanged: (index) {
+                                wheel_name = index;
+                                setState(() {
+                                  if (index == 0) {
+                                    wheel_name = 'HOURS';
+                                  } else if (index == 1) {
+                                    wheel_name = 'PAGES';
+                                  } else if (index == 2) {
+                                    wheel_name = 'KILOMETER';
+                                  } else if (index == 3) {
+                                    wheel_name = 'METER';
+                                  } else if (index == 4) {
+                                    wheel_name = 'LITER';
+                                  } else if (index == 5) {
+                                    wheel_name = 'CUP';
+                                  } else if (index == 6) {
+                                    wheel_name = 'RUPEE';
+                                  }
+                                });
+                                print('Selected: $wheel_name');
+                              },
+                              physics: const FixedExtentScrollPhysics(),
+                              children: List<Widget>.generate(
+                                7,
+                                (index) => Column(
+                                  children: [
+                                    Center(
+                                      child: Text(
+                                        [
+                                          'HOURS',
+                                          'PAGES',
+                                          'KILOMETE',
+                                          'METER',
+                                          'LITER',
+                                          'CUP',
+                                          'RUPEE',
+                                        ][index],
+                                        style: GoogleFonts.andadaPro(
+                                          color: Colors.blue.shade900,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    const Padding(
+                                      padding: EdgeInsets.all(10.0),
+                                      child: Divider(color: Colors.blue), 
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.2,
+                            alignment: Alignment.center,
+                            child: Text(
+                              'per day',
+                              style: GoogleFonts.andadaPro(
+                                color: Colors.blue.shade900,
+                                fontWeight: FontWeight.bold,
+                              ),  
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 28, bottom: 8),
+                    child: Text(
+                      'DO IT AT',
+                      style: GoogleFonts.unbounded(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ToggleSwitch(
+                    activeBgColor:const [Colors.indigo],  
+                    minWidth: 100.0,
+                    initialLabelIndex: 0,
+                    totalSwitches: 3,
+                    inactiveBgColor: Colors.indigo.shade100,   
+                    labels: const ['MORNING', 'NOON', 'EVENING'],
+                    icons: const [
+                      Icons.sunny,
+                      Icons.wb_sunny_outlined,
+                      Icons.bedtime_rounded
+                    ],
+                    onToggle: (index) {
+                      List<String> labelValues = ['MORNING', 'NOON', 'EVENING'];
+                      if (index != null &&
+                          index >= 0 &&
+                          index < labelValues.length) {
+                        String selectedValue = labelValues[index];
+                        do_itAt = selectedValue;
+                      }
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton( 
+                    style: ElevatedButton.styleFrom( 
+                          backgroundColor: Colors.indigo, 
+                          fixedSize: const Size(220, 34),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              20,
+                            ),
+                          )),
+                    onPressed: () {
+                      if (habit_NameController.text.isNotEmpty) {
+                        if (total_DaysController.text.isNotEmpty) {
+                          addDataToModel();
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                                  backgroundColor: Colors.red,
+                                  behavior: SnackBarBehavior.floating,
+                                  margin: EdgeInsets.all(10),
+                                  content: Center(
+                                    child: Text(
+                                      'Enter Duration of Habit',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )));
+    
+                          print("Empty");
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            backgroundColor: Colors.red,
+                            behavior: SnackBarBehavior.floating,
+                            margin: EdgeInsets.all(10),
+                            content: Center(
+                              child: Text(
+                                'Enter Name of Habit',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )));
+    
                         print("Empty");
                       }
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          backgroundColor: Colors.red,
-                          behavior: SnackBarBehavior.floating,
-                          margin: EdgeInsets.all(10),
-                          content: Center(
-                            child: Text(
-                              'Enter Name of Habit',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          )));
-
-                      print("Empty");
-                    }
-                  },
-                  child: const Text(
-                    'START',
-                    style: TextStyle(color: Colors.white),
+                    },
+                    child: const Text(
+                      'START',
+                      style: TextStyle(color: Colors.white),  
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

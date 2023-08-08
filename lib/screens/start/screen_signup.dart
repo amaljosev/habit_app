@@ -40,7 +40,7 @@ class _SignUpState extends State<SignUp> {
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("lib/assets/images/sign_up.jpg"),  
+                image: AssetImage("lib/assets/images/first_bg.jpg"),  
                 fit: BoxFit.cover,
               ),
             ),
@@ -168,7 +168,7 @@ class _SignUpState extends State<SignUp> {
                       child: Text(
                         "Sign up",
                         style: GoogleFonts.unbounded(
-                            fontWeight: FontWeight.w500, color: Colors.green), 
+                            fontWeight: FontWeight.w500, color: Colors.indigo),  
                       ),
                     ),
                   ],

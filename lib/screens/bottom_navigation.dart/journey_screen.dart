@@ -103,6 +103,7 @@ class _JourneyPageState extends State<JourneyPage> {
 
   @override
   Widget build(BuildContext context) {
+    
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
@@ -121,11 +122,11 @@ class _JourneyPageState extends State<JourneyPage> {
                     style: GoogleFonts.unbounded(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black, 
                     ),
                   ),
                   CircleAvatar(
-                    backgroundColor: Colors.white,
+                    backgroundColor: Colors.indigo, 
                     child: IconButton(
                         onPressed: () {
                           showDialog<String>(
@@ -326,17 +327,17 @@ class _JourneyPageState extends State<JourneyPage> {
                             ),
                           );
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.person,
-                          color: Colors.blue.shade800,
+                          color: Colors.white, 
                         )),
-                  ),
+                  ), 
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
-                  color: Colors.blue.shade100,  
+                  color: Colors.indigo.shade100,   
                   elevation: 5,
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -345,13 +346,13 @@ class _JourneyPageState extends State<JourneyPage> {
                       firstDay: DateTime.utc(2010, 10, 16),
                       lastDay: DateTime.utc(2035, 10, 16),
                       focusedDay: DateTime.now(),
-                      calendarFormat: CalendarFormat.month,
+                      calendarFormat: CalendarFormat.month, 
                       rangeStartDay: parsedDate,
                       rangeEndDay: DateTime.now(),
                       calendarStyle:  CalendarStyle(
-                        rangeHighlightColor: Colors.blue.shade400,  
+                        rangeHighlightColor: Colors.indigo.shade400,    
                         rangeEndDecoration: const BoxDecoration( 
-                          color: Colors.blue, 
+                          color: Colors.indigo, 
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey,
@@ -362,7 +363,7 @@ class _JourneyPageState extends State<JourneyPage> {
                           shape: BoxShape.circle,
                         ),
                         rangeStartDecoration: const BoxDecoration(
-                          color: Colors.blue,  
+                          color: Colors.indigo,   
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
@@ -372,10 +373,10 @@ class _JourneyPageState extends State<JourneyPage> {
                             ),
                           ],
                         ),
-                        withinRangeTextStyle: const TextStyle(color: Colors.white),
-                        rangeHighlightScale: 0.2,
+                        withinRangeTextStyle: const TextStyle(color: Colors.indigo),   
+                        rangeHighlightScale: 0.2, 
                         withinRangeDecoration: const BoxDecoration(
-                          color: Colors.green,
+                          color: Colors.indigo,   
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
@@ -386,7 +387,7 @@ class _JourneyPageState extends State<JourneyPage> {
                           ],
                         ),
                         todayDecoration: const BoxDecoration(
-                          color: Colors.blue, 
+                          color: Colors.indigo, 
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
@@ -398,15 +399,15 @@ class _JourneyPageState extends State<JourneyPage> {
                         ),
                       ),
                       daysOfWeekStyle: const DaysOfWeekStyle(
-                        weekdayStyle: TextStyle(color: Colors.blue),
-                        weekendStyle: TextStyle(color: Colors.blue),
+                        weekdayStyle: TextStyle(color: Colors.indigo),
+                        weekendStyle: TextStyle(color: Colors.indigo ),
                       ),
                       headerStyle: const HeaderStyle(
                         titleCentered: true,
                         headerPadding: EdgeInsets.all(15),
                         formatButtonVisible: false,
                         titleTextStyle: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.indigo, 
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
@@ -418,7 +419,7 @@ class _JourneyPageState extends State<JourneyPage> {
               Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: Card(
-                  color: Colors.blue.shade100,
+                  color: Colors.indigo.shade100, 
                   child: Column(
                     children: [
                       Padding(
@@ -427,7 +428,7 @@ class _JourneyPageState extends State<JourneyPage> {
                           style: GoogleFonts.unbounded(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white, 
+                            color: Colors.indigo,  
                           ),),
                       ), 
                       Padding(
