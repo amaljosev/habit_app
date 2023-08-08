@@ -70,7 +70,12 @@ class _HomeState extends State<Home> {
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(color: Colors.cyan),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('lib/assets/images/bg_painted.png'),    
+              fit: BoxFit.fill, 
+            ),
+          ),  
           child: Padding(
             padding: const EdgeInsets.only(
               left: 10,
@@ -87,16 +92,16 @@ class _HomeState extends State<Home> {
                         lastDay: DateTime.utc(2035, 10, 16),
                         focusedDay: DateTime.now(),
                         calendarFormat: CalendarFormat.week,
-                        calendarStyle: const CalendarStyle(
+                        calendarStyle:   CalendarStyle(
                           outsideDaysVisible: true,
-                          outsideTextStyle: TextStyle(color: Colors.white),
+                           
                           todayDecoration: BoxDecoration(
-                            color: Colors.indigo,
+                            color: Colors.indigo.shade900,   
                             shape: BoxShape.circle,
                           ),
                         ),
                         daysOfWeekStyle: const DaysOfWeekStyle(
-                          weekdayStyle: TextStyle(color: Colors.indigo),
+                          weekdayStyle: TextStyle(color: Colors.indigo), 
                           weekendStyle: TextStyle(color: Colors.indigo),
                         ),
                         headerStyle: HeaderStyle(
@@ -111,10 +116,10 @@ class _HomeState extends State<Home> {
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-                    Container(
+                    SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height,
-                        decoration: const BoxDecoration(color: Colors.cyan),
+                        height: MediaQuery.of(context).size.height, 
+                        
                         child: widgetOptions.elementAt(page)),
                   ],
                 ),
@@ -172,11 +177,11 @@ class _HomeState extends State<Home> {
                   size: 35, 
                 ),
         ],
-        color: Colors.blueGrey,
+        color: const Color.fromARGB(255, 25, 78, 122),  
         backgroundColor: Colors.transparent,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 900),
-        buttonBackgroundColor: Colors.blueGrey,
+        buttonBackgroundColor:const Color.fromARGB(255, 25, 78, 122), 
         onTap: (index) {
           setState(() {
             page = index;

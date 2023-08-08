@@ -105,240 +105,243 @@ class _JourneyPageState extends State<JourneyPage> {
   Widget build(BuildContext context) {
     
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const SizedBox(
-                    width: 25,
-                  ),
-                  Text(
-                    "JOURNEY",
-                    style: GoogleFonts.unbounded(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black, 
+      child: Container(
+        decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+      ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20,bottom: 140), 
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const SizedBox(
+                      width: 25,
                     ),
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Colors.indigo, 
-                    child: IconButton(
-                        onPressed: () {
-                          showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) =>
-                                FractionallySizedBox(
-                              heightFactor: 0.6,
-                              child: AlertDialog(
-                                content: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          IconButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              icon: const Icon(Icons.close)),
-                                          const SizedBox(
-                                            width: 55,
-                                          ),
-                                          Text(
-                                            'profile',
-                                            style: GoogleFonts.unbounded(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Card(
-                                        color: Colors.blue.shade50,
-                                        child: Column(
+                    Text(
+                      "JOURNEY",
+                      style: GoogleFonts.unbounded(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black, 
+                      ),
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.indigo, 
+                      child: IconButton(
+                          onPressed: () {
+                            showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  FractionallySizedBox(
+                                heightFactor: 0.6,
+                                child: AlertDialog(
+                                  content: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        Row(
                                           children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                children: [
-                                                  const CircleAvatar(
-                                                    backgroundColor:
-                                                        Colors.blue,
-                                                    child: Icon(
-                                                      Icons.person_2_outlined,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          username,
-                                                          style: GoogleFonts
-                                                              .unbounded(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.blue,
-                                                          ),
-                                                        ),
-                                                        Text(email),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
+                                            IconButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                icon: const Icon(Icons.close)),
+                                            const SizedBox(
+                                              width: 55,
+                                            ),
+                                            Text(
+                                              'profile',
+                                              style: GoogleFonts.unbounded(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
                                               ),
                                             ),
                                           ],
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 7,
-                                      ),
-                                      Container(
-                                        height: 30,
-                                        decoration: BoxDecoration(
-                                            color: Colors.green.shade100,
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(20),
-                                                    topRight:
-                                                        Radius.circular(20))),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                'RUNNING HABITS : $totalHabitsStarted',
+                                        Card(
+                                          color: Colors.blue.shade50,
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    const CircleAvatar(
+                                                      backgroundColor:
+                                                          Colors.blue,
+                                                      child: Icon(
+                                                        Icons.person_2_outlined,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            username,
+                                                            style: GoogleFonts
+                                                                .unbounded(
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              color: Colors.blue,
+                                                            ),
+                                                          ),
+                                                          Text(email),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 7,
+                                        ),
+                                        Container(
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                              color: Colors.green.shade100,
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(20),
+                                                      topRight:
+                                                          Radius.circular(20))),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  'RUNNING HABITS : $totalHabitsStarted',
+                                                  style: GoogleFonts.unbounded(
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Container(
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                            color: Colors.green.shade200,
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'TOTAL HABITS COMPLETED : $countComplete',
                                                 style: GoogleFonts.unbounded(
                                                   fontSize: 10,
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black,
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                          color: Colors.green.shade200,
+                                        const SizedBox(
+                                          height: 5,
                                         ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'TOTAL HABITS COMPLETED : $countComplete',
-                                              style: GoogleFonts.unbounded(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Container(
-                                        height: 30,
-                                        decoration: BoxDecoration(
-                                            color: Colors.green.shade100,
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(20),
-                                                    bottomRight:
-                                                        Radius.circular(20))),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'YOUR SCORE : $score',
-                                              style: GoogleFonts.unbounded(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 20),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            TextButton(
-                                              onPressed: () {
-                                                clearDatabase();
-                                                AnalysisDB().clearAllData();
-                                                Navigator.pop(context);
-                                              },
-                                              child: const Text(
-                                                'DELETE ALL HABITS',
-                                                style: TextStyle(
-                                                    color: Colors.red),
-                                              ),
-                                            ),
-                                            Column(
-                                              children: [
-                                                const Text('log out'), 
-                                                IconButton(
-                                                  onPressed: () {
-                                                    signOut(context);
-                                                  },
-                                                  icon: const Icon(Icons
-                                                      .power_settings_new_rounded),
+                                        Container(
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                              color: Colors.green.shade100,
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(20),
+                                                      bottomRight:
+                                                          Radius.circular(20))),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'YOUR SCORE : $score',
+                                                style: GoogleFonts.unbounded(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black,
                                                 ),
-                                              ],
-                                            ),
-                                          ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 20),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  clearDatabase();
+                                                  AnalysisDB().clearAllData();
+                                                  Navigator.pop(context);
+                                                },
+                                                child: const Text(
+                                                  'DELETE ALL HABITS',
+                                                  style: TextStyle(
+                                                      color: Colors.red),
+                                                ),
+                                              ),
+                                              Column(
+                                                children: [
+                                                  const Text('log out'), 
+                                                  IconButton(
+                                                    onPressed: () {
+                                                      signOut(context);
+                                                    },
+                                                    icon: const Icon(Icons
+                                                        .power_settings_new_rounded),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.person,
-                          color: Colors.white, 
-                        )),
-                  ), 
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Card(
-                  color: Colors.indigo.shade100,   
-                  elevation: 5,
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.person,
+                            color: Colors.white, 
+                          )),
+                    ), 
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: TableCalendar(
@@ -414,42 +417,42 @@ class _JourneyPageState extends State<JourneyPage> {
                     ),
                   ),
                 ),
-              ),
-              
-              Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Card(
-                  color: Colors.indigo.shade100, 
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Most active days',   
-                          style: GoogleFonts.unbounded(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.indigo,  
-                          ),),
-                      ), 
-                      Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: SizedBox(
-                          height: 200,
-                          child: MybarGraph(
-                            weeklySummary: weeklySummary,
+                
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Card(
+                    color: Colors.indigo.shade100, 
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('Most active days',   
+                            style: GoogleFonts.unbounded(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.indigo,  
+                            ),),
+                        ), 
+                        Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: SizedBox(
+                            height: 200,
+                            child: MybarGraph(
+                              weeklySummary: weeklySummary,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              
-              const SizedBox( 
-                height: 30,
-              ),
-
-            ],
+                
+                const SizedBox( 
+                  height: 30,
+                ),
+      
+              ],
+            ),
           ),
         ),
       ),

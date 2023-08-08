@@ -250,7 +250,7 @@ class _ScreenUserState extends State<ScreenUser> {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/assets/images/new_bg.jpg'),  
-              fit: BoxFit.fill,
+              fit: BoxFit.fill, 
             ),
           ),
         child: SingleChildScrollView(
