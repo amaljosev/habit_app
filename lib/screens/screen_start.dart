@@ -41,147 +41,195 @@ class _StartScreenState extends State<StartScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold( 
+    return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('lib/assets/images/new_bg.jpg'),  
-              fit: BoxFit.fill,
-            ),
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('lib/assets/images/new_bg.jpg'),
+            fit: BoxFit.fill,
           ),
-        child: SingleChildScrollView(
+        ),
+        child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(28.0),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(28.0),
-                  child: Text(
-                    'START A HABIT',
-                    style: GoogleFonts.unbounded(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,  
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        'ENTER DURATION',
-                        style: GoogleFonts.unbounded(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black, 
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                TextFormField(
-                  style: const TextStyle(color: Colors.black),
-                  controller: totalDaysController,
-                  keyboardType: TextInputType.number,
-                  decoration:  InputDecoration(
-                    filled: true,
-                    fillColor: Colors.indigo.shade50,
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    hintText: 'Days ',
-                    hintStyle: const TextStyle(color: Colors.grey),
-                    labelStyle: const TextStyle(color: Colors.grey),
-                    prefixIcon: const Icon(
-                      Icons.edit,
-                      color: Colors.black,
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Duration empty!';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Column(
+            padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              icon: const Icon(Icons.arrow_back_ios)),
+                          const SizedBox(
+                            width: 50,
+                          ),
                           Text(
-                            'SELECT WEEKDAYS',
-                            style: GoogleFonts.unbounded(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,  
+                            'START A HABIT',
+                            style: GoogleFonts.comicNeue(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 20,
+                              color: Colors.black,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    WeekdaySelector(
-                      selectedFillColor: Colors.indigo,  
-                      onChanged: (int day) {
-                        setState(() {
-                          final index = day % 7;
-                          selectedWeekdays[index] = !selectedWeekdays[index];
-                          printSelectedWeekdays();
-                        });
-                      },
-                      values: selectedWeekdays,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Card(
+                              color: Colors.indigo.shade50,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text(
+                                    'ENTER DURATION',
+                                    style: GoogleFonts.unbounded(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'COUNTER',
-                            style: GoogleFonts.unbounded(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black, 
-                            ),
+                      child: TextFormField(
+                        style: const TextStyle(color: Colors.black),
+                        controller: totalDaysController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.indigo.shade50,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
-                          IconButton(
-                              onPressed: () {
-                                popDialogueBox();
-                              },
-                              icon: const Icon(
-                                Icons.info_outline,
-                                color: Colors.black, 
-                              )),
-                        ],
+                          hintText: 'Days ',
+                          hintStyle: const TextStyle(color: Colors.grey),
+                          labelStyle: const TextStyle(color: Colors.grey),
+                          prefixIcon: const Icon(
+                            Icons.edit,
+                            color: Colors.black,
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Duration empty!';
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
                     ),
-                    Container(
-                      decoration:  BoxDecoration(
-                        color: Colors.indigo.shade50,
-                        borderRadius: const BorderRadius.all( 
-                          Radius.circular(30),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Card(
+                                  color: Colors.indigo.shade50,
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'SELECT WEEKDAYS',
+                                        style: GoogleFonts.unbounded(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [ 
-                          
-                          Row(
+                        Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: WeekdaySelector(
+                            selectedFillColor: Colors.indigo,
+                            onChanged: (int day) {
+                              setState(() {
+                                final index = day % 7;
+                                selectedWeekdays[index] =
+                                    !selectedWeekdays[index];
+                                printSelectedWeekdays();
+                              });
+                            },
+                            values: selectedWeekdays,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Card(
+                                  color: Colors.indigo.shade50,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(18.0),
+                                    child: Center(
+                                      child: Text(
+                                        'SET  COUNTER',
+                                        style: GoogleFonts.unbounded(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                color: Colors.indigo.shade50,
+                                child: IconButton(
+                                    onPressed: () {
+                                      popDialogueBox();
+                                    },
+                                    icon: const Icon(
+                                      Icons.info_outline,
+                                      color: Colors.black,
+                                    )),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding( 
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
                             children: [
                               Expanded(
                                 child: SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.4,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.2,
+                                  height: MediaQuery.of(context).size.height *
+                                      0.2,
                                   child: ListWheelScrollView(
                                     itemExtent: 50,
                                     onSelectedItemChanged: (index) {
@@ -197,14 +245,10 @@ class _StartScreenState extends State<StartScreen> {
                                             child: Text(
                                               '${index + 1}',
                                               style: GoogleFonts.andadaPro(
-                                                color: Colors.blue.shade900,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            width: 50,
-                                            child: Divider(color: Colors.indigo), 
                                           ),
                                         ],
                                       ),
@@ -212,13 +256,12 @@ class _StartScreenState extends State<StartScreen> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: 20),
                               Expanded(
                                 child: SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.4,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.2,
+                                  height: MediaQuery.of(context).size.height *
+                                      0.2,
                                   child: ListWheelScrollView(
                                     itemExtent: 50,
                                     onSelectedItemChanged: (index) {
@@ -259,15 +302,10 @@ class _StartScreenState extends State<StartScreen> {
                                               child: Text(
                                                 name,
                                                 style: GoogleFonts.andadaPro(
-                                                  color: Colors.blue.shade900,
+                                                  color: Colors.black,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              width: 50,
-                                              child:
-                                                  Divider(color: Colors.indigo), 
                                             ),
                                           ],
                                         ),
@@ -275,125 +313,127 @@ class _StartScreenState extends State<StartScreen> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: 20),
-                              const SizedBox(width: 20),
-                              Expanded(
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.2,
-                                  alignment: Alignment.center,
+                              Column( 
+                                children: [
+                                  Text( 
+                                        'per day',
+                                        style: GoogleFonts.andadaPro(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ), 
+                                      const SizedBox(height: 30,),  
+                                  
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Card(
+                              color: Colors.indigo.shade50,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    'per day',
-                                    style: GoogleFonts.andadaPro(
-                                      color: Colors.indigo,  
+                                    'DO IT AT',
+                                    style: GoogleFonts.unbounded(
+                                      fontSize: 10,
                                       fontWeight: FontWeight.bold,
+                                      color: Colors.black,
                                     ),
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        'DO IT AT',
-                        style: GoogleFonts.unbounded(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black, 
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ToggleSwitch(
+                          activeBgColor: [Colors.indigo],
+                          minWidth: 100.0,
+                          initialLabelIndex: 0,
+                          totalSwitches: 3,
+                          inactiveBgColor: Colors.indigo.shade50,
+                          labels: const ['MORNING', 'NOON', 'EVENING'],
+                          icons: const [
+                            Icons.sunny,
+                            Icons.wb_sunny_outlined,
+                            Icons.bedtime_rounded
+                          ],
+                          onToggle: (index) {
+                            List<String> labelValues = [
+                              'MORNING',
+                              'NOON',
+                              'EVENING'
+                            ];
+                            if (index != null &&
+                                index >= 0 &&
+                                index < labelValues.length) {
+                              String selectedValue = labelValues[index];
+                              doitAt = selectedValue;
+                              print('Switched to: $selectedValue');
+                            }
+                          },
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ToggleSwitch(
-                      activeBgColor: [Colors.indigo],   
-                      minWidth: 100.0,
-                      initialLabelIndex: 0,
-                      totalSwitches: 3,
-                      inactiveBgColor: Colors.indigo.shade50,    
-                      labels: const ['MORNING', 'NOON', 'EVENING'],
-                      icons: const [
-                        Icons.sunny,
-                        Icons.wb_sunny_outlined,
-                        Icons.bedtime_rounded
                       ],
-                      onToggle: (index) {
-                        List<String> labelValues = [
-                          'MORNING',
-                          'NOON',
-                          'EVENING'
-                        ];
-                        if (index != null &&
-                            index >= 0 &&
-                            index < labelValues.length) {
-                          String selectedValue = labelValues[index];
-                          doitAt = selectedValue;
-                          print('Switched to: $selectedValue');
-                        }
-                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.indigo,
+                              fixedSize: const Size(220, 34),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  20,
+                                ),
+                              )),
+                          onPressed: () {
+                            if (totalDaysController.text.isNotEmpty) {
+                              addDataToModel();
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                      backgroundColor: Colors.red,
+                                      behavior: SnackBarBehavior.floating,
+                                      margin: EdgeInsets.all(10),
+                                      content: Center(
+                                        child: Text(
+                                          'Enter Duration of Habit',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      )));
+
+                              print("Empty");
+                            }
+                          },
+                          child: const Text(
+                            'START',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom( 
-                            backgroundColor: Colors.indigo, 
-                            fixedSize: const Size(220, 34),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                20,
-                              ),
-                            )), 
-                      onPressed: () {
-                        if (totalDaysController.text.isNotEmpty) {
-                          addDataToModel();
-                        } else {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                                  backgroundColor: Colors.red,
-                                  behavior: SnackBarBehavior.floating,
-                                  margin: EdgeInsets.all(10),
-                                  content: Center(
-                                    child: Text(
-                                      'Enter Duration of Habit',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  )));
-      
-                          print("Empty");
-                        }
-                      },
-                      child: const Text(
-                        'START',
-                        style: TextStyle(color: Colors.white ), 
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+              ),
             ),
           ),
         ),
@@ -459,8 +499,10 @@ class _StartScreenState extends State<StartScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Scroll and select items based on your habit'),   
-          titleTextStyle: const TextStyle(color: Colors.indigo),  
+          title: const Text(
+              'Scroll and select items based on your habit.Set wheel for how many times do you want perform '),
+          titleTextStyle:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           content: Image.asset('lib/assets/videos/info scroll .gif'),
         );
       },

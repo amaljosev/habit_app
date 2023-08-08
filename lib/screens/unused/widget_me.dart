@@ -1,172 +1,84 @@
-// import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-// import '../../functions/hive_functions/db_functions.dart';
-// import '../home.dart';
-// import '../start/screen_login.dart';
+import 'package:flutter/material.dart';
+import 'package:selector_wheel/selector_wheel/models/selector_wheel_value.dart';
+import 'package:selector_wheel/selector_wheel/selector_wheel.dart';
 
-// class MeWdget extends StatefulWidget {
-//   const MeWdget({super.key});
+class ScreenMe extends StatefulWidget {
+  const ScreenMe({super.key});
 
-//   @override
-//   State<MeWdget> createState() => _MeWdgetState();
-// }
+  @override
+  State<ScreenMe> createState() => _ScreenMeState();
+}
 
-// class _MeWdgetState extends State<MeWdget> {
-//   String username = '';
-
-//   @override
-//   void initState() {
-//     super.initState();
-
-//     fetchUsername();
-//   }
-
-//   void fetchUsername() async {
-//     final db = SignUpDB();
-//     final dataList = await db.getDatas();
-//     if (dataList.isNotEmpty) {
-//       setState(() {
-//         username = dataList.last.username;
-//       });
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Container(
-//         width: MediaQuery.of(context).size.width,
-//         height: MediaQuery.of(context).size.height,
-//         decoration: const BoxDecoration(
-//           image: DecorationImage(
-//             image: AssetImage("lib/assets/images/profile_bg.jpg"),
-//             fit: BoxFit.fill,
-//           ),
-//         ),
-//         child: SafeArea(
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.end,
-//             children: [
-//               Row(
-//                 children: [
-//                   IconButton(
-//                       onPressed: () {
-//                         Navigator.of(context).pushReplacement(
-//                           MaterialPageRoute(builder: (context) {
-//                             return const Home();
-//                           }),
-//                         );
-//                       },
-//                       icon: const Icon(Icons.arrow_back))
-//                 ],
-//               ),
-//               Container(
-//                 width: MediaQuery.of(context).size.width,
-//                 height: MediaQuery.of(context).size.height * 0.8, 
-//                 decoration: BoxDecoration(
-//                   color: Colors.white30,
-//                   borderRadius: const BorderRadius.only(
-//                       topLeft: Radius.circular(30),
-//                       topRight: Radius.circular(30)),
-//                   border: Border.all(
-//                     color: Colors.white, 
-//                     width: 2.0,
-//                   ),
-//                 ),
-//                 child: DefaultTabController(
-//                   length: 2,
-//                   child: Column(
-//                     children: [
-//                       const TabBar(
-//                         tabs: [
-//                           Tab(text: 'STARTED HABITS'),
-//                           Tab(
-//                             text: 'COMPLETED HABITS',
-//                           ),
-//                         ],
-//                         labelColor: Colors.black,
-//                         unselectedLabelColor: Colors.black54,
-//                         indicatorSize: TabBarIndicatorSize.tab,
-//                         indicatorColor: Colors.black,
-//                       ),
-//                       Expanded(
-//                         child: TabBarView(
-//                           children: [
-//                             Padding(
-//                               padding: const EdgeInsets.all(8.0),
-//                               child: Column(
-//                                 crossAxisAlignment: CrossAxisAlignment.start,
-//                                 children: [
-//                                   Padding(
-//                                     padding: const EdgeInsets.all(8.0),
-//                                     child: Text(
-//                                       'TOTAL HABITS STARTED : 5',
-//                                       style: GoogleFonts.unbounded(
-//                                         fontSize: 10,
-//                                         fontWeight: FontWeight.bold,
-//                                         color: Colors.white,
-//                                       ),
-//                                     ),
-//                                   ),
-//                                   Padding(
-//                                     padding: const EdgeInsets.all(8.0),
-//                                     child: Text(
-//                                       'TOTAL HABITS STARTED : 5',
-//                                       style: GoogleFonts.unbounded(
-//                                         fontSize: 10,
-//                                         fontWeight: FontWeight.bold,
-//                                         color: Colors.white,
-//                                       ),
-//                                     ),
-//                                   ),
-//                                 ],
-//                               ),
-//                             ),
-//                             Padding(
-//                               padding: const EdgeInsets.all(8.0),
-//                               child: Text(
-//                                 'COMPLETED : 2',
-//                                 style: GoogleFonts.unbounded(
-//                                   fontSize: 10,
-//                                   fontWeight: FontWeight.bold,
-//                                   color: Colors.white,
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                       Padding(
-//                         padding: const EdgeInsets.only(top: 50, right: 30),
-//                         child: Row(
-//                           mainAxisAlignment: MainAxisAlignment.end,
-//                           children: [
-//                             ElevatedButton(
-//                               onPressed: () {
-//                                 signOut(context);
-//                               },
-//                               child: const Text('sign out'),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ], 
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-
-//   signOut(BuildContext ctx) async {
-//     final _sharedPrefs = await SharedPreferences.getInstance();
-//     _sharedPrefs.clear();
-//     Navigator.of(ctx).pushAndRemoveUntil(
-//         MaterialPageRoute(builder: (ctx) => const LogInPage()),
-//         (route) => false);
-//   }
-// }
+class _ScreenMeState extends State<ScreenMe> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold( 
+        body: Row(
+      
+      children: [
+        // Overriding the colors of the selector wheel
+        Card( 
+          child: SizedBox(
+            width: 100,
+            height: 100, 
+            child: SelectorWheel(
+              childCount: 10,
+              convertIndexToValue: (int index) {
+                // Convert the index to a value from 1 to 10
+                final value = index + 1;
+        
+                return SelectorWheelValue(
+                  label: '$value', // Display the value directly
+                  value: value.toDouble(),
+                  index: index,
+                );
+              },
+              onValueChanged: (SelectorWheelValue<double> value) {
+                // Print the selected value
+                print(value);
+              },
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 100,
+          height: 100, 
+          child: SelectorWheel(
+            childCount: 10, // Including weekdays, so total items are 10
+            convertIndexToValue: (int index) {
+              if (index < 7) {
+                // Return weekday names for index 0 to 6
+                final weekdays = [
+                  'Sunday',
+                  'Monday',
+                  'Tuesday',
+                  'Wednesday',
+                  'Thursday',
+                  'Friday',
+                  'Saturday'
+                ];
+                final value = weekdays[index];
+                return SelectorWheelValue(
+                  label: value,
+                  value: value,
+                  index: index,
+                );
+              } else {
+                // Return numeric values for index 7 to 9 (as per previous example)
+                final numericValue = index - 6;
+                return SelectorWheelValue(
+                  label: '$numericValue',
+                  value: numericValue.toDouble(),
+                  index: index,
+                );
+              }
+            },
+            onValueChanged: (SelectorWheelValue<dynamic> value) {
+              print(value);
+            },
+          ),
+        )
+      ],
+    ));
+  }
+}

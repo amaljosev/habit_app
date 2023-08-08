@@ -41,6 +41,7 @@ dependencies:
   intl: ^0.17.0
   percent_indicator: ^4.2.3
   scrollable_clean_calendar: ^1.4.0
+  selector_wheel: ^1.1.2
   shared_preferences: ^2.2.0 
   slider_button: ^2.0.0
   smooth_page_indicator: ^1.1.0

@@ -55,7 +55,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
-                color: Colors.blue.shade100,
+                color: Colors.indigo.shade50, 
                 elevation: 5,
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
@@ -68,9 +68,9 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                     rangeStartDay: widget.date,
                     rangeEndDay: DateTime.now(),
                     calendarStyle: CalendarStyle(
-                      rangeHighlightColor: Colors.red.shade300,
+                      rangeHighlightColor: Colors.indigo.shade300,
                       rangeEndDecoration: const BoxDecoration(
-                        color: Colors.red,
+                        color: Colors.indigo,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey,
@@ -81,7 +81,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                         shape: BoxShape.circle,
                       ),
                       rangeStartDecoration: const BoxDecoration(
-                        color: Colors.red,
+                        color: Colors.indigo,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -95,7 +95,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                           const TextStyle(color: Colors.white),
                       rangeHighlightScale: 0.3,
                       withinRangeDecoration: const BoxDecoration(
-                        color: Colors.red,
+                        color: Colors.indigo, 
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -106,7 +106,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                         ],
                       ),
                       todayDecoration: const BoxDecoration(
-                        color: Colors.green,
+                        color: Colors.indigo, 
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -118,15 +118,15 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                       ),
                     ),
                     daysOfWeekStyle: const DaysOfWeekStyle(
-                      weekdayStyle: TextStyle(color: Colors.blue),
-                      weekendStyle: TextStyle(color: Colors.blue),
+                      weekdayStyle: TextStyle(color: Colors.indigo),
+                      weekendStyle: TextStyle(color: Colors.indigo),
                     ),
                     headerStyle: const HeaderStyle(
                       titleCentered: true,
                       headerPadding: EdgeInsets.all(15),
                       formatButtonVisible: false,
                       titleTextStyle: TextStyle(
-                          color: Colors.blue,
+                          color: Colors.indigo, 
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),

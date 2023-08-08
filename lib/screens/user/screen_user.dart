@@ -1096,23 +1096,24 @@ class _ScreenUserState extends State<ScreenUser> {
         return AlertDialog(
           content: const Text("Do you want to delete this habit?"),
           title: Card(
-              color: Colors.indigo.shade50, child: const Center(child: Padding(
+              color: Colors.indigo.shade50,
+              child: const Center(
+                  child: Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text("DELETE HABIT"),
               ))),
           titleTextStyle: const TextStyle(
-              fontWeight: FontWeight.w900, color: Colors.black, fontSize: 20),  
+              fontWeight: FontWeight.w900, color: Colors.black, fontSize: 20),
           actionsOverflowButtonSpacing: 20,
-          actions: [ 
+          actions: [
             ElevatedButton(
-              style: ElevatedButton.styleFrom( 
-                            backgroundColor: Colors.red, 
-                            
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                20,
-                              ),
-                            )),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      20,
+                    ),
+                  )),
               onPressed: () {
                 deleteData(indexValue);
                 Navigator.of(context).pushReplacement(
@@ -1121,13 +1122,14 @@ class _ScreenUserState extends State<ScreenUser> {
                   }),
                 );
               },
-              child: const Text("DELETE",style: TextStyle(color: Colors.white)), 
+              child:
+                  const Text("DELETE", style: TextStyle(color: Colors.white)),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text("GO BACK"), 
+              child: const Text("GO BACK"),
             ),
           ],
         );
