@@ -16,18 +16,24 @@ class CategoryWidget extends StatefulWidget {
 class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 60),   
-      child: ValueListenableBuilder(
-        valueListenable: startListNotifier,
-        builder: (BuildContext ctx, List<StartModel> startList, Widget? child) {
-          return Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ListView.separated(
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+      ),
+      child: Padding(
+        padding:
+            const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 120),
+        child: ValueListenableBuilder(
+          valueListenable: startListNotifier,
+          builder:
+              (BuildContext ctx, List<StartModel> startList, Widget? child) {
+            return ListView.separated(
                 itemBuilder: (context, index) {
                   return InkWell(
-                    child: Card(
-                      color: Colors.indigo.shade50, 
+                    child: Card( 
+                      color: Colors.indigo.shade50,
                       child: ListTile(
                         title: Text(
                           categoryList[index].trailingTitle.toString(),
@@ -46,7 +52,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                 builder: (context) => StartScreen(
                                     name: categoryList[index].trailingTitle)),
                           );
-                          print(categoryList[index].trailingTitle); 
+                          print(categoryList[index].trailingTitle);
                         },
                       ),
                     ),
@@ -54,12 +60,12 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                 },
                 separatorBuilder: (context, index) {
                   return const SizedBox(
-                    height: 20,
+                    height: 5,
                   );
                 },
-                itemCount: categoryList.length),
-          );
-        },
+                itemCount: categoryList.length);
+          },
+        ),
       ),
     );
   }
@@ -148,12 +154,11 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           Icons.pool,
           color: Colors.blueGrey,
         ),
-        
         trailingTitle: 'Swimming'),
-        CategoryModel(
+    CategoryModel(
         leadingIcon: const Icon(
-          Icons.local_florist_outlined, 
-          color: Colors.orangeAccent,  
+          Icons.local_florist_outlined,
+          color: Colors.orangeAccent,
         ),
         trailingTitle: 'Gardening'),
     CategoryModel(
