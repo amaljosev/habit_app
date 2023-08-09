@@ -40,7 +40,6 @@ dependencies:
   hive_flutter: ^1.1.0 
   intl: ^0.17.0
   percent_indicator: ^4.2.3
-  scrollable_clean_calendar: ^1.4.0
   selector_wheel: ^1.1.2
   shared_preferences: ^2.2.0 
   slider_button: ^2.0.0
@@ -50,7 +49,6 @@ dependencies:
   toggle_switch: ^2.1.0
   video_player: ^2.7.0
   weekday_selector: ^1.1.0
-  wheel_chooser: ^1.1.2
 
 
 dev_dependencies:
@@ -76,26 +74,22 @@ flutter:
   assets:
     - lib/assets/videos/splash.mp4   
     - lib/assets/images/first_bg.jpg        
-    - lib/assets/videos/tick.gif
     - lib/assets/videos/trophy.gif    
-    - lib/assets/images/log_in.jpg
-    - lib/assets/images/start_habit.jpg 
     - lib/assets/images/timer_bg.jpg  
     - lib/assets/images/stop_watch_bg.jpg 
-    - lib/assets/videos/category_completed.gif
     - lib/assets/videos/habit_completed.gif  
     - lib/assets/videos/completed.gif 
-    - lib/assets/videos/info scroll .gif 
     - lib/assets/images/screen_1.webp
     - lib/assets/images/screen_2.webp
     - lib/assets/images/screen_3.webp
     - lib/assets/images/new_bg.jpg 
     - lib/assets/svg/house.svg  
     - lib/assets/svg/category.svg
-    - lib/assets/svg/statistics-graph.svg 
+    - lib/assets/svg/statistics-graph.svg  
     - lib/assets/svg/add.svg 
     - lib/assets/images/bg_painted.png
-    - lib/assets/images/new_home.png  
+    - lib/assets/images/new_home.png
+    - lib/assets/videos/information.gif  
 
 
     

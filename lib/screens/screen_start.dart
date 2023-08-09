@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/functions/hive_functions/db_start.dart';
 import 'package:habit_project/models/sign_up/db_model.dart';
+import 'package:selector_wheel/selector_wheel/models/selector_wheel_value.dart';
+import 'package:selector_wheel/selector_wheel/selector_wheel.dart';
 
 import 'package:weekday_selector/weekday_selector.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -63,29 +65,33 @@ class _StartScreenState extends State<StartScreen> {
               ),
               child: SingleChildScrollView(
                 child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              icon: const Icon(Icons.arrow_back_ios)),
-                          const SizedBox(
-                            width: 50,
+                  children: [ 
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  icon: const Icon(Icons.arrow_back_ios)),
+                              const SizedBox(
+                                width: 50,
+                              ),
+                              Text(
+                                'START A HABIT',
+                                style: GoogleFonts.comicNeue(
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            'START A HABIT',
-                            style: GoogleFonts.comicNeue(
-                              fontWeight: FontWeight.w800,
-                              fontSize: 20,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -220,114 +226,67 @@ class _StartScreenState extends State<StartScreen> {
                             ],
                           ),
                         ),
-                        Padding( 
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  height: MediaQuery.of(context).size.height *
-                                      0.2,
-                                  child: ListWheelScrollView(
-                                    itemExtent: 50,
-                                    onSelectedItemChanged: (index) {
-                                      wheelCount = index + 1;
-                                      print('Days: $wheelCount');
-                                    },
-                                    physics: const FixedExtentScrollPhysics(),
-                                    children: List<Widget>.generate(
-                                      10,
-                                      (index) => Column(
-                                        children: [
-                                          Center(
-                                            child: Text(
-                                              '${index + 1}',
-                                              style: GoogleFonts.andadaPro(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: SelectorWheel(
+                                childCount: 10,
+                                convertIndexToValue: (int index) {
+                                  final value = index + 1;
+                                  return SelectorWheelValue(
+                                    label: '$value',
+                                    value: value.toDouble(),
+                                    index: index,
+                                  );
+                                },
+                                onValueChanged:
+                                    (SelectorWheelValue<double> value) {
+                                  wheelCount = value.label;
+                                  print(wheelCount);
+                                },
                               ),
-                              Expanded(
-                                child: SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  height: MediaQuery.of(context).size.height *
-                                      0.2,
-                                  child: ListWheelScrollView(
-                                    itemExtent: 50,
-                                    onSelectedItemChanged: (index) {
-                                      wheelName = index;
-                                      setState(() {
-                                        if (index == 0) {
-                                          wheelName = 'HOURS';
-                                        } else if (index == 1) {
-                                          wheelName = 'PAGES';
-                                        } else if (index == 2) {
-                                          wheelName = 'KILOMETER';
-                                        } else if (index == 3) {
-                                          wheelName = 'METER';
-                                        } else if (index == 4) {
-                                          wheelName = 'LITER';
-                                        } else if (index == 5) {
-                                          wheelName = 'CUP';
-                                        } else if (index == 6) {
-                                          wheelName = 'RUPEE';
-                                        }
-                                      });
-                                      print('Selected: $wheelName');
-                                    },
-                                    physics: const FixedExtentScrollPhysics(),
-                                    children: [
-                                      for (var name in [
-                                        'HOUR',
-                                        'PAGES',
-                                        'KILOMETER',
-                                        'METER',
-                                        'LITER',
-                                        'CUP',
-                                        'RUPEE'
-                                      ])
-                                        Column(
-                                          children: [
-                                            Center(
-                                              child: Text(
-                                                name,
-                                                style: GoogleFonts.andadaPro(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                    ],
-                                  ),
-                                ),
+                            ),
+                            SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: SelectorWheel(
+                                childCount: 7,
+                                convertIndexToValue: (int index) {
+                                  final units = [
+                                    'Hours',
+                                    'Pages',
+                                    'Kilometer',
+                                    'Meter',
+                                    'Liter',
+                                    'Cups',
+                                    'Rupees',
+                                  ];
+                                  final value = units[index];
+                                  return SelectorWheelValue(
+                                    label: value,
+                                    value: value,
+                                    index: index,
+                                  );
+                                },
+                                onValueChanged:
+                                    (SelectorWheelValue<dynamic> value) {
+                                  wheelName = value.label;
+                                  print(wheelName);
+                                },
                               ),
-                              Column( 
-                                children: [
-                                  Text( 
-                                        'per day',
-                                        style: GoogleFonts.andadaPro(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ), 
-                                      const SizedBox(height: 30,),  
-                                  
-                                ],
+                            ),
+                            Text( 
+                              'per day',
+                              style: GoogleFonts.varela(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -503,7 +462,7 @@ class _StartScreenState extends State<StartScreen> {
               'Scroll and select items based on your habit.Set wheel for how many times do you want perform '),
           titleTextStyle:
               const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-          content: Image.asset('lib/assets/videos/info scroll .gif'),
+          content: Image.asset('lib/assets/videos/information.gif'), 
         );
       },
     );

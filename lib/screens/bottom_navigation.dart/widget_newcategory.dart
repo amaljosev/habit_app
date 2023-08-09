@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:selector_wheel/selector_wheel/models/selector_wheel_value.dart';
+import 'package:selector_wheel/selector_wheel/selector_wheel.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import '../../functions/hive_functions/db_start.dart';
@@ -51,7 +53,7 @@ class _StartWidgetState extends State<StartWidget> {
                 Padding(
                   padding: const EdgeInsets.all(28.0),
                   child: Text(
-                    'START A HABIT', 
+                    'START A HABIT',
                     style: GoogleFonts.comicNeue(
                       fontWeight: FontWeight.w800,
                       fontSize: 20,
@@ -63,9 +65,9 @@ class _StartWidgetState extends State<StartWidget> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Expanded( 
-                        child: Card( 
-                          color: Colors.indigo.shade50, 
+                      Expanded(
+                        child: Card(
+                          color: Colors.indigo.shade50,
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -114,9 +116,9 @@ class _StartWidgetState extends State<StartWidget> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Expanded( 
+                      Expanded(
                         child: Card(
-                          color: Colors.indigo.shade50, 
+                          color: Colors.indigo.shade50,
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -161,26 +163,25 @@ class _StartWidgetState extends State<StartWidget> {
                     }
                   },
                 ),
-                
                 Column(
                   children: [
-                     Padding(
+                    Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Expanded (
+                          Expanded(
                             child: Card(
-                              color: Colors.indigo.shade50, 
+                              color: Colors.indigo.shade50,
                               child: Center(
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0), 
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                     'SELECT WEEKDAYS',
-                                style: GoogleFonts.unbounded(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                                    style: GoogleFonts.unbounded(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -210,14 +211,14 @@ class _StartWidgetState extends State<StartWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded( 
+                          Expanded(
                             child: Card(
                               color: Colors.indigo.shade50,
                               child: Center(
                                 child: Padding(
                                   padding: const EdgeInsets.all(18.0),
                                   child: Text(
-                                    'SET  COUNTER', 
+                                    'SET  COUNTER',
                                     style: GoogleFonts.unbounded(
                                       fontSize: 10,
                                       fontWeight: FontWeight.bold,
@@ -228,8 +229,8 @@ class _StartWidgetState extends State<StartWidget> {
                               ),
                             ),
                           ),
-                          Card( 
-                            color: Colors.indigo.shade50, 
+                          Card(
+                            color: Colors.indigo.shade50,
                             child: IconButton(
                                 onPressed: () {
                                   popDialogueBox();
@@ -242,119 +243,76 @@ class _StartWidgetState extends State<StartWidget> {
                         ],
                       ),
                     ),
-                    Row( 
-                      children: [ 
-                        Expanded(
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height: MediaQuery.of(context).size.height * 0.2,
-                            child: ListWheelScrollView(
-                              itemExtent: 70,
-                              onSelectedItemChanged: (index) {
-                                wheel_count = index + 1;
-                                print('Days: $wheel_count');
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: SelectorWheel(
+                              childCount: 10,
+                              convertIndexToValue: (int index) {
+                                final value = index + 1;
+                                return SelectorWheelValue(
+                                  label: '$value',
+                                  value: value.toDouble(),
+                                  index: index,
+                                );
                               },
-                              physics: const FixedExtentScrollPhysics(),
-                              children: List<Widget>.generate(
-                                10,
-                                (index) => Column(
-                                  children: [
-                                    Center(
-                                      child: Text(
-                                        '${index + 1}',
-                                        style: GoogleFonts.andadaPro( 
-                                          color:Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                    
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                         
-                        Expanded(
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height: MediaQuery.of(context).size.height * 0.2,
-                            child: ListWheelScrollView(
-                              itemExtent: 70,
-                              onSelectedItemChanged: (index) {
-                                wheel_name = index;
-                                setState(() {
-                                  if (index == 0) {
-                                    wheel_name = 'HOURS';
-                                  } else if (index == 1) {
-                                    wheel_name = 'PAGES';
-                                  } else if (index == 2) {
-                                    wheel_name = 'KILOMETER';
-                                  } else if (index == 3) {
-                                    wheel_name = 'METER';
-                                  } else if (index == 4) {
-                                    wheel_name = 'LITER';
-                                  } else if (index == 5) {
-                                    wheel_name = 'CUP';
-                                  } else if (index == 6) {
-                                    wheel_name = 'RUPEE';
-                                  }
-                                });
-                                print('Selected: $wheel_name');
+                              onValueChanged:
+                                  (SelectorWheelValue<double> value) {
+                                wheel_count = value.label;
+                                print(wheel_count);
                               },
-                              physics: const FixedExtentScrollPhysics(),
-                              children: List<Widget>.generate(
-                                7,
-                                (index) => Column(
-                                  children: [
-                                    Center(
-                                      child: Text(
-                                        [
-                                          'HOURS',
-                                          'PAGES',
-                                          'KILOMETE',
-                                          'METER',
-                                          'LITER',
-                                          'CUP',
-                                          'RUPEE',
-                                        ][index],
-                                        style: GoogleFonts.andadaPro(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                    
-                                  ],
-                                ),
-                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 20),
-                        Expanded(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height: MediaQuery.of(context).size.height * 0.2,
-                            alignment: Alignment.center,
-                            child: Text(
-                              'per day',
-                              style: GoogleFonts.andadaPro(
-                                color: Colors.black, 
-                                fontWeight: FontWeight.bold,
-                              ),
+                          SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: SelectorWheel(
+                              childCount: 7,
+                              convertIndexToValue: (int index) {
+                                final units = [
+                                  'Hours',
+                                  'Pages',
+                                  'Kilometer',
+                                  'Meter',
+                                  'Liter',
+                                  'Cups',
+                                  'Rupees',
+                                ];
+                                final value = units[index];
+                                return SelectorWheelValue(
+                                  label: value,
+                                  value: value,
+                                  index: index,
+                                );
+                              },
+                              onValueChanged:
+                                  (SelectorWheelValue<dynamic> value) {
+                                wheel_name = value.label;
+                                print(wheel_name);
+                              },
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                          Text(
+                            'per day',
+                            style: GoogleFonts.varela(            
+                              fontSize: 18,   
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ), 
                   ],
                 ),
-                
                 Row(
                   children: [
-                    Expanded( 
+                    Expanded(
                       child: Card(
                         color: Colors.indigo.shade50,
                         child: Center(
@@ -376,7 +334,7 @@ class _StartWidgetState extends State<StartWidget> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ToggleSwitch( 
+                  child: ToggleSwitch(
                     activeBgColor: const [Colors.indigo],
                     minWidth: 100.0,
                     initialLabelIndex: 0,
@@ -389,11 +347,7 @@ class _StartWidgetState extends State<StartWidget> {
                       Icons.bedtime_rounded
                     ],
                     onToggle: (index) {
-                      List<String> labelValues = [
-                        'MORNING',
-                        'NOON',
-                        'EVENING'
-                      ];
+                      List<String> labelValues = ['MORNING', 'NOON', 'EVENING'];
                       if (index != null &&
                           index >= 0 &&
                           index < labelValues.length) {
@@ -525,7 +479,7 @@ class _StartWidgetState extends State<StartWidget> {
         return AlertDialog(
           title: const Text('Scroll and select items based on your habit'),
           titleTextStyle: const TextStyle(color: Colors.indigo),
-          content: Image.asset('lib/assets/videos/info scroll .gif'),
+          content: Image.asset('lib/assets/videos/information.gif'), 
         );
       },
     );

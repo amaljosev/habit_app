@@ -9,7 +9,7 @@ import '../../functions/hive_functions/db_date.dart';
 import '../../functions/hive_functions/db_functions.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../start/screen_login.dart';
-import '../unused/widget_me.dart';
+import 'widget_me.dart';
 
 
 
@@ -378,7 +378,7 @@ class _JourneyPageState extends State<JourneyPage> {
                             ),
                           ],
                         ),
-                        withinRangeTextStyle: const TextStyle(color: Colors.indigo),   
+                        withinRangeTextStyle: const TextStyle(color: Colors.white),    
                         rangeHighlightScale: 0.2, 
                         withinRangeDecoration: const BoxDecoration(
                           color: Colors.indigo,   
