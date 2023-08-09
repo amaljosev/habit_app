@@ -27,11 +27,8 @@ class _ScreenMeState extends State<ScreenMe> {
     super.initState();
 
     fetchUsername();
-    fetchCount(); 
+    fetchCount();
   }
-
-
-
 
   void fetchUsername() async {
     final db = SignUpDB();
@@ -77,7 +74,8 @@ class _ScreenMeState extends State<ScreenMe> {
         ),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(top: 20, bottom: 140,left: 8,right: 8), 
+            padding:
+                const EdgeInsets.only(top: 20, bottom: 140, left: 8, right: 8),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -85,7 +83,7 @@ class _ScreenMeState extends State<ScreenMe> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     CircleAvatar(
-                      backgroundColor: Colors.indigo.shade50, 
+                      backgroundColor: Colors.indigo.shade50,
                       child: IconButton(
                           onPressed: () {
                             showDialog<String>(
@@ -128,7 +126,7 @@ class _ScreenMeState extends State<ScreenMe> {
                                                   children: [
                                                     const CircleAvatar(
                                                       backgroundColor:
-                                                          Colors.indigo, 
+                                                          Colors.indigo,
                                                       child: Icon(
                                                         Icons.person_2_outlined,
                                                         color: Colors.white,
@@ -152,7 +150,7 @@ class _ScreenMeState extends State<ScreenMe> {
                                                                   FontWeight
                                                                       .bold,
                                                               color:
-                                                                  Colors.black, 
+                                                                  Colors.black,
                                                             ),
                                                           ),
                                                           Text(email),
@@ -174,7 +172,6 @@ class _ScreenMeState extends State<ScreenMe> {
                           },
                           icon: const Icon(
                             Icons.person,
-                            
                           )),
                     ),
                     Text(
@@ -379,7 +376,9 @@ class _ScreenMeState extends State<ScreenMe> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.indigo.shade50),
-                  onPressed: () {},
+                  onPressed: () { 
+                    
+                  },
                   child: Text(
                     'CLick me',
                     style: GoogleFonts.comicNeue(
@@ -469,6 +468,35 @@ class _ScreenMeState extends State<ScreenMe> {
                   padding: EdgeInsets.all(28.0),
                   child: Divider(thickness: 2),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center, 
+                  children: [
+                    Padding( 
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text(
+                        'Privacy Policy |',  
+                        style: GoogleFonts.comicNeue(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text(
+                    ' Terms of conditions',
+                    style: GoogleFonts.comicNeue(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15,
+                      color: Colors.black,
+                    ),
+                      ),
+                    ),
+                    
+                    
+                  ],
+                )
               ],
             ),
           ),
