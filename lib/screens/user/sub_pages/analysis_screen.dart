@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-
 class AnalysisScreen extends StatefulWidget {
   const AnalysisScreen(
       {super.key,
@@ -36,8 +35,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
     double percentDay = completedDays / totalDays;
     double percentCount = completedCount / totalCount;
     return Scaffold(
-      appBar: AppBar( 
-        
+      appBar: AppBar(
         centerTitle: true,
         title: Text(
           'STATISTICS',
@@ -45,7 +43,6 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
             fontWeight: FontWeight.w800,
             fontSize: 20,
             color: Colors.black,
-            
           ),
         ),
       ),
@@ -55,7 +52,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
-                color: Colors.indigo.shade50, 
+                color: Colors.indigo.shade50,
                 elevation: 5,
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
@@ -95,7 +92,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                           const TextStyle(color: Colors.white),
                       rangeHighlightScale: 0.3,
                       withinRangeDecoration: const BoxDecoration(
-                        color: Colors.indigo, 
+                        color: Colors.indigo,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -106,7 +103,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                         ],
                       ),
                       todayDecoration: const BoxDecoration(
-                        color: Colors.indigo, 
+                        color: Colors.indigo,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -126,7 +123,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                       headerPadding: EdgeInsets.all(15),
                       formatButtonVisible: false,
                       titleTextStyle: TextStyle(
-                          color: Colors.indigo, 
+                          color: Colors.indigo,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),

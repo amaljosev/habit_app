@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:habit_project/screens/bottom_navigation.dart/widget_me.dart';
 import 'package:habit_project/screens/bottom_navigation.dart/widget_newcategory.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../functions/hive_functions/db_functions.dart';
@@ -41,6 +42,7 @@ class _HomeState extends State<Home> {
     CategoryWidget(),
     StartWidget(),
     JourneyPage(),
+    ScreenMe(), 
   ];
 
   void onItemTapped(int index) {
@@ -55,27 +57,16 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.blueGrey,
       extendBody: true,
-      // appBar: page == 0
-      //     ? CalendarAppBar(
-      //         onDateChanged: (value) => print(value),
-      //         firstDate: DateTime.now().subtract(const Duration(days: 140)),
-      //         lastDate: DateTime.now(),
-      //         accent:Colors.indigo,
-
-      //         backButton: false,
-      //       )
-      //     : null,
-      // extendBodyBehindAppBar: mounted,
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('lib/assets/images/bg_painted.png'),    
-              fit: BoxFit.fill, 
+              image: AssetImage('lib/assets/images/bg_painted.png'),
+              fit: BoxFit.fill,
             ),
-          ),  
+          ),
           child: Padding(
             padding: const EdgeInsets.only(
               left: 10,
@@ -92,16 +83,15 @@ class _HomeState extends State<Home> {
                         lastDay: DateTime.utc(2035, 10, 16),
                         focusedDay: DateTime.now(),
                         calendarFormat: CalendarFormat.week,
-                        calendarStyle:   CalendarStyle(
+                        calendarStyle: CalendarStyle(
                           outsideDaysVisible: true,
-                           
                           todayDecoration: BoxDecoration(
-                            color: Colors.indigo.shade900,   
+                            color: Colors.indigo.shade900,
                             shape: BoxShape.circle,
                           ),
                         ),
                         daysOfWeekStyle: const DaysOfWeekStyle(
-                          weekdayStyle: TextStyle(color: Colors.indigo), 
+                          weekdayStyle: TextStyle(color: Colors.indigo),
                           weekendStyle: TextStyle(color: Colors.indigo),
                         ),
                         headerStyle: HeaderStyle(
@@ -118,8 +108,7 @@ class _HomeState extends State<Home> {
                       ),
                     SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height, 
-                        
+                        height: MediaQuery.of(context).size.height,
                         child: widgetOptions.elementAt(page)),
                   ],
                 ),
@@ -136,7 +125,6 @@ class _HomeState extends State<Home> {
           shouldChangeIconColor(page, 0)
               ? SvgPicture.asset(
                   'lib/assets/svg/house.svg',
-                  
                   width: 35,
                   height: 35,
                 )
@@ -147,7 +135,7 @@ class _HomeState extends State<Home> {
                 ),
           shouldChangeIconColor(page, 1)
               ? SvgPicture.asset(
-                  'lib/assets/svg/category.svg', 
+                  'lib/assets/svg/category.svg',
                   width: 35,
                   height: 35,
                 )
@@ -155,33 +143,46 @@ class _HomeState extends State<Home> {
                   Icons.assignment_sharp,
                   color: Colors.white,
                   size: 35,
-                ),shouldChangeIconColor(page, 2)
-              ?
-          SvgPicture.asset(
-            'lib/assets/svg/add.svg', 
-            width: 35,
-            height: 35,
-          ): const Icon(
+                ),
+          shouldChangeIconColor(page, 2)
+              ? SvgPicture.asset(
+                  'lib/assets/svg/add.svg',
+                  width: 35,
+                  height: 35,
+                )
+              : const Icon(
                   Icons.add,
                   color: Colors.white,
                   size: 35,
-                ),shouldChangeIconColor(page, 3)
-              ?
-          SvgPicture.asset(
-            'lib/assets/svg/statistics-graph.svg',
-            width: 35, 
-            height: 35,
-          ): const Icon(
-                  Icons.bar_chart, 
-                  color: Colors.white,
-                  size: 35, 
                 ),
+          shouldChangeIconColor(page, 3)
+              ? SvgPicture.asset(
+                  'lib/assets/svg/statistics-graph.svg',
+                  width: 35,
+                  height: 35,
+                )
+              : const Icon(
+                  Icons.bar_chart,
+                  color: Colors.white,
+                  size: 35,
+                ),
+                shouldChangeIconColor(page, 3)
+              ? const Icon(
+                  Icons.person,
+                  color: Colors.white,
+                  size: 35,
+                )
+              : const Icon(
+                  Icons.person_2_outlined, 
+                  color: Colors.white,
+                  size: 35,
+                ), 
         ],
-        color: const Color.fromARGB(255, 25, 78, 122),  
+        color: const Color.fromARGB(255, 25, 78, 122),
         backgroundColor: Colors.transparent,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 900),
-        buttonBackgroundColor:const Color.fromARGB(255, 25, 78, 122), 
+        buttonBackgroundColor: const Color.fromARGB(255, 25, 78, 122),
         onTap: (index) {
           setState(() {
             page = index;
