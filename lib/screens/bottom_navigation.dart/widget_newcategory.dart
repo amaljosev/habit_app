@@ -61,113 +61,120 @@ class _StartWidgetState extends State<StartWidget> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Card(
-                          color: Colors.indigo.shade50,
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'ENTER HABIT NAME',
-                                style: GoogleFonts.unbounded(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Card(
+                        color: Colors.indigo.shade50,
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'ENTER HABIT NAME',
+                              style: GoogleFonts.unbounded(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                TextFormField(
-                  style: const TextStyle(color: Colors.black),
-                  controller: habit_NameController,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.indigo.shade50,
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    hintText: 'HABIT NAME',
-                    hintStyle: const TextStyle(color: Colors.grey),
-                    labelStyle: const TextStyle(color: Colors.grey),
-                    prefixIcon: const Icon(
-                      Icons.edit,
-                      color: Colors.black,
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Duration empty!';
-                    } else {
-                      return null;
-                    }
-                  },
+                  ],
                 ),
+                    
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Card(
-                          color: Colors.indigo.shade50,
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'ENTER TOTAL DAYS',
-                                style: GoogleFonts.unbounded(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                  padding: const EdgeInsets.all(5.0), 
+                  child: TextFormField(
+                    style: const TextStyle(color: Colors.black),
+                    controller: habit_NameController,
+                    keyboardType: TextInputType.name,
+                    decoration: const InputDecoration(
+                      focusedBorder: InputBorder.none,
+                      filled: true,
+                      fillColor: Colors.black12,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      hintText: 'HABIT NAME',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      labelStyle: TextStyle(color: Colors.grey),
+                      prefixIcon: Icon(
+                        Icons.edit,
+                        color: Colors.black,
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Duration empty!';
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                ),
+                const SizedBox(height: 15,), 
+                Row(
+                  children: [
+                    Expanded(
+                      child: Card(
+                        color: Colors.indigo.shade50,
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'ENTER TOTAL DAYS',
+                              style: GoogleFonts.unbounded(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),   
+                  child: TextFormField(
+                    style: const TextStyle(color: Colors.black),
+                    controller: total_DaysController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      focusedBorder: InputBorder.none,
+                      filled: true,
+                      fillColor: Colors.black12,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      hintText: 'Days',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      labelStyle: TextStyle(color: Colors.grey),
+                      prefixIcon: Icon(
+                        Icons.alarm,
+                        color: Colors.black,
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Duration empty!';
+                      } else {
+                        return null;
+                      }
+                    },
                   ),
                 ),
-                TextFormField(
-                  style: const TextStyle(color: Colors.black),
-                  controller: total_DaysController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.indigo.shade50,
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    hintText: 'Days',
-                    hintStyle: const TextStyle(color: Colors.grey),
-                    labelStyle: const TextStyle(color: Colors.grey),
-                    prefixIcon: const Icon(
-                      Icons.alarm,
-                      color: Colors.black,
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Duration empty!';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
+                const SizedBox(height: 15,),      
                 Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                     padding: const EdgeInsets.only(top: 8.0,left: 8.0,right: 8.0),
+                      child: Row( 
                         children: [
                           Expanded(
                             child: Card(
@@ -175,7 +182,7 @@ class _StartWidgetState extends State<StartWidget> {
                               child: Center(
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(
+                                  child: Text(  
                                     'SELECT WEEKDAYS',
                                     style: GoogleFonts.unbounded(
                                       fontSize: 10,
@@ -190,6 +197,7 @@ class _StartWidgetState extends State<StartWidget> {
                         ],
                       ),
                     ),
+                    
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: WeekdaySelector(
@@ -206,6 +214,7 @@ class _StartWidgetState extends State<StartWidget> {
                         values: selectedWeekdays,
                       ),
                     ),
+                       
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -299,38 +308,41 @@ class _StartWidgetState extends State<StartWidget> {
                           ),
                           Text(
                             'per day',
-                            style: GoogleFonts.varela(            
-                              fontSize: 18,   
+                            style: GoogleFonts.varela(
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),
                           ),
                         ],
                       ),
-                    ), 
+                    ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Card(
-                        color: Colors.indigo.shade50,
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'DO IT AT',
-                              style: GoogleFonts.unbounded(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                Padding( 
+                  padding: const EdgeInsets.only(left: 14,right: 14),  
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Card(
+                          color: Colors.indigo.shade50,
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'DO IT AT',
+                                style: GoogleFonts.unbounded(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -339,7 +351,7 @@ class _StartWidgetState extends State<StartWidget> {
                     minWidth: 100.0,
                     initialLabelIndex: 0,
                     totalSwitches: 3,
-                    inactiveBgColor: Colors.indigo.shade100,
+                    inactiveBgColor: Colors.black12, 
                     labels: const ['MORNING', 'NOON', 'EVENING'],
                     icons: const [
                       Icons.sunny,
@@ -479,7 +491,7 @@ class _StartWidgetState extends State<StartWidget> {
         return AlertDialog(
           title: const Text('Scroll and select items based on your habit'),
           titleTextStyle: const TextStyle(color: Colors.indigo),
-          content: Image.asset('lib/assets/videos/information.gif'), 
+          content: Image.asset('lib/assets/videos/information.gif'),
         );
       },
     );

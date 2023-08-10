@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/functions/hive_functions/db_functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../functions/hive_functions/db_analysis.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../start/screen_login.dart';
+import 'help/screenhelp.dart';
 
 class ScreenMe extends StatefulWidget {
   const ScreenMe({super.key});
@@ -79,207 +81,151 @@ class _ScreenMeState extends State<ScreenMe> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.indigo.shade50,
-                      child: IconButton(
-                          onPressed: () {
-                            showDialog<String>(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  FractionallySizedBox(
-                                heightFactor: 0.6,
-                                child: AlertDialog(
-                                  content: SingleChildScrollView(
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    color: Colors.indigo.shade50,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  const CircleAvatar(
+                                    backgroundColor: Colors.indigo,
+                                    child: Icon(
+                                      Icons.person_2_outlined,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Row(
-                                          children: [
-                                            IconButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                icon: const Icon(Icons.close)),
-                                            const SizedBox(
-                                              width: 55,
-                                            ),
-                                            Text(
-                                              'Details',
-                                              style: GoogleFonts.comicNeue(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Card(
-                                          color: Colors.blue.shade50,
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Row(
-                                                  children: [
-                                                    const CircleAvatar(
-                                                      backgroundColor:
-                                                          Colors.indigo,
-                                                      child: Icon(
-                                                        Icons.person_2_outlined,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            username,
-                                                            style: GoogleFonts
-                                                                .unbounded(
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  Colors.black,
-                                                            ),
-                                                          ),
-                                                          Text(email),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
+                                        Text(
+                                          username,
+                                          style: GoogleFonts.unbounded(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
                                           ),
                                         ),
+                                        Text(email),
                                       ],
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.person,
-                          )),
-                    ),
-                    Text(
-                      'Profile',
-                      style: GoogleFonts.comicNeue(
-                        fontWeight: FontWeight.w800,
-                        fontSize: 30,
-                        color: Colors.black,
-                      ),
-                    ),
-                    CircleAvatar(
-                      backgroundColor: Colors.indigo.shade50,
-                      child: IconButton(
-                          onPressed: () {
-                            showDialog<String>(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  FractionallySizedBox(
-                                heightFactor: 0.6,
-                                child: AlertDialog(
-                                  content: SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            IconButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                icon: const Icon(Icons.close)),
-                                            const SizedBox(
-                                              width: 55,
-                                            ),
-                                            Text(
-                                              'Settings',
-                                              style: GoogleFonts.unbounded(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
+                              CircleAvatar(
+                                backgroundColor: Colors.indigo.shade50,
+                                child: IconButton(
+                                    onPressed: () {
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            FractionallySizedBox(
+                                          heightFactor: 0.6,
+                                          child: AlertDialog(
+                                            content: SingleChildScrollView(
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      IconButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          icon: const Icon(
+                                                              Icons.close)),
+                                                      const SizedBox(
+                                                        width: 55,
+                                                      ),
+                                                      Text(
+                                                        'Settings',
+                                                        style: GoogleFonts
+                                                            .unbounded(
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Card(
+                                                    color:
+                                                        Colors.indigo.shade50,
+                                                  ),
+                                                  Column(
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          const Text(
+                                                            'DELETE ALL HABITS',
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.red),
+                                                          ),
+                                                          ElevatedButton(
+                                                            onPressed: () {
+                                                              clearDatabase();
+                                                              AnalysisDB()
+                                                                  .clearAllData();
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            child: const Icon(
+                                                                Icons.delete),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          const Text(
+                                                            'Log out',
+                                                          ),
+                                                          ElevatedButton(
+                                                            onPressed: () {
+                                                              signOut(context);
+                                                            },
+                                                            child: const Icon(Icons
+                                                                .power_settings_new_rounded),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                          ],
+                                          ),
                                         ),
-                                        Card(
-                                          color: Colors.indigo.shade50,
-                                        ),
-                                        Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                const Text(
-                                                  'DELETE ALL HABITS',
-                                                  style: TextStyle(
-                                                      color: Colors.red),
-                                                ),
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    clearDatabase();
-                                                    AnalysisDB().clearAllData();
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child:
-                                                      const Icon(Icons.delete),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                const Text(
-                                                  'Log out',
-                                                ),
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    signOut(context);
-                                                  },
-                                                  child: const Icon(Icons
-                                                      .power_settings_new_rounded),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                      );
+                                    },
+                                    icon: const Icon(
+                                      Icons.settings,
+                                    )),
                               ),
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.settings,
-                          )),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(28.0),
-                  child: Divider(thickness: 2),
-                ),
-                const SizedBox(
-                  height: 7,
-                ),
+                const Divider(thickness: 2),
                 Container(
                   height: 30,
                   decoration: BoxDecoration(
@@ -351,7 +297,7 @@ class _ScreenMeState extends State<ScreenMe> {
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.all(28.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Divider(thickness: 2),
                 ),
                 Text(
@@ -376,8 +322,12 @@ class _ScreenMeState extends State<ScreenMe> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.indigo.shade50),
-                  onPressed: () { 
-                    
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) {
+                        return const ScreenHelp();
+                      }),
+                    );
                   },
                   child: Text(
                     'CLick me',
@@ -414,7 +364,95 @@ class _ScreenMeState extends State<ScreenMe> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.indigo.shade50),
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => FractionallySizedBox(
+                        heightFactor: 0.6,
+                        child: AlertDialog(
+                          content: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Enjoying Our App',
+                                    style: GoogleFonts.unbounded(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  'Drag and share your responce',
+                                  style: GoogleFonts.comicNeue(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Text(
+                                  'It will help to improve the app',
+                                  style: GoogleFonts.comicNeue(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: RatingBar.builder(
+                                      initialRating: 0,
+                                      itemCount: 5,
+                                      itemBuilder: (context, index) {
+                                        switch (index) {
+                                          case 0:
+                                            return const Icon(
+                                              Icons.sentiment_very_dissatisfied,
+                                              color: Colors.red,
+                                            );
+                                          case 1:
+                                            return const Icon(
+                                              Icons.sentiment_dissatisfied,
+                                              color: Colors.redAccent,
+                                            );
+                                          case 2:
+                                            return const Icon(
+                                              Icons.sentiment_neutral,
+                                              color: Colors.amber,
+                                            );
+                                          case 3:
+                                            return const Icon(
+                                              Icons.sentiment_satisfied,
+                                              color: Colors.lightGreen,
+                                            );
+                                          case 4:
+                                            return const Icon(
+                                              Icons.sentiment_very_satisfied,
+                                              color: Colors.green,
+                                            );
+                                          default:
+                                            return Container();
+                                        }
+                                      },
+                                      onRatingUpdate: (rating) {
+                                        print(rating);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                   child: Text(
                     'Rate now',
                     style: GoogleFonts.comicNeue(
@@ -461,7 +499,9 @@ class _ScreenMeState extends State<ScreenMe> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.indigo.shade50),
-                  onPressed: () {},
+                  onPressed: () { 
+                  
+                  },
                   child: const Icon(Icons.share),
                 ),
                 const Padding(
@@ -469,12 +509,12 @@ class _ScreenMeState extends State<ScreenMe> {
                   child: Divider(thickness: 2),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center, 
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding( 
+                    Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
-                        'Privacy Policy |',  
+                        'Privacy Policy |',
                         style: GoogleFonts.comicNeue(
                           fontWeight: FontWeight.w800,
                           fontSize: 15,
@@ -485,24 +525,52 @@ class _ScreenMeState extends State<ScreenMe> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
-                    ' Terms of conditions',
-                    style: GoogleFonts.comicNeue(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 15,
-                      color: Colors.black,
-                    ),
+                        ' Terms and conditions', 
+                        style: GoogleFonts.comicNeue(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                    
-                    
                   ],
-                )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      'lib/assets/svg/instagram (1).svg',
+                      width: 20,
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        '|',
+                        style: GoogleFonts.halant(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    SvgPicture.asset(
+                      'lib/assets/svg/linkedin.svg',
+                      width: 20,
+                      height: 20,
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  shareYourApp()  {
+     
   }
 
   signOut(BuildContext ctx) async {

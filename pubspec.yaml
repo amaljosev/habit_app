@@ -34,10 +34,11 @@ dependencies:
   fl_chart: ^0.63.0
   flutter:
     sdk: flutter 
+  flutter_rating_bar: ^4.0.1
   flutter_svg: ^2.0.7
   google_fonts: ^5.1.0
   hive: ^2.2.3
-  hive_flutter: ^1.1.0 
+  hive_flutter: ^1.1.0  
   intl: ^0.17.0
   percent_indicator: ^4.2.3
   selector_wheel: ^1.1.2
@@ -49,6 +50,7 @@ dependencies:
   toggle_switch: ^2.1.0
   video_player: ^2.7.0
   weekday_selector: ^1.1.0
+  
 
 
 dev_dependencies:
@@ -89,7 +91,10 @@ flutter:
     - lib/assets/svg/add.svg 
     - lib/assets/images/bg_painted.png
     - lib/assets/images/new_home.png
-    - lib/assets/videos/information.gif  
+    - lib/assets/videos/information.gif
+    - lib/assets/svg/instagram (1).svg 
+    - lib/assets/svg/linkedin.svg 
+
 
 
     

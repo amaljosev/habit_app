@@ -45,6 +45,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           ),
                         ),
                         leading: categoryList[index].leadingIcon,
+                       
                         onTap: () {
                           Navigator.push(
                             context,
