@@ -280,7 +280,8 @@ class _StartWidgetState extends State<StartWidget> {
                           SizedBox(
                             width: 100,
                             height: 100,
-                            child: SelectorWheel(
+                            child: SelectorWheel( 
+                              width: 100,  
                               childCount: 7,
                               convertIndexToValue: (int index) {
                                 final units = [

@@ -291,6 +291,7 @@ class _EditUserState extends State<EditUser> {
                                     width: 100,
                                     height: 100,
                                     child: SelectorWheel(
+                                      width: 100, 
                                       childCount: 7,
                                       convertIndexToValue: (int index) {
                                         final units = [

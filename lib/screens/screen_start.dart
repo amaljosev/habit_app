@@ -41,17 +41,17 @@ class _StartScreenState extends State<StartScreen> {
     'Friday',
     'Saturday',
   ];
-  @override 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView( 
+      body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/assets/images/new_bg.jpg'),
-              fit: BoxFit.fill, 
+              fit: BoxFit.fill,
             ),
           ),
           child: SafeArea(
@@ -60,9 +60,8 @@ class _StartScreenState extends State<StartScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-          
                   Container(
-                    decoration: const BoxDecoration( 
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
@@ -71,7 +70,6 @@ class _StartScreenState extends State<StartScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
-                         
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -128,7 +126,7 @@ class _StartScreenState extends State<StartScreen> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 12,right: 12 ),   
+                            padding: const EdgeInsets.only(left: 12, right: 12),
                             child: TextFormField(
                               style: const TextStyle(color: Colors.black),
                               controller: totalDaysController,
@@ -139,7 +137,8 @@ class _StartScreenState extends State<StartScreen> {
                                 fillColor: Colors.black12,
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
                                 ),
                                 hintText: 'Days ',
                                 hintStyle: TextStyle(color: Colors.grey),
@@ -158,7 +157,9 @@ class _StartScreenState extends State<StartScreen> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 20,), 
+                          const SizedBox(
+                            height: 20,
+                          ),
                           Column(
                             children: [
                               Padding(
@@ -198,11 +199,14 @@ class _StartScreenState extends State<StartScreen> {
                                 },
                                 values: selectedWeekdays,
                               ),
-                              const SizedBox(height: 20,),  
+                              const SizedBox(
+                                height: 20,
+                              ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       child: Card(
@@ -237,7 +241,8 @@ class _StartScreenState extends State<StartScreen> {
                                 ),
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   SizedBox(
                                     width: 100,
@@ -263,6 +268,7 @@ class _StartScreenState extends State<StartScreen> {
                                     width: 100,
                                     height: 100,
                                     child: SelectorWheel(
+                                      width: 100,  
                                       childCount: 7,
                                       convertIndexToValue: (int index) {
                                         final units = [
@@ -300,10 +306,12 @@ class _StartScreenState extends State<StartScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20,),  
+                          const SizedBox(
+                            height: 20,
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Row( 
+                            child: Row(
                               children: [
                                 Expanded(
                                   child: Card(
@@ -326,17 +334,16 @@ class _StartScreenState extends State<StartScreen> {
                               ],
                             ),
                           ),
-                         
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               ToggleSwitch(
-                                activeBgColor: const [Colors.indigo], 
+                                activeBgColor: const [Colors.indigo],
                                 minWidth: 100.0,
                                 initialLabelIndex: 0,
                                 totalSwitches: 3,
                                 inactiveBgColor: Colors.indigo.shade50,
-                                labels: const ['MORNING', 'NOON', 'EVENING'], 
+                                labels: const ['MORNING', 'NOON', 'EVENING'],
                                 icons: const [
                                   Icons.sunny,
                                   Icons.wb_sunny_outlined,
@@ -391,7 +398,7 @@ class _StartScreenState extends State<StartScreen> {
                                                 ),
                                               ),
                                             )));
-                    
+
                                     print("Empty");
                                   }
                                 },
