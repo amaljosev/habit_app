@@ -16,56 +16,61 @@ class CategoryWidget extends StatefulWidget {
 class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-      ),
-      child: Padding(
-        padding:
-            const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 120),
-        child: ValueListenableBuilder( 
-          valueListenable: startListNotifier,
-          builder:
-              (BuildContext ctx, List<StartModel> startList, Widget? child) {
-            return ListView.separated(
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    child: Card( 
-                      color: Colors.indigo.shade50,
-                      child: ListTile(
-                        title: Text(
-                          categoryList[index].trailingTitle.toString(),
-                          style: GoogleFonts.saira(
-                            fontSize: 15,
-                            letterSpacing: 2,
-                            color: Colors.indigo,
-                            fontWeight: FontWeight.bold,
+    return Scaffold(
+      extendBody: true, 
+      body: Container( 
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        ),
+        child: SafeArea( 
+          child: Padding(
+            padding:
+                const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 120), 
+            child: ValueListenableBuilder( 
+              valueListenable: startListNotifier,
+              builder:
+                  (BuildContext ctx, List<StartModel> startList, Widget? child) {
+                return ListView.separated(
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        child: Card( 
+                          color: Colors.indigo.shade50,
+                          child: ListTile(
+                            title: Text(
+                              categoryList[index].trailingTitle.toString(),
+                              style: GoogleFonts.saira(
+                                fontSize: 15,
+                                letterSpacing: 2,
+                                color: Colors.indigo,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            leading: categoryList[index].leadingIcon,
+                           
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => StartScreen(
+                                        name: categoryList[index].trailingTitle)),
+                              );
+                              print(categoryList[index].trailingTitle);
+                            },
                           ),
                         ),
-                        leading: categoryList[index].leadingIcon,
-                       
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => StartScreen(
-                                    name: categoryList[index].trailingTitle)),
-                          );
-                          print(categoryList[index].trailingTitle);
-                        },
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(
-                    height: 5,
-                  );
-                },
-                itemCount: categoryList.length);
-          },
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        height: 5,
+                      );
+                    },
+                    itemCount: categoryList.length);
+              },
+            ),
+          ),
         ),
       ),
     );

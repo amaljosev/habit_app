@@ -8,7 +8,10 @@ import '../../functions/hive_functions/db_analysis.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../start/screen_login.dart';
+
+import 'help/screen_terms_conditions.dart';
 import 'help/screenhelp.dart';
+import 'help/screenprivacypolicy.dart';
 
 class ScreenMe extends StatefulWidget {
   const ScreenMe({super.key});
@@ -324,7 +327,7 @@ class _ScreenMeState extends State<ScreenMe> {
                       backgroundColor: Colors.indigo.shade50),
                   onPressed: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) {
+                      MaterialPageRoute(builder: (context) { 
                         return const ScreenHelp();
                       }),
                     );
@@ -496,25 +499,29 @@ class _ScreenMeState extends State<ScreenMe> {
                     ),
                   ),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.indigo.shade50),
-                  onPressed: () { 
-                  
-                  },
-                  child: const Icon(Icons.share),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.indigo.shade50),
+                    onPressed: () {},
+                    child: const Icon(Icons.share),
+                  ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(28.0),
-                  child: Divider(thickness: 2),
-                ),
+               const Divider(thickness: 2),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return const ScreenPrivacy();
+                          }),
+                        );
+                      },
                       child: Text(
-                        'Privacy Policy |',
+                        'Privacy Policy ',
                         style: GoogleFonts.comicNeue(
                           fontWeight: FontWeight.w800,
                           fontSize: 15,
@@ -522,17 +529,28 @@ class _ScreenMeState extends State<ScreenMe> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Text(
-                        ' Terms and conditions', 
-                        style: GoogleFonts.comicNeue(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
+                    Text(
+                      '|',
+                      style: GoogleFonts.halant(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 15,
+                        color: Colors.black, 
                       ),
-                    ),
+                    ), 
+                    TextButton(onPressed: (){
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return const ScreenTermsAndConditions(); 
+                          }),
+                        );
+                    }, child: Text(
+                      ' Terms and conditions', 
+                      style: GoogleFonts.comicNeue(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                    ),),
                   ],
                 ),
                 Row(
@@ -569,9 +587,7 @@ class _ScreenMeState extends State<ScreenMe> {
     );
   }
 
-  shareYourApp()  {
-     
-  }
+  shareYourApp() {}
 
   signOut(BuildContext ctx) async {
     final _sharedPrefs = await SharedPreferences.getInstance();

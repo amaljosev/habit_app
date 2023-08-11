@@ -76,17 +76,17 @@ class _EditUserState extends State<EditUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView( 
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('lib/assets/images/new_bg.jpg'),
-              fit: BoxFit.fill,
-            ),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('lib/assets/images/new_bg.jpg'), 
+            fit: BoxFit.fill,
           ),
-          child: SafeArea(
+        ),
+        child: SafeArea( 
+          child: SingleChildScrollView( 
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end, 
               children: [
@@ -411,7 +411,7 @@ class _EditUserState extends State<EditUser> {
                                                   ),
                                                 ),
                                               )));
-
+          
                                       print("Empty");
                                     }
                                   } else {
@@ -428,7 +428,7 @@ class _EditUserState extends State<EditUser> {
                                                 ),
                                               ),
                                             )));
-
+          
                                     print("Empty");
                                   }
                                 },
