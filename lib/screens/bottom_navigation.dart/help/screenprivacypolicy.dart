@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
-class ScreenPrivacy extends StatelessWidget {
+class ScreenPrivacy extends StatefulWidget {
   const ScreenPrivacy({super.key});
+
+  @override
+  State<ScreenPrivacy> createState() => _ScreenPrivacyState();
+}
+
+class _ScreenPrivacyState extends State<ScreenPrivacy> {
+    Future<void>? launchedd;
+  final Uri toLaunchPlay =
+    Uri(scheme: 'https', host: 'policies.google.com', path: 'privacy');
+    
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +91,9 @@ class ScreenPrivacy extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () => setState(() { 
+                  launchedd = _launchInWebViewOrVC(toLaunchPlay);     
+                },),
                     child: const Text('Google Play Services'),
                   ),
                 ),
@@ -162,9 +175,16 @@ class ScreenPrivacy extends StatelessWidget {
                     ),
                   ),
                 ),
-                TextButton(onPressed: (){
-                  // launchEmail(); 
-                }, child: Text('amaljvattakkunnel@gmail.com'),), 
+                TextButton(onPressed: () async {
+              // Create a mailto Uri with the recipient's email address.
+              final Uri uri = Uri(
+                  scheme: 'mailto',
+                  path: 'amaljvattakkunnel@gmail.com');
+
+              // Launch the mailto Uri using the url_launcher package.
+              await launchUrl(uri);
+            }, child: const Text('contact us'),),    
+                 
               ],
             ),
           ),
@@ -172,18 +192,16 @@ class ScreenPrivacy extends StatelessWidget {
       ),
     );
   }
-  // launchEmail() async {
-  //   final Uri emailLaunchUri = Uri(
-  //     scheme: 'mailto',
-  //     path: 'amaljvattakkunnel@gmail.com',
-  //     queryParameters: {'subject': 'Question or Suggestion'},  // You can also specify a subject
-  //   );
 
-  //   if (await canLaunch(emailLaunchUri.toString())) {
-  //     await launch(emailLaunchUri.toString());
-  //   } else {
-  //     throw 'Could not launch email client';
-  //   }
-  // }
 
+  Future<void> _launchInWebViewOrVC(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.inAppWebView,
+      webViewConfiguration: const WebViewConfiguration(
+          headers: <String, String>{'my_header_key': 'my_header_value'}),
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
 }

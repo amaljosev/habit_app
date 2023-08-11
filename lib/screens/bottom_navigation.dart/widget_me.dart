@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/functions/hive_functions/db_functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../functions/hive_functions/db_analysis.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
@@ -21,6 +23,24 @@ class ScreenMe extends StatefulWidget {
 }
 
 class _ScreenMeState extends State<ScreenMe> {
+  Future<void>? launchedd;
+  final Uri toLaunchInstagram =
+      Uri(scheme: 'https', host: 'instagram.com', path: 'myhabitsapp');
+  final Uri toLaunchLinkedIn = Uri(
+  scheme: 'https',
+  host: 'www.linkedin.com',
+  path: 'search/results/all/',
+  queryParameters: {
+    'fetchDeterministicClustersOnly': 'true',
+    'heroEntityKey': 'urn:li:fsd_profile:ACoAAD4DhVsB7jCqpCh9KnwGkVbWU47J7rWKdlY', // Adjust the heroEntityKey if necessary
+    'keywords': 'amal jose',
+    'origin': 'RICH_QUERY_SUGGESTION',
+    'position': '1',
+    'searchId': 'ac6ffd47-5f1b-4880-9a92-95cf874fd439',
+    'sid': 's;2',
+  },
+); 
+
   String username = '';
   String email = '';
   int countComplete = 0;
@@ -327,7 +347,7 @@ class _ScreenMeState extends State<ScreenMe> {
                       backgroundColor: Colors.indigo.shade50),
                   onPressed: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) { 
+                      MaterialPageRoute(builder: (context) {
                         return const ScreenHelp();
                       }),
                     );
@@ -504,11 +524,13 @@ class _ScreenMeState extends State<ScreenMe> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.indigo.shade50),
-                    onPressed: () {},
+                    onPressed: () => setState(() {
+                      // launchedd=_launchInBrowser(toLaunch);
+                    }),
                     child: const Icon(Icons.share),
                   ),
                 ),
-               const Divider(thickness: 2),
+                const Divider(thickness: 2),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -534,32 +556,40 @@ class _ScreenMeState extends State<ScreenMe> {
                       style: GoogleFonts.halant(
                         fontWeight: FontWeight.w800,
                         fontSize: 15,
-                        color: Colors.black, 
-                      ),
-                    ), 
-                    TextButton(onPressed: (){
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) {
-                            return const ScreenTermsAndConditions(); 
-                          }),
-                        );
-                    }, child: Text(
-                      ' Terms and conditions', 
-                      style: GoogleFonts.comicNeue(
-                        fontWeight: FontWeight.w800,
-                        fontSize: 15,
                         color: Colors.black,
                       ),
-                    ),),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return const ScreenTermsAndConditions();
+                          }),
+                        );
+                      },
+                      child: Text(
+                        ' Terms and conditions',
+                        style: GoogleFonts.comicNeue(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(
-                      'lib/assets/svg/instagram (1).svg',
-                      width: 20,
-                      height: 20,
+                    GestureDetector(
+                      onTap: () => setState(() {
+                        launchedd = _launchInWebViewOrVC(toLaunchInstagram);
+                      }),
+                      child: SvgPicture.asset(
+                        'lib/assets/svg/instagram (1).svg',
+                        width: 20,
+                        height: 20,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -572,10 +602,15 @@ class _ScreenMeState extends State<ScreenMe> {
                         ),
                       ),
                     ),
-                    SvgPicture.asset(
-                      'lib/assets/svg/linkedin.svg',
-                      width: 20,
-                      height: 20,
+                    GestureDetector(
+                      onTap: () => setState(() {
+                        launchedd = _launchInWebViewOrVC(toLaunchLinkedIn);  
+                      }),
+                      child: SvgPicture.asset(
+                        'lib/assets/svg/linkedin.svg',
+                        width: 20,
+                        height: 20,
+                      ),
                     ),
                   ],
                 ),
@@ -587,7 +622,16 @@ class _ScreenMeState extends State<ScreenMe> {
     );
   }
 
-  shareYourApp() {}
+  Future<void> _launchInWebViewOrVC(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.inAppWebView,
+      webViewConfiguration: const WebViewConfiguration(
+          headers: <String, String>{'my_header_key': 'my_header_value'}),
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   signOut(BuildContext ctx) async {
     final _sharedPrefs = await SharedPreferences.getInstance();

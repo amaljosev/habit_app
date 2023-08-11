@@ -48,8 +48,9 @@ dependencies:
   stop_watch_timer: ^3.0.1
   table_calendar: ^3.0.8
   toggle_switch: ^2.1.0
-  video_player: ^2.7.0
-  weekday_selector: ^1.1.0
+  url_launcher: ^6.1.12 
+  video_player: ^2.7.0 
+  weekday_selector: ^1.1.0 
   
 
 
