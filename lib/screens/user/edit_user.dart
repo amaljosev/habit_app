@@ -73,6 +73,15 @@ class _EditUserState extends State<EditUser> {
 
   final int defaultCountData = 1;
   final String defaultNameCount = 'Hours';
+  List defaultWeekDays = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -493,34 +502,36 @@ class _EditUserState extends State<EditUser> {
       if (selectedWeekdays[i]) {
         switch (i) {
           case 0:
-            weekdays.add('SUNDAY');
+            weekdays.add('Sunday');
             break;
           case 1:
-            weekdays.add('MONDAY');
+            weekdays.add('Monday');
             break;
           case 2:
-            weekdays.add('TUESDAY');
+            weekdays.add('Tuesday');
             break;
           case 3:
-            weekdays.add('WEDNESDAY');
+            weekdays.add('Wednesday');
             break;
           case 4:
-            weekdays.add('THURSDAY');
+            weekdays.add('Thursday');
             break;
           case 5:
-            weekdays.add('FRIDAY');
-            break;
+            weekdays.add('Friday');
+            break; 
           case 6:
-            weekdays.add('SATURDAY');
+            weekdays.add('Saturday'); 
             break;
         }
       }
     }
+    
     week_days = weekdays;
     print('Selected weekdays: $weekdays');
-  }
+  } 
 
   Future<void> updateDetails(ctx) async {
+     week_days ??= defaultWeekDays; 
     final dataModel = StartModel(
         id: DateTime.now().millisecond.toString(),
         habit: habitNameController.text,
@@ -534,6 +545,7 @@ class _EditUserState extends State<EditUser> {
         doitAt: do_it_at,
         date: widget.date,
         dateLastDone: widget.lastDoneDate);
+        print(week_days); 
 
     await updateList(widget.index, dataModel);
 

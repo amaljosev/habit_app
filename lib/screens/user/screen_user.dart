@@ -210,6 +210,8 @@ class _ScreenUserState extends State<ScreenUser> {
 
     // Check if the current day is present in the list of days
     bool isDayInWeek = week.contains(currentDayOfWeek);
+     print(currentDayOfWeek);  
+    print(week); 
 
     // Return true if the current day is in the list, otherwise false
     return isDayInWeek;
@@ -219,12 +221,12 @@ class _ScreenUserState extends State<ScreenUser> {
     String todayCount = habitName.toString();
     String today = widget.wheelCount;
     isDisable = true;
-
-    if (todayCount == today) {
+ 
+    if (todayCount == today) { 
       isDisable = false;
-    }
+    } 
 
-    return isDisable;
+    return isDisable; 
   }
 
   Future<void> resetNotifiers() async {
@@ -534,9 +536,9 @@ class _ScreenUserState extends State<ScreenUser> {
                                   ],
                                 ),
                               ),
-                              if (disableButtons())
+                              if (disableButtons())  
                                 if (shouldShowButtons(widget.week))
-                                  Padding(
+                                  Padding( 
                                     padding: const EdgeInsets.all(18.0),
                                     child: Column(
                                       children: [
