@@ -128,6 +128,32 @@ class _ScreenPrivacyState extends State<ScreenPrivacy> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
+                        ' Sharing of Information', 
+                        style: GoogleFonts.comicNeue(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                ), 
+                Padding( 
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    ''' We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except for the purposes outlined in this Privacy Policy.''',
+                    style: GoogleFonts.gideonRoman(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
                         'Changes to This Privacy Policy',
                         style: GoogleFonts.comicNeue(
                           fontWeight: FontWeight.w800,

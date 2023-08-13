@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/functions/hive_functions/db_functions.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../functions/hive_functions/db_analysis.dart';
@@ -21,24 +22,12 @@ class ScreenMe extends StatefulWidget {
 }
 
 class _ScreenMeState extends State<ScreenMe> {
-  Future<void>? launchedd;
-  final Uri toLaunchInstagram =
-      Uri(scheme: 'https', host: 'instagram.com', path: 'myhabitsapp');
-  final Uri toLaunchLinkedIn = Uri(
-  scheme: 'https',
-  host: 'www.linkedin.com',
-  path: 'search/results/all/',
-  queryParameters: {
-    'fetchDeterministicClustersOnly': 'true',
-    'heroEntityKey': 'urn:li:fsd_profile:ACoAAD4DhVsB7jCqpCh9KnwGkVbWU47J7rWKdlY',
-    'keywords': 'amal jose',
-    'origin': 'RICH_QUERY_SUGGESTION',
-    'position': '1',
-    'searchId': 'ac6ffd47-5f1b-4880-9a92-95cf874fd439',
-    'sid': 's;2',
-  },
-); 
 
+  String uri = 'https://www.google.co.uk/';
+  List<String> imageNames = [];
+  List<String> imagePaths = [];
+
+  
   String username = '';
   String email = '';
   int countComplete = 0;
@@ -522,9 +511,7 @@ class _ScreenMeState extends State<ScreenMe> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.indigo.shade50),
-                    onPressed: () => setState(() {
-                      // launchedd=_launchInBrowser(toLaunch);
-                    }),
+                    onPressed: () => _onShare(context), 
                     child: const Icon(Icons.share),
                   ),
                 ),
@@ -579,6 +566,17 @@ class _ScreenMeState extends State<ScreenMe> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Padding( 
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Text(
+                        'follow us ',
+                        style: GoogleFonts.comicNeue( 
+                          fontWeight: FontWeight.w800,
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      ), 
+                    ),
                     GestureDetector(
                       onTap: () => setState(() {
                         launchedd = _launchInWebViewOrVC(toLaunchInstagram);
@@ -589,27 +587,8 @@ class _ScreenMeState extends State<ScreenMe> {
                         height: 20,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Text(
-                        '|',
-                        style: GoogleFonts.halant(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => setState(() {
-                        launchedd = _launchInWebViewOrVC(toLaunchLinkedIn);  
-                      }),
-                      child: SvgPicture.asset(
-                        'lib/assets/svg/linkedin.svg',
-                        width: 20,
-                        height: 20,
-                      ),
-                    ),
+                    
+                    
                   ],
                 ),
               ],
@@ -620,6 +599,26 @@ class _ScreenMeState extends State<ScreenMe> {
     );
   }
 
+  Future<void>? launchedd; 
+  final Uri toLaunchInstagram =
+      Uri(scheme: 'https', host: 'instagram.com', path: 'myhabitsapp');
+  final Uri toLaunchLinkedIn = Uri(
+    scheme: 'https',
+    host: 'www.linkedin.com',
+    path: 'search/results/all/',
+    queryParameters: {
+      'fetchDeterministicClustersOnly': 'true',
+      'heroEntityKey':
+          'urn:li:fsd_profile:ACoAAD4DhVsB7jCqpCh9KnwGkVbWU47J7rWKdlY',
+      'keywords': 'amal jose',
+      'origin': 'RICH_QUERY_SUGGESTION',
+      'position': '1',
+      'searchId': 'ac6ffd47-5f1b-4880-9a92-95cf874fd439',
+      'sid': 's;2',
+    },
+  );
+
+
   Future<void> _launchInWebViewOrVC(Uri url) async {
     if (!await launchUrl(
       url,
@@ -629,6 +628,11 @@ class _ScreenMeState extends State<ScreenMe> {
     )) {
       throw Exception('Could not launch $url');
     }
+  }
+
+  void _onShare(BuildContext context) async {
+
+    await Share.shareUri(Uri.parse(uri)); 
   }
 
   signOut(BuildContext ctx) async {
