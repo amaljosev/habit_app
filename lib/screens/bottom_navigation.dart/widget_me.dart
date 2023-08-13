@@ -5,12 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/functions/hive_functions/db_functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../functions/hive_functions/db_analysis.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../start/screen_login.dart';
-
 import 'help/screen_terms_conditions.dart';
 import 'help/screenhelp.dart';
 import 'help/screenprivacypolicy.dart';
@@ -32,7 +30,7 @@ class _ScreenMeState extends State<ScreenMe> {
   path: 'search/results/all/',
   queryParameters: {
     'fetchDeterministicClustersOnly': 'true',
-    'heroEntityKey': 'urn:li:fsd_profile:ACoAAD4DhVsB7jCqpCh9KnwGkVbWU47J7rWKdlY', // Adjust the heroEntityKey if necessary
+    'heroEntityKey': 'urn:li:fsd_profile:ACoAAD4DhVsB7jCqpCh9KnwGkVbWU47J7rWKdlY',
     'keywords': 'amal jose',
     'origin': 'RICH_QUERY_SUGGESTION',
     'position': '1',

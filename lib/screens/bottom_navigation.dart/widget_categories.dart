@@ -22,10 +22,10 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+              topLeft: Radius.circular(20), topRight: Radius.circular(20)), 
         ),
         child: SafeArea( 
-          child: Padding(
+          child: Padding( 
             padding:
                 const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 120), 
             child: ValueListenableBuilder( 
