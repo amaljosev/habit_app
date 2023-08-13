@@ -153,9 +153,7 @@ class _ScreenMeState extends State<ScreenMe> {
                                                           },
                                                           icon: const Icon(
                                                               Icons.close)),
-                                                      const SizedBox(
-                                                        width: 55,
-                                                      ),
+                                                      
                                                       Text(
                                                         'Settings',
                                                         style: GoogleFonts
@@ -236,7 +234,7 @@ class _ScreenMeState extends State<ScreenMe> {
                   ),
                 ),
                 const Divider(thickness: 2),
-                Container(
+                Container( 
                   height: 30,
                   decoration: BoxDecoration(
                       color: Colors.indigo.shade100,
@@ -571,7 +569,7 @@ class _ScreenMeState extends State<ScreenMe> {
                       child: Text(
                         'follow us ',
                         style: GoogleFonts.comicNeue( 
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w800, 
                           fontSize: 15,
                           color: Colors.black,
                         ),
