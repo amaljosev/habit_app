@@ -12,7 +12,7 @@ class _TimerSreenState extends State<TimerSreen> {
   final CountDownController _controller = CountDownController();
   final TextEditingController textEditingController = TextEditingController();
   int timerDuration = 600; // 10 minutes in seconds
-  int defaultValue = 1; // 1 minute in minutes
+  int defaultValue = 10; // 1 minute in minutes
   int maxValue = 60; // Maximum value in minutes
 
   @override
@@ -37,152 +37,192 @@ class _TimerSreenState extends State<TimerSreen> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('lib/assets/images/timer_bg.jpg'),
+              image: AssetImage('lib/assets/images/new_home.png'),
               fit: BoxFit.fill,
             ),
           ),
-          child: Column(
-            children: [
-              CircularCountDownTimer(
-              
-                duration: timerDuration,
-                initialDuration: 0,
-                controller: _controller,
-                width: MediaQuery.of(context).size.width / 2,
-                height: MediaQuery.of(context).size.height / 2,
-                ringColor: Colors.yellow.shade200,
-                ringGradient: null,
-                fillColor: Colors.blueAccent.shade100,
-                fillGradient: null,
-                backgroundColor: Colors.blueGrey,
-                backgroundGradient: null,
-                strokeWidth: 20.0,
-                strokeCap: StrokeCap.round,
-                textStyle: const TextStyle(
-                  fontSize: 33.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-                textFormat: CountdownTextFormat
-                    .MM_SS, // Format the timer in minutes and seconds
-                isReverse: true, // Set to true to make the timer count down
-                isReverseAnimation: false,
-                
-                autoStart: false,
-                onStart: () {
-                  debugPrint('Countdown Started');
-                },
-                onComplete: () {
-                  debugPrint('Countdown Ended');
-                },
-                onChange: (String timeStamp) {
-                  debugPrint('Countdown Changed $timeStamp');
-                },
-                timeFormatterFunction: (defaultFormatterFunction, duration) {
-                  if (duration.inSeconds == 0) {
-                    return "1 min"; 
-                  } else {
-                    // Format the duration to minutes and seconds
-                    String minutes =
-                        (duration.inMinutes % 60).toString().padLeft(2, '0');
-                    String seconds =
-                        (duration.inSeconds % 60).toString().padLeft(2, '0');
-                    return "$minutes:$seconds";
-                  }
-                },
-                isTimerTextShown: true,  
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Card(
-                  color: Colors.blueGrey.shade200,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(28.0),
-                        child: TextFormField(
-                          style: const TextStyle(color: Colors.white),
-                          controller: textEditingController,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            filled: true,
-                            fillColor: Colors.blueGrey,
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
-                            labelText: 'Enter Time Limit in Minutes',
-                            labelStyle: TextStyle(color: Colors.white70),
-                            prefixIcon: Icon(
-                              Icons.alarm,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
-                                const CircleBorder(),
-                              ),
-                              minimumSize:
-                                  MaterialStateProperty.all(const Size(80, 80)),
-                              backgroundColor: MaterialStateProperty.all(
-                                  Colors.yellow.shade200),
-                            ),
+          child: SingleChildScrollView(
+            child: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Card(
+                          child: IconButton(
                             onPressed: () {
-                              startTimer();
+                              Navigator.of(context).pop();
                             },
-                            child: const Text("Start"),
+                            icon: const Icon(
+                              Icons.arrow_back_ios_rounded,
+                              size: 20,
+                            ),
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    Colors.yellow.shade200),
-                              ),
-                              onPressed: () {
-                                _controller.pause();
-                              },
-                              child: const Text("Pause"),
-                            ),
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    Colors.yellow.shade200),
-                              ),
-                              onPressed: () {
-                                _controller.resume();
-                              },
-                              child: const Text("Resume"),
-                            ),
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    Colors.yellow.shade200),
-                              ),
-                              onPressed: () {
-                                resetTimer();
-                              },
-                              child: const Text("Restart"),
-                            ),
-                          ],
                         ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      CircularCountDownTimer(
+                        duration: timerDuration,
+                        initialDuration: 0,
+                        controller: _controller,
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: MediaQuery.of(context).size.height / 2,
+                        ringColor: Colors.yellow.shade200,
+                        ringGradient: null,
+                        fillColor: Colors.white,
+                        fillGradient: null,
+
+                        backgroundGradient: null,
+                        strokeWidth: 20.0,
+                        strokeCap: StrokeCap.round,
+                        textStyle: const TextStyle(
+                          fontSize: 33.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textFormat: CountdownTextFormat
+                            .MM_SS, // Format the timer in minutes and seconds
+                        isReverse:
+                            true, // Set to true to make the timer count down
+                        isReverseAnimation: false,
+
+                        autoStart: false,
+                        onStart: () {
+                          debugPrint('Countdown Started');
+                        },
+                        onComplete: () {
+                          debugPrint('Countdown Ended');
+                        },
+                        onChange: (String timeStamp) {
+                          debugPrint('Countdown Changed $timeStamp');
+                        },
+                        timeFormatterFunction:
+                            (defaultFormatterFunction, duration) {
+                          if (duration.inSeconds == 0) {
+                            return "10 min";
+                          } else {
+                            // Format the duration to minutes and seconds
+                            String minutes = (duration.inMinutes % 60)
+                                .toString()
+                                .padLeft(2, '0');
+                            String seconds = (duration.inSeconds % 60)
+                                .toString()
+                                .padLeft(2, '0');
+                            return "$minutes:$seconds";
+                          }
+                        },
+                        isTimerTextShown: true,
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                           
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(28.0),
+                                child: TextFormField(
+                                  style: const TextStyle(color: Colors.black),
+                                  controller: textEditingController,
+                                  keyboardType: TextInputType.number,
+                                  decoration:  const InputDecoration(
+                                     focusedBorder: InputBorder.none, 
+                                    filled: true,
+                                    fillColor: Colors.black12, 
+                                    border: OutlineInputBorder(  
+                                      borderSide: BorderSide.none, 
+                                        borderRadius: BorderRadius.all(
+                                          
+                                            Radius.circular(20))),
+                                    labelText: 'Enter Time Limit in Minutes',
+                                    labelStyle:
+                                        TextStyle(color: Colors.grey),  
+                                    prefixIcon: Icon(
+                                      Icons.alarm,
+                                      color: Colors.grey, 
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ElevatedButton(
+                                    style: ButtonStyle(
+                                      shape: MaterialStateProperty.all(
+                                        const CircleBorder(),
+                                      ),
+                                      minimumSize: MaterialStateProperty.all(
+                                          const Size(80, 80)),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.yellow.shade200),
+                                    ),
+                                    onPressed: () {
+                                      startTimer();
+                                    },
+                                    child: const Text("Start"),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              Padding(
+                                padding: const EdgeInsets.all(18.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    ElevatedButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.yellow.shade200),
+                                      ),
+                                      onPressed: () {
+                                        _controller.pause();
+                                      },
+                                      child: const Text("Pause"),
+                                    ),
+                                    ElevatedButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.yellow.shade200),
+                                      ),
+                                      onPressed: () {
+                                        _controller.resume();
+                                      },
+                                      child: const Text("Resume"),
+                                    ),
+                                    ElevatedButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.yellow.shade200),
+                                      ),
+                                      onPressed: () {
+                                        resetTimer();
+                                      },
+                                      child: const Text("Restart"),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
-                ),
-              )
-            ],
+                ],
+              ),
+            ),
           ),
         ),
       ),

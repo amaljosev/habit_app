@@ -81,99 +81,155 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("lib/assets/images/stop_watch_bg.jpg"),
+            image: AssetImage("lib/assets/images/new_home.png"),
             fit: BoxFit.fill,
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround, 
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 55), 
-              child: Text(
-                '$digiHours:$digiMinuts:$digiSeconds',
-                style:
-                    TextStyle(fontSize: 80, color: Colors.blueAccent.shade100),
-              ),
-            ),
-            Padding(
               padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 300,
-                child: ListView.builder(
-                  itemCount: laps.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-                            children: [
-                              Text(
-                                'Lap no:${index + 1}',
-                                style: TextStyle(
-                                    color: Colors.blue.shade800, fontSize: 16),
-                              ),
-                              Text(
-                                '${laps[index]}',
-                                style: TextStyle(
-                                    color: Colors.blue.shade800, fontSize: 16),
-                              ),
-                            ],
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Card(
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back_ios_rounded,
+                              size: 20,
+                            ),
                           ),
                         ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 55),
+                      child: Text(
+                        '$digiHours:$digiMinuts:$digiSeconds',
+                        style:
+                            const TextStyle(fontSize: 80, color: Colors.white),
                       ),
-                    );
-                  },
+                    ),
+                  ],
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Column(
               children: [
-                Expanded(
-                  child: RawMaterialButton(
-                    onPressed: () {
-                      (!started ? start() : stop());
-                    },
-                    shape: const StadiumBorder(
-                      side: BorderSide(color: Colors.blue),
-                    ),
-                    child: Text(
-                      (!started ? 'START' : 'PAUSE'),
-                      style: const TextStyle(color: Colors.white),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                      itemCount: laps.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Lap no:${index + 1}',
+                                    style: const TextStyle(
+                                        color: Colors.indigo, fontSize: 16),
+                                  ),
+                                  Text(
+                                    '${laps[index]}',
+                                    style: const TextStyle(
+                                        color: Colors.indigo, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
-                IconButton(
-                    onPressed: () {
-                      addLaps();
-                    },
-                    icon: const Icon(
-                      Icons.flag,
-                      color: Colors.white,
-                    )),
-                Expanded(
-                  child: RawMaterialButton(
-                    onPressed: () {
-                      reset();
-                    },
-                    shape: const StadiumBorder(
-                      side: BorderSide(color: Colors.blue),
-                    ),
-                    child: const Text(
-                      'STOP',
-                      style: TextStyle(color: Colors.white),
+                Card(
+                  child: Padding(
+                    padding:  const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.indigo.shade50, 
+                            
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                20,
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            (!started ? start() : stop());
+                          },
+                          child: Text(
+                            (!started ? 'START' : 'PAUSE'),
+                            style: const TextStyle(color: Colors.black), 
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            addLaps();
+                          },
+                          icon:  Card(
+                            color: Colors.indigo.shade50, 
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.flag,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.indigo.shade50,
+                            
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                20,
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            reset();
+                          },
+                          child: const Text(
+                            'STOP',
+                            style: TextStyle(color: Colors.black), 
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+
+    super.dispose();
   }
 }

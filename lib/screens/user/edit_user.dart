@@ -90,7 +90,7 @@ class _EditUserState extends State<EditUser> {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/assets/images/new_bg.jpg'), 
+            image: AssetImage('lib/assets/images/new_home.png'), 
             fit: BoxFit.fill,
           ),
         ),
