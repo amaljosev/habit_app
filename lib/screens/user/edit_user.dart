@@ -545,7 +545,7 @@ class _EditUserState extends State<EditUser> {
         doitAt: do_it_at,
         date: widget.date,
         dateLastDone: widget.lastDoneDate);
-        print(week_days); 
+
 
     await updateList(widget.index, dataModel);
 

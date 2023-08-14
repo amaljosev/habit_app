@@ -87,7 +87,7 @@ class _ScreenUserState extends State<ScreenUser> {
     lastDate = widget.lastDoneDate;
 
     DateTime currentDate = DateTime.now();
-    print('$lastDate         $currentDate');
+
 
     if (lastDate.day != currentDate.day) {
       habitNameNotifier.value = 0;
@@ -210,8 +210,8 @@ class _ScreenUserState extends State<ScreenUser> {
 
     // Check if the current day is present in the list of days
     bool isDayInWeek = week.contains(currentDayOfWeek);
-     print(currentDayOfWeek);  
-    print(week); 
+
+
 
     // Return true if the current day is in the list, otherwise false
     return isDayInWeek;
@@ -1162,8 +1162,7 @@ class _ScreenUserState extends State<ScreenUser> {
         date: widget.date,
         dateLastDone: widget.lastDoneDate);
 
-    print(
-        "${widget.habitName} ${widget.totalDays}  ${widget.wheelCount} ${widget.wheelName}");
+
 
     addCategory(startObject);
     Navigator.of(context).pushReplacement(
@@ -1272,7 +1271,7 @@ class _ScreenUserState extends State<ScreenUser> {
           break;
         case 'Sunday':
           sunday += 1;
-          print('$sunday');
+
           final analysisObject = AnalysisModel(
               id: DateTime.now().millisecond,
               monday: monday,
