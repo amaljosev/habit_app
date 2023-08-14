@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/categories/categories_model.dart';
 import '../../models/sign_up/db_model.dart';
@@ -17,61 +16,56 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
     return  SafeArea(  
-        child: Align( 
-          alignment: Alignment.bottomCenter,
-          child: Container(  
-            
-             
-            decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-          ),
-            child: Padding(  
-              padding:
-                  const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 120), 
-              child: ValueListenableBuilder( 
-                valueListenable: startListNotifier,
-                builder:
-                    (BuildContext ctx, List<StartModel> startList, Widget? child) {
-                  return ListView.separated(
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          child: Card( 
-                            color: Colors.indigo.shade50,
-                            child: ListTile(
-                              title: Text(
-                                categoryList[index].trailingTitle.toString(),
-                                style: GoogleFonts.saira(
-                                  fontSize: 15,
-                                  letterSpacing: 2,
-                                  color: Colors.indigo,
-                                  fontWeight: FontWeight.bold,
-                                ),
+        child: Container(  
+          decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        ),
+          child: Padding(  
+            padding:
+                const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 120), 
+            child: ValueListenableBuilder( 
+              valueListenable: startListNotifier,
+              builder:
+                  (BuildContext ctx, List<StartModel> startList, Widget? child) {
+                return ListView.separated(
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        child: Card( 
+                          color: Colors.indigo.shade50,
+                          child: ListTile(
+                            title: Text(
+                              categoryList[index].trailingTitle.toString(),
+                              style: GoogleFonts.saira(
+                                fontSize: 15,
+                                letterSpacing: 2,
+                                color: Colors.indigo,
+                                fontWeight: FontWeight.bold,
                               ),
-                              leading: categoryList[index].leadingIcon,
-                             
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => StartScreen(
-                                          name: categoryList[index].trailingTitle)),
-                                );
-                                print(categoryList[index].trailingTitle);
-                              },
                             ),
+                            leading: categoryList[index].leadingIcon,
+                           
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => StartScreen(
+                                        name: categoryList[index].trailingTitle)),
+                              );
+                              print(categoryList[index].trailingTitle);
+                            },
                           ),
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 5,
-                        );
-                      },
-                      itemCount: categoryList.length);
-                },
-              ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        height: 5,
+                      );
+                    },
+                    itemCount: categoryList.length);
+              },
             ),
           ),
         ),

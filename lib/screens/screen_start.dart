@@ -4,10 +4,8 @@ import 'package:habit_project/functions/hive_functions/db_start.dart';
 import 'package:habit_project/models/sign_up/db_model.dart';
 import 'package:selector_wheel/selector_wheel/models/selector_wheel_value.dart';
 import 'package:selector_wheel/selector_wheel/selector_wheel.dart';
-
 import 'package:weekday_selector/weekday_selector.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-
 import '../functions/hive_functions/db_date.dart';
 import 'home.dart';
 
@@ -44,17 +42,17 @@ class _StartScreenState extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('lib/assets/images/new_bg.jpg'),
-              fit: BoxFit.fill,
-            ),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('lib/assets/images/new_bg.jpg'),
+            fit: BoxFit.fill,
           ),
-          child: SafeArea(
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(  
             child: Padding(
               padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
               child: Column(
@@ -398,7 +396,7 @@ class _StartScreenState extends State<StartScreen> {
                                                 ),
                                               ),
                                             )));
-
+          
                                     print("Empty");
                                   }
                                 },
