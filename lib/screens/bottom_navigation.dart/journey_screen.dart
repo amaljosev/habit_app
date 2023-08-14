@@ -64,10 +64,10 @@ class _JourneyPageState extends State<JourneyPage> {
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
         ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(
-                top: 20, bottom: 140, left: 10, right: 10),
+        child: Padding(
+          padding: const EdgeInsets.only(
+              top: 20, bottom: 140, left: 10, right: 10),
+          child: SingleChildScrollView(  
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
