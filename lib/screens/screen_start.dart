@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/functions/hive_functions/db_start.dart';
-import 'package:habit_project/models/sign_up/db_model.dart';
 import 'package:selector_wheel/selector_wheel/models/selector_wheel_value.dart';
 import 'package:selector_wheel/selector_wheel/selector_wheel.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../functions/hive_functions/db_date.dart';
+import '../models/db_models/db_model.dart';
 import 'home.dart';
 
 class StartScreen extends StatefulWidget {

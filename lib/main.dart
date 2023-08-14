@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:habit_project/screens/start/screen_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'models/sign_up/db_model.dart';
+
+import 'models/db_models/db_model.dart';
+
 
 const save_key_name = 'userLoggedIn';
 

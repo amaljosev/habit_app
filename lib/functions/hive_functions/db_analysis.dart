@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
-import '../../models/sign_up/db_model.dart';
+
+import '../../models/db_models/db_model.dart';
+
 
 const ANALYSIS_DB_NAME = 'analaysis_db';
 

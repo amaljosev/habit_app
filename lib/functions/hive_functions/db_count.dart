@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
-import '../../models/sign_up/db_model.dart';
+
+import '../../models/db_models/db_model.dart';
+
 
 const COUNT_DB_NAME = 'count_db';
 

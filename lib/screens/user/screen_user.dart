@@ -8,7 +8,8 @@ import 'package:slider_button/slider_button.dart';
 import '../../functions/hive_functions/db_analysis.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
-import '../../models/sign_up/db_model.dart';
+
+import '../../models/db_models/db_model.dart';
 import '../home.dart';
 import 'edit_user.dart';
 

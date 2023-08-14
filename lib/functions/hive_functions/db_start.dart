@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:habit_project/models/sign_up/db_model.dart';
+
 import 'package:hive/hive.dart';
+
+import '../../models/db_models/db_model.dart';
 
 ValueNotifier<List<StartModel>> startListNotifier = ValueNotifier([]);
 

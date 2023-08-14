@@ -5,7 +5,7 @@ import 'package:selector_wheel/selector_wheel/selector_wheel.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import '../../functions/hive_functions/db_start.dart';
-import '../../models/sign_up/db_model.dart';
+import '../../models/db_models/db_model.dart';
 import '../home.dart';
 
 class EditUser extends StatefulWidget {
