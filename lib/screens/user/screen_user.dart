@@ -73,11 +73,12 @@ class _ScreenUserState extends State<ScreenUser> {
   @override
   void initState() {
     super.initState();
+
     initializeData();
   }
 
   Future<void> initializeData() async {
-    await checkAndResetHabit();
+    
     await fetchAnalysisData();
     await fetchCount();
   }
@@ -88,12 +89,10 @@ class _ScreenUserState extends State<ScreenUser> {
 
     DateTime currentDate = DateTime.now();
 
-
     if (lastDate.day != currentDate.day) {
-      habitNameNotifier.value = 0;
-
       setState(
         () {
+          habitName = 0;
           updateList(
             widget.index,
             StartModel(
@@ -102,22 +101,26 @@ class _ScreenUserState extends State<ScreenUser> {
                 habit: widget.habitName,
                 wheelCount: widget.wheelCount,
                 wheelName: widget.wheelName,
-                todayHours: habitNameNotifier.value.toString(),
+                todayHours: '0',
                 today: daysNotifier.value.toString(),
                 streak: streakNotifier.value.toString(),
                 doitAt: widget.doItAt,
                 week: widget.week,
                 date: widget.date,
-                dateLastDone: currentDate),
+                dateLastDone: currentDate), 
           );
 
           getallDatas();
+
+          
+
         },
       );
       if (isOneDayOrMoreDifference(lastDate, currentDate)) {
-        streakNotifier.value = 0;
+        
         setState(
           () {
+            streak=0;  
             updateList(
               widget.index,
               StartModel(
@@ -126,9 +129,9 @@ class _ScreenUserState extends State<ScreenUser> {
                   habit: widget.habitName,
                   wheelCount: widget.wheelCount,
                   wheelName: widget.wheelName,
-                  todayHours: habitNameNotifier.value.toString(),
+                  todayHours: '0',
                   today: daysNotifier.value.toString(),
-                  streak: streakNotifier.value.toString(),
+                  streak: '0',
                   doitAt: widget.doItAt,
                   week: widget.week,
                   date: widget.date,
@@ -167,7 +170,6 @@ class _ScreenUserState extends State<ScreenUser> {
       bool isFirstDayOfMonth = (currentDate.day == 1);
       return isLastDayOfMonth && isFirstDayOfMonth;
     }
-
     return false;
   }
 
@@ -211,8 +213,6 @@ class _ScreenUserState extends State<ScreenUser> {
     // Check if the current day is present in the list of days
     bool isDayInWeek = week.contains(currentDayOfWeek);
 
-
-
     // Return true if the current day is in the list, otherwise false
     return isDayInWeek;
   }
@@ -221,12 +221,12 @@ class _ScreenUserState extends State<ScreenUser> {
     String todayCount = habitName.toString();
     String today = widget.wheelCount;
     isDisable = true;
- 
-    if (todayCount == today) { 
-      isDisable = false;
-    } 
 
-    return isDisable; 
+    if (todayCount == today) {
+      isDisable = false;
+    }
+
+    return isDisable;
   }
 
   Future<void> resetNotifiers() async {
@@ -242,8 +242,9 @@ class _ScreenUserState extends State<ScreenUser> {
   @override
   Widget build(BuildContext context) {
     resetNotifiers();
+     checkAndResetHabit(); 
     return Scaffold(
-      body: SingleChildScrollView( 
+      body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -282,7 +283,9 @@ class _ScreenUserState extends State<ScreenUser> {
                                     MaterialPageRoute(builder: (context) {
                                       return EditUser(
                                         index: widget.index,
-                                        id: DateTime.now().millisecond.toString(),
+                                        id: DateTime.now()
+                                            .millisecond
+                                            .toString(),
                                         habitName: widget.habitName,
                                         totalDays: widget.totalDays,
                                         wheelCount: widget.wheelCount,
@@ -355,8 +358,8 @@ class _ScreenUserState extends State<ScreenUser> {
                               Row(
                                 children: [
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.only(top: 20, left: 20),
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 20),
                                     child: Text(
                                       widget.habitName,
                                       style: GoogleFonts.unbounded(
@@ -369,7 +372,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 13, top: 8),
+                                padding:
+                                    const EdgeInsets.only(left: 13, top: 8),
                                 child: Row(
                                   children: [
                                     Card(
@@ -426,7 +430,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             ValueListenableBuilder<int>(
-                                              valueListenable: habitNameNotifier,
+                                              valueListenable:
+                                                  habitNameNotifier,
                                               builder: (BuildContext context,
                                                   int value, Widget? child) {
                                                 return Text(
@@ -536,9 +541,9 @@ class _ScreenUserState extends State<ScreenUser> {
                                   ],
                                 ),
                               ),
-                              if (disableButtons())  
+                              if (disableButtons())
                                 if (shouldShowButtons(widget.week))
-                                  Padding( 
+                                  Padding(
                                     padding: const EdgeInsets.all(18.0),
                                     child: Column(
                                       children: [
@@ -551,7 +556,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                             buttonSize: 50,
                                             action: () {
                                               incrementTodayWheelCount();
-                                              if (daysNotifier.value.toString() ==
+                                              if (daysNotifier.value
+                                                      .toString() ==
                                                   widget.totalDays) {
                                                 addCountToModel();
                                                 showModalBottomSheet<void>(
@@ -575,7 +581,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                                               color:
                                                                   Colors.indigo,
                                                               fontWeight:
-                                                                  FontWeight.bold,
+                                                                  FontWeight
+                                                                      .bold,
                                                             ),
                                                           ),
                                                           Row(
@@ -640,7 +647,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                                               'YOU HAVE COMPLETED \n    SCHEDULED TASKS',
                                                               style: GoogleFonts
                                                                   .andadaPro(
-                                                                color: Colors.blue
+                                                                color: Colors
+                                                                    .blue
                                                                     .shade900,
                                                                 fontWeight:
                                                                     FontWeight
@@ -701,7 +709,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                               addCountToModel();
                                               showModalBottomSheet<void>(
                                                 context: context,
-                                                builder: (BuildContext context) {
+                                                builder:
+                                                    (BuildContext context) {
                                                   return Center(
                                                     child: Column(
                                                       mainAxisAlignment:
@@ -756,7 +765,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                             } else {
                                               showModalBottomSheet<void>(
                                                 context: context,
-                                                builder: (BuildContext context) {
+                                                builder:
+                                                    (BuildContext context) {
                                                   return Center(
                                                     child: Column(
                                                       mainAxisAlignment:
@@ -773,7 +783,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                                               'YOU HAVE COMPLETED',
                                                               style: GoogleFonts
                                                                   .andadaPro(
-                                                                color: Colors.blue
+                                                                color: Colors
+                                                                    .blue
                                                                     .shade900,
                                                                 fontWeight:
                                                                     FontWeight
@@ -784,7 +795,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                                               'A DAY',
                                                               style: GoogleFonts
                                                                   .andadaPro(
-                                                                color: Colors.blue
+                                                                color: Colors
+                                                                    .blue
                                                                     .shade900,
                                                                 fontWeight:
                                                                     FontWeight
@@ -840,13 +852,15 @@ class _ScreenUserState extends State<ScreenUser> {
                                 height: 40,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Column(
                                     children: [
                                       ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.indigo.shade50,
+                                          backgroundColor:
+                                              Colors.indigo.shade50,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
@@ -854,7 +868,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                         ),
                                         onPressed: () {
                                           Navigator.of(context).push(
-                                            MaterialPageRoute(builder: (context) {
+                                            MaterialPageRoute(
+                                                builder: (context) {
                                               return const TimerSreen();
                                             }),
                                           );
@@ -881,7 +896,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                     children: [
                                       ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.indigo.shade50,
+                                          backgroundColor:
+                                              Colors.indigo.shade50,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
@@ -889,7 +905,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                         ),
                                         onPressed: () {
                                           Navigator.of(context).push(
-                                            MaterialPageRoute(builder: (context) {
+                                            MaterialPageRoute(
+                                                builder: (context) {
                                               return const StopWatchScreen();
                                             }),
                                           );
@@ -916,7 +933,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                     children: [
                                       ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.indigo.shade50,
+                                          backgroundColor:
+                                              Colors.indigo.shade50,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
@@ -924,14 +942,16 @@ class _ScreenUserState extends State<ScreenUser> {
                                         ),
                                         onPressed: () {
                                           Navigator.of(context).push(
-                                            MaterialPageRoute(builder: (context) {
+                                            MaterialPageRoute(
+                                                builder: (context) {
                                               return AnalysisScreen(
                                                 date: widget.date,
-                                                completedDays:
-                                                    daysNotifier.value.toString(),
-                                                completedHours: habitNameNotifier
+                                                completedDays: daysNotifier
                                                     .value
                                                     .toString(),
+                                                completedHours:
+                                                    habitNameNotifier.value
+                                                        .toString(),
                                                 totalCount: widget.wheelCount,
                                                 totalDays: widget.totalDays,
                                                 categoryname: widget.wheelName,
@@ -1161,8 +1181,6 @@ class _ScreenUserState extends State<ScreenUser> {
         doitAt: widget.doItAt,
         date: widget.date,
         dateLastDone: widget.lastDoneDate);
-
-
 
     addCategory(startObject);
     Navigator.of(context).pushReplacement(
