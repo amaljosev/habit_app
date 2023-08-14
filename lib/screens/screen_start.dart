@@ -57,7 +57,7 @@ class _StartScreenState extends State<StartScreen> {
               padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [
+                children: [ 
                   Container(
                     decoration: const BoxDecoration(
                       color: Colors.white,
@@ -396,7 +396,7 @@ class _StartScreenState extends State<StartScreen> {
                                                 ),
                                               ),
                                             )));
-          
+                          
                                     print("Empty");
                                   }
                                 },

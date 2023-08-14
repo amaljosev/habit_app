@@ -136,7 +136,7 @@ class _HomeState extends State<Home> {
                 ),
           shouldChangeIconColor(page, 1)
               ? SvgPicture.asset(
-                  'lib/assets/svg/category.svg',
+                  'lib/assets/svg/menu (1).svg',   
                   width: 35,
                   height: 35,
                 )
@@ -147,7 +147,7 @@ class _HomeState extends State<Home> {
                 ),
           shouldChangeIconColor(page, 2)
               ? SvgPicture.asset(
-                  'lib/assets/svg/add.svg',
+                  'lib/assets/svg/add (1).svg', 
                   width: 35,
                   height: 35,
                 )
@@ -158,7 +158,7 @@ class _HomeState extends State<Home> {
                 ),
           shouldChangeIconColor(page, 3)
               ? SvgPicture.asset(
-                  'lib/assets/svg/statistics-graph.svg',
+                  'lib/assets/svg/add (1).svg', 
                   width: 35,
                   height: 35,
                 )
@@ -168,10 +168,10 @@ class _HomeState extends State<Home> {
                   size: 35,
                 ),
                 shouldChangeIconColor(page, 3)
-              ? const Icon(
-                  Icons.person,
-                  color: Colors.white,
-                  size: 35,
+              ? SvgPicture.asset(
+                  'lib/assets/svg/profile.svg', 
+                  width: 35,
+                  height: 35,
                 )
               : const Icon(
                   Icons.person_2_outlined, 
