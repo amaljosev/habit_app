@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import '../../models/date models/date_model.dart';
 
 
+// ignore: constant_identifier_names
 const DATE_DB_NAME = 'date_db';
 
 abstract class DateDBfunctions {

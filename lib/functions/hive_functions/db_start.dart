@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import '../../models/user model/user_model.dart';
+
+import '../../models/user_model.dart';
+
 
 
 ValueNotifier<List<StartModel>> startListNotifier = ValueNotifier([]);
@@ -18,7 +20,8 @@ Future<void> getallDatas() async {
   final categoryDB = await Hive.openBox<StartModel>('category_db');
   startListNotifier.value.clear(); 
   startListNotifier.value.addAll(categoryDB.values);
-  startListNotifier.notifyListeners();
+  // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+  startListNotifier.notifyListeners(); 
 }
 
 

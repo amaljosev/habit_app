@@ -449,7 +449,7 @@ class _ScreenMeState extends State<ScreenMe> {
                                         }
                                       },
                                       onRatingUpdate: (rating) {
-                                        print(rating);
+                                       
                                       },
                                     ),
                                   ),
@@ -634,8 +634,10 @@ class _ScreenMeState extends State<ScreenMe> {
   }
 
   signOut(BuildContext ctx) async {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _sharedPrefs = await SharedPreferences.getInstance();
     _sharedPrefs.clear();
+    // ignore: use_build_context_synchronously
     Navigator.of(ctx).pushAndRemoveUntil(
         MaterialPageRoute(builder: (ctx) => const LogInPage()),
         (route) => false);

@@ -4,6 +4,7 @@ import '../../models/count_model/count_model.dart';
 
 
 
+// ignore: constant_identifier_names
 const COUNT_DB_NAME = 'count_db';
 
 abstract class HabitCountDBfunctions {

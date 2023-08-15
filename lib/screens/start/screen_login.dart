@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/main.dart';
@@ -7,7 +5,6 @@ import 'package:habit_project/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../functions/hive_functions/db_functions.dart';
 import '../home.dart';
-
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -30,8 +27,8 @@ class _LogInPageState extends State<LogInPage> {
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("lib/assets/images/first_bg.jpg"),     
-                fit: BoxFit.cover, 
+                image: AssetImage("lib/assets/images/first_bg.jpg"),
+                fit: BoxFit.cover,
               ),
             ),
             child: Padding(
@@ -58,7 +55,7 @@ class _LogInPageState extends State<LogInPage> {
                     TextFormField(
                         style: const TextStyle(color: Colors.black),
                         controller: _usernameController,
-                        decoration:  const InputDecoration(
+                        decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white70,
                           border: OutlineInputBorder(
@@ -86,7 +83,7 @@ class _LogInPageState extends State<LogInPage> {
                         style: const TextStyle(color: Colors.black),
                         controller: _passwordController,
                         keyboardType: TextInputType.visiblePassword,
-                        decoration:  const InputDecoration(
+                        decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white70,
                           border: OutlineInputBorder(
@@ -97,7 +94,7 @@ class _LogInPageState extends State<LogInPage> {
                           labelStyle: TextStyle(color: Colors.grey),
                           prefixIcon: Icon(
                             Icons.key,
-                            color: Colors.grey, 
+                            color: Colors.grey,
                           ),
                         ),
                         validator: (value) {
@@ -115,11 +112,11 @@ class _LogInPageState extends State<LogInPage> {
                         if (_formKey.currentState!.validate()) {
                           addDataToModel();
                         } else {
-                          print("Empty");
+                    
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white, 
+                          backgroundColor: Colors.white,
                           fixedSize: const Size(220, 34),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
@@ -129,7 +126,8 @@ class _LogInPageState extends State<LogInPage> {
                       child: Text(
                         "Log In",
                         style: GoogleFonts.unbounded(
-                            fontWeight: FontWeight.w500, color: Colors.deepPurple),   
+                            fontWeight: FontWeight.w500,
+                            color: Colors.deepPurple),
                       ),
                     ),
                   ],
@@ -141,7 +139,9 @@ class _LogInPageState extends State<LogInPage> {
   }
 
   Future<void> addDataToModel() async {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _username = _usernameController.text;
+    // ignore: no_leading_underscores_for_local_identifiers
     final _password = _passwordController.text;
 
     if (_username.isEmpty || _password.isEmpty) {
@@ -151,6 +151,7 @@ class _LogInPageState extends State<LogInPage> {
     final signUpDB = SignUpDB();
     final signUpList = await signUpDB.getDatas();
 
+    // ignore: prefer_typing_uninitialized_variables
     var user;
     for (var signUp in signUpList) {
       if (signUp.username == _username && signUp.password == _password) {
@@ -160,20 +161,23 @@ class _LogInPageState extends State<LogInPage> {
     }
 
     if (user != null) {
-      _usernameController.text='';
-     _passwordController.text='';
+      _usernameController.text = '';
+      _passwordController.text = '';
 
-     final _sharedPrefs = await SharedPreferences.getInstance();
+      // ignore: no_leading_underscores_for_local_identifiers
+      final _sharedPrefs = await SharedPreferences.getInstance();
       await _sharedPrefs.setBool(save_key_name, true);
-       print("$_username $_password ");
+
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (ctx) => const Home()),
       );
     } else {
-      _usernameController.text='';
-     _passwordController.text='';
-      
-      ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+      _usernameController.text = '';
+      _passwordController.text = '';
+
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.grey[800],
           behavior: SnackBarBehavior.floating,
           margin: const EdgeInsets.all(10),
@@ -183,8 +187,6 @@ class _LogInPageState extends State<LogInPage> {
               color: Colors.white,
             ),
           )));
-      print('Invalid username or password');
     }
   }
 }
-

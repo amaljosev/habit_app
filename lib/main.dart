@@ -5,11 +5,12 @@ import 'models/analysis model/analysis_model.dart';
 import 'models/count_model/count_model.dart';
 import 'models/date models/date_model.dart';
 import 'models/signup_models/signup_model.dart';
-import 'models/user model/user_model.dart';
+import 'models/user_model.dart';
 
 
 
 
+// ignore: constant_identifier_names
 const save_key_name = 'userLoggedIn';
 
 Future<void> main() async {

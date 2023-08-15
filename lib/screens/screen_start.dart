@@ -7,8 +7,8 @@ import 'package:weekday_selector/weekday_selector.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../functions/hive_functions/db_date.dart';
 import '../models/date models/date_model.dart';
-import '../models/user model/user_model.dart';
 
+import '../models/user_model.dart';
 import 'home.dart';
 
 class StartScreen extends StatefulWidget {
@@ -21,9 +21,13 @@ class StartScreen extends StatefulWidget {
 
 final TextEditingController totalDaysController = TextEditingController();
 
+// ignore: prefer_typing_uninitialized_variables
 var wheelName;
+// ignore: prefer_typing_uninitialized_variables
 var wheelCount;
+// ignore: prefer_typing_uninitialized_variables
 var doitAt;
+// ignore: prefer_typing_uninitialized_variables
 var week;
 
 class _StartScreenState extends State<StartScreen> {
@@ -54,12 +58,12 @@ class _StartScreenState extends State<StartScreen> {
           ),
         ),
         child: SafeArea(
-          child: SingleChildScrollView(  
+          child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [ 
+                children: [
                   Container(
                     decoration: const BoxDecoration(
                       color: Colors.white,
@@ -68,7 +72,7 @@ class _StartScreenState extends State<StartScreen> {
                           topRight: Radius.circular(20)),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0), 
+                      padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
                           Padding(
@@ -260,7 +264,6 @@ class _StartScreenState extends State<StartScreen> {
                                       onValueChanged:
                                           (SelectorWheelValue<double> value) {
                                         wheelCount = value.label;
-                                        print(wheelCount);
                                       },
                                     ),
                                   ),
@@ -268,7 +271,7 @@ class _StartScreenState extends State<StartScreen> {
                                     width: 100,
                                     height: 100,
                                     child: SelectorWheel(
-                                      width: 100,  
+                                      width: 100,
                                       childCount: 7,
                                       convertIndexToValue: (int index) {
                                         final units = [
@@ -290,7 +293,6 @@ class _StartScreenState extends State<StartScreen> {
                                       onValueChanged:
                                           (SelectorWheelValue<dynamic> value) {
                                         wheelName = value.label;
-                                        print(wheelName);
                                       },
                                     ),
                                   ),
@@ -360,7 +362,6 @@ class _StartScreenState extends State<StartScreen> {
                                       index < labelValues.length) {
                                     String selectedValue = labelValues[index];
                                     doitAt = selectedValue;
-                                    print('Switched to: $selectedValue');
                                   }
                                 },
                               ),
@@ -398,8 +399,6 @@ class _StartScreenState extends State<StartScreen> {
                                                 ),
                                               ),
                                             )));
-                          
-                                    print("Empty");
                                   }
                                 },
                                 child: const Text(
@@ -427,6 +426,7 @@ class _StartScreenState extends State<StartScreen> {
     wheelName ??= defaultNameCount;
     doitAt ??= defaultWeek;
     week ??= defaultWeekDays;
+    // ignore: no_leading_underscores_for_local_identifiers
     final _days = totalDaysController.text.trim();
 
     if (_days.isEmpty) {
@@ -463,7 +463,6 @@ class _StartScreenState extends State<StartScreen> {
         date: DateTime.now(),
         dateLastDone: currentDateWithoutTime);
 
-    print("${widget.name} $_days  $wheelCount $wheelName $today ");
     wheelCount = defaultCountData;
     wheelName = defaultNameCount;
 
@@ -521,6 +520,5 @@ class _StartScreenState extends State<StartScreen> {
       }
     }
     week = weekdays;
-    print('Selected weekdays: $weekdays');
   }
 }

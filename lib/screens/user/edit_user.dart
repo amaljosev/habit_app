@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:selector_wheel/selector_wheel/models/selector_wheel_value.dart';
@@ -5,7 +7,7 @@ import 'package:selector_wheel/selector_wheel/selector_wheel.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import '../../functions/hive_functions/db_start.dart';
-import '../../models/user model/user_model.dart';
+import '../../models/user_model.dart';
 import '../home.dart';
 
 class EditUser extends StatefulWidget {
@@ -47,13 +49,22 @@ class EditUser extends StatefulWidget {
 class _EditUserState extends State<EditUser> {
   TextEditingController totalDaysController = TextEditingController();
   TextEditingController habitNameController = TextEditingController();
+  
+  
+  // ignore: prefer_typing_uninitialized_variables, non_constant_identifier_names
   var wheel_Name;
+  // ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
   var wheel_Count;
+  // ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
   var today_hours_Count;
+  // ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
   var today_days_count;
+  // ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
   var today_streak;
+  // ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
   var week_days;
 
+  // ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
   var do_it_at;
   @override
   void initState() {
@@ -292,7 +303,7 @@ class _EditUserState extends State<EditUser> {
                                       onValueChanged:
                                           (SelectorWheelValue<double> value) {
                                         wheel_Count = value.label;
-                                        print(wheel_Count);
+                                   
                                       },
                                     ),
                                   ),
@@ -322,7 +333,7 @@ class _EditUserState extends State<EditUser> {
                                       onValueChanged:
                                           (SelectorWheelValue<dynamic> value) {
                                         wheel_Name = value.label;
-                                        print(wheel_Name);
+                                      
                                       },
                                     ),
                                   ),
@@ -381,7 +392,7 @@ class _EditUserState extends State<EditUser> {
                                       index >= 0 &&
                                       index < labelValues.length) {
                                     String selectedValue = labelValues[index];
-                                    print('Switched to: $selectedValue');
+                                  
                                     do_it_at = selectedValue;
                                   }
                                 },
@@ -422,7 +433,7 @@ class _EditUserState extends State<EditUser> {
                                                 ),
                                               )));
           
-                                      print("Empty");
+                        
                                     }
                                   } else {
                                     ScaffoldMessenger.of(context)
@@ -439,7 +450,7 @@ class _EditUserState extends State<EditUser> {
                                               ),
                                             )));
           
-                                    print("Empty");
+        
                                   }
                                 },
                                 child: const Text(
@@ -527,7 +538,7 @@ class _EditUserState extends State<EditUser> {
     }
     
     week_days = weekdays;
-    print('Selected weekdays: $weekdays');
+
   } 
 
   Future<void> updateDetails(ctx) async {

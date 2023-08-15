@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import '../../models/analysis model/analysis_model.dart';
 
 
+// ignore: constant_identifier_names
 const ANALYSIS_DB_NAME = 'analaysis_db';
 
 abstract class DateDBfunctions {

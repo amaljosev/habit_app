@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/functions/hive_functions/db_start.dart';
-import '../../models/user model/user_model.dart';
+import '../../models/user_model.dart';
 import '../user/screen_user.dart';
 
 class TodayWidget extends StatefulWidget {
   const TodayWidget({super.key});
- 
+
   @override
   State<TodayWidget> createState() => _TodayWidgetState();
 }
@@ -14,21 +14,23 @@ class TodayWidget extends StatefulWidget {
 class _TodayWidgetState extends State<TodayWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container( 
+    return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(10.0),   
+        padding: const EdgeInsets.all(10.0),
         child: ValueListenableBuilder(
           valueListenable: startListNotifier,
-          builder: (BuildContext ctx, List<StartModel> startList, Widget? child) {
+          builder:
+              (BuildContext ctx, List<StartModel> startList, Widget? child) {
             return ListView.separated(
                 itemBuilder: (ctx, indexVal) {
                   final startdata = startList[indexVal];
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5), 
+                    padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Column(
                       children: [
                         InkWell(
@@ -36,7 +38,7 @@ class _TodayWidgetState extends State<TodayWidget> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ScreenUser( 
+                                    builder: (context) => ScreenUser(
                                           id: DateTime.now()
                                               .millisecond
                                               .toString(),
@@ -53,7 +55,6 @@ class _TodayWidgetState extends State<TodayWidget> {
                                           date: startdata.date,
                                           lastDoneDate: startdata.dateLastDone,
                                         )));
-                            print(startList[indexVal]);
                           },
                           child: Card(
                             color: Colors.indigo.shade50,

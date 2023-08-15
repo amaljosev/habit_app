@@ -66,14 +66,18 @@ class _SplashState extends State<Splash> {
   }
 
   Future<void> checkUserSignedUp() async {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _sharedPrefs = await SharedPreferences.getInstance();
+    // ignore: no_leading_underscores_for_local_identifiers
     final _userSignedUp = _sharedPrefs.getBool(save_key_name);
     if (_userSignedUp == null || _userSignedUp == false) {
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const OnBoardingScreen()), 
       );
     } else {
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const Home()),

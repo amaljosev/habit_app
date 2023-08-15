@@ -22,10 +22,7 @@ final _formKey = GlobalKey<FormState>();
 class _SignUpState extends State<SignUp> {
   @override
   void initState() {
-    SignUpDB().getDatas().then((value) {
-      print('signUp list');
-      print(value);
-    });
+    SignUpDB().getDatas().then((value) {});
     super.initState();
   }
 
@@ -38,7 +35,7 @@ class _SignUpState extends State<SignUp> {
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("lib/assets/images/first_bg.jpg"),  
+                image: AssetImage("lib/assets/images/first_bg.jpg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -53,35 +50,35 @@ class _SignUpState extends State<SignUp> {
                         child: Padding(
                       padding: const EdgeInsets.only(bottom: 30),
                       child: Text('Begin your journey',
-                          style: GoogleFonts.ubuntu(        
-                              fontSize: 25,  
+                          style: GoogleFonts.ubuntu(
+                              fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white )), 
+                              color: Colors.white)),
                     )),
                     TextFormField(
-                      style: const TextStyle(color: Colors.black), 
+                      style: const TextStyle(color: Colors.black),
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
-                      decoration:  const InputDecoration(
+                      decoration: const InputDecoration(
                         filled: true,
-                        fillColor: Colors.white70, 
+                        fillColor: Colors.white70,
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
                         hintText: 'yourname@gmail.com',
                         labelText: 'Email Address',
-                        labelStyle: TextStyle(color: Colors.grey), 
+                        labelStyle: TextStyle(color: Colors.grey),
                         prefixIcon: Icon(
                           Icons.mail,
-                          color: Colors.grey, 
+                          color: Colors.grey,
                         ),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Enail Address is empty!';
-                        }  else if (!EmailValidator.validate(value)) {
-                        return 'Invalid email address!';
-                      }
-                        else {
+                        } else if (!EmailValidator.validate(value)) {
+                          return 'Invalid email address!';
+                        } else {
                           return null;
                         }
                       },
@@ -93,8 +90,7 @@ class _SignUpState extends State<SignUp> {
                         style: const TextStyle(color: Colors.black),
                         controller: _userNameController,
                         keyboardType: TextInputType.name,
-                        decoration:  const InputDecoration(
-                          
+                        decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white70,
                           border: OutlineInputBorder(
@@ -105,8 +101,8 @@ class _SignUpState extends State<SignUp> {
                           labelStyle: TextStyle(color: Colors.grey),
                           prefixIcon: Icon(
                             Icons.person,
-                            color: Colors.grey, 
-                          ), 
+                            color: Colors.grey,
+                          ),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -123,7 +119,7 @@ class _SignUpState extends State<SignUp> {
                         controller: _passwordController,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: true,
-                        decoration:  const InputDecoration(
+                        decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white70,
                           border: OutlineInputBorder(
@@ -134,7 +130,7 @@ class _SignUpState extends State<SignUp> {
                           labelStyle: TextStyle(color: Colors.grey),
                           prefixIcon: Icon(
                             Icons.key,
-                            color: Colors.grey, 
+                            color: Colors.grey,
                           ),
                         ),
                         validator: (value) {
@@ -151,9 +147,7 @@ class _SignUpState extends State<SignUp> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           addDataToModel();
-                        } else {
-                          print("Empty");
-                        }
+                        } else {}
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
@@ -166,7 +160,7 @@ class _SignUpState extends State<SignUp> {
                       child: Text(
                         "Sign up",
                         style: GoogleFonts.unbounded(
-                            fontWeight: FontWeight.w500, color: Colors.indigo),  
+                            fontWeight: FontWeight.w500, color: Colors.indigo),
                       ),
                     ),
                   ],
@@ -178,8 +172,11 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future<void> addDataToModel() async {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _mail = _emailController.text.trim();
+    // ignore: no_leading_underscores_for_local_identifiers
     final _username = _userNameController.text.trim();
+    // ignore: no_leading_underscores_for_local_identifiers
     final _password = _passwordController.text.trim();
 
     if (_mail.isEmpty || _username.isEmpty || _password.isEmpty) {
@@ -188,12 +185,11 @@ class _SignUpState extends State<SignUp> {
       _emailController.text = '';
       _userNameController.text = '';
       _passwordController.text = '';
-      
-      
-      
+
       final signUpDB = SignUpDB();
       final signUpList = await signUpDB.getDatas();
-      
+
+      // ignore: prefer_typing_uninitialized_variables
       var user;
       for (var signUp in signUpList) {
         if (signUp.username == _username && signUp.password == _password) {
@@ -202,6 +198,7 @@ class _SignUpState extends State<SignUp> {
         }
       }
       if (user != null) {
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.green[800],
             behavior: SnackBarBehavior.floating,
@@ -212,30 +209,25 @@ class _SignUpState extends State<SignUp> {
                 color: Colors.white,
               ),
             )));
-            
-        print('user already registred');
       } else {
-        
         _emailController.text = '';
         _userNameController.text = '';
         _passwordController.text = '';
+        // ignore: no_leading_underscores_for_local_identifiers
         final _sharedPrefs = await SharedPreferences.getInstance();
-      await _sharedPrefs.setBool(save_key_name, true);
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) { 
+        await _sharedPrefs.setBool(save_key_name, true);
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
           return const Home();
         }));
       }
     }
-
-      
 
     final signUpObject = SignUpModel(
         mail: _mail,
         username: _username,
         password: _password,
         id: DateTime.now().millisecond.toString());
-
-    print("$_mail $_username $_password ");
 
     SignUpDB().addData(signUpObject);
   }

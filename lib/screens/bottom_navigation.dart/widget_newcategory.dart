@@ -5,7 +5,7 @@ import 'package:selector_wheel/selector_wheel/selector_wheel.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import '../../functions/hive_functions/db_start.dart';
-import '../../models/user model/user_model.dart';
+import '../../models/user_model.dart';
 import '../home.dart';
 
 class StartWidget extends StatefulWidget {
@@ -15,17 +15,25 @@ class StartWidget extends StatefulWidget {
   State<StartWidget> createState() => _StartWidgetState();
 }
 
+// ignore: non_constant_identifier_names
 TextEditingController total_DaysController = TextEditingController();
+// ignore: non_constant_identifier_names
 TextEditingController habit_NameController = TextEditingController();
+// ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
 var wheel_name;
+
+// ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
 var wheel_count;
+// ignore: prefer_typing_uninitialized_variables, non_constant_identifier_names
 var do_itAt;
+// ignore: prefer_typing_uninitialized_variables
 var week;
 
 class _StartWidgetState extends State<StartWidget> {
   final List<bool> selectedWeekdays = List.filled(7, true);
   final int defaultCountData = 1;
   final String defaultNameCount = 'Hours';
+  // ignore: non_constant_identifier_names
   final String default_Week = 'MORNING';
   List defaultWeekDays = [
     'Sunday',
@@ -83,9 +91,8 @@ class _StartWidgetState extends State<StartWidget> {
                     ),
                   ],
                 ),
-                    
                 Padding(
-                  padding: const EdgeInsets.all(5.0), 
+                  padding: const EdgeInsets.all(5.0),
                   child: TextFormField(
                     style: const TextStyle(color: Colors.black),
                     controller: habit_NameController,
@@ -115,7 +122,9 @@ class _StartWidgetState extends State<StartWidget> {
                     },
                   ),
                 ),
-                const SizedBox(height: 15,), 
+                const SizedBox(
+                  height: 15,
+                ),
                 Row(
                   children: [
                     Expanded(
@@ -139,7 +148,7 @@ class _StartWidgetState extends State<StartWidget> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(5.0),   
+                  padding: const EdgeInsets.all(5.0),
                   child: TextFormField(
                     style: const TextStyle(color: Colors.black),
                     controller: total_DaysController,
@@ -169,12 +178,15 @@ class _StartWidgetState extends State<StartWidget> {
                     },
                   ),
                 ),
-                const SizedBox(height: 15,),      
+                const SizedBox(
+                  height: 15,
+                ),
                 Column(
                   children: [
                     Padding(
-                     padding: const EdgeInsets.only(top: 8.0,left: 8.0,right: 8.0),
-                      child: Row( 
+                      padding: const EdgeInsets.only(
+                          top: 8.0, left: 8.0, right: 8.0),
+                      child: Row(
                         children: [
                           Expanded(
                             child: Card(
@@ -182,7 +194,7 @@ class _StartWidgetState extends State<StartWidget> {
                               child: Center(
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(  
+                                  child: Text(
                                     'SELECT WEEKDAYS',
                                     style: GoogleFonts.unbounded(
                                       fontSize: 10,
@@ -197,7 +209,6 @@ class _StartWidgetState extends State<StartWidget> {
                         ],
                       ),
                     ),
-                    
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: WeekdaySelector(
@@ -214,7 +225,6 @@ class _StartWidgetState extends State<StartWidget> {
                         values: selectedWeekdays,
                       ),
                     ),
-                       
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -273,15 +283,14 @@ class _StartWidgetState extends State<StartWidget> {
                               onValueChanged:
                                   (SelectorWheelValue<double> value) {
                                 wheel_count = value.label;
-                                print(wheel_count);
                               },
                             ),
                           ),
                           SizedBox(
                             width: 100,
                             height: 100,
-                            child: SelectorWheel( 
-                              width: 100,  
+                            child: SelectorWheel(
+                              width: 100,
                               childCount: 7,
                               convertIndexToValue: (int index) {
                                 final units = [
@@ -303,7 +312,6 @@ class _StartWidgetState extends State<StartWidget> {
                               onValueChanged:
                                   (SelectorWheelValue<dynamic> value) {
                                 wheel_name = value.label;
-                                print(wheel_name);
                               },
                             ),
                           ),
@@ -320,8 +328,8 @@ class _StartWidgetState extends State<StartWidget> {
                     ),
                   ],
                 ),
-                Padding( 
-                  padding: const EdgeInsets.only(left: 14,right: 14),  
+                Padding(
+                  padding: const EdgeInsets.only(left: 14, right: 14),
                   child: Row(
                     children: [
                       Expanded(
@@ -352,7 +360,7 @@ class _StartWidgetState extends State<StartWidget> {
                     minWidth: 100.0,
                     initialLabelIndex: 0,
                     totalSwitches: 3,
-                    inactiveBgColor: Colors.black12, 
+                    inactiveBgColor: Colors.black12,
                     labels: const ['MORNING', 'NOON', 'EVENING'],
                     icons: const [
                       Icons.sunny,
@@ -403,8 +411,6 @@ class _StartWidgetState extends State<StartWidget> {
                                         ),
                                       ),
                                     )));
-
-                            print("Empty");
                           }
                         } else {
                           ScaffoldMessenger.of(context)
@@ -420,8 +426,6 @@ class _StartWidgetState extends State<StartWidget> {
                                       ),
                                     ),
                                   )));
-
-                          print("Empty");
                         }
                       },
                       child: const Text(
@@ -444,6 +448,7 @@ class _StartWidgetState extends State<StartWidget> {
     wheel_name ??= defaultNameCount;
     do_itAt ??= default_Week;
     week ??= defaultWeekDays;
+    // ignore: no_leading_underscores_for_local_identifiers
     final _days = total_DaysController.text.trim();
     final name = habit_NameController.text.trim();
 
@@ -479,7 +484,6 @@ class _StartWidgetState extends State<StartWidget> {
       dateLastDone: DateTime.now(),
     );
 
-    print("$name $_days  $wheel_count $wheel_name");
     wheel_count = defaultCountData;
     wheel_name = defaultNameCount;
     addCategory(startObject);
@@ -529,6 +533,5 @@ class _StartWidgetState extends State<StartWidget> {
       }
     }
     week = weekdays;
-    print('Selected weekdays: $weekdays');
   }
 }
