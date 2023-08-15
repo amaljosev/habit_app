@@ -20,6 +20,7 @@ int? habitName = 0;
 int? days = 0;
 int? streak = 0;
 bool isDisable = true;
+DateTime currentDate = DateTime.now();
 
 double monday = 0.0;
 double tuesday = 0.0;
@@ -79,21 +80,25 @@ class _ScreenUserState extends State<ScreenUser> {
   }
 
   Future<void> initializeData() async {
-    
+     
+    await resetNotifiers();
+    await checkAndResetHabit();
     await fetchAnalysisData();
     await fetchCount();
   }
 
   Future<void> checkAndResetHabit() async {
-    await resetNotifiers();
-    lastDate = widget.lastDoneDate;
+     await getallDatas();
+     lastDate = widget.lastDoneDate;  
 
-    DateTime currentDate = DateTime.now();
+     currentDate = DateTime.now();
 
     if (lastDate.day != currentDate.day) {
       setState(
         () {
-          habitName = 0;
+
+          habitNameNotifier.value = 0;
+
           updateList(
             widget.index,
             StartModel(
@@ -102,26 +107,20 @@ class _ScreenUserState extends State<ScreenUser> {
                 habit: widget.habitName,
                 wheelCount: widget.wheelCount,
                 wheelName: widget.wheelName,
-                todayHours: '0',
+                todayHours: habitNameNotifier.value.toString(),
                 today: daysNotifier.value.toString(),
                 streak: streakNotifier.value.toString(),
                 doitAt: widget.doItAt,
                 week: widget.week,
                 date: widget.date,
-                dateLastDone: currentDate), 
+                dateLastDone: currentDate),
           );
-
-          getallDatas();
-
-          
-
         },
       );
       if (isOneDayOrMoreDifference(lastDate, currentDate)) {
-        
         setState(
           () {
-            streak=0;  
+            streakNotifier.value = 0;
             updateList(
               widget.index,
               StartModel(
@@ -130,15 +129,14 @@ class _ScreenUserState extends State<ScreenUser> {
                   habit: widget.habitName,
                   wheelCount: widget.wheelCount,
                   wheelName: widget.wheelName,
-                  todayHours: '0',
+                  todayHours: habitNameNotifier.value.toString(),
                   today: daysNotifier.value.toString(),
-                  streak: '0',
+                  streak: streakNotifier.value.toString(),
                   doitAt: widget.doItAt,
                   week: widget.week,
                   date: widget.date,
                   dateLastDone: currentDate),
             );
-            getallDatas();
           },
         );
       }
@@ -219,7 +217,7 @@ class _ScreenUserState extends State<ScreenUser> {
   }
 
   bool disableButtons() {
-    String todayCount = habitName.toString();
+    String todayCount = habitNameNotifier.value.toString();
     String today = widget.wheelCount;
     isDisable = true;
 
@@ -232,9 +230,7 @@ class _ScreenUserState extends State<ScreenUser> {
 
   Future<void> resetNotifiers() async {
     await getallDatas();
-    habitName = int.parse(widget.todayCount);
-    days = int.parse(widget.today);
-    streak = int.parse(widget.streak);
+
     habitNameNotifier.value = int.parse(widget.todayCount);
     daysNotifier.value = int.parse(widget.today);
     streakNotifier.value = int.parse(widget.streak);
@@ -242,8 +238,6 @@ class _ScreenUserState extends State<ScreenUser> {
 
   @override
   Widget build(BuildContext context) {
-    resetNotifiers();
-     checkAndResetHabit(); 
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -436,7 +430,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                               builder: (BuildContext context,
                                                   int value, Widget? child) {
                                                 return Text(
-                                                  habitName.toString(),
+                                                  habitNameNotifier.value
+                                                      .toString(),
                                                   style: const TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w900,
@@ -477,7 +472,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                               builder: (BuildContext context,
                                                   int count, Widget? child) {
                                                 return Text(
-                                                  days.toString(),
+                                                  daysNotifier.value.toString(),
                                                   style: const TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w900,
@@ -519,7 +514,8 @@ class _ScreenUserState extends State<ScreenUser> {
                                               builder: (BuildContext context,
                                                   int count, Widget? child) {
                                                 return Text(
-                                                  streak.toString(),
+                                                  streakNotifier.value
+                                                      .toString(),
                                                   style: const TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w900,
@@ -1013,7 +1009,7 @@ class _ScreenUserState extends State<ScreenUser> {
           doitAt: widget.doItAt,
           week: widget.week,
           date: widget.date,
-          dateLastDone: widget.lastDoneDate),
+          dateLastDone: currentDate),
     );
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) {
@@ -1024,12 +1020,12 @@ class _ScreenUserState extends State<ScreenUser> {
 
   void incrementTodayWheelCount() {
     setState(() {
-      habitNameNotifier.value = (habitName ?? 0) + 1;
+      habitNameNotifier.value += 1;
 
       if (habitNameNotifier.value.toString() == widget.wheelCount) {
         incrementCounterBasedOnDay();
-        daysNotifier.value = (days ?? 0) + 1;
-        streakNotifier.value = (streak ?? 0) + 1;
+        daysNotifier.value += 1;
+        streakNotifier.value += 1;
         updateList(
           widget.index,
           StartModel(
@@ -1044,7 +1040,7 @@ class _ScreenUserState extends State<ScreenUser> {
               doitAt: widget.doItAt,
               week: widget.week,
               date: widget.date,
-              dateLastDone: widget.lastDoneDate),
+              dateLastDone: currentDate),
         );
         if (daysNotifier.value.toString() == widget.totalDays) {
           deleteData(widget.index);
@@ -1063,7 +1059,7 @@ class _ScreenUserState extends State<ScreenUser> {
                 doitAt: widget.doItAt,
                 week: widget.week,
                 date: widget.date,
-                dateLastDone: widget.lastDoneDate),
+                dateLastDone: currentDate),
           );
         }
       } else {
@@ -1081,7 +1077,7 @@ class _ScreenUserState extends State<ScreenUser> {
               doitAt: widget.doItAt,
               week: widget.week,
               date: widget.date,
-              dateLastDone: widget.lastDoneDate),
+              dateLastDone: currentDate),
         );
       }
     });
@@ -1090,8 +1086,8 @@ class _ScreenUserState extends State<ScreenUser> {
   void incrementTodayCount() {
     setState(() {
       habitNameNotifier.value = int.parse(widget.wheelCount);
-      daysNotifier.value = (days ?? 0) + 1;
-      streakNotifier.value = (streak ?? 0) + 1;
+      daysNotifier.value += 1;
+      streakNotifier.value += 1;
 
       if (daysNotifier.value.toString() == widget.totalDays) {
         deleteData(widget.index);
@@ -1110,7 +1106,7 @@ class _ScreenUserState extends State<ScreenUser> {
               doitAt: widget.doItAt,
               week: widget.week,
               date: widget.date,
-              dateLastDone: widget.lastDoneDate),
+              dateLastDone: currentDate),
         );
       }
     });
@@ -1181,7 +1177,7 @@ class _ScreenUserState extends State<ScreenUser> {
         week: widget.week,
         doitAt: widget.doItAt,
         date: widget.date,
-        dateLastDone: widget.lastDoneDate);
+        dateLastDone: currentDate);
 
     addCategory(startObject);
     Navigator.of(context).pushReplacement(
