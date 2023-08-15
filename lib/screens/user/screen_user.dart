@@ -3,12 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/screens/user/sub_pages/analysis_screen.dart';
 import 'package:habit_project/screens/user/sub_pages/screen_timer.dart';
 import 'package:habit_project/screens/user/sub_pages/stopwatch_screen.dart';
+import 'package:habit_project/screens/user/user_functions/button_functions.dart';
+import 'package:habit_project/screens/user/user_functions/popup_functions.dart.dart';
+import 'package:habit_project/screens/user/user_functions/reset_functions.dart.dart';
 import 'package:intl/intl.dart';
 import 'package:slider_button/slider_button.dart';
 import '../../functions/hive_functions/db_analysis.dart';
 import '../../functions/hive_functions/db_count.dart';
 import '../../functions/hive_functions/db_start.dart';
-
 import '../../models/db_models/db_model.dart';
 import '../home.dart';
 import 'edit_user.dart';
@@ -87,146 +89,7 @@ class _ScreenUserState extends State<ScreenUser> {
     await fetchCount();
   }
 
-  Future<void> checkAndResetHabit() async {
-     await getallDatas();
-     lastDate = widget.lastDoneDate;  
-
-     currentDate = DateTime.now();
-
-    if (lastDate.day != currentDate.day) {
-      setState(
-        () {
-
-          habitNameNotifier.value = 0;
-
-          updateList(
-            widget.index,
-            StartModel(
-                id: DateTime.now().millisecond.toString(),
-                days: widget.totalDays,
-                habit: widget.habitName,
-                wheelCount: widget.wheelCount,
-                wheelName: widget.wheelName,
-                todayHours: habitNameNotifier.value.toString(),
-                today: daysNotifier.value.toString(),
-                streak: streakNotifier.value.toString(),
-                doitAt: widget.doItAt,
-                week: widget.week,
-                date: widget.date,
-                dateLastDone: currentDate),
-          );
-        },
-      );
-      if (isOneDayOrMoreDifference(lastDate, currentDate)) {
-        setState(
-          () {
-            streakNotifier.value = 0;
-            updateList(
-              widget.index,
-              StartModel(
-                  id: DateTime.now().millisecond.toString(),
-                  days: widget.totalDays,
-                  habit: widget.habitName,
-                  wheelCount: widget.wheelCount,
-                  wheelName: widget.wheelName,
-                  todayHours: habitNameNotifier.value.toString(),
-                  today: daysNotifier.value.toString(),
-                  streak: streakNotifier.value.toString(),
-                  doitAt: widget.doItAt,
-                  week: widget.week,
-                  date: widget.date,
-                  dateLastDone: currentDate),
-            );
-          },
-        );
-      }
-    }
-  }
-
-  bool isOneDayOrMoreDifference(DateTime lastDate, DateTime currentDate) {
-    // Get the date components (day, month, year) for both dates
-    int lastDay = lastDate.day;
-    int currentDay = currentDate.day;
-
-    int lastMonth = lastDate.month;
-    int currentMonth = currentDate.month;
-
-    int lastYear = lastDate.year;
-    int currentYear = currentDate.year;
-
-    // Check if the year and month are the same
-    if (lastYear == currentYear && lastMonth == currentMonth) {
-      // Check if the difference between the days is 1 or more
-      return (currentDay - lastDay) > 1;
-    }
-
-    // Check if the dates are 1 month apart or more
-    if ((currentYear == lastYear && currentMonth - lastMonth >= 1) ||
-        (currentYear - lastYear == 1 && currentMonth == 1 && lastMonth == 12)) {
-      // Check if the last date is the last day of the month and the current date is the first day of the month
-      bool isLastDayOfMonth =
-          (lastDate.day == DateTime(lastYear, lastMonth + 1, 0).day);
-      bool isFirstDayOfMonth = (currentDate.day == 1);
-      return isLastDayOfMonth && isFirstDayOfMonth;
-    }
-    return false;
-  }
-
-  Future<void> fetchCount() async {
-    final db = HabitCountsDB();
-    final dataList = await db.getAllCounts();
-    if (dataList.isNotEmpty) {
-      setState(
-        () {
-          completed = dataList.last.totalHabitCompleted;
-        },
-      );
-    }
-  }
-
-  Future<void> fetchAnalysisData() async {
-    final db = AnalysisDB();
-    final dataList = await db.getAllanalysData();
-    analysisList = dataList;
-    if (dataList.isNotEmpty) {
-      setState(
-        () {
-          monday = dataList.last.monday;
-          tuesday = dataList.last.tuesday;
-          wednesday = dataList.last.wednesday;
-          thursday = dataList.last.thursday;
-          friday = dataList.last.friday;
-          saturday = dataList.last.saturday;
-          sunday = dataList.last.sunday;
-        },
-      );
-    }
-  }
-
   SampleItem? selectedMenu;
-
-  bool shouldShowButtons(List week) {
-    // Get the current day of the week (e.g., "Monday", "Tuesday")
-    String currentDayOfWeek = DateFormat('EEEE').format(DateTime.now());
-
-    // Check if the current day is present in the list of days
-    bool isDayInWeek = week.contains(currentDayOfWeek);
-
-    // Return true if the current day is in the list, otherwise false
-    return isDayInWeek;
-  }
-
-  bool disableButtons() {
-    String todayCount = habitNameNotifier.value.toString();
-    String today = widget.wheelCount;
-    isDisable = true;
-
-    if (todayCount == today) {
-      isDisable = false;
-    }
-
-    return isDisable;
-  }
 
   Future<void> resetNotifiers() async {
     await getallDatas();
@@ -310,7 +173,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                     reset();
                                   }
                                   if (item == SampleItem.itemTwo) {
-                                    popupDialogueBox(widget.index);
+                                    popupDialogueBox(widget.index,context); 
                                   }
                                 });
                               },
@@ -539,7 +402,7 @@ class _ScreenUserState extends State<ScreenUser> {
                                 ),
                               ),
                               if (disableButtons())
-                                if (shouldShowButtons(widget.week))
+                                if (shouldShowButtons(widget.week)) 
                                   Padding(
                                     padding: const EdgeInsets.all(18.0),
                                     child: Column(
@@ -990,6 +853,108 @@ class _ScreenUserState extends State<ScreenUser> {
       ),
     );
   }
+  Future<void> checkAndResetHabit() async {
+     await getallDatas();
+     lastDate = widget.lastDoneDate;  
+
+     currentDate = DateTime.now();
+
+    if (lastDate.day != currentDate.day) {
+      setState(
+        () {
+
+          habitNameNotifier.value = 0;
+
+          updateList(
+            widget.index,
+            StartModel(
+                id: DateTime.now().millisecond.toString(),
+                days: widget.totalDays,
+                habit: widget.habitName,
+                wheelCount: widget.wheelCount,
+                wheelName: widget.wheelName,
+                todayHours: habitNameNotifier.value.toString(),
+                today: daysNotifier.value.toString(),
+                streak: streakNotifier.value.toString(),
+                doitAt: widget.doItAt,
+                week: widget.week,
+                date: widget.date,
+                dateLastDone: currentDate),
+          );
+        },
+      );
+      if (isOneDayOrMoreDifference(lastDate, currentDate)) { 
+        setState(
+          () {
+            streakNotifier.value = 0;
+            updateList(
+              widget.index,
+              StartModel(
+                  id: DateTime.now().millisecond.toString(),
+                  days: widget.totalDays,
+                  habit: widget.habitName,
+                  wheelCount: widget.wheelCount,
+                  wheelName: widget.wheelName,
+                  todayHours: habitNameNotifier.value.toString(),
+                  today: daysNotifier.value.toString(),
+                  streak: streakNotifier.value.toString(),
+                  doitAt: widget.doItAt,
+                  week: widget.week,
+                  date: widget.date,
+                  dateLastDone: currentDate),
+            );
+          },
+        );
+      }
+    }
+  }
+  
+
+
+  bool disableButtons() {
+    String todayCount = habitNameNotifier.value.toString();
+    String today = widget.wheelCount;
+    isDisable = true;
+
+    if (todayCount == today) {
+      isDisable = false;
+    }
+
+    return isDisable;
+  }
+
+
+
+  Future<void> fetchCount() async {
+    final db = HabitCountsDB();
+    final dataList = await db.getAllCounts();
+    if (dataList.isNotEmpty) {
+      setState(
+        () {
+          completed = dataList.last.totalHabitCompleted;
+        },
+      );
+    }
+  }
+
+  Future<void> fetchAnalysisData() async {
+    final db = AnalysisDB();
+    final dataList = await db.getAllanalysData();
+    analysisList = dataList;
+    if (dataList.isNotEmpty) {
+      setState(
+        () {
+          monday = dataList.last.monday;
+          tuesday = dataList.last.tuesday;
+          wednesday = dataList.last.wednesday;
+          thursday = dataList.last.thursday;
+          friday = dataList.last.friday;
+          saturday = dataList.last.saturday;
+          sunday = dataList.last.sunday;
+        },
+      );
+    }
+  }
 
   Future<void> reset() async {
     habitNameNotifier.value = 0;
@@ -1112,53 +1077,7 @@ class _ScreenUserState extends State<ScreenUser> {
     });
   }
 
-  popupDialogueBox(int indexValue) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: const Text("Do you want to delete this habit?"),
-          title: Card(
-              color: Colors.indigo.shade50,
-              child: const Center(
-                  child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text("DELETE HABIT"),
-              ))),
-          titleTextStyle: const TextStyle(
-              fontWeight: FontWeight.w900, color: Colors.black, fontSize: 20),
-          actionsOverflowButtonSpacing: 20,
-          actions: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      20,
-                    ),
-                  )),
-              onPressed: () {
-                deleteData(indexValue);
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) {
-                    return const Home();
-                  }),
-                );
-              },
-              child:
-                  const Text("DELETE", style: TextStyle(color: Colors.white)),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("GO BACK"),
-            ),
-          ],
-        );
-      },
-    );
-  }
+
 
   Future<void> restart() async {
     habitNameNotifier.value = 0;

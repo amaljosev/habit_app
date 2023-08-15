@@ -66,7 +66,7 @@ class _StartScreenState extends State<StartScreen> {
                           topRight: Radius.circular(20)),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0), 
                       child: Column(
                         children: [
                           Padding(
