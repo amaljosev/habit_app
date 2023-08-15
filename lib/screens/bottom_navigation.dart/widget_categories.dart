@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/categories/categories_model.dart';
-import '../../models/db_models/db_model.dart';
-
+import '../../models/user model/user_model.dart';
 import '../screen_start.dart';
 
 class CategoryWidget extends StatefulWidget {

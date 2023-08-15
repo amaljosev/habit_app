@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../functions/hive_functions/db_functions.dart';
 import '../../main.dart';
 import 'package:email_validator/email_validator.dart';
-import '../../models/db_models/db_model.dart';
+import '../../models/signup_models/signup_model.dart';
 import '../home.dart';
 
 class SignUp extends StatefulWidget {

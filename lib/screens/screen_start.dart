@@ -6,7 +6,9 @@ import 'package:selector_wheel/selector_wheel/selector_wheel.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../functions/hive_functions/db_date.dart';
-import '../models/db_models/db_model.dart';
+import '../models/date models/date_model.dart';
+import '../models/user model/user_model.dart';
+
 import 'home.dart';
 
 class StartScreen extends StatefulWidget {

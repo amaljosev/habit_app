@@ -1,7 +1,7 @@
 
 import 'package:hive/hive.dart';
 
-import '../../models/db_models/db_model.dart';
+import '../../models/signup_models/signup_model.dart';
 const SIGNUP_DB_NAME='signup_db';
 abstract class SignupDBfunctions {
   Future<List <SignUpModel>> getDatas();

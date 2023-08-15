@@ -1,6 +1,5 @@
 import 'package:hive/hive.dart';
-
-import '../../models/db_models/db_model.dart';
+import '../../models/date models/date_model.dart';
 
 
 const DATE_DB_NAME = 'date_db';

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:habit_project/screens/start/screen_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'models/analysis model/analysis_model.dart';
+import 'models/count_model/count_model.dart';
+import 'models/date models/date_model.dart';
+import 'models/signup_models/signup_model.dart';
+import 'models/user model/user_model.dart';
 
-import 'models/db_models/db_model.dart';
+
 
 
 const save_key_name = 'userLoggedIn';
@@ -14,7 +19,7 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(SignUpModelAdapter().typeId)) {
     Hive.registerAdapter(SignUpModelAdapter());
   }
-  if (!Hive.isAdapterRegistered(StartModelAdapter().typeId)) {
+  if (!Hive.isAdapterRegistered(StartModelAdapter().typeId)) { 
     Hive.registerAdapter(StartModelAdapter());
   }
   if (!Hive.isAdapterRegistered(HabitsCountModelAdapter().typeId)) {
