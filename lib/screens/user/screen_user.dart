@@ -14,7 +14,7 @@ import '../../functions/hive_functions/db_start.dart';
 import '../../models/analysis model/analysis_model.dart';
 import '../../models/count_model/count_model.dart';
 import '../../models/user_model.dart';
-import '../home.dart';
+import '../screen_home.dart';
 import 'edit_user.dart';
 
 ValueNotifier<int> habitNameNotifier = ValueNotifier<int>(habitName ?? 0);

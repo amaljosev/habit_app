@@ -4,7 +4,7 @@ import 'package:habit_project/main.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../functions/hive_functions/db_functions.dart';
-import '../home.dart';
+import '../screen_home.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});

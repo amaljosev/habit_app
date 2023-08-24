@@ -4,7 +4,7 @@ import 'package:video_player/video_player.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../main.dart';
-import '../home.dart';
+import '../screen_home.dart';
 import 'on_boarding_screen.dart';
 
 

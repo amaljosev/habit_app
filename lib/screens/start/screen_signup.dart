@@ -5,7 +5,7 @@ import '../../functions/hive_functions/db_functions.dart';
 import '../../main.dart';
 import 'package:email_validator/email_validator.dart';
 import '../../models/signup_models/signup_model.dart';
-import '../home.dart';
+import '../screen_home.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});

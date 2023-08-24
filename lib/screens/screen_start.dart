@@ -9,7 +9,7 @@ import '../functions/hive_functions/db_date.dart';
 import '../models/date models/date_model.dart';
 
 import '../models/user_model.dart';
-import 'home.dart';
+import 'screen_home.dart';
 
 class StartScreen extends StatefulWidget {
   final String name;
@@ -53,7 +53,7 @@ class _StartScreenState extends State<StartScreen> {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/assets/images/new_bg.jpg'),
+            image: AssetImage('lib/assets/images/new_home.png'), 
             fit: BoxFit.fill,
           ),
         ),

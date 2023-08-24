@@ -86,26 +86,20 @@ flutter:
     - lib/assets/videos/splash.mp4   
     - lib/assets/images/first_bg.jpg        
     - lib/assets/videos/trophy.gif    
-    - lib/assets/images/timer_bg.jpg  
-    - lib/assets/images/stop_watch_bg.jpg 
     - lib/assets/videos/habit_completed.gif  
     - lib/assets/videos/completed.gif 
     - lib/assets/images/screen_1.webp
     - lib/assets/images/screen_2.webp
     - lib/assets/images/screen_3.webp
     - lib/assets/images/new_bg.jpg 
-    - lib/assets/svg/house.svg  
-    - lib/assets/svg/category.svg
-    - lib/assets/svg/statistics-graph.svg  
-    - lib/assets/svg/add.svg 
     - lib/assets/images/bg_painted.png
     - lib/assets/images/new_home.png
     - lib/assets/videos/information.gif
-    - lib/assets/svg/instagram (1).svg  
-    - lib/assets/svg/linkedin.svg 
+    - lib/assets/svg/instagram (1).svg 
 
 
 
+ 
 
     
   # An image asset can refer to one or more resolution-specific "variants", see

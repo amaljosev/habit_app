@@ -1,6 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:habit_project/screens/bottom_navigation.dart/widget_me.dart';
 import 'package:habit_project/screens/bottom_navigation.dart/widget_newcategory.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -46,7 +45,7 @@ class _HomeState extends State<Home> {
   ];
 
   void onItemTapped(int index) {
-    setState(() {
+    setState(() { 
       page = index;
     });
   }
@@ -85,7 +84,6 @@ class _HomeState extends State<Home> {
                         calendarFormat: CalendarFormat.week,
                         calendarStyle: CalendarStyle(
                           outsideDaysVisible: true,
-                          outsideTextStyle: const TextStyle(color: Colors.black), 
                           todayDecoration: BoxDecoration(
                             color: Colors.indigo.shade900,
                             shape: BoxShape.circle,
@@ -124,10 +122,10 @@ class _HomeState extends State<Home> {
         height: 60.0,
         items: [
           shouldChangeIconColor(page, 0)
-              ? SvgPicture.asset(
-                  'lib/assets/svg/house.svg',
-                  width: 35,
-                  height: 35,
+              ? const Icon(
+                  Icons.home, 
+                  color: Colors.white,
+                  size: 35,
                 )
               : const Icon(
                   Icons.home_outlined,
@@ -135,21 +133,21 @@ class _HomeState extends State<Home> {
                   size: 35,
                 ),
           shouldChangeIconColor(page, 1)
-              ? SvgPicture.asset(
-                  'lib/assets/svg/menu (1).svg',   
-                  width: 35,
-                  height: 35,
+              ? const Icon(
+                  Icons.assignment_sharp,
+                  color: Colors.white,
+                  size: 35,
                 )
               : const Icon(
-                  Icons.assignment_sharp,
+                  Icons.assignment_outlined, 
                   color: Colors.white,
                   size: 35,
                 ),
           shouldChangeIconColor(page, 2)
-              ? SvgPicture.asset(
-                  'lib/assets/svg/add (1).svg', 
-                  width: 35,
-                  height: 35,
+              ? const Icon(
+                  Icons.add ,
+                  color: Colors.white,
+                  size: 35,
                 )
               : const Icon(
                   Icons.add,
@@ -157,24 +155,24 @@ class _HomeState extends State<Home> {
                   size: 35,
                 ),
           shouldChangeIconColor(page, 3)
-              ? SvgPicture.asset(
-                  'lib/assets/svg/add (1).svg', 
-                  width: 35,
-                  height: 35,
+              ? const Icon(
+                  Icons.bar_chart_rounded,  
+                  color: Colors.white,
+                  size: 35,
                 )
               : const Icon(
-                  Icons.bar_chart,
+                  Icons.  insert_chart_outlined_sharp,
                   color: Colors.white,
                   size: 35,
                 ),
-                shouldChangeIconColor(page, 3)
-              ? SvgPicture.asset(
-                  'lib/assets/svg/profile.svg', 
-                  width: 35,
-                  height: 35,
+                shouldChangeIconColor(page, 4) 
+              ? const Icon(
+                  Icons.person,  
+                  color: Colors.white,
+                  size: 35,
                 )
               : const Icon(
-                  Icons.person_2_outlined, 
+                  Icons.  person_outline, 
                   color: Colors.white,
                   size: 35,
                 ), 

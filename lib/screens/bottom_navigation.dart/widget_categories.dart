@@ -5,7 +5,7 @@ import '../../models/categories/categories_model.dart';
 import '../../models/user_model.dart';
 import '../screen_start.dart';
 
-class CategoryWidget extends StatefulWidget {
+class CategoryWidget extends StatefulWidget { 
   const CategoryWidget({super.key});
 
   @override
@@ -16,7 +16,8 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
     return  SafeArea(  
-        child: Container(  
+        child: Container(
+              
           decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(

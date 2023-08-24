@@ -8,7 +8,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 import '../../functions/hive_functions/db_start.dart';
 import '../../models/user_model.dart';
-import '../home.dart';
+import '../screen_home.dart';
 
 class EditUser extends StatefulWidget {
   final int index;
