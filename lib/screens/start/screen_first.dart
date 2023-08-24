@@ -45,7 +45,7 @@ class FirstPage extends StatelessWidget {
                   child:
                       Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Text(
-                      "Make your life helthy",
+                      "Make your life healthy",
                       style: GoogleFonts.unbounded(
                           fontWeight: FontWeight.w500,
                           color: Colors.red.shade50, 
@@ -61,7 +61,7 @@ class FirstPage extends StatelessWidget {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => const SignUp()),
-                          );
+                          ); 
                         },
                         style: ElevatedButton.styleFrom(
                             fixedSize: const Size(220, 34),
