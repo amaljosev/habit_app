@@ -205,7 +205,7 @@ class _ScreenPrivacyState extends State<ScreenPrivacy> {
               // Create a mailto Uri with the recipient's email address.
               final Uri uri = Uri(
                   scheme: 'mailto',
-                  path: 'amaljvattakkunnel@gmail.com');
+                  path: 'flutterverseofficial@gmail.com'); 
 
               // Launch the mailto Uri using the url_launcher package.
               await launchUrl(uri);

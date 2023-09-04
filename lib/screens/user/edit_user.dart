@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:selector_wheel/selector_wheel/models/selector_wheel_value.dart';
@@ -49,8 +47,7 @@ class EditUser extends StatefulWidget {
 class _EditUserState extends State<EditUser> {
   TextEditingController totalDaysController = TextEditingController();
   TextEditingController habitNameController = TextEditingController();
-  
-  
+
   // ignore: prefer_typing_uninitialized_variables, non_constant_identifier_names
   var wheel_Name;
   // ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
@@ -101,151 +98,66 @@ class _EditUserState extends State<EditUser> {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/assets/images/new_home.png'), 
+            image: AssetImage('lib/assets/images/new_home.png'),
             fit: BoxFit.fill,
           ),
         ),
-        child: SafeArea( 
-          child: SingleChildScrollView( 
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end, 
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8, top: 8), 
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(28.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-                            children: [
-                              IconButton(onPressed: (){
-                                Navigator.of(context).pop(); 
-                              }, icon: const Icon(Icons.arrow_back_ios_new),), 
-                              Padding(
-                                padding: const EdgeInsets.all(28.0),
-                                child: Text(
-                                  'Edit Habit',  
-                                  style: GoogleFonts.comicNeue(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 20,
-                                    color: Colors.black,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: SingleChildScrollView(
+              child: Padding( 
+                padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container( 
+                      height: MediaQuery.of(context).size.height,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(28.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  icon: const Icon(Icons.arrow_back_ios_new),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(28.0),
+                                  child: Text(
+                                    'Edit Habit',
+                                    style: GoogleFonts.comicNeue(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 20,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.all(8.0), 
-                                child: Icon(Icons.arrow_back_ios_new,color: Colors.white,),
-                              ), 
-                            ],
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'HABIT NAME',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.arrow_back_ios_new,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ],
                             ),
-                          ),
-                          TextFormField(
-                            style: const TextStyle(color: Colors.black),
-                            controller: habitNameController,
-                            keyboardType: TextInputType.number, 
-                            decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.black12,  
-                              focusedBorder: InputBorder.none, 
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none, 
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              hintText: 'Name',
-                              hintStyle: TextStyle(color: Colors.grey),
-                              labelStyle: TextStyle(color: Colors.grey),
-                              prefixIcon: Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                              ),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Duration empty!';
-                              } else {
-                                return null;
-                              }
-                            },
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'HABIT DURATION',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          TextFormField(
-                            style: const TextStyle(color: Colors.black),
-                            controller: totalDaysController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                              focusedBorder: InputBorder.none,
-                              filled: true,
-                              fillColor: Colors.black12,
-                              border: OutlineInputBorder( 
-                                 borderSide: BorderSide.none,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              hintText: 'Days',
-                              hintStyle: TextStyle(color: Colors.grey),
-                              labelStyle: TextStyle(color: Colors.grey),
-                              prefixIcon: Icon(
-                                Icons.calendar_month_outlined,
-                                color: Colors.black,
-                              ),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Duration empty!';
-                              } else {
-                                return null;
-                              }
-                            },
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Column(
-                            children: [
-                              const Row(
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Row(
                                 children: [
                                   Text(
-                                    'SELECT WEEKDAYS',
+                                    'HABIT NAME',
                                     style: TextStyle(
                                       fontSize: 10,
                                       fontWeight: FontWeight.bold,
@@ -254,28 +166,45 @@ class _EditUserState extends State<EditUser> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 20,
+                            ),
+                            TextFormField(
+                              style: const TextStyle(color: Colors.black),
+                              controller: habitNameController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.black12,
+                                focusedBorder: InputBorder.none,
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                hintText: 'Name',
+                                hintStyle: TextStyle(color: Colors.grey),
+                                labelStyle: TextStyle(color: Colors.grey),
+                                prefixIcon: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                ),
                               ),
-                              WeekdaySelector(
-                                selectedFillColor: Colors.indigo,
-                                onChanged: (int day) {
-                                  setState(() {
-                                    final index = day % 7;
-                                    selectedWeekdays[index] =
-                                        !selectedWeekdays[index];
-                                    printSelectedWeekdays();
-                                  });
-                                },
-                                values: selectedWeekdays,
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const Row(
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Duration empty!';
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Row(
                                 children: [
                                   Text(
-                                    'COUNTER',
+                                    'HABIT DURATION',
                                     style: TextStyle(
                                       fontSize: 10,
                                       fontWeight: FontWeight.bold,
@@ -284,145 +213,241 @@ class _EditUserState extends State<EditUser> {
                                   ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  SizedBox(
-                                    width: 100,
-                                    height: 100,
-                                    child: SelectorWheel(
-                                      childCount: 10,
-                                      convertIndexToValue: (int index) {
-                                        final value = index + 1;
-                                        return SelectorWheelValue(
-                                          label: '$value',
-                                          value: value.toDouble(),
-                                          index: index,
-                                        );
-                                      },
-                                      onValueChanged:
-                                          (SelectorWheelValue<double> value) {
-                                        wheel_Count = value.label;
-                                   
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 100,
-                                    height: 100,
-                                    child: SelectorWheel(
-                                      width: 100, 
-                                      childCount: 7,
-                                      convertIndexToValue: (int index) {
-                                        final units = [
-                                          'Hours',
-                                          'Pages',
-                                          'Kilometer',
-                                          'Meter',
-                                          'Liter',
-                                          'Cups',
-                                          'Rupees',
-                                        ];
-                                        final value = units[index];
-                                        return SelectorWheelValue(
-                                          label: value,
-                                          value: value,
-                                          index: index,
-                                        );
-                                      },
-                                      onValueChanged:
-                                          (SelectorWheelValue<dynamic> value) {
-                                        wheel_Name = value.label;
-                                      
-                                      },
-                                    ),
-                                  ),
-                                  Text(
-                                    'per day',
-                                    style: GoogleFonts.varela(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'DO IT AT',
-                                  style: GoogleFonts.unbounded(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              ToggleSwitch(
-                                activeBgColor: const [Colors.indigo],
-                                minWidth: 100.0,
-                                initialLabelIndex: 0,
-                                totalSwitches: 3,
-                                inactiveBgColor: Colors.grey.shade200,
-                                labels: const ['Morning', 'Noon', 'Evening'],
-                                icons: const [
-                                  Icons.sunny,
-                                  Icons.wb_sunny_outlined,
-                                  Icons.bedtime_rounded
-                                ],
-                                onToggle: (index) {
-                                  List<String> labelValues = [
-                                    'Morning',
-                                    'Noon',
-                                    'Evening'
-                                  ];
-                                  if (index != null &&
-                                      index >= 0 &&
-                                      index < labelValues.length) {
-                                    String selectedValue = labelValues[index];
-                                  
-                                    do_it_at = selectedValue;
-                                  }
-                                },
+                            TextFormField(
+                              style: const TextStyle(color: Colors.black),
+                              controller: totalDaysController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(
+                                focusedBorder: InputBorder.none,
+                                filled: true,
+                                fillColor: Colors.black12,
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                hintText: 'Days',
+                                hintStyle: TextStyle(color: Colors.grey),
+                                labelStyle: TextStyle(color: Colors.grey),
+                                prefixIcon: Icon(
+                                  Icons.calendar_month_outlined,
+                                  color: Colors.black,
+                                ),
                               ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.indigo,
-                                    fixedSize: const Size(220, 34),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                        10,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Duration empty!';
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Column(
+                              children: [
+                                const Row(
+                                  children: [
+                                    Text(
+                                      'SELECT WEEKDAYS',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
                                       ),
-                                    )),
-                                onPressed: () {
-                                  if (habitNameController.text.isNotEmpty) {
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                WeekdaySelector(
+                                  selectedFillColor: Colors.indigo,
+                                  onChanged: (int day) {
+                                    setState(() {
+                                      final index = day % 7;
+                                      selectedWeekdays[index] =
+                                          !selectedWeekdays[index];
+                                      printSelectedWeekdays();
+                                    });
+                                  },
+                                  values: selectedWeekdays,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                const Row(
+                                  children: [
+                                    Text(
+                                      'COUNTER',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    SizedBox(
+                                      width: 100,
+                                      height: 100,
+                                      child: SelectorWheel(
+                                        childCount: 10,
+                                        convertIndexToValue: (int index) {
+                                          final value = index + 1;
+                                          return SelectorWheelValue(
+                                            label: '$value',
+                                            value: value.toDouble(),
+                                            index: index,
+                                          );
+                                        },
+                                        onValueChanged:
+                                            (SelectorWheelValue<double> value) {
+                                          wheel_Count = value.label;
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 100,
+                                      height: 100,
+                                      child: SelectorWheel(
+                                        width: 100,
+                                        childCount: 7,
+                                        convertIndexToValue: (int index) {
+                                          final units = [
+                                            'Hours',
+                                            'Pages',
+                                            'Kilometer',
+                                            'Meter',
+                                            'Liter',
+                                            'Cups',
+                                            'Rupees',
+                                          ];
+                                          final value = units[index];
+                                          return SelectorWheelValue(
+                                            label: value,
+                                            value: value,
+                                            index: index,
+                                          );
+                                        },
+                                        onValueChanged:
+                                            (SelectorWheelValue<dynamic>
+                                                value) {
+                                          wheel_Name = value.label;
+                                        },
+                                      ),
+                                    ),
+                                    Text(
+                                      'per day',
+                                      style: GoogleFonts.varela(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'DO IT AT',
+                                    style: GoogleFonts.unbounded(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                ToggleSwitch(
+                                  activeBgColor: const [Colors.indigo],
+                                  minWidth: 100.0,
+                                  initialLabelIndex: 0,
+                                  totalSwitches: 3,
+                                  inactiveBgColor: Colors.grey.shade200,
+                                  labels: const ['Morning', 'Noon', 'Evening'],
+                                  icons: const [
+                                    Icons.sunny,
+                                    Icons.wb_sunny_outlined,
+                                    Icons.bedtime_rounded
+                                  ],
+                                  onToggle: (index) {
+                                    List<String> labelValues = [
+                                      'Morning',
+                                      'Noon',
+                                      'Evening'
+                                    ];
+                                    if (index != null &&
+                                        index >= 0 &&
+                                        index < labelValues.length) {
+                                      String selectedValue = labelValues[index];
+
+                                      do_it_at = selectedValue;
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.indigo,
+                                      fixedSize: const Size(220, 34),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          10,
+                                        ),
+                                      )),
+                                  onPressed: () {
                                     if (totalDaysController.text.isNotEmpty) {
-                                      updateDetails(context);
+                                      final number =
+                                          int.parse(totalDaysController.text);
+                                      if (number <= 0) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                backgroundColor: Colors.red,
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                margin: EdgeInsets.all(10),
+                                                content: Center(
+                                                  child: Text(
+                                                    'Duration cant be less than one !',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                )));
+                                      } else {
+                                        updateDetails(context);
+                                      }
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
                                               backgroundColor: Colors.red,
-                                              behavior: SnackBarBehavior.floating,
+                                              behavior:
+                                                  SnackBarBehavior.floating,
                                               margin: EdgeInsets.all(10),
                                               content: Center(
                                                 child: Text(
@@ -432,40 +457,22 @@ class _EditUserState extends State<EditUser> {
                                                   ),
                                                 ),
                                               )));
-          
-                        
                                     }
-                                  } else {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                            backgroundColor: Colors.red,
-                                            behavior: SnackBarBehavior.floating,
-                                            margin: EdgeInsets.all(10),
-                                            content: Center(
-                                              child: Text(
-                                                'Enter Name of Habit',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            )));
-          
-        
-                                  }
-                                },
-                                child: const Text(
-                                  'UPDATE',
-                                  style: TextStyle(color: Colors.white),
+                                  },
+                                  child: const Text(
+                                    'UPDATE',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
@@ -529,20 +536,19 @@ class _EditUserState extends State<EditUser> {
             break;
           case 5:
             weekdays.add('Friday');
-            break; 
+            break;
           case 6:
-            weekdays.add('Saturday'); 
+            weekdays.add('Saturday');
             break;
         }
       }
     }
-    
-    week_days = weekdays;
 
-  } 
+    week_days = weekdays;
+  }
 
   Future<void> updateDetails(ctx) async {
-     week_days ??= defaultWeekDays; 
+    week_days ??= defaultWeekDays;
     final dataModel = StartModel(
         id: DateTime.now().millisecond.toString(),
         habit: habitNameController.text,
@@ -556,7 +562,6 @@ class _EditUserState extends State<EditUser> {
         doitAt: do_it_at,
         date: widget.date,
         dateLastDone: widget.lastDoneDate);
-
 
     await updateList(widget.index, dataModel);
 

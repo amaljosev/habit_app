@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_project/functions/hive_functions/db_functions.dart';
 import 'package:share_plus/share_plus.dart';
@@ -560,32 +559,7 @@ class _ScreenMeState extends State<ScreenMe> {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Text(
-                        'follow us ',
-                        style: GoogleFonts.comicNeue(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => setState(() {
-                        launchedd = _launchInBrowser(toLaunchInstagram); 
-                      }),
-                      child: SvgPicture.asset(
-                        'lib/assets/svg/instagram (1).svg',
-                        width: 20,
-                        height: 20,
-                      ),
-                    ),
-                  ],
-                ),
+                
               ],
             ),
           ),
@@ -595,9 +569,6 @@ class _ScreenMeState extends State<ScreenMe> {
   }
 
   Future<void>? launchedd;
-
-  final Uri toLaunchInstagram =
-      Uri(scheme: 'https', host: 'instagram.com', path: 'myhabitsapp');
 
   final Uri toLaunchGooglePlay = Uri(
     scheme: 'https',

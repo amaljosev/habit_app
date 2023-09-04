@@ -395,9 +395,28 @@ class _StartWidgetState extends State<StartWidget> {
                           )),
                       onPressed: () {
                         if (habit_NameController.text.isNotEmpty) {
-                          if (total_DaysController.text.isNotEmpty) {
-                            addDataToModel();
+                          
+                          if (total_DaysController.text.isNotEmpty) { 
+                            final number =
+                                          int.parse(total_DaysController.text); 
+                          if (number>0) {
+                              addDataToModel();
                           } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                                    backgroundColor: Colors.red,
+                                    behavior: SnackBarBehavior.floating,
+                                    margin: EdgeInsets.all(10),
+                                    content: Center(
+                                      child: Text(
+                                        'Enter Duration of Habit minimum 1 day', 
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )));
+                          }
+                          }else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,

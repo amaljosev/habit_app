@@ -53,7 +53,7 @@ class _StartScreenState extends State<StartScreen> {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/assets/images/new_home.png'), 
+            image: AssetImage('lib/assets/images/new_home.png'),
             fit: BoxFit.fill,
           ),
         ),
@@ -67,7 +67,7 @@ class _StartScreenState extends State<StartScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height, 
+                      height: MediaQuery.of(context).size.height,
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -81,7 +81,8 @@ class _StartScreenState extends State<StartScreen> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   IconButton(
                                     onPressed: () {
@@ -133,7 +134,8 @@ class _StartScreenState extends State<StartScreen> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 12, right: 12),
+                              padding:
+                                  const EdgeInsets.only(left: 12, right: 12),
                               child: TextFormField(
                                 style: const TextStyle(color: Colors.black),
                                 controller: totalDaysController,
@@ -178,7 +180,8 @@ class _StartScreenState extends State<StartScreen> {
                                           color: Colors.indigo.shade50,
                                           child: Center(
                                             child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: Text(
                                                 'SELECT WEEKDAYS',
                                                 style: GoogleFonts.unbounded(
@@ -294,7 +297,8 @@ class _StartScreenState extends State<StartScreen> {
                                           );
                                         },
                                         onValueChanged:
-                                            (SelectorWheelValue<dynamic> value) {
+                                            (SelectorWheelValue<dynamic>
+                                                value) {
                                           wheelName = value.label;
                                         },
                                       ),
@@ -387,12 +391,32 @@ class _StartScreenState extends State<StartScreen> {
                                       )),
                                   onPressed: () {
                                     if (totalDaysController.text.isNotEmpty) {
-                                      addDataToModel();
+                                      final number =
+                                          int.parse(totalDaysController.text);
+                                      if (number <= 0) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                backgroundColor: Colors.red,
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                margin: EdgeInsets.all(10),
+                                                content: Center(
+                                                  child: Text(
+                                                    'Duration cant be less than one !',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                )));
+                                      } else {
+                                        addDataToModel();
+                                      }
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
                                               backgroundColor: Colors.red,
-                                              behavior: SnackBarBehavior.floating,
+                                              behavior:
+                                                  SnackBarBehavior.floating,
                                               margin: EdgeInsets.all(10),
                                               content: Center(
                                                 child: Text(
